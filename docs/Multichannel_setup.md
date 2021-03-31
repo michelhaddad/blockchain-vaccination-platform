@@ -21,7 +21,7 @@ To get started with the project, clone the git repository. If you want to build 
 ```
 $ mkdir $GOPATH/src/github.com -p
 $ cd $GOPATH/src/github.com  
-$ git clone https://github.com/hyperledger-labs/blockchain-analyzer.git
+$ git clone https://github.com/michelhaddad/blockchain-analyzer.git
 ```
 
 ## Start / stop the `multichannel` network
