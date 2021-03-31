@@ -11,7 +11,7 @@ To get started with the project, clone the git repository. If you want to build 
 ```
 mkdir -p $GOPATH/src/github.com
 cd $GOPATH/src/github.com
-git clone https://github.com/balazsprehoda/hyperledger-elastic.git
+git clone https://github.com/michelhaddad/blockchain-analyzer.git
 ```
 
 ## Starting the applechain network
