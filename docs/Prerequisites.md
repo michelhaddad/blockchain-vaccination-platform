@@ -10,7 +10,7 @@ The following are necessary only if you want to build Fabricbeat yourself. If yo
 * virtualenv (16.7.0+)  
 * Go (v1.12.7+)  
 
-The instructions below have been tested on a Ubuntu 20.04 virtual machine:
+The instructions below have been tested on a Ubuntu 20.04 virtual machine with at least 4GB RAM:
 
 ### Golang
 
