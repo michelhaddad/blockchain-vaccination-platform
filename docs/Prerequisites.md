@@ -2,7 +2,7 @@
 
 * Docker  (v19.03.0+)
 * docker-compose (v1.24.1+)  
-* Node.js (v8.10+)  
+* Node.js (v10.16.3)  
 
 The following are necessary only if you want to build Fabricbeat yourself. If you intend to use the Docker image ([balazsprehoda/fabricbeat](https://hub.docker.com/repository/docker/balazsprehoda/fabricbeat/general)) or the pre-compiled executable, you can skip them.
 
@@ -10,7 +10,7 @@ The following are necessary only if you want to build Fabricbeat yourself. If yo
 * virtualenv (16.7.0+)  
 * Go (v1.12.7+)  
 
-The instructions below have been tested on a Ubuntu 16.04 machine in AWS:
+The instructions below have been tested on a Ubuntu 20.04 virtual machine:
 
 ### Golang
 
@@ -19,11 +19,12 @@ Install [`goenv`](https://github.com/syndbg/goenv/blob/master/INSTALL.md) tool f
 To install `goenv`:
 ```
 $ git clone https://github.com/syndbg/goenv.git ~/.goenv
-$ echo 'export GOENV_ROOT="$HOME/.goenv"' >> ~/.bash_profile
-$ echo 'export PATH="$GOENV_ROOT/bin:$PATH"' >> ~/.bash_profile
-$ echo 'eval "$(goenv init -)"' >> ~/.bash_profile
-$ echo 'export PATH="$GOROOT/bin:$PATH"' >> ~/.bash_profile
-$ echo 'export PATH="$GOPATH/bin:$PATH"' >> ~/.bash_profile
+$ echo 'export GOENV_ROOT="$HOME/.goenv"' >> ~/.bashrc
+$ echo 'export PATH="$GOENV_ROOT/bin:$PATH"' >> ~/.bashrc
+$ echo 'eval "$(goenv init -)"' >> ~/.bashrc
+$ echo 'export PATH="$GOROOT/bin:$PATH"' >> ~/.bashrc
+$ echo 'export PATH="$GOPATH/bin:$PATH"' >> ~/.bashrc
+$ sudo reboot
 ```
 
 Install Go and set this version to be used globally:
@@ -104,7 +105,9 @@ $ sudo apt-get install gcc make
 $ git clone https://github.com/nodenv/nodenv.git ~/.nodenv
 $ cd ~/.nodenv && src/configure && make -C src
 # For bash only
-$ echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.bash_profile
+$ echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.bashrc
+$ echo 'eval "$(nodenv init -)"' >> ~/.bashrc
+$ sudo reboot
 ```
 
 Install [`node-build`](https://github.com/nodenv/node-build) plugin:
@@ -116,8 +119,8 @@ $ git clone https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/no
 
 Install Nodejs and upgrade `npm`:
 ```
-$ nodenv install 8.16.1
-$ nodenv global 8.16.1
+$ nodenv install 10.16.3
+$ nodenv global 10.16.3
 $ sudo apt-get install npm
 $ sudo npm install npm@latest
 ```
@@ -133,7 +136,9 @@ $ npm -v
 Install python 2.7:
 
 ```
-$ sudo apt-get install python
+$ sudo apt-get install python2
+$ echo alias python='python2' >> ~/.bashrc
+$ sudo reboot
 $ python --version
 ```
 
