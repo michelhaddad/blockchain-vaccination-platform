@@ -24,7 +24,7 @@ $ echo 'export PATH="$GOENV_ROOT/bin:$PATH"' >> ~/.bashrc
 $ echo 'eval "$(goenv init -)"' >> ~/.bashrc
 $ echo 'export PATH="$GOROOT/bin:$PATH"' >> ~/.bashrc
 $ echo 'export PATH="$GOPATH/bin:$PATH"' >> ~/.bashrc
-$ sudo reboot
+$ bash
 ```
 
 Install Go and set this version to be used globally:
@@ -107,7 +107,7 @@ $ cd ~/.nodenv && src/configure && make -C src
 # For bash only
 $ echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.bashrc
 $ echo 'eval "$(nodenv init -)"' >> ~/.bashrc
-$ sudo reboot
+$ bash
 ```
 
 Install [`node-build`](https://github.com/nodenv/node-build) plugin:
@@ -138,7 +138,7 @@ Install python 2.7:
 ```
 $ sudo apt-get install python2
 $ echo alias python='python2' >> ~/.bashrc
-$ sudo reboot
+$ bash
 $ python --version
 ```
 
