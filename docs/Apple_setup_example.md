@@ -4,7 +4,7 @@ This is an example to setup the project with applechain network on a new Ubuntu 
 
 ## Prerequisites
 
-Please make sure that you have set up the environment for the project. Follow the steps listed in [Prerequisites](https://github.com/balazsprehoda/hyperledger-elastic/blob/master/docs/Prerequisites.md).   
+Please make sure that you have set up the environment for the project. Follow the steps listed in [Prerequisites](https://github.com/michelhaddad/hyperledger-elastic/blob/master/docs/Prerequisites.md).   
 
 ## Cloning the repository
 To get started with the project, clone the git repository. If you want to build Fabricbeat yourself, it is important that you place the project under `$GOPATH/src/github.com`. Otherwise, you can clone the repository anywhere you want (you do not need to install Go to use the pre-compiled executable or the Docker image).
