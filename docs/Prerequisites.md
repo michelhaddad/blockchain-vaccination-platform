@@ -24,10 +24,9 @@ $ echo 'export PATH="$GOENV_ROOT/bin:$PATH"' >> ~/.bashrc
 $ echo 'eval "$(goenv init -)"' >> ~/.bashrc
 $ echo 'export PATH="$GOROOT/bin:$PATH"' >> ~/.bashrc
 $ echo 'export PATH="$GOPATH/bin:$PATH"' >> ~/.bashrc
-$ bash
 ```
 
-Install Go and set this version to be used globally:
+Restart the shell, install Go and set this version to be used globally:
 ```
 $ goenv install 1.12.7
 $ goenv global 1.12.7
@@ -107,10 +106,9 @@ $ cd ~/.nodenv && src/configure && make -C src
 # For bash only
 $ echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.bashrc
 $ echo 'eval "$(nodenv init -)"' >> ~/.bashrc
-$ bash
 ```
 
-Install [`node-build`](https://github.com/nodenv/node-build) plugin:
+Restart the shell and install [`node-build`](https://github.com/nodenv/node-build) plugin:
 
 ```
 $ mkdir -p "$(nodenv root)"/plugins
@@ -122,14 +120,15 @@ Install Nodejs and upgrade `npm`:
 $ nodenv install 10.16.3
 $ nodenv global 10.16.3
 $ sudo apt-get install npm
-$ sudo npm install npm@latest
 ```
 
 We can check the installed version by running
 ```
-$ nodejs -v
+$ node -v
 $ npm -v
 ```
+
+###Optional
 
 ### Python
 
@@ -138,7 +137,10 @@ Install python 2.7:
 ```
 $ sudo apt-get install python2
 $ echo alias python='python2' >> ~/.bashrc
-$ bash
+```
+
+Reopen the shell and check that the alias is set properly
+```
 $ python --version
 ```
 
