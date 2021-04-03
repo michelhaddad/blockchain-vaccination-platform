@@ -128,7 +128,7 @@ $ node -v
 $ npm -v
 ```
 
-###Optional
+### Optional
 
 ### Python
 

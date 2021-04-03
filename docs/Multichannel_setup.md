@@ -140,11 +140,28 @@ make erase
 
 ## Fabricbeat Agent
 
-The fabricbeat beats agent is responsible for connecting to a specified peer, periodically querying its ledger, processing the data and shipping it to Elasticsearch. Multiple instances can be run at the same time, each querying a different peer and sending its data to the Elasticsearch cluster.  
+The fabricbeat Beats agent is responsible for connecting to a specified peer, periodically querying its ledger, processing the data and shipping it to Elasticsearch. Multiple instances can be run at the same time, each querying a different peer and sending its data to the Elasticsearch cluster.
 
-### Docker image
+### Use docker image
 
-Fabricbeat agent is also available as a Docker image ([balazsprehoda/fabricbeat](https://hub.docker.com/r/balazsprehoda/fabricbeat)). You can use this image, or build it using the command  
+Fabricbeat agent is also available as a Docker image ([balazsprehoda/fabricbeat](https://hub.docker.com/r/balazsprehoda/fabricbeat)).
+The commands in this section should be issued from the `blockchain-analyzer/docker-agent` folder.
+
+#### Start
+To start the containers, navigate to `blockchain-analyzer/docker-agent` directory and issue
+```
+make start
+```
+
+#### Stop
+To stop the containers, issue
+```
+make destroy
+```
+
+### Build a new docker image
+
+ Alternatively, you can build the docker image using the command  
 ```
 $ docker build -t <IMAGE NAME> .
 ```  
