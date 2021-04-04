@@ -18,7 +18,7 @@ services:
       # Connection profile ("connectionProfile" in configuration file)
       - ./connection-profile-CONFIG_ORG_NUM.yaml:/go/src/github.com/blockchain-analyzer/network/CONFIG_NETWORK_NAME/connection-profile-CONFIG_ORG_NUM.yaml
       # Crypto-config
-      - ../network/CONFIG_NETWORK_NAME/crypto-config:/go/src/github.com/blockchain-analyzer/network/basic/crypto-config
+      - ../network/CONFIG_NETWORK_NAME/crypto-config:/go/src/github.com/blockchain-analyzer/network/CONFIG_NETWORK_NAME/crypto-config
       # Kibana dashboard directory ("dashboardDirectory" in configuration file)
       - ../dashboards/7/dashboard:/go/src/github.com/blockchain-analyzer/dashboards/7/dashboard
       # Kibana template directory ("templateDirectory" in configuration file)

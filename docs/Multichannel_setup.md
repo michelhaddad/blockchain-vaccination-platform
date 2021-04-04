@@ -142,30 +142,7 @@ make erase
 
 The fabricbeat Beats agent is responsible for connecting to a specified peer, periodically querying its ledger, processing the data and shipping it to Elasticsearch. Multiple instances can be run at the same time, each querying a different peer and sending its data to the Elasticsearch cluster.
 
-### Use docker image
-
-Fabricbeat agent is also available as a Docker image ([balazsprehoda/fabricbeat](https://hub.docker.com/r/balazsprehoda/fabricbeat)).
-The commands in this section should be issued from the `blockchain-analyzer/docker-agent` folder.
-
-#### Start
-To start the containers, navigate to `blockchain-analyzer/docker-agent` directory and issue
-```
-make start
-```
-
-#### Stop
-To stop the containers, issue
-```
-make destroy
-```
-
-### Build a new docker image
-
- Alternatively, you can build the docker image using the command  
-```
-$ docker build -t <IMAGE NAME> .
-```  
-from the project root directory.
+### Docker image
 
 To start the agent, you have to mount two configuration files, the necessary crypto materials and the folders that contain kibana dashboards and templates:
 
@@ -176,49 +153,25 @@ To start the agent, you have to mount two configuration files, the necessary cry
 
 If you use environment variables in the configuration file, do not forget to set these variables in the container!
 
-For a sample Docker setup, see [`/blockchain-analyzer/docker-agent/`](https://github.com/hyperledger-labs/blockchain-analyzer/tree/master/docker-agent).
+Fabricbeat agent is available as a Docker image ([balazsprehoda/fabricbeat](https://hub.docker.com/r/balazsprehoda/fabricbeat)).
+The commands in this section should be issued from the `blockchain-analyzer/docker-agent` folder.
 
-### Running the agent locally
-
-The commands in this section should be issued from the `blockchain-analyzer/agent/fabricbeat` directory.
-
-You can build the agent yourself, or you can use a pre-built one from the `blockchain-analyzer/agent/fabricbeat/prebuilt` directory. To use an executable from the `prebuilt` dir, choose the appropriate for your system and copy it into the `blockchain-analyzer/agent/fabricbeat` folder.
-
-#### Environment setup
-
-Before configuring and building the fabricbeat agent, please make sure that the `GOPATH` variable is set correctly. Then, add `$GOPATH/bin` to the `PATH`:
-```
-export PATH=$PATH:$GOPATH/bin
-```
-
-Ensure that Python version is 2.7.*. 
-
-Get module dependencies:
-```
-make go-get
-```
-
-Build the agent:
-```
-make update
-make
-```
 
 #### Start fabricbeat locally
 
-To start the agent, issue the following command from the `fabricbeat` directory:
+To start the agent, issue the following command from the `docker-agent` directory:
 ```
-./fabricbeat -e -d "*"
-```
-To use the agent with the `multichannel` network from the `blockchain-analyzer/network` folder, you can start the agent using:
-```
-ORG_NUMBER=1 PEER_NUMBER=0 NETWORK=multichannel ./fabricbeat -e -d "*"
+ORG_NUMBER=1 PEER_NUMBER=0 NETWORK=multichannel make start
 ```
 The variables passed are used in the configuration (`fabricbeat.yml`). To connect to another network or peer, change the configuration (and/or the passed variables) accordingly.
 
+
 #### Stop fabricbeat
 
-To stop the agent, simply type `Ctrl+C`
+To stop the agent, issue
+```
+make destroy
+```
 
 
 ## Configuring Indices for the first time in Kibana
@@ -253,6 +206,6 @@ We can go on discovering the dashboards by scrolling and clicking the link field
 ## Starting more instances of fabricbeat agent
 To start more instances of the fabricbeat agent, open another tab/terminal, make sure that the GOPATH variable is set (`export GOPATH=$HOME/go`) , and run fabricbeat passing different variables from the previous run(s) (e.g.
 ```
-ORG_NUMBER=2 PEER_NUMBER=0 NETWORK=multichannel ./fabricbeat -e -d "*"
+ORG_NUMBER=2 PEER_NUMBER=0 NETWORK=multichannel make start
 ```
 will start an agent querying peer0.org2.el-network.com). If the started instance queries a peer from the same organization as the previous one, we can select the peer we want to see the data of from a dropdown on the dashboards. If the new peer is shipping data from a different organization, we can see its data on a different dashboard (click the dashboards menu on the left, and choose one).
