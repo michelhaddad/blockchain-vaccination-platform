@@ -54,6 +54,13 @@ class DonationPaper extends State {
         this.redeemDate = date;
     }
 
+    getRedeemedDate() {
+        if (this.currentState !== cpState.REDEEMED) {
+            throw new Error("Donation paper is not redeemed yet!");
+        }
+        return this.redeemDate;
+    }
+
     isIssued() {
         return this.currentState === cpState.ISSUED;
     }

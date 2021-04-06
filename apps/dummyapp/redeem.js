@@ -59,14 +59,14 @@ async function main() {
         // redeem commercial paper
         console.log('Submit donation paper redeem transaction.');
 
-        const redeemResponse = await contract.submitTransaction('redeem', 'Rima', '102');
+        const redeemResponse = await contract.submitTransaction('redeem', 'Rima', '102', '2021-10-5');
 
         // process response
         console.log('Process redeem transaction response.');
 
         let paper = DonationPaper.fromBuffer(redeemResponse);
 
-        console.log(`${paper.issuer} donation paper : ${paper.paperNumber} successfully redeemed.`);
+        console.log(`${paper.issuer} donation paper : ${paper.paperNumber} successfully redeemed on the ${paper.redeemDate}.`);
         console.log('Transaction complete.');
         process.exit();
     } catch (error) {
