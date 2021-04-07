@@ -20,7 +20,7 @@ const cpState = {
 class DonationPaper extends State {
 
     constructor(obj) {
-        super(DonationPaper.getClass(), [obj.issuer, obj.paperNumber]);
+        super(DonationPaper.getClass(), obj.paperID);
         Object.assign(this, obj);
     }
 
@@ -61,6 +61,18 @@ class DonationPaper extends State {
         return this.redeemDate;
     }
 
+    /**
+     * 
+     * @param {String} redeemer 
+     */
+    setRedeemer(redeemer) {
+        this.redeemer = redeemer;
+    }
+
+    getRedeemer() {
+        return this.redeemer;
+    }
+
     isIssued() {
         return this.currentState === cpState.ISSUED;
     }
@@ -88,8 +100,8 @@ class DonationPaper extends State {
     /**
      * Factory method to create a donation paper object
      */
-    static createInstance(issuer, paperNumber, issueDateTime, amount) {
-        return new DonationPaper({ issuer, paperNumber, issueDateTime, amount });
+    static createInstance(issuer, paperID, issueDateTime, amount) {
+        return new DonationPaper({ issuer, paperID, issueDateTime, amount });
     }
 
     static getClass() {

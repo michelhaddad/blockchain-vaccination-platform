@@ -12,11 +12,11 @@ class State {
 
     /**
      * @param {String|Object} class  An indentifiable class of the instance
-     * @param {keyParts[]} elements to pull together to make a key for the objects
+     * @param {Number} id The state's id
      */
-    constructor(stateClass, keyParts) {
+    constructor(stateClass, id) {
         this.class = stateClass;
-        this.key = State.makeKey(keyParts);
+        this.id = id
         this.currentState = null;
     }
 
@@ -24,12 +24,8 @@ class State {
         return this.class;
     }
 
-    getKey() {
-        return this.key;
-    }
-
-    getSplitKey(){
-        return State.splitKey(this.key);
+    getID() {
+        return this.id;
     }
 
     getCurrentState(){
@@ -79,18 +75,6 @@ class State {
         let json = JSON.parse(data.toString());
         let object = new (objClass)(json);
         return object;
-    }
-
-    /**
-     * Join the keyParts to make a unififed string
-     * @param (String[]) keyParts
-     */
-    static makeKey(keyParts) {
-        return keyParts.map(part => JSON.stringify(part)).join(':');
-    }
-
-    static splitKey(key){
-        return key.split(':');
     }
 
 }
