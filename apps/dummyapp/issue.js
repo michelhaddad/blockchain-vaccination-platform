@@ -9,6 +9,9 @@ const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
 const DonationPaper = require('../../network/basic/chaincode/donationcc/lib/donationPaper');
+const uuid = require('uuid');
+
+const getUID = () => uuid.v4();
 
 const configPath = path.resolve(__dirname, 'config.json');
 const configJSON = fs.readFileSync(configPath, 'utf8');
@@ -61,15 +64,14 @@ async function main() {
         // issue commercial paper
         console.log('Submit donation paper issue transaction.');
 
-        const issueResponse = await contract.submitTransaction('issue', 'Rima', '102', '2020-05-31','500');
+        const issueResponse = await contract.submitTransaction('issue', '5', '1000');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
         let paper = DonationPaper.fromBuffer(issueResponse);
 
-        console.log(`${paper.issuer} donation paper : ${paper.paperNumber} successfully issued for the amount of ${paper.amount}`);
-        console.log('Transaction complete.');
+        console.log(`Donation paper ${paper.paperID} issued by ${paper.issuer} with the amount of ${paper.amount}`);
         process.exit();
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);

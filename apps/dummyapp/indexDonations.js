@@ -9,6 +9,9 @@ const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
 const DonationPaper = require('../../network/basic/chaincode/donationcc/lib/donationPaper');
+const uuid = require('uuid');
+
+const getUID = () => uuid.v4();
 
 const configPath = path.resolve(__dirname, 'config.json');
 const configJSON = fs.readFileSync(configPath, 'utf8');
@@ -48,7 +51,9 @@ async function main() {
 
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
-        await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false }});
+        await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false }, eventHandlerOptions: {
+            commitTimeout: 100,
+          },});
 
         // Get the network (channel) our contract is deployed to.
         const network = await gateway.getNetwork(config.channel.channelName);
@@ -56,18 +61,13 @@ async function main() {
         // Get the contract from the network.
         const contract = network.getContract("donationcc");
 
-        // redeem commercial paper
-        console.log('Submit donation paper redeem transaction.');
+        // issue commercial paper
+        console.log('Submi index donation papers transaction.');
 
-        const redeemResponse = await contract.submitTransaction('redeem', '1');
+        const issueResponse = await contract.submitTransaction('indexUserDonations');
 
         // process response
-        console.log('Process redeem transaction response.');
-
-        let paper = DonationPaper.fromBuffer(redeemResponse);
-
-        console.log(`Donation paper ${paper.paperID} redeemed by ${paper.redeemer} for the amount of ${paper.amount}`);
-        console.log('Transaction complete.');
+        console.log('Process issue transaction response.' + issueResponse);
         process.exit();
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);

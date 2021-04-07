@@ -48,19 +48,61 @@ class DonationPaperContract extends Contract {
         console.log('Instantiate the contract');
     }
 
+    async query(ctx, query) {
+        const iterator = await ctx.stub.getQueryResult(query);
+
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({ Key, Record });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                console.info(allResults);
+                return JSON.stringify(allResults);
+            }
+        }
+    }
+
+
+    async indexUserDonations(ctx) {
+        let identity = ctx.clientIdentity;
+        const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
+        const query = `{"selector": {"issuer": "${enrollmentID}"}}`;
+        const results = await this.query(ctx, query);
+        return results;
+    }
+
     /**
      * Issue donation paper
      *
      * @param {Context} ctx the transaction context
-     * @param {String} issuer donation paper issuer
      * @param {Integer} paperNumber paper number for this issuer
-     * @param {String} issueDateTime paper issue date
      * @param {Integer} amount amount of donation
     */
-    async issue(ctx, issuer, paperNumber, issueDateTime, amount) {
+    async issue(ctx, paperID, amount) {
+        // get enrollement ID of the issuer
+        let identity = ctx.clientIdentity;
+        const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
+
+        // Get today's date in format yyyy-mm-dd
+        let today = new Date().toISOString().slice(0, 10);
 
         // create an instance of the paper
-        let paper = DonationPaper.createInstance(issuer, paperNumber, issueDateTime, amount);
+        let paper = DonationPaper.createInstance(enrollmentID, paperID, today, amount);
 
         // Smart contract, rather than paper, moves paper into ISSUED state
         paper.setIssued();
@@ -80,19 +122,24 @@ class DonationPaperContract extends Contract {
      * @param {Integer} paperNumber paper number for this issuer
      * @param {String} redeemDate time paper was redeemed
     */
-    async redeem(ctx, issuer, paperNumber, redeemDate) {
+    async redeem(ctx, paperID) {
+        // get enrollement ID of the issuer
+        let identity = ctx.clientIdentity;
+        const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
 
-        let paperKey = DonationPaper.makeKey([issuer, paperNumber]);
-
-        let paper = await ctx.paperList.getPaper(paperKey);
+        let paper = await ctx.paperList.getPaper(paperID);
 
         // Check paper is not REDEEMED
         if (paper.isRedeemed()) {
-            throw new Error('Paper ' + issuer + paperNumber + ' already redeemed');
+            throw new Error('Paper ' + paperID + ' is already redeemed');
         }
 
+        // Get today's date in format yyyy-mm-dd
+        let today = new Date().toISOString().slice(0, 10);
+
         paper.setRedeemed();
-        paper.setRedeemedDate(redeemDate);
+        paper.setRedeemedDate(today);
+        paper.setRedeemer(enrollmentID);
 
         await ctx.paperList.updatePaper(paper);
         return paper;

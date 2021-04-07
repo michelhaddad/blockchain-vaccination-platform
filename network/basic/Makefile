@@ -18,8 +18,8 @@ destroy:
 	rm -rf connection-profile-[0-9].yaml
 
 rmchaincode:
-	docker images | grep dummy | awk '{print $1}' | xargs docker rmi
-	docker images | grep donation | awk '{print $1}' | xargs docker rmi
+	docker images | grep dummy | awk '{print $3}' | xargs docker rmi
+	docker images | grep donation | awk '{print $3}' | xargs docker rmi
 
 generate:
 	cp docker-compose-TEMPLATE.yaml docker-compose.yaml
