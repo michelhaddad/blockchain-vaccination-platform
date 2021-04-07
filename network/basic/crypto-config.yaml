@@ -7,34 +7,60 @@ OrdererOrgs:
 
 PeerOrgs:
 
-  - Name: Org1
-    Domain: org1.el-network.com
+  - Name: Impact
+    Domain: Impact.el-network.com
     EnableNodeOUs: true
     Template:
       Count: 1
     Users:
       Count: 1
 
-  - Name: Org2
-    Domain: org2.el-network.com
+  - Name: MOPH
+    Domain: MOPH.el-network.com
     EnableNodeOUs: true
     Template:
       Count: 1
     Users:
       Count: 1
 
-  - Name: Org3
-    Domain: org3.el-network.com
+  - Name: BorderControl
+    Domain: BorderControl.el-network.com
     EnableNodeOUs: true
     Template:
       Count: 1
     Users:
       Count: 1
 
-  - Name: Org4
-    Domain: org4.el-network.com
+  - Name: Manufacturer
+    Domain: Manufacturer.el-network.com
     EnableNodeOUs: true
     Template:
       Count: 1
     Users:
       Count: 1
+
+  - Name: Hospital
+    Domain: Hospital.el-network.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: StorageFacility
+    Domain: StorageFacility.el-network.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: Donor
+    Domain: Donor.el-network.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  
