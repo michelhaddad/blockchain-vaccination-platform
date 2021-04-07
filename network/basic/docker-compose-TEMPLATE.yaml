@@ -110,22 +110,22 @@ services:
     networks:
       - HLNETWORK
 
-    ca.Donor.HLNETWORK.com:
-      container_name: ca.Donor.HLNETWORK.com
-      image: hyperledger/fabric-ca:1.4
-      environment:
-        - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-        - FABRIC_CA_SERVER_CA_NAME=ca.Donor.HLNETWORK.com
-        - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.Donor.HLNETWORK.com-cert.pem
-        - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/key.pem
-        # - FABRIC_CA_SERVER_TLS_ENABLED=true
-      ports:
-        - 13054:7054
-      command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
-      volumes:
-        - ./crypto-config/peerOrganizations/Donor.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
-      networks:
-        - HLNETWORK
+  ca.Donor.HLNETWORK.com:
+    container_name: ca.Donor.HLNETWORK.com
+    image: hyperledger/fabric-ca:1.4
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.Donor.HLNETWORK.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.Donor.HLNETWORK.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/key.pem
+      # - FABRIC_CA_SERVER_TLS_ENABLED=true
+    ports:
+      - 13054:7054
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/Donor.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      - HLNETWORK
 
   ###########
   # orderer #
