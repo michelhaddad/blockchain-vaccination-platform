@@ -77,7 +77,7 @@ async function main() {
             }
 
             // Register the user, enroll the user, and import the new identity into the wallet.
-            var secret = await ca.register({ affiliation: config.users[i].organization.toLowerCase() + '.department1', enrollmentID: config.users[i].name, role: 'client' }, adminIdentity);
+            var secret = await ca.register({ affiliation: config.users[i].organization.toLowerCase() + '.department1', enrollmentID: config.users[i].name, role: 'client', attrs: [{ name: "role", value: "patient", ecert: true}]}, adminIdentity);
             var enrollment = await ca.enroll({ enrollmentID: config.users[i].name, enrollmentSecret: secret });
             var userIdentity = X509WalletMixin.createIdentity(config.organizations[config.users[i].organization].MSP, enrollment.certificate, enrollment.key.toBytes());
             wallet.import(config.users[i].name, userIdentity);

@@ -23,6 +23,10 @@ query:
 query-all:
 	NETWORK=${NETWORK} node queryAll.js
 
+issue:
+	NETWORK=${NETWORK} CHANNEL=${CHANNEL} node issue.js
+redeem:
+	NETWORK=${NETWORK} CHANNEL=${CHANNEL} node redeem.js
 clean:
 	rm -rf ./wallet
 
