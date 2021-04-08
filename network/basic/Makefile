@@ -15,7 +15,13 @@ destroy:
 	./destroy-network.sh
 	rm -rf *-e
 	rm -rf ../../apps/dummyapp/wallet
-	rm -rf connection-profile-[0-9].yaml
+	rm -rf connection-profile-Donor.yaml
+	rm -rf connection-profile-Impact.yaml
+	rm -rf connection-profile-Hospital.yaml
+	rm -rf connection-profile-MOPH.yaml
+	rm -rf connection-profile-Manufacturer.yaml
+	rm -rf connection-profile-StorageFacility.yaml
+	rm -rf connection-profile-BorderControl.yaml
 
 rmchaincode:
 	docker images | grep dummy | awk '{print $3}' | xargs docker rmi
