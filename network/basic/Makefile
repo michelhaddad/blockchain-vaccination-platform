@@ -9,7 +9,7 @@ WHICHOS := $(shell uname)
 
 start:
 	make generate ABSPATH=${ABSPATH}
-	./start-dummy.sh
+	./start-platform.sh
 	
 destroy:
 	./destroy-network.sh
