@@ -24,8 +24,8 @@ destroy:
 	rm -rf connection-profile-BorderControl.yaml
 
 rmchaincode:
-	docker images | grep dummy | awk '{print $3}' | xargs docker rmi
-	docker images | grep donation | awk '{print $3}' | xargs docker rmi
+	docker rmi $(docker images | grep 'donationcc')
+    docker rmi $(docker images | grep 'dummycc')
 
 generate:
 	cp docker-compose-TEMPLATE.yaml docker-compose.yaml
