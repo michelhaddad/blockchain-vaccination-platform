@@ -16,4 +16,8 @@ To add a smart contract you will need to follow these steps:
 6. Add your smart contract in `basic/scripts/platformcc/channel-chaincode-setup.sh`
 7. Feel free to add some bash scripts so that smart contracts can easily be tested from the cli container
 
-In case any additional assistance is needed, check this [pull request](https://github.com/michelhaddad/blockchain-analyzer/pull/1)
+In case any additional assistance is needed, check these pull requests [#1](https://github.com/michelhaddad/blockchain-analyzer/pull/1) and [#2](https://github.com/michelhaddad/blockchain-analyzer/pull/2)
+
+# Side note
+
+Once a chaincode is added/removed, don't forget to issue `make rmchaincode` in the `network/basic` directory before starting your network.
