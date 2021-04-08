@@ -67,7 +67,7 @@ async function main() {
         console.log('Submit order issue transaction.');
 
         //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
-        const issueResponse = await contract.submitTransaction('issue', 'order1', 'storage1', 'hospital1',
+        let issueResponse = await contract.submitTransaction('issue', 'order1', 'storage1', 'hospital1',
             'BATCH001', '500', '2021-04-8');
 
         // process response
@@ -81,12 +81,12 @@ async function main() {
         console.log('Leaving border control.');
 
         //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
-        const issueResponse = await contract.submitTransaction('storageDelivery', 'order1');
+        issueResponse = await contract.submitTransaction('storageDelivery', 'order1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
-        let paper = OrderDelivery.fromBuffer(issueResponse);
+        paper = OrderDelivery.fromBuffer(issueResponse);
 
         console.log(`Order ${paper.orderID} left ${paper.borderControl} to ${paper.storage} with the state ${paper.currentState}\n`);
 
@@ -94,12 +94,12 @@ async function main() {
         console.log('Arriving to storage.');
 
         //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
-        const issueResponse = await contract.submitTransaction('storageArrival', 'order1');
+        issueResponse = await contract.submitTransaction('storageArrival', 'order1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
-        let paper = OrderDelivery.fromBuffer(issueResponse);
+        paper = OrderDelivery.fromBuffer(issueResponse);
 
         console.log(`Order ${paper.orderID} arrived to ${paper.storage} with the state ${paper.currentState}`);
 
@@ -107,12 +107,12 @@ async function main() {
         console.log('Leaving storage.');
 
         //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
-        const issueResponse = await contract.submitTransaction('hospitalDelivery', 'order1');
+        issueResponse = await contract.submitTransaction('hospitalDelivery', 'order1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
-        let paper = OrderDelivery.fromBuffer(issueResponse);
+        paper = OrderDelivery.fromBuffer(issueResponse);
 
         console.log(`Order ${paper.orderID} left ${paper.storage} to ${paper.hospital} with the state ${paper.currentState}\n`);
 
@@ -121,12 +121,12 @@ async function main() {
         console.log('Arriving to hospital.');
 
         //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
-        const issueResponse = await contract.submitTransaction('hospitalArrival', 'order1');
+        issueResponse = await contract.submitTransaction('hospitalArrival', 'order1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
-        let paper = OrderDelivery.fromBuffer(issueResponse);
+        paper = OrderDelivery.fromBuffer(issueResponse);
 
         console.log(`Order ${paper.orderID} arrived to ${paper.hospital} with the state ${paper.currentState}\n`);
 
