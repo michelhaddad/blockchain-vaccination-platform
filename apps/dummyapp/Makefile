@@ -27,6 +27,9 @@ issue:
 	NETWORK=${NETWORK} CHANNEL=${CHANNEL} node issue.js
 redeem:
 	NETWORK=${NETWORK} CHANNEL=${CHANNEL} node redeem.js
+
+supplychain:
+	NETWORK=${NETWORK} CHANNEL=${CHANNEL} node supplychain.js
 clean:
 	rm -rf ./wallet
 

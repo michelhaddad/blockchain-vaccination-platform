@@ -67,6 +67,7 @@ fi
     echo "Installing chaincode on peer$ORG_NUM..."
     peer chaincode install -n dummycc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/dummycc
     peer chaincode install -n donationcc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/donationcc
+    peer chaincode install -n supplychaincc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/supplychaincc
 done
 
 # Instantiate chaincode
@@ -77,3 +78,4 @@ CORE_PEER_TLS_ROOTCERT_FILE=$CACERT_1
 
 peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n dummycc -l node -v 5.5 -c '{"Args":[]}' -P "OR ('Org1MSP.member','Org2MSP.member','Org3MSP.member','Org4MSP.member')" --tls --cafile $CACERT_ORDERER
 peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n donationcc -l node -v 5.5 -c '{"Args":[]}' -P "OR ('Org1MSP.member','Org2MSP.member','Org3MSP.member','Org4MSP.member')" --tls --cafile $CACERT_ORDERER
+peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n supplychaincc -l node -v 5.5 -c '{"Args":[]}' -P "OR ('Org1MSP.member','Org2MSP.member','Org3MSP.member','Org4MSP.member')" --tls --cafile $CACERT_ORDERER
