@@ -59,7 +59,7 @@ async function main() {
         // redeem commercial paper
         console.log('Submit donation paper redeem transaction.');
 
-        const redeemResponse = await contract.submitTransaction('redeem', '1');
+        const redeemResponse = await contract.submitTransaction('redeem', '5');
 
         // process response
         console.log('Process redeem transaction response.');

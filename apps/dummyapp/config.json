@@ -5,35 +5,35 @@
     },
     "connection_profile": "../../network/basic/connectionProfile.json",
     "organizations": {
-        "Org1": {
-            "MSP": "Org1MSP"
+        "Impact": {
+            "MSP": "ImpactMSP"
         },
-        "Org2": {
-            "MSP": "Org2MSP"
+        "MOPH": {
+            "MSP": "MOPHMSP"
         },
-        "Org3": {
-            "MSP": "Org3MSP"
+        "BorderControl": {
+            "MSP": "BorderControlMSP"
         },
-        "Org4": {
-            "MSP": "Org4MSP"
+        "Manufacturer": {
+            "MSP": "ManufacturerMSP"
         }
     },
     "users": [
         {
             "name": "user1",
-            "organization": "Org1"
+            "organization": "Impact"
         },
         {
             "name": "user2",
-            "organization": "Org2"
+            "organization": "MOPH"
         },
         {
             "name": "user3",
-            "organization": "Org3"
+            "organization": "BorderControl"
         },
         {
             "name": "user4",
-            "organization": "Org4"
+            "organization": "Manufacturer"
         }
     ],
     "transactions": [

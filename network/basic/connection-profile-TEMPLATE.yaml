@@ -27,22 +27,37 @@ BCCSP:
 channels:
   mychannel:
     peers:
-      peer0.org1.HLNETWORK.com:
+      peer0.Impact.HLNETWORK.com:
         endorsingPeer: true
         chaincodeQuery: true
         ledgerQuery: true
         eventSource: true
-      peer0.org2.HLNETWORK.com:
+      peer0.MOPH.HLNETWORK.com:
         endorsingPeer: true
         chaincodeQuery: true
         ledgerQuery: true
         eventSource: true
-      peer0.org3.HLNETWORK.com:
+      peer0.BorderControl.HLNETWORK.com:
         endorsingPeer: true
         chaincodeQuery: true
         ledgerQuery: true
         eventSource: true
-      peer0.org4.HLNETWORK.com:
+      peer0.Manufacturer.HLNETWORK.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer0.Hospital.HLNETWORK.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer0.StorageFacility.HLNETWORK.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer0.Donor.HLNETWORK.com:
         endorsingPeer: true
         chaincodeQuery: true
         ledgerQuery: true
@@ -58,54 +73,90 @@ channels:
         orderer: '6000'
 
 organizations:
-  org1:
-    mspid: Org1MSP
+  Impact:
+    mspid: ImpactMSP
     fullpath: true
     peers:
-    - peer0.org1.HLNETWORK.com
+    - peer0.Impact.HLNETWORK.com
     certificateAuthorities:
-    - ca.org1.HLNETWORK.com
-    cryptopath: peerOrganizations/org1.HLNETWORK.com/msp
+    - ca.Impact.HLNETWORK.com
+    cryptopath: peerOrganizations/Impact.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/users/Admin@org1.HLNETWORK.com/msp/keystore/adminKey1"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.HLNETWORK.com/users/Admin@Impact.HLNETWORK.com/msp/keystore/adminKey1"
     signedCert:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/users/Admin@org1.HLNETWORK.com/msp/signcerts/Admin@org1.HLNETWORK.com-cert.pem"
-  org2:
-    mspid: Org2MSP
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.HLNETWORK.com/users/Admin@Impact.HLNETWORK.com/msp/signcerts/Admin@Impact.HLNETWORK.com-cert.pem"
+  MOPH:
+    mspid: MOPHMSP
     fullpath: true
     peers:
-    - peer0.org2.HLNETWORK.com
+    - peer0.MOPH.HLNETWORK.com
     certificateAuthorities:
-    - ca.org2.HLNETWORK.com
-    cryptopath: peerOrganizations/org2.HLNETWORK.com/msp
+    - ca.MOPH.HLNETWORK.com
+    cryptopath: peerOrganizations/MOPH.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org2.HLNETWORK.com/users/Admin@org2.HLNETWORK.com/msp/keystore/adminKey2"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.HLNETWORK.com/users/Admin@MOPH.HLNETWORK.com/msp/keystore/adminKey2"
     signedCert:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org2.HLNETWORK.com/users/Admin@org2.HLNETWORK.com/msp/signcerts/Admin@org2.HLNETWORK.com-cert.pem"
-  org3:
-    mspid: Org3MSP
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.HLNETWORK.com/users/Admin@MOPH.HLNETWORK.com/msp/signcerts/Admin@MOPH.HLNETWORK.com-cert.pem"
+  BorderControl:
+    mspid: BorderControlMSP
     fullpath: true
     peers:
-    - peer0.org3.HLNETWORK.com
+    - peer0.BorderControl.HLNETWORK.com
     certificateAuthorities:
-    - ca.org3.HLNETWORK.com
-    cryptopath: peerOrganizations/org3.HLNETWORK.com/msp
+    - ca.BorderControl.HLNETWORK.com
+    cryptopath: peerOrganizations/BorderControl.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org3.HLNETWORK.com/users/Admin@org3.HLNETWORK.com/msp/keystore/adminKey3"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.HLNETWORK.com/users/Admin@BorderControl.HLNETWORK.com/msp/keystore/adminKey3"
     signedCert:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org3.HLNETWORK.com/users/Admin@org3.HLNETWORK.com/msp/signcerts/Admin@org3.HLNETWORK.com-cert.pem"
-  org4:
-    mspid: Org4MSP
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.HLNETWORK.com/users/Admin@BorderControl.HLNETWORK.com/msp/signcerts/Admin@BorderControl.HLNETWORK.com-cert.pem"
+  Manufacturer:
+    mspid: ManufacturerMSP
     fullpath: true
     peers:
-    - peer0.org4.HLNETWORK.com
+    - peer0.Manufacturer.HLNETWORK.com
     certificateAuthorities:
-    - ca.org4.HLNETWORK.com
-    cryptopath: peerOrganizations/org4.HLNETWORK.com/msp
+    - ca.Manufacturer.HLNETWORK.com
+    cryptopath: peerOrganizations/Manufacturer.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org4.HLNETWORK.com/users/Admin@org4.HLNETWORK.com/msp/keystore/adminKey4"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Manufacturer.HLNETWORK.com/users/Admin@Manufacturer.HLNETWORK.com/msp/keystore/adminKey4"
     signedCert:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org4.HLNETWORK.com/users/Admin@org4.HLNETWORK.com/msp/signcerts/Admin@org4.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Manufacturer.HLNETWORK.com/users/Admin@Manufacturer.HLNETWORK.com/msp/signcerts/Admin@Manufacturer.HLNETWORK.com-cert.pem"
+  Hospital:
+    mspid: HospitalMSP
+    fullpath: true
+    peers:
+    - peer0.Hospital.HLNETWORK.com
+    certificateAuthorities:
+    - ca.Hospital.HLNETWORK.com
+    cryptopath: peerOrganizations/Hospital.HLNETWORK.com/msp
+    adminPrivateKey:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Hospital.HLNETWORK.com/users/Admin@Hospital.HLNETWORK.com/msp/keystore/adminKey4"
+    signedCert:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Hospital.HLNETWORK.com/users/Admin@Hospital.HLNETWORK.com/msp/signcerts/Admin@Hospital.HLNETWORK.com-cert.pem"
+  StorageFacility:
+    mspid: StorageFacilityMSP
+    fullpath: true
+    peers:
+    - peer0.StorageFacility.HLNETWORK.com
+    certificateAuthorities:
+    - ca.StorageFacility.HLNETWORK.com
+    cryptopath: peerOrganizations/StorageFacility.HLNETWORK.com/msp
+    adminPrivateKey:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/StorageFacility.HLNETWORK.com/users/Admin@StorageFacility.HLNETWORK.com/msp/keystore/adminKey4"
+    signedCert:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/StorageFacility.HLNETWORK.com/users/Admin@StorageFacility.HLNETWORK.com/msp/signcerts/Admin@StorageFacility.HLNETWORK.com-cert.pem"
+  Donor:
+    mspid: DonorMSP
+    fullpath: true
+    peers:
+    - peer0.Donor.HLNETWORK.com
+    certificateAuthorities:
+    - ca.Donor.HLNETWORK.com
+    cryptopath: peerOrganizations/Donor.HLNETWORK.com/msp
+    adminPrivateKey:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Donor.HLNETWORK.com/users/Admin@Donor.HLNETWORK.com/msp/keystore/adminKey4"
+    signedCert:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Donor.HLNETWORK.com/users/Admin@Donor.HLNETWORK.com/msp/signcerts/Admin@Donor.HLNETWORK.com-cert.pem"
   ordererOrg:
     mspid: OrdererMSP
     fullpath: true
@@ -115,30 +166,48 @@ organizations:
     signedCert:
       path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/HLNETWORK.com/users/Admin@HLNETWORK.com/msp/signcerts/Admin@HLNETWORK.com-cert.pem"
 peers:
-  peer0.org1.HLNETWORK.com:
+  peer0.Impact.HLNETWORK.com:
     tlsCACerts:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/peers/peer0.org1.HLNETWORK.com/msp/tlscacerts/tlsca.org1.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.HLNETWORK.com/peers/peer0.Impact.HLNETWORK.com/msp/tlscacerts/tlsca.Impact.HLNETWORK.com-cert.pem"
     url: grpcs://localhost:7051
     grpcOptions:
-      ssl-target-name-override: peer0.org1.HLNETWORK.com
-  peer0.org2.HLNETWORK.com:
+      ssl-target-name-override: peer0.Impact.HLNETWORK.com
+  peer0.MOPH.HLNETWORK.com:
     tlsCACerts:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org2.HLNETWORK.com/peers/peer0.org2.HLNETWORK.com/msp/tlscacerts/tlsca.org2.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.HLNETWORK.com/peers/peer0.MOPH.HLNETWORK.com/msp/tlscacerts/tlsca.MOPH.HLNETWORK.com-cert.pem"
     url: grpcs://localhost:8051
     grpcOptions:
-      ssl-target-name-override: peer0.org2.HLNETWORK.com
-  peer0.org3.HLNETWORK.com:
+      ssl-target-name-override: peer0.MOPH.HLNETWORK.com
+  peer0.BorderControl.HLNETWORK.com:
     tlsCACerts:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org3.HLNETWORK.com/peers/peer0.org3.HLNETWORK.com/msp/tlscacerts/tlsca.org3.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.HLNETWORK.com/peers/peer0.BorderControl.HLNETWORK.com/msp/tlscacerts/tlsca.BorderControl.HLNETWORK.com-cert.pem"
     url: grpcs://localhost:9051
     grpcOptions:
-      ssl-target-name-override: peer0.org3.HLNETWORK.com
-  peer0.org4.HLNETWORK.com:
+      ssl-target-name-override: peer0.BorderControl.HLNETWORK.com
+  peer0.Manufacturer.HLNETWORK.com:
     tlsCACerts:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org4.HLNETWORK.com/peers/peer0.org4.HLNETWORK.com/msp/tlscacerts/tlsca.org4.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Manufacturer.HLNETWORK.com/peers/peer0.Manufacturer.HLNETWORK.com/msp/tlscacerts/tlsca.Manufacturer.HLNETWORK.com-cert.pem"
     url: grpcs://localhost:10051
     grpcOptions:
-      ssl-target-name-override: peer0.org4.HLNETWORK.com
+      ssl-target-name-override: peer0.Manufacturer.HLNETWORK.com
+  peer0.Hospital.HLNETWORK.com:
+    tlsCACerts:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Hospital.HLNETWORK.com/peers/peer0.Hospital.HLNETWORK.com/msp/tlscacerts/tlsca.Hospital.HLNETWORK.com-cert.pem"
+    url: grpcs://localhost:11051
+    grpcOptions:
+      ssl-target-name-override: peer0.Hospital.HLNETWORK.com
+  peer0.StorageFacility.HLNETWORK.com:
+    tlsCACerts:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/StorageFacility.HLNETWORK.com/peers/peer0.StorageFacility.HLNETWORK.com/msp/tlscacerts/tlsca.StorageFacility.HLNETWORK.com-cert.pem"
+    url: grpcs://localhost:12051
+    grpcOptions:
+      ssl-target-name-override: peer0.StorageFacility.HLNETWORK.com
+  peer0.Donor.HLNETWORK.com:
+    tlsCACerts:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Donor.HLNETWORK.com/peers/peer0.Donor.HLNETWORK.com/msp/tlscacerts/tlsca.Donor.HLNETWORK.com-cert.pem"
+    url: grpcs://localhost:13051
+    grpcOptions:
+      ssl-target-name-override: peer0.Donor.HLNETWORK.com
 orderers:
   orderer.HLNETWORK.com:
     tlsCACerts:
@@ -149,75 +218,126 @@ orderers:
 
 certificateAuthorities:
 
-  ca.org1.HLNETWORK.com:
+  ca.Impact.HLNETWORK.com:
     url: http://localhost:7054
-    caName: ca.org1.HLNETWORK.com
+    caName: ca.Impact.HLNETWORK.com
     httpOptions:
       verify: false
     registrar:
       enrollId: admin
       enrollSecret: adminpw
     tlsCACerts:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/peers/peer0.org1.HLNETWORK.com/msp/tlscacerts/tlsca.org1.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.HLNETWORK.com/peers/peer0.Impact.HLNETWORK.com/msp/tlscacerts/tlsca.Impact.HLNETWORK.com-cert.pem"
   
-  ca.org2.HLNETWORK.com:
+  ca.MOPH.HLNETWORK.com:
     url: http://localhost:8054
-    caName: ca.org2.HLNETWORK.com
+    caName: ca.MOPH.HLNETWORK.com
     httpOptions:
       verify: false
     registrar:
       enrollId: admin
       enrollSecret: adminpw
     tlsCACerts:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org2.HLNETWORK.com/peers/peer0.org2.HLNETWORK.com/msp/tlscacerts/tlsca.org2.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.HLNETWORK.com/peers/peer0.MOPH.HLNETWORK.com/msp/tlscacerts/tlsca.MOPH.HLNETWORK.com-cert.pem"
 
-  ca.org3.HLNETWORK.com:
+  ca.BorderControl.HLNETWORK.com:
     url: http://localhost:9054
-    caName: ca.org3.HLNETWORK.com
+    caName: ca.BorderControl.HLNETWORK.com
     httpOptions:
       verify: false
     registrar:
       enrollId: admin
       enrollSecret: adminpw
     tlsCACerts:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org3.HLNETWORK.com/peers/peer0.org3.HLNETWORK.com/msp/tlscacerts/tlsca.org3.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.HLNETWORK.com/peers/peer0.BorderControl.HLNETWORK.com/msp/tlscacerts/tlsca.BorderControl.HLNETWORK.com-cert.pem"
 
-  ca.org4.HLNETWORK.com:
+  ca.Manufacturer.HLNETWORK.com:
     url: http://localhost:10054
-    caName: ca.org4.HLNETWORK.com
+    caName: ca.Manufacturer.HLNETWORK.com
     httpOptions:
       verify: false
     registrar:
       enrollId: admin
       enrollSecret: adminpw
     tlsCACerts:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org4.HLNETWORK.com/peers/peer0.org4.HLNETWORK.com/msp/tlscacerts/tlsca.org4.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Manufacturer.HLNETWORK.com/peers/peer0.Manufacturer.HLNETWORK.com/msp/tlscacerts/tlsca.Manufacturer.HLNETWORK.com-cert.pem"
+
+  ca.Hospital.HLNETWORK.com:
+    url: http://localhost:11054
+    caName: ca.Hospital.HLNETWORK.com
+    httpOptions:
+      verify: false
+    registrar:
+      enrollId: admin
+      enrollSecret: adminpw
+    tlsCACerts:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Hospital.HLNETWORK.com/peers/peer0.Hospital.HLNETWORK.com/msp/tlscacerts/tlsca.Hospital.HLNETWORK.com-cert.pem"
+
+  ca.StorageFacility.HLNETWORK.com:
+    url: http://localhost:12054
+    caName: ca.StorageFacility.HLNETWORK.com
+    httpOptions:
+      verify: false
+    registrar:
+      enrollId: admin
+      enrollSecret: adminpw
+    tlsCACerts:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/StorageFacility.HLNETWORK.com/peers/peer0.StorageFacility.HLNETWORK.com/msp/tlscacerts/tlsca.StorageFacility.HLNETWORK.com-cert.pem"
+
+  ca.Donor.HLNETWORK.com:
+    url: http://localhost:13054
+    caName: ca.Donor.HLNETWORK.com
+    httpOptions:
+      verify: false
+    registrar:
+      enrollId: admin
+      enrollSecret: adminpw
+    tlsCACerts:
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Donor.HLNETWORK.com/peers/peer0.Donor.HLNETWORK.com/msp/tlscacerts/tlsca.Donor.HLNETWORK.com-cert.pem"
 
 entityMatchers:
   peer:
-    - pattern: (\w*)peer0.org1.HLNETWORK.com(\w*)
+    - pattern: (\w*)peer0.Impact.HLNETWORK.com(\w*)
       urlSubstitutionExp: localhost:7051
       eventUrlSubstitutionExp: localhost:7053
-      sslTargetOverrideUrlSubstitutionExp: peer0.org1.HLNETWORK.com
-      mappedHost: peer0.org1.HLNETWORK.com
+      sslTargetOverrideUrlSubstitutionExp: peer0.Impact.HLNETWORK.com
+      mappedHost: peer0.Impact.HLNETWORK.com
     
-    - pattern: (\w*)peer0.org2.HLNETWORK.com(\w*)
+    - pattern: (\w*)peer0.MOPH.HLNETWORK.com(\w*)
       urlSubstitutionExp: localhost:8051
       eventUrlSubstitutionExp: localhost:8053
-      sslTargetOverrideUrlSubstitutionExp: peer0.org2.HLNETWORK.com
-      mappedHost: peer0.org2.HLNETWORK.com
+      sslTargetOverrideUrlSubstitutionExp: peer0.MOPH.HLNETWORK.com
+      mappedHost: peer0.MOPH.HLNETWORK.com
 
-    - pattern: (\w*)peer0.org3.HLNETWORK.com(\w*)
+    - pattern: (\w*)peer0.BorderControl.HLNETWORK.com(\w*)
       urlSubstitutionExp: localhost:9051
       eventUrlSubstitutionExp: localhost:9053
-      sslTargetOverrideUrlSubstitutionExp: peer0.org3.HLNETWORK.com
-      mappedHost: peer0.org3.HLNETWORK.com
+      sslTargetOverrideUrlSubstitutionExp: peer0.BorderControl.HLNETWORK.com
+      mappedHost: peer0.BorderControl.HLNETWORK.com
   
-    - pattern: (\w*)peer0.org4.HLNETWORK.com(\w*)
+    - pattern: (\w*)peer0.Manufacturer.HLNETWORK.com(\w*)
       urlSubstitutionExp: localhost:10051
       eventUrlSubstitutionExp: localhost:10053
-      sslTargetOverrideUrlSubstitutionExp: peer0.org4.HLNETWORK.com
-      mappedHost: peer0.org4.HLNETWORK.com
+      sslTargetOverrideUrlSubstitutionExp: peer0.Manufacturer.HLNETWORK.com
+      mappedHost: peer0.Manufacturer.HLNETWORK.com
+
+    - pattern: (\w*)peer0.Hospital.HLNETWORK.com(\w*)
+      urlSubstitutionExp: localhost:11051
+      eventUrlSubstitutionExp: localhost:11053
+      sslTargetOverrideUrlSubstitutionExp: peer0.Hospital.HLNETWORK.com
+      mappedHost: peer0.Hospital.HLNETWORK.com
+
+    - pattern: (\w*)peer0.StorageFacility.HLNETWORK.com(\w*)
+      urlSubstitutionExp: localhost:12051
+      eventUrlSubstitutionExp: localhost:12053
+      sslTargetOverrideUrlSubstitutionExp: peer0.StorageFacility.HLNETWORK.com
+      mappedHost: peer0.StorageFacility.HLNETWORK.com
+    
+    - pattern: (\w*)peer0.Donor.HLNETWORK.com(\w*)
+      urlSubstitutionExp: localhost:13051
+      eventUrlSubstitutionExp: localhost:13053
+      sslTargetOverrideUrlSubstitutionExp: peer0.Donor.HLNETWORK.com
+      mappedHost: peer0.Donor.HLNETWORK.com
 
   orderer:
     - pattern: (\w*)orderer.HLNETWORK.com(\w*)
@@ -226,18 +346,30 @@ entityMatchers:
       mappedHost: orderer.HLNETWORK.com
 
   certificateAuthorities:
-    - pattern: (\w*)ca.org1.HLNETWORK.com(\w*)
+    - pattern: (\w*)ca.Impact.HLNETWORK.com(\w*)
       urlSubstitutionExp: http://localhost:7054
-      mappedHost: ca.org1.HLNETWORK.com
+      mappedHost: ca.Impact.HLNETWORK.com
 
-    - pattern: (\w*)ca.org2.HLNETWORK.com(\w*)
+    - pattern: (\w*)ca.MOPH.HLNETWORK.com(\w*)
       urlSubstitutionExp: http://localhost:8054
-      mappedHost: ca.org2.HLNETWORK.com
+      mappedHost: ca.MOPH.HLNETWORK.com
 
-    - pattern: (\w*)ca.org3.HLNETWORK.com(\w*)
+    - pattern: (\w*)ca.BorderControl.HLNETWORK.com(\w*)
       urlSubstitutionExp: http://localhost:9054
-      mappedHost: ca.org3.HLNETWORK.com
+      mappedHost: ca.BorderControl.HLNETWORK.com
 
-    - pattern: (\w*)ca.org4.HLNETWORK.com(\w*)
+    - pattern: (\w*)ca.Manufacturer.HLNETWORK.com(\w*)
       urlSubstitutionExp: http://localhost:10054
-      mappedHost: ca.org4.HLNETWORK.com
+      mappedHost: ca.Manufacturer.HLNETWORK.com
+
+    - pattern: (\w*)ca.Hospital.HLNETWORK.com(\w*)
+      urlSubstitutionExp: http://localhost:11054
+      mappedHost: ca.Hospital.HLNETWORK.com
+
+    - pattern: (\w*)ca.StorageFacility.HLNETWORK.com(\w*)
+      urlSubstitutionExp: http://localhost:12054
+      mappedHost: ca.StorageFacility.HLNETWORK.com
+
+    - pattern: (\w*)ca.Donor.HLNETWORK.com(\w*)
+      urlSubstitutionExp: http://localhost:13054
+      mappedHost: ca.Donor.HLNETWORK.com
