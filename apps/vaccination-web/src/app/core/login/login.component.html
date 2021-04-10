@@ -1,0 +1,36 @@
+<div class="page-background flex-center">
+  <mat-card class="login-container mat-elevation-z3 ">
+    <mat-card-title >Welcome</mat-card-title>
+    <span class="italic">Enter your Hyperledger Fabric Vaccination Blockchain crentials </span>
+    <mat-card-content class="mt-4">
+        <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+            <mat-form-field class="w-100 pb-2">
+              <input required
+                matInput
+                formControlName="userName"
+                placeholder="User Name"
+                autofocus
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100 pb-5">
+              <input required
+                matInput
+                type="password"
+                formControlName="password"
+                placeholder="Password"
+              />
+            </mat-form-field>
+            <div class="text-center">
+              <button class="login-button main-button"
+                mat-flat-button
+                color="accent"
+                [disabled]="!formGroup.valid"
+                type="submit"
+              >
+                {{ "Log In" | uppercase }}
+              </button>
+            </div>
+          </form>
+    </mat-card-content>
+  </mat-card>
+</div>
