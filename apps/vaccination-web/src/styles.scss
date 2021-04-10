@@ -1,0 +1,93 @@
+/* You can add global styles to this file, and also import other style files */
+@import "src/assets/_vars.scss";
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+}
+
+.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label {
+  font-size: 20px;
+}
+
+.main-button {
+  font-size: 18px;
+  height: 35px;
+}
+
+.main-button:not(.mat-button-disabled).mat-accent {
+  color: white !important;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered-nav .mat-tab-links {
+  flex-direction: row;
+  @extend.flex-center;
+}
+
+.overflow-hidden {
+  overflow-y: hidden;
+  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.floating-button {
+  position: fixed !important;
+  bottom: 50px;
+  right: 50px;
+}
+
+.add-organization-dialog {
+  min-height: 300px;
+  @extend .general-dialog;
+}
+
+.mat-accent .mat-tab-links .mat-tab-link:hover {
+  color: $accent-color;
+}
+
+.general-dialog {
+  min-width: 500px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.donate-dialog,
+.add-peer-dialog {
+  min-height: 120px;
+  @extend .general-dialog;
+}
+
+.peers-dialog {
+  .mat-dialog-container {
+    padding: 0px;
+  }
+  @extend .general-dialog;
+}
+
+.mat-fab {
+  mat-icon {
+    color: white;
+  }
+}
