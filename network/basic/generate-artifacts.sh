@@ -24,10 +24,10 @@ fi
 ${CRYPTOGEN} generate --config=./crypto-config.yaml
 
 #Rename admin and ca private key files so their names are always the same (no need to change Hyperledger Explorer configuration after restarting the network)
-for ORG_NUM in 1 2 3 4
+for ORG in Impact MOPH BorderControl Manufacturer Hospital StorageFacility Donor
 do
-	mv ./crypto-config/peerOrganizations/org$ORG_NUM.el-network.com/users/Admin@org$ORG_NUM.el-network.com/msp/keystore/*_sk ./crypto-config/peerOrganizations/org$ORG_NUM.el-network.com/users/Admin@org$ORG_NUM.el-network.com/msp/keystore/adminKey$ORG_NUM
-  mv ./crypto-config/peerOrganizations/org$ORG_NUM.el-network.com/ca/*_sk ./crypto-config/peerOrganizations/org$ORG_NUM.el-network.com/ca/key.pem
+	mv ./crypto-config/peerOrganizations/$ORG.el-network.com/users/Admin@$ORG.el-network.com/msp/keystore/*_sk ./crypto-config/peerOrganizations/$ORG.el-network.com/users/Admin@$ORG.el-network.com/msp/keystore/adminKey$ORG
+  mv ./crypto-config/peerOrganizations/$ORG.el-network.com/ca/*_sk ./crypto-config/peerOrganizations/$ORG.el-network.com/ca/key.pem
 done
 mv ./crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.com/msp/keystore/*_sk ./crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.com/msp/keystore/ordererAdminKey
 mv ./crypto-config/ordererOrganizations/el-network.com/ca/*_sk ./crypto-config/ordererOrganizations/el-network.com/ca/key.pem
@@ -38,7 +38,7 @@ ${CONFIGTXGEN} -profile FourOrgsOrdererGenesis -outputBlock ./channel-artifacts/
 export CHANNEL_NAME=mychannel
 ${CONFIGTXGEN} -profile FourOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
 
-${CONFIGTXGEN} -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
-${CONFIGTXGEN} -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
-${CONFIGTXGEN} -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org3MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org3MSP
-${CONFIGTXGEN} -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org4MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org4MSP
+${CONFIGTXGEN} -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/ImpactMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ImpactMSP
+${CONFIGTXGEN} -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/MOPHMSPanchors.tx -channelID $CHANNEL_NAME -asOrg MOPHMSP
+${CONFIGTXGEN} -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/BorderControlMSPanchors.tx -channelID $CHANNEL_NAME -asOrg BorderControlMSP
+${CONFIGTXGEN} -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/ManufacturerMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ManufacturerMSP
