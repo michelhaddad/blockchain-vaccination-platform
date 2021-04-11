@@ -39,6 +39,9 @@ fabricbeat:
     - name: fabcar
       linkingkey:
       values: ["make", "model", "colour", "owner"]
+    - name: donationcc
+      linkingKey:
+      values: ["class", "id", "currentState", "issuer", "paperID", "issueDateTime", "amount"]
 
 #-------------------------- Elasticsearch output ------------------------------
 setup.ilm.enabled: false
