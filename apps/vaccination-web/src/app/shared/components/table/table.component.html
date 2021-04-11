@@ -1,0 +1,38 @@
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <ng-container 
+    *ngFor="let item of displayedColumns"
+    matColumnDef="{{ item.id }}"
+  >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ item.title }}</th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngIf="!item.isMenu; else button">
+        <ng-container *ngIf="item.clickable; else regularText">
+          <button mat-button color="accent"  (click)="elementClicked(element,$event)">
+            {{ element[item.id] }}
+          </button>
+        </ng-container>
+        <ng-template #regularText>
+          {{ element[item.id] }}
+        </ng-template>
+      </ng-container>
+      <ng-template #button>
+        <button class="float-right"
+          mat-icon-button color='accent' [matMenuTriggerFor]="menuBtn">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menuBtn="matMenu" xPosition="before">
+          <button *ngFor="let e of item.menuItems;" mat-menu-item
+            (click)="menuClicked.emit({action: e.action, item: element})" >{{ e.title }}</button>
+        </mat-menu>
+      </ng-template>
+    </td>
+  </ng-container>
+  <tr
+    mat-header-row
+    *matHeaderRowDef="getTableDisplayedColumnsIds(displayedColumns)"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: getTableDisplayedColumnsIds(displayedColumns)"
+  ></tr>
+</table>

@@ -42,6 +42,10 @@ fabricbeat:
     - name: supplychain
       linkingkey:
       values: ["class","id","currentState","arrivalDateTime","batchNumber","hospital","issueDateTime","issuer","numberOfVials","orderID","storage","updateDateTime"]
+    - name: donationcc
+      linkingKey:
+      values: ["class", "id", "currentState", "issuer", "paperID", "issueDateTime", "amount"]
+
 #-------------------------- Elasticsearch output ------------------------------
 setup.ilm.enabled: false
 

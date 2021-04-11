@@ -1,0 +1,28 @@
+@import "src/assets/_vars.scss";
+
+.login-container {
+  width: 500px;
+  height: 400px;
+  padding: 50px;
+  background-color: white;
+  border-radius: 0%;
+}
+
+.page-background {
+  background-color: $primary-color;
+  height: 100%;
+  width: 100%;
+}
+
+mat-card-title {
+  color: $primary-title-color;
+  text-align: center;
+}
+
+.login-button {
+  width: 100%;
+}
+
+mat-card-content {
+  height: 100%;
+}
