@@ -16,16 +16,16 @@ class OrderDeliveryList extends StateList {
         this.use(OrderDelivery);
     }
 
-    async addPaper(paper) {
-        return this.addState(paper);
+    async addDelivery(delivery) {
+        return this.addState(delivery);
     }
 
-    async getPaper(paperKey) {
-        return this.getState(paperKey);
+    async getDelivery(deliveryKey) {
+        return this.getState(deliveryKey);
     }
 
-    async updatePaper(paper) {
-        return this.updateState(paper);
+    async updateDelivery(delivery) {
+        return this.updateState(delivery);
     }
 }
 

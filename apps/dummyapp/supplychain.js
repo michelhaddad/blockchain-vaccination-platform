@@ -66,16 +66,16 @@ async function main() {
         // issue commercial paper
         console.log('Submit order issue transaction.');
 
-        //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
-        let issueResponse = await contract.submitTransaction('issue', 'order1', 'storage1', 'hospital1',
+        //deliveryID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
+        let issueResponse = await contract.submitTransaction('issue', 'delivery1', 'storage1', 'hospital1',
             'BATCH001', '500', '2021-04-8');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
-        let paper = OrderDelivery.fromBuffer(issueResponse);
+        let delivery = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} issued by ${paper.issuer} with the state ${paper.currentState}\n`);
+        console.log(`Order ${delivery.deliveryID} issued by ${delivery.issuer} with the state ${delivery.currentState}\n`);
         
         //###################################################################################################################
         console.log('Leaving border control.');
@@ -85,9 +85,9 @@ async function main() {
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
-        paper = OrderDelivery.fromBuffer(issueResponse);
+        delivery = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} left ${paper.borderControl} to ${paper.storage} with the state ${paper.currentState}\n`);
+        console.log(`Order ${delivery.deliveryID} left ${delivery.borderControl} to ${delivery.storage} with the state ${delivery.currentState}\n`);
 
         //###################################################################################################################
         console.log('Arriving to storage.');
@@ -97,9 +97,9 @@ async function main() {
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
-        paper = OrderDelivery.fromBuffer(issueResponse);
+        delivery = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} arrived to ${paper.storage} with the state ${paper.currentState}\n`);
+        console.log(`Order ${delivery.deliveryID} arrived to ${delivery.storage} with the state ${delivery.currentState}\n`);
 
         //###################################################################################################################
         console.log('Leaving storage.');
@@ -109,9 +109,9 @@ async function main() {
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
-        paper = OrderDelivery.fromBuffer(issueResponse);
+        delivery = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} left ${paper.storage} to ${paper.hospital} with the state ${paper.currentState}\n`);
+        console.log(`Order ${delivery.deliveryID} left ${delivery.storage} to ${delivery.hospital} with the state ${delivery.currentState}\n`);
 
 
         //###################################################################################################################
@@ -122,9 +122,9 @@ async function main() {
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
-        paper = OrderDelivery.fromBuffer(issueResponse);
+        delivery = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} arrived to ${paper.hospital} with the state ${paper.currentState}\n`);
+        console.log(`Order ${delivery.deliveryID} arrived to ${delivery.hospital} with the state ${delivery.currentState}\n`);
 
         process.exit();
     } catch (error) {

@@ -62,7 +62,7 @@ async function main() {
         const contract = network.getContract("supplychaincc");
 
         // issue commercial paper
-        console.log('Submit index order transaction.');
+        console.log('Submit index order delivery transaction.');
 
         const issueResponse = await contract.submitTransaction('indexOrderDelivery');
 

@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 // Utility class for ledger state
 const State = require('../ledger-api/state.js');
 
-// Enumerate order delivery paper state values
+// Enumerate order delivery state values
 const cpState = {
     IN_BORDER_CONTROL: 1,
     TO_STORAGE: 2,
@@ -18,12 +18,12 @@ const cpState = {
 
 /**
  * OrderDelivery class extends State class
- * Class will be used by application and smart contract to define an order
+ * Class will be used by application and smart contract to define an order delivery
  */
 class OrderDelivery extends State {
 
     constructor(obj) {
-        super(OrderDelivery.getClass(), obj.orderID);
+        super(OrderDelivery.getClass(), obj.deliveryID);
         Object.assign(this, obj);
     }
 
@@ -141,7 +141,7 @@ class OrderDelivery extends State {
     }
 
     /**
-     * Deserialize a state data to donation paper
+     * Deserialize a state data to order delivery
      * @param {Buffer} data to form back into the object
      */
     static deserialize(data) {
@@ -149,11 +149,11 @@ class OrderDelivery extends State {
     }
 
     /**
-     * Factory method to create a donation paper object
+     * Factory method to create a order delivery object
      */
-    static createInstance(orderID, issuer, storage, hospital, batchNumber, numberOfVials, 
+    static createInstance(deliveryID, issuer, storage, hospital, batchNumber, numberOfVials, 
         arrivalDateTime, issueDateTime, updateDateTime) {
-        return new OrderDelivery({ orderID, issuer, storage, hospital, batchNumber, numberOfVials, 
+        return new OrderDelivery({ deliveryID, issuer, storage, hospital, batchNumber, numberOfVials, 
             arrivalDateTime, issueDateTime, updateDateTime});
     }
 

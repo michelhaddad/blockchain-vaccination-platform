@@ -12,27 +12,27 @@ const OrderDelivery = require('./orderDelivery.js');
 const OrderDeliveryList = require('./orderDeliveryList.js');
 
 /**
- * A custom context provides easy access to list of all donation papers
+ * A custom context provides easy access to list of all order deliveries
  */
 class OrderDeliveryContext extends Context {
 
     constructor() {
         super();
-        // All papers are held in a list of papers
-        this.paperList = new OrderDeliveryList(this);
+        // All orders are held in a list of orders
+        this.deliveryList = new OrderDeliveryList(this);
     }
 
 }
 
 /**
- * Define donation paper smart contract by extending Fabric Contract class
+ * Define supply chain smart contract by extending Fabric Contract class
  *
  */
 class SupplyChainContract extends Contract {
 
 
     /**
-     * Define a custom context for donation paper
+     * Define a custom context for order delivery
     */
     createContext() {
         return new OrderDeliveryContext();
@@ -107,14 +107,14 @@ class SupplyChainContract extends Contract {
      * Issue order plan
      *
      * @param {Context} ctx the transaction context
-     * @param {Integer} orderID order number
+     * @param {Integer} deliveryID delivery number
      * @param {Integer} storageID ID of targeted order's storage facility
      * @param {Integer} hospitalID ID of targeted final destination
      * @param {String} batchNumber batch number sent to hospital
      * @param {Integer} numberOfVials number of vials sent to the hospital
      * @param {Date} arrivalDateTime expected arrival date of vials to final destination
     */
-    async issue(ctx, orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime) {
+    async issue(ctx, deliveryID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime) {
         // get enrollement ID of the issuer
         let identity = ctx.clientIdentity;
         const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
@@ -122,119 +122,119 @@ class SupplyChainContract extends Contract {
         // Get today's date in format yyyy-mm-dd
         let today = new Date().toISOString().slice(0, 10);
 
-        // create an instance of the order
-        let paper = OrderDelivery.createInstance(orderID, enrollmentID, storageID, 
+        // create an instance of the delivery
+        let delivery = OrderDelivery.createInstance(deliveryID, enrollmentID, storageID, 
             hospitalID, batchNumber, numberOfVials, arrivalDateTime, today, today);
 
-        // Smart contract, rather than paper, moves paper into IN_BORDER_CONTROL state
-        paper.setInBorderControl();
+        // Smart contract moves delivery into IN_BORDER_CONTROL state
+        delivery.setInBorderControl();
 
-        // Add the paper to the list of all similar order papers in the ledger world state
-        await ctx.paperList.addPaper(paper);
+        // Add the delivery to the list of all similar deliveries in the ledger world state
+        await ctx.deliveryList.addDelivery(delivery);
 
-        // Must return a serialized paper to caller of smart contract
-        return paper;
+        // Must return a serialized delivery to caller of smart contract
+        return delivery;
     }
 
     /**
      * Initiate order delivery from border control to storage facility
      *
      * @param {Context} ctx the transaction context
-     * @param {Integer} orderID order number for this issuer
+     * @param {Integer} deliveryID delivery number
     */
-    async storageDelivery(ctx, orderID) {
-        let paper = await ctx.paperList.getPaper(orderID);
+    async storageDelivery(ctx, deliveryID) {
+        let delivery = await ctx.deliveryList.getDelivery(deliveryID);
 
-        // Check order is in border control
-        if (!paper.isInBorderControl()) {
-            throw new Error('Delivery ' + orderID + ' is not in border control');
+        // Check delivery is in border control
+        if (!delivery.isInBorderControl()) {
+            throw new Error('Delivery ' + deliveryID + ' is not in border control');
         }
 
         // Get today's date in format yyyy-mm-dd
         let today = new Date().toISOString().slice(0, 10);
 
-        // Moves order into TO_STORAGE state and sets last updated date
-        paper.setToStorage();
-        paper.setUpdateDateTime(today);
+        // Moves delivery into TO_STORAGE state and sets last updated date
+        delivery.setToStorage();
+        delivery.setUpdateDateTime(today);
 
-        await ctx.paperList.updatePaper(paper);
-        return paper;
+        await ctx.deliveryList.updateDelivery(delivery);
+        return delivery;
     }
 
 
     /**
-     * Acknowledge order arrival to storage facility
+     * Acknowledge delivery arrival to storage facility
      *
      * @param {Context} ctx the transaction context
-     * @param {Integer} orderID order number
+     * @param {Integer} deliveryID delivery number
     */
-     async storageArrival(ctx, orderID) {
-        let paper = await ctx.paperList.getPaper(orderID);
+     async storageArrival(ctx, deliveryID) {
+        let delivery = await ctx.deliveryList.getDelivery(deliveryID);
 
-        // Check order is on its way to storage
-        if (!paper.isToStorage()) {
-            throw new Error('Delivery ' + orderID + ' is not on its way to storage');
+        // Check delivery is on its way to storage
+        if (!delivery.isToStorage()) {
+            throw new Error('Delivery ' + deliveryID + ' is not on its way to storage');
         }
 
         // Get today's date in format yyyy-mm-dd
         let today = new Date().toISOString().slice(0, 10);
 
-        // Moves order into IN_STORAGE state and sets last updated date
-        paper.setInStorage();
-        paper.setUpdateDateTime(today);
+        // Moves delivery into IN_STORAGE state and sets last updated date
+        delivery.setInStorage();
+        delivery.setUpdateDateTime(today);
 
-        await ctx.paperList.updatePaper(paper);
-        return paper;
+        await ctx.deliveryList.updateDelivery(delivery);
+        return delivery;
     }
 
     /**
      * Initiate order delivery from storage facility to hospital
      *
      * @param {Context} ctx the transaction context
-     * @param {Integer} orderID order number
+     * @param {Integer} deliveryID delivery number
     */
-     async hospitalDelivery(ctx, orderID) {
-        let paper = await ctx.paperList.getPaper(orderID);
+     async hospitalDelivery(ctx, deliveryID) {
+        let delivery = await ctx.deliveryList.getDelivery(deliveryID);
 
-        // Check order is in storage
-        if (!paper.isInStorage()) {
-            throw new Error('Delivery ' + orderID + ' is not in storage');
+        // Check delivery is in storage
+        if (!delivery.isInStorage()) {
+            throw new Error('Delivery ' + deliveryID + ' is not in storage');
         }
 
         // Get today's date in format yyyy-mm-dd
         let today = new Date().toISOString().slice(0, 10);
 
-        // Moves order into TO_HOSPITAL state and sets last updated date
-        paper.setToHospital();
-        paper.setUpdateDateTime(today);
+        // Moves delivery into TO_HOSPITAL state and sets last updated date
+        delivery.setToHospital();
+        delivery.setUpdateDateTime(today);
 
-        await ctx.paperList.updatePaper(paper);
-        return paper;
+        await ctx.deliveryList.updateDelivery(delivery);
+        return delivery;
     }
 
     /**
-     * Acknowledge order arrival to hospital
+     * Acknowledge delivery arrival to hospital
      *
      * @param {Context} ctx the transaction context
-     * @param {Integer} orderID order number
+     * @param {Integer} deliveryID delivery number
     */
-     async hospitalArrival(ctx, orderID) {
-        let paper = await ctx.paperList.getPaper(orderID);
+     async hospitalArrival(ctx, deliveryID) {
+        let delivery = await ctx.deliveryList.getDelivery(deliveryID);
 
-        // Check paper is on its way to hospital
-        if (!paper.isToHospital()) {
-            throw new Error('Delivery ' + orderID + ' is not on its way to hospital');
+        // Check delivery is on its way to hospital
+        if (!delivery.isToHospital()) {
+            throw new Error('Delivery ' + deliveryID + ' is not on its way to hospital');
         }
 
         // Get today's date in format yyyy-mm-dd
         let today = new Date().toISOString().slice(0, 10);
 
-        // Moves order into IN_HOSPITAL state and sets last updated date
-        paper.setInHospital();
-        paper.setUpdateDateTime(today);
+        // Moves delivery into IN_HOSPITAL state and sets last updated date
+        delivery.setInHospital();
+        delivery.setUpdateDateTime(today);
 
-        await ctx.paperList.updatePaper(paper);
-        return paper;
+        await ctx.deliveryList.updateOrder(delivery);
+        return delivery;
     }
 }
 
