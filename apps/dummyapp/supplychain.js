@@ -80,7 +80,7 @@ async function main() {
         //###################################################################################################################
         console.log('Leaving border control.');
 
-        issueResponse = await contract.submitTransaction('storageDelivery', 'order1');
+        issueResponse = await contract.submitTransaction('storageDelivery', 'delivery1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
@@ -92,7 +92,7 @@ async function main() {
         //###################################################################################################################
         console.log('Arriving to storage.');
 
-        issueResponse = await contract.submitTransaction('storageArrival', 'order1');
+        issueResponse = await contract.submitTransaction('storageArrival', 'delivery1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
@@ -104,7 +104,7 @@ async function main() {
         //###################################################################################################################
         console.log('Leaving storage.');
 
-        issueResponse = await contract.submitTransaction('hospitalDelivery', 'order1');
+        issueResponse = await contract.submitTransaction('hospitalDelivery', 'delivery1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
@@ -117,7 +117,7 @@ async function main() {
         //###################################################################################################################
         console.log('Arriving to hospital.');
 
-        issueResponse = await contract.submitTransaction('hospitalArrival', 'order1');
+        issueResponse = await contract.submitTransaction('hospitalArrival', 'delivery1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
