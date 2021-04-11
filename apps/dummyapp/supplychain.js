@@ -80,7 +80,6 @@ async function main() {
         //###################################################################################################################
         console.log('Leaving border control.');
 
-        //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
         issueResponse = await contract.submitTransaction('storageDelivery', 'order1');
 
         // process response
@@ -93,7 +92,6 @@ async function main() {
         //###################################################################################################################
         console.log('Arriving to storage.');
 
-        //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
         issueResponse = await contract.submitTransaction('storageArrival', 'order1');
 
         // process response
@@ -101,12 +99,11 @@ async function main() {
 
         paper = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} arrived to ${paper.storage} with the state ${paper.currentState}`);
+        console.log(`Order ${paper.orderID} arrived to ${paper.storage} with the state ${paper.currentState}\n`);
 
         //###################################################################################################################
         console.log('Leaving storage.');
 
-        //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
         issueResponse = await contract.submitTransaction('hospitalDelivery', 'order1');
 
         // process response
@@ -120,7 +117,6 @@ async function main() {
         //###################################################################################################################
         console.log('Arriving to hospital.');
 
-        //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
         issueResponse = await contract.submitTransaction('hospitalArrival', 'order1');
 
         // process response

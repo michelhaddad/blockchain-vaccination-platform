@@ -77,11 +77,28 @@ class SupplyChainContract extends Contract {
         }
     }
 
-
+    /**
+     * Selects orders from database in descending order of arrivalDateTime
+     * 
+     * @param {Context} ctx 
+     * @returns 
+     */
     async indexOrderDelivery(ctx) {
         let identity = ctx.clientIdentity;
         const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
-        const query = `{"selector": {"issuer": "${enrollmentID}"}}`;
+        let org = identity.getMSPID();
+        const role = "issuer";
+        // if(org === "MOPH")
+        //     role = "issuer";
+        // else
+        //     role = org;
+        const query = `{
+            "selector": {
+                "${role.toLowerCase()}": "${enrollmentID}", 
+                "class": "org.papernet.orderDelivery"
+            },
+            "sort": [{"arrivalDateTime": "desc"}]
+        }`;
         const results = await this.query(ctx, query);
         return results;
     }
