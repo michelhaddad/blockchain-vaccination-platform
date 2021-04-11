@@ -87,11 +87,11 @@ class SupplyChainContract extends Contract {
         let identity = ctx.clientIdentity;
         const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
         let org = identity.getMSPID();
-        const role = "issuer";
-        // if(org === "MOPH")
-        //     role = "issuer";
-        // else
-        //     role = org;
+        const role;
+        if(org === "MOPH")
+            role = "issuer";
+        else
+            role = org;
         const query = `{
             "selector": {
                 "${role.toLowerCase()}": "${enrollmentID}", 
