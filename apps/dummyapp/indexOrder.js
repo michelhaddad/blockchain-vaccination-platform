@@ -8,7 +8,7 @@ const { FileSystemWallet, Gateway } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
-const OrderDelivery = require('../../network/basic/chaincode/donationcc/lib/orderDelivery');
+const OrderDelivery = require('../../network/basic/chaincode/supplychaincc/lib/orderDelivery');
 const uuid = require('uuid');
 
 const getUID = () => uuid.v4();
