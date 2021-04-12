@@ -24,9 +24,10 @@ destroy:
 	rm -rf connection-profile-BorderControl.yaml
 
 rmchaincode:
-	docker images | grep "dummycc" | xargs docker rmi
+  docker images | grep "dummycc" | xargs docker rmi
 	docker images | grep "donationcc" | xargs docker rmi
-    
+  docker images | grep "supplychain" | xargs docker rmi
+  
 generate:
 	cp docker-compose-TEMPLATE.yaml docker-compose.yaml
 	sed -i -e "s/HLNETWORK/${HLNETWORK}/g" docker-compose.yaml
