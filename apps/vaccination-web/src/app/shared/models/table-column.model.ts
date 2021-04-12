@@ -5,7 +5,9 @@ export class TableColumnModel {
         public id: string,
         public title: string,
         public clickable: boolean = false,
-        public isMenu: boolean = false,
-        public menuItems: MenuItemModel[] = []
+        public isStatus: boolean = false,
+        public isButton: boolean = false,
+        // public isMenu: boolean = false,
+        // public menuItems: MenuItemModel[] = []
     ) { }
 }

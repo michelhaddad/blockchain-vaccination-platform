@@ -6,6 +6,7 @@ export class PlanRowModel {
         public hospital: string,
         public batchNumber: string,
         public vialQuantity: number,
-        public status: string
+        public status: number,
+        public button: number,
     ) { }
 }
