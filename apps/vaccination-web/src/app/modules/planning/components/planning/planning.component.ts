@@ -14,7 +14,7 @@ import { AddPlanComponent } from '../dialogs/add-plan/add-plan.component';
 export class PlanningComponent implements OnInit {
   displayedColumns: TableColumnModel[] = [
     new TableColumnModel('orderId', 'Order ID'),
-    new TableColumnModel('date', 'Date'),
+    new TableColumnModel('date', 'Arrival Date'),
     new TableColumnModel('storageFacility', 'Storage Facility'),
     new TableColumnModel('hospital', 'Hospitall'),
     new TableColumnModel('batchNumber', 'Batch Number'),
