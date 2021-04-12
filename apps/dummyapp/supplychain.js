@@ -66,8 +66,8 @@ async function main() {
         // issue commercial paper
         console.log('Submit order issue transaction.');
 
-        //orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
-        let issueResponse = await contract.submitTransaction('issue', 'order1', 'storage1', 'hospital1',
+        //deliveryID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime
+        let issueResponse = await contract.submitTransaction('issue', 'delivery1', 'storage1', 'hospital1',
             'BATCH001', '500', '2021-04-8');
 
         // process response
@@ -75,56 +75,56 @@ async function main() {
 
         let paper = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} issued by ${paper.issuer} with the state ${paper.currentState}\n`);
+        console.log(`Order ${paper.deliveryID} issued by ${paper.issuer} with the state ${paper.currentState}\n`);
         
         //###################################################################################################################
         console.log('Leaving border control.');
 
-        issueResponse = await contract.submitTransaction('storageDelivery', 'order1');
+        issueResponse = await contract.submitTransaction('storageDelivery', 'delivery1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
         paper = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} left ${paper.borderControl} to ${paper.storage} with the state ${paper.currentState}\n`);
+        console.log(`Order ${paper.deliveryID} left ${paper.borderControl} to ${paper.storage} with the state ${paper.currentState}\n`);
 
         //###################################################################################################################
         console.log('Arriving to storage.');
 
-        issueResponse = await contract.submitTransaction('storageArrival', 'order1');
+        issueResponse = await contract.submitTransaction('storageArrival', 'delivery1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
         paper = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} arrived to ${paper.storage} with the state ${paper.currentState}\n`);
+        console.log(`Order ${paper.deliveryID} arrived to ${paper.storage} with the state ${paper.currentState}\n`);
 
         //###################################################################################################################
         console.log('Leaving storage.');
 
-        issueResponse = await contract.submitTransaction('hospitalDelivery', 'order1');
+        issueResponse = await contract.submitTransaction('hospitalDelivery', 'delivery1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
         paper = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} left ${paper.storage} to ${paper.hospital} with the state ${paper.currentState}\n`);
+        console.log(`Order ${paper.deliveryID} left ${paper.storage} to ${paper.hospital} with the state ${paper.currentState}\n`);
 
 
         //###################################################################################################################
         console.log('Arriving to hospital.');
 
-        issueResponse = await contract.submitTransaction('hospitalArrival', 'order1');
+        issueResponse = await contract.submitTransaction('hospitalArrival', 'delivery1');
 
         // process response
         console.log('Process issue transaction response.' + issueResponse);
 
         paper = OrderDelivery.fromBuffer(issueResponse);
 
-        console.log(`Order ${paper.orderID} arrived to ${paper.hospital} with the state ${paper.currentState}\n`);
+        console.log(`Order ${paper.deliveryID} arrived to ${paper.hospital} with the state ${paper.currentState}\n`);
 
         process.exit();
     } catch (error) {
