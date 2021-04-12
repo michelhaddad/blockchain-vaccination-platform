@@ -8,71 +8,122 @@ services:
   # CA #
   ######
 
-  ca.org1.HLNETWORK.com:
-    container_name: ca.org1.HLNETWORK.com
+  ca.Impact.HLNETWORK.com:
+    container_name: ca.Impact.HLNETWORK.com
     image: hyperledger/fabric-ca:1.4
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.org1.HLNETWORK.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.HLNETWORK.com-cert.pem
+      - FABRIC_CA_SERVER_CA_NAME=ca.Impact.HLNETWORK.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.Impact.HLNETWORK.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/key.pem
       # - FABRIC_CA_SERVER_TLS_ENABLED=true
     ports:
       - 7054:7054
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ./crypto-config/peerOrganizations/org1.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ./crypto-config/peerOrganizations/Impact.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
     networks:
       - HLNETWORK
   
-  ca.org2.HLNETWORK.com:
-    container_name: ca.org2.HLNETWORK.com
+  ca.MOPH.HLNETWORK.com:
+    container_name: ca.MOPH.HLNETWORK.com
     image: hyperledger/fabric-ca:1.4
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.org2.HLNETWORK.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.HLNETWORK.com-cert.pem
+      - FABRIC_CA_SERVER_CA_NAME=ca.MOPH.HLNETWORK.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.MOPH.HLNETWORK.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/key.pem
       # - FABRIC_CA_SERVER_TLS_ENABLED=true
     ports:
       - 8054:7054
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ./crypto-config/peerOrganizations/org2.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ./crypto-config/peerOrganizations/MOPH.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
     networks:
       - HLNETWORK
 
-  ca.org3.HLNETWORK.com:
-    container_name: ca.org3.HLNETWORK.com
+  ca.BorderControl.HLNETWORK.com:
+    container_name: ca.BorderControl.HLNETWORK.com
     image: hyperledger/fabric-ca:1.4
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.org3.HLNETWORK.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org3.HLNETWORK.com-cert.pem
+      - FABRIC_CA_SERVER_CA_NAME=ca.BorderControl.HLNETWORK.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.BorderControl.HLNETWORK.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/key.pem
       # - FABRIC_CA_SERVER_TLS_ENABLED=true
     ports:
       - 9054:7054
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ./crypto-config/peerOrganizations/org3.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ./crypto-config/peerOrganizations/BorderControl.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
     networks:
       - HLNETWORK
 
-  ca.org4.HLNETWORK.com:
-    container_name: ca.org4.HLNETWORK.com
+  ca.Manufacturer.HLNETWORK.com:
+    container_name: ca.Manufacturer.HLNETWORK.com
     image: hyperledger/fabric-ca:1.4
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.org4.HLNETWORK.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org4.HLNETWORK.com-cert.pem
+      - FABRIC_CA_SERVER_CA_NAME=ca.Manufacturer.HLNETWORK.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.Manufacturer.HLNETWORK.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/key.pem
       # - FABRIC_CA_SERVER_TLS_ENABLED=true
     ports:
       - 10054:7054
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ./crypto-config/peerOrganizations/org4.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ./crypto-config/peerOrganizations/Manufacturer.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      - HLNETWORK
+
+  ca.Hospital.HLNETWORK.com:
+    container_name: ca.Hospital.HLNETWORK.com
+    image: hyperledger/fabric-ca:1.4
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.Hospital.HLNETWORK.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.Hospital.HLNETWORK.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/key.pem
+      # - FABRIC_CA_SERVER_TLS_ENABLED=true
+    ports:
+      - 11054:7054
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/Hospital.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      - HLNETWORK
+
+  ca.StorageFacility.HLNETWORK.com:
+    container_name: ca.StorageFacility.HLNETWORK.com
+    image: hyperledger/fabric-ca:1.4
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.StorageFacility.HLNETWORK.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.StorageFacility.HLNETWORK.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/key.pem
+      # - FABRIC_CA_SERVER_TLS_ENABLED=true
+    ports:
+      - 12054:7054
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/StorageFacility.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      - HLNETWORK
+
+  ca.Donor.HLNETWORK.com:
+    container_name: ca.Donor.HLNETWORK.com
+    image: hyperledger/fabric-ca:1.4
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.Donor.HLNETWORK.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.Donor.HLNETWORK.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/key.pem
+      # - FABRIC_CA_SERVER_TLS_ENABLED=true
+    ports:
+      - 13054:7054
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/Donor.HLNETWORK.com/ca/:/etc/hyperledger/fabric-ca-server-config
     networks:
       - HLNETWORK
 
@@ -112,8 +163,8 @@ services:
   # peers #
   #########
 
-  peer0.org1.HLNETWORK.com:
-    container_name: peer0.org1.HLNETWORK.com
+  peer0.Impact.HLNETWORK.com:
+    container_name: peer0.Impact.HLNETWORK.com
     image: hyperledger/fabric-peer:1.4
     environment:
       - GOPATH=$HOME/go
@@ -131,24 +182,25 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-      - CORE_PEER_ID=peer0.org1.HLNETWORK.com
-      - CORE_PEER_ADDRESS=peer0.org1.HLNETWORK.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.HLNETWORK.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.HLNETWORK.com:7051
-      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_ID=peer0.Impact.HLNETWORK.com
+      - CORE_PEER_ADDRESS=peer0.Impact.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.Impact.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.Impact.HLNETWORK.com:7051
+      - CORE_PEER_LOCALMSPID=ImpactMSP
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.org1.HLNETWORK.com:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.Impact.HLNETWORK.com:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_VM_DOCKER_ATTACHSTDOUT=true
       # Database
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.org1.HLNETWORK.com:5984
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0org1
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=org1pass
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.Impact.HLNETWORK.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0Impact
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=Impactpass
     volumes:
       - /var/run/:/host/var/run/
-      - ./crypto-config/peerOrganizations/org1.HLNETWORK.com/peers/peer0.org1.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
-      - ./crypto-config/peerOrganizations/org1.HLNETWORK.com/peers/peer0.org1.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
-      # - peer0.org1.HLNETWORK.com:/var/hyperledger/production
+      - ./crypto-config/peerOrganizations/Impact.HLNETWORK.com/peers/peer0.Impact.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/Impact.HLNETWORK.com/peers/peer0.Impact.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
+      # - peer0.Impact.HLNETWORK.com:/var/hyperledger/production
     working_dir: $GOPATH/src/github.com/hyperledger/fabric
     command: peer node start
     depends_on:
@@ -158,8 +210,8 @@ services:
     networks:
       - HLNETWORK
 
-  peer0.org2.HLNETWORK.com:
-    container_name: peer0.org2.HLNETWORK.com
+  peer0.MOPH.HLNETWORK.com:
+    container_name: peer0.MOPH.HLNETWORK.com
     image: hyperledger/fabric-peer:1.4
     environment:
       - GOPATH=$HOME/go
@@ -178,24 +230,25 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-      - CORE_PEER_ID=peer0.org2.HLNETWORK.com
-      - CORE_PEER_ADDRESS=peer0.org2.HLNETWORK.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org2.HLNETWORK.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.HLNETWORK.com:7051
-      - CORE_PEER_LOCALMSPID=Org2MSP
+      - CORE_PEER_ID=peer0.MOPH.HLNETWORK.com
+      - CORE_PEER_ADDRESS=peer0.MOPH.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.MOPH.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.MOPH.HLNETWORK.com:7051
+      - CORE_PEER_LOCALMSPID=MOPHMSP
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.org2.HLNETWORK.com:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.MOPH.HLNETWORK.com:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_VM_DOCKER_ATTACHSTDOUT=true
       # Database
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.org2.HLNETWORK.com:5984
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0org2
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=org2pass
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.MOPH.HLNETWORK.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0MOPH
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=MOPHpass
     volumes:
       - /var/run/:/host/var/run/
-      - ./crypto-config/peerOrganizations/org2.HLNETWORK.com/peers/peer0.org2.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
-      - ./crypto-config/peerOrganizations/org2.HLNETWORK.com/peers/peer0.org2.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
-      # - peer0.org2.HLNETWORK.com:/var/hyperledger/production
+      - ./crypto-config/peerOrganizations/MOPH.HLNETWORK.com/peers/peer0.MOPH.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/MOPH.HLNETWORK.com/peers/peer0.MOPH.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
+      # - peer0.MOPH.HLNETWORK.com:/var/hyperledger/production
     working_dir: $GOPATH/src/github.com/hyperledger/fabric
     command: peer node start
     depends_on:
@@ -205,8 +258,8 @@ services:
     networks:
       - HLNETWORK
 
-  peer0.org3.HLNETWORK.com:
-    container_name: peer0.org3.HLNETWORK.com
+  peer0.BorderControl.HLNETWORK.com:
+    container_name: peer0.BorderControl.HLNETWORK.com
     image: hyperledger/fabric-peer:1.4
     environment:
       - GOPATH=$HOME/go
@@ -225,24 +278,25 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-      - CORE_PEER_ID=peer0.org3.HLNETWORK.com
-      - CORE_PEER_ADDRESS=peer0.org3.HLNETWORK.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.HLNETWORK.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org3.HLNETWORK.com:7051
-      - CORE_PEER_LOCALMSPID=Org3MSP
+      - CORE_PEER_ID=peer0.BorderControl.HLNETWORK.com
+      - CORE_PEER_ADDRESS=peer0.BorderControl.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.BorderControl.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.BorderControl.HLNETWORK.com:7051
+      - CORE_PEER_LOCALMSPID=BorderControlMSP
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.org3.HLNETWORK.com:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.BorderControl.HLNETWORK.com:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_VM_DOCKER_ATTACHSTDOUT=true
       # Database
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.org3.HLNETWORK.com:5984
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0org3
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=org3pass
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.BorderControl.HLNETWORK.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0BorderControl
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=BorderControlpass
     volumes:
       - /var/run/:/host/var/run/
-      - ./crypto-config/peerOrganizations/org3.HLNETWORK.com/peers/peer0.org3.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
-      - ./crypto-config/peerOrganizations/org3.HLNETWORK.com/peers/peer0.org3.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
-      # - peer0.org3.HLNETWORK.com:/var/hyperledger/production
+      - ./crypto-config/peerOrganizations/BorderControl.HLNETWORK.com/peers/peer0.BorderControl.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/BorderControl.HLNETWORK.com/peers/peer0.BorderControl.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
+      # - peer0.BorderControl.HLNETWORK.com:/var/hyperledger/production
     working_dir: $GOPATH/src/github.com/hyperledger/fabric
     command: peer node start
     depends_on:
@@ -252,8 +306,8 @@ services:
     networks:
       - HLNETWORK
 
-  peer0.org4.HLNETWORK.com:
-    container_name: peer0.org4.HLNETWORK.com
+  peer0.Manufacturer.HLNETWORK.com:
+    container_name: peer0.Manufacturer.HLNETWORK.com
     image: hyperledger/fabric-peer:1.4
     environment:
       - GOPATH=$HOME/go
@@ -272,24 +326,25 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-      - CORE_PEER_ID=peer0.org4.HLNETWORK.com
-      - CORE_PEER_ADDRESS=peer0.org4.HLNETWORK.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org4.HLNETWORK.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org4.HLNETWORK.com:7051
-      - CORE_PEER_LOCALMSPID=Org4MSP
+      - CORE_PEER_ID=peer0.Manufacturer.HLNETWORK.com
+      - CORE_PEER_ADDRESS=peer0.Manufacturer.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.Manufacturer.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.Manufacturer.HLNETWORK.com:7051
+      - CORE_PEER_LOCALMSPID=ManufacturerMSP
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.org4.HLNETWORK.com:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.Manufacturer.HLNETWORK.com:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_VM_DOCKER_ATTACHSTDOUT=true
       # Database
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.org4.HLNETWORK.com:5984
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0org4
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=org4pass
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.Manufacturer.HLNETWORK.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0Manufacturer
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=Manufacturerpass
     volumes:
       - /var/run/:/host/var/run/
-      - ./crypto-config/peerOrganizations/org4.HLNETWORK.com/peers/peer0.org4.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
-      - ./crypto-config/peerOrganizations/org4.HLNETWORK.com/peers/peer0.org4.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
-      # - peer0.org4.HLNETWORK.com:/var/hyperledger/production
+      - ./crypto-config/peerOrganizations/Manufacturer.HLNETWORK.com/peers/peer0.Manufacturer.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/Manufacturer.HLNETWORK.com/peers/peer0.Manufacturer.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
+      # - peer0.Manufacturer.HLNETWORK.com:/var/hyperledger/production
     working_dir: $GOPATH/src/github.com/hyperledger/fabric
     command: peer node start
     depends_on:
@@ -298,52 +353,229 @@ services:
       - 10051:7051
     networks:
       - HLNETWORK
+
+  peer0.Hospital.HLNETWORK.com:
+    container_name: peer0.Hospital.HLNETWORK.com
+    image: hyperledger/fabric-peer:1.4
+    environment:
+      - GOPATH=$HOME/go
+      - GODEBUG=netdns=go
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_HLNETWORK
+      - FABRIC_LOGGING_SPEC=INFO
+      # - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      - CORE_PEER_ID=peer0.Hospital.HLNETWORK.com
+      - CORE_PEER_ADDRESS=peer0.Hospital.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.Hospital.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.Hospital.HLNETWORK.com:7051
+      - CORE_PEER_LOCALMSPID=HospitalMSP
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.Hospital.HLNETWORK.com:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_VM_DOCKER_ATTACHSTDOUT=true
+      # Database
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.Hospital.HLNETWORK.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0Hospital
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=Hospitalpass
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/Hospital.HLNETWORK.com/peers/peer0.Hospital.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/Hospital.HLNETWORK.com/peers/peer0.Hospital.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
+      # - peer0.Hospital.HLNETWORK.com:/var/hyperledger/production
+    working_dir: $GOPATH/src/github.com/hyperledger/fabric
+    command: peer node start
+    depends_on:
+      - orderer.HLNETWORK.com
+    ports:
+      - 11051:7051
+    networks:
+      - HLNETWORK
+
+  peer0.StorageFacility.HLNETWORK.com:
+    container_name: peer0.StorageFacility.HLNETWORK.com
+    image: hyperledger/fabric-peer:1.4
+    environment:
+      - GOPATH=$HOME/go
+      - GODEBUG=netdns=go
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_HLNETWORK
+      - FABRIC_LOGGING_SPEC=INFO
+      # - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      - CORE_PEER_ID=peer0.StorageFacility.HLNETWORK.com
+      - CORE_PEER_ADDRESS=peer0.StorageFacility.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.StorageFacility.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.StorageFacility.HLNETWORK.com:7051
+      - CORE_PEER_LOCALMSPID=StorageFacilityMSP
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.StorageFacility.HLNETWORK.com:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_VM_DOCKER_ATTACHSTDOUT=true
+      # Database
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.StorageFacility.HLNETWORK.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0StorageFacility
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=StorageFacilitypass
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/StorageFacility.HLNETWORK.com/peers/peer0.StorageFacility.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/StorageFacility.HLNETWORK.com/peers/peer0.StorageFacility.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
+      # - peer0.StorageFacility.HLNETWORK.com:/var/hyperledger/production
+    working_dir: $GOPATH/src/github.com/hyperledger/fabric
+    command: peer node start
+    depends_on:
+      - orderer.HLNETWORK.com
+    ports:
+      - 12051:7051
+    networks:
+      - HLNETWORK
+
+  peer0.Donor.HLNETWORK.com:
+    container_name: peer0.Donor.HLNETWORK.com
+    image: hyperledger/fabric-peer:1.4
+    environment:
+      - GOPATH=$HOME/go
+      - GODEBUG=netdns=go
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_HLNETWORK
+      - FABRIC_LOGGING_SPEC=INFO
+      # - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      - CORE_PEER_ID=peer0.Donor.HLNETWORK.com
+      - CORE_PEER_ADDRESS=peer0.Donor.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.Donor.HLNETWORK.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.Donor.HLNETWORK.com:7051
+      - CORE_PEER_LOCALMSPID=DonorMSP
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.Donor.HLNETWORK.com:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_VM_DOCKER_ATTACHSTDOUT=true
+      # Database
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.Donor.HLNETWORK.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=peer0Donor
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=Donorpass
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/Donor.HLNETWORK.com/peers/peer0.Donor.HLNETWORK.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/Donor.HLNETWORK.com/peers/peer0.Donor.HLNETWORK.com/tls:/etc/hyperledger/fabric/tls
+      # - peer0.Donor.HLNETWORK.com:/var/hyperledger/production
+    working_dir: $GOPATH/src/github.com/hyperledger/fabric
+    command: peer node start
+    depends_on:
+      - orderer.HLNETWORK.com
+    ports:
+      - 13051:7051
+    networks:
+      - HLNETWORK
   
   ###########
   # CouchDB #
   ###########
 
-  couchdb.org1.HLNETWORK.com:
-    container_name: couchdb.org1.HLNETWORK.com
+  couchdb.Impact.HLNETWORK.com:
+    container_name: couchdb.Impact.HLNETWORK.com
     image: hyperledger/fabric-couchdb
     environment:
-      - COUCHDB_USER=peer0org1
-      - COUCHDB_PASSWORD=org1pass
+      - COUCHDB_USER=peer0Impact
+      - COUCHDB_PASSWORD=Impactpass
     ports:
       - 5984:5984
     networks:
       - HLNETWORK
 
-  couchdb.org2.HLNETWORK.com:
-    container_name: couchdb.org2.HLNETWORK.com
+  couchdb.MOPH.HLNETWORK.com:
+    container_name: couchdb.MOPH.HLNETWORK.com
     image: hyperledger/fabric-couchdb
     environment:
-      - COUCHDB_USER=peer0org2
-      - COUCHDB_PASSWORD=org2pass
+      - COUCHDB_USER=peer0MOPH
+      - COUCHDB_PASSWORD=MOPHpass
     ports:
       - 6984:5984
     networks:
       - HLNETWORK
 
-  couchdb.org3.HLNETWORK.com:
-    container_name: couchdb.org3.HLNETWORK.com
+  couchdb.BorderControl.HLNETWORK.com:
+    container_name: couchdb.BorderControl.HLNETWORK.com
     image: hyperledger/fabric-couchdb
     environment:
-      - COUCHDB_USER=peer0org3
-      - COUCHDB_PASSWORD=org3pass
+      - COUCHDB_USER=peer0BorderControl
+      - COUCHDB_PASSWORD=BorderControlpass
     ports:
       - 7984:5984
     networks:
       - HLNETWORK
 
-  couchdb.org4.HLNETWORK.com:
-    container_name: couchdb.org4.HLNETWORK.com
+  couchdb.Manufacturer.HLNETWORK.com:
+    container_name: couchdb.Manufacturer.HLNETWORK.com
     image: hyperledger/fabric-couchdb
     environment:
-      - COUCHDB_USER=peer0org4
-      - COUCHDB_PASSWORD=org4pass
+      - COUCHDB_USER=peer0Manufacturer
+      - COUCHDB_PASSWORD=Manufacturerpass
     ports:
       - 8984:5984
+    networks:
+      - HLNETWORK
+
+  couchdb.Hospital.HLNETWORK.com:
+    container_name: couchdb.Hospital.HLNETWORK.com
+    image: hyperledger/fabric-couchdb
+    environment:
+      - COUCHDB_USER=peer0Hospital
+      - COUCHDB_PASSWORD=Hospitalpass
+    ports:
+      - 9984:5984
+    networks:
+      - HLNETWORK
+
+  couchdb.StorageFacility.HLNETWORK.com:
+    container_name: couchdb.StorageFacility.HLNETWORK.com
+    image: hyperledger/fabric-couchdb
+    environment:
+      - COUCHDB_USER=peer0StorageFacility
+      - COUCHDB_PASSWORD=StorageFacilitypass
+    ports:
+      - 10984:5984
+    networks:
+      - HLNETWORK
+
+  couchdb.Donor.HLNETWORK.com:
+    container_name: couchdb.Donor.HLNETWORK.com
+    image: hyperledger/fabric-couchdb
+    environment:
+      - COUCHDB_USER=peer0Donor
+      - COUCHDB_PASSWORD=Donorpass
+    ports:
+      - 11984:5984
     networks:
       - HLNETWORK
   
@@ -361,13 +593,14 @@ services:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - FABRIC_LOGGING_SPEC=INFO
       - CORE_PEER_ID=cli
-      - CORE_PEER_ADDRESS=peer0.org1.HLNETWORK.com:7051
-      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_ADDRESS=peer0.Impact.HLNETWORK.com:7051
+      - CORE_VM_DOCKER_ATTACHSTDOUT=true
+      - CORE_PEER_LOCALMSPID=ImpactMSP
       - CORE_PEER_TLS_ENABLED=true
-      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.HLNETWORK.com/peers/peer0.org1.HLNETWORK.com/tls/server.crt
-      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.HLNETWORK.com/peers/peer0.org1.HLNETWORK.com/tls/server.key
-      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.HLNETWORK.com/peers/peer0.org1.HLNETWORK.com/tls/ca.crt
-      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.HLNETWORK.com/users/Admin@org1.HLNETWORK.com/msp
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Impact.HLNETWORK.com/peers/peer0.Impact.HLNETWORK.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Impact.HLNETWORK.com/peers/peer0.Impact.HLNETWORK.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Impact.HLNETWORK.com/peers/peer0.Impact.HLNETWORK.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Impact.HLNETWORK.com/users/Admin@Impact.HLNETWORK.com/msp
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     # command: /bin/bash
     volumes:
@@ -378,13 +611,19 @@ services:
       - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
     depends_on:
       - orderer.HLNETWORK.com
-      - peer0.org1.HLNETWORK.com
-      - peer0.org2.HLNETWORK.com
-      - peer0.org3.HLNETWORK.com
-      - peer0.org4.HLNETWORK.com
-      - couchdb.org1.HLNETWORK.com
-      - couchdb.org2.HLNETWORK.com
-      - couchdb.org3.HLNETWORK.com
-      - couchdb.org4.HLNETWORK.com
+      - peer0.Impact.HLNETWORK.com
+      - peer0.MOPH.HLNETWORK.com
+      - peer0.BorderControl.HLNETWORK.com
+      - peer0.Manufacturer.HLNETWORK.com
+      - peer0.Hospital.HLNETWORK.com
+      - peer0.StorageFacility.HLNETWORK.com
+      - peer0.Donor.HLNETWORK.com
+      - couchdb.Impact.HLNETWORK.com
+      - couchdb.MOPH.HLNETWORK.com
+      - couchdb.BorderControl.HLNETWORK.com
+      - couchdb.Manufacturer.HLNETWORK.com
+      - couchdb.Hospital.HLNETWORK.com
+      - couchdb.StorageFacility.HLNETWORK.com
+      - couchdb.Donor.HLNETWORK.com
     networks:
       - HLNETWORK

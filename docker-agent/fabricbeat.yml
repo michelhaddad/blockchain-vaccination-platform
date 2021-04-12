@@ -45,6 +45,7 @@ fabricbeat:
     - name: supplychain
       linkingkey:
       values: ["class","id","currentState","arrivalDateTime","batchNumber","hospital","issueDateTime","issuer","numberOfVials","deliveryID","storage","updateDateTime"]
+
 #-------------------------- Elasticsearch output ------------------------------
 setup.ilm.enabled: false
 

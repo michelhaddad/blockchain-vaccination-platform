@@ -1,0 +1,59 @@
+<mat-toolbar color="primary">
+  <button class="hamburger-button" mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-sidenav-container class="h-100 overflow-hidden" autosize>
+  <mat-sidenav
+    #sidenav
+    class="sidenav"
+    mode="side"
+    [opened]="isSideNavExpanded"
+  >
+    <mat-nav-list>
+      <div *ngFor="let section of sections">
+        <a class="section-title"
+          mat-list-item
+          *ngIf="!section.hasSubSections"
+          [routerLink]="section.mainSection.link"
+        >
+          <mat-icon class="mr-2">{{ section.icon }}</mat-icon>
+          <div>{{ section.mainSection.title | titlecase }}</div>
+        </a>
+        <div *ngIf="section.hasSubSections">
+            <div>
+              <mat-expansion-panel
+                [expanded]="section.isToggled"
+                (opened)="section.isToggled = true"
+                (closed)="section.isToggled = false"
+              >
+                <mat-expansion-panel-header
+                  [collapsedHeight]="'48px'"
+                  [expandedHeight]="'48px'"
+                >
+                  <mat-panel-title>
+					  <div  class="section-title">
+						<mat-icon class="mr-2">{{ section.icon }}</mat-icon><div>{{ section.mainSection.title | titlecase }}</div>
+					  </div>	
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                  <a
+                    mat-list-item
+                    *ngFor="let subSection of section.subSections"
+                    [routerLink]="subSection.link"
+                    [routerLinkActive]="'active'"
+                  >
+                    {{ subSection.title | titlecase }}
+                  </a>
+                </mat-nav-list>
+              </mat-expansion-panel>
+            </div>
+        </div>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="overflow-hidden">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

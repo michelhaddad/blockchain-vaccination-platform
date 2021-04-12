@@ -25,100 +25,172 @@ Organizations:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
 
-    - &Org1
+    - &Impact
 
-        Name: Org1MSP
+        Name: ImpactMSP
 
         # ID to load the MSP definition as
-        ID: Org1MSP
+        ID: ImpactMSP
 
-        MSPDir: crypto-config/peerOrganizations/org1.el-network.com/msp
+        MSPDir: crypto-config/peerOrganizations/Impact.el-network.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
+                Rule: "OR('ImpactMSP.admin', 'ImpactMSP.peer', 'ImpactMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
+                Rule: "OR('ImpactMSP.admin', 'ImpactMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin')"
+                Rule: "OR('ImpactMSP.admin')"
 
         AnchorPeers:
-            - Host: peer0.org1.el-network.com
+            - Host: peer0.Impact.el-network.com
               Port: 7051
 
-    - &Org2
+    - &MOPH
 
-        Name: Org2MSP
+        Name: MOPHMSP
 
         # ID to load the MSP definition as
-        ID: Org2MSP
+        ID: MOPHMSP
 
-        MSPDir: crypto-config/peerOrganizations/org2.el-network.com/msp
+        MSPDir: crypto-config/peerOrganizations/MOPH.el-network.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"
+                Rule: "OR('MOPHMSP.admin', 'MOPHMSP.peer', 'MOPHMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"
+                Rule: "OR('MOPHMSP.admin', 'MOPHMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin')"
+                Rule: "OR('MOPHMSP.admin')"
 
         AnchorPeers:
-            - Host: peer0.org2.el-network.com
+            - Host: peer0.MOPH.el-network.com
               Port: 7051
 
-    - &Org3
+    - &BorderControl
 
-        Name: Org3MSP
+        Name: BorderControlMSP
 
         # ID to load the MSP definition as
-        ID: Org3MSP
+        ID: BorderControlMSP
 
-        MSPDir: crypto-config/peerOrganizations/org3.el-network.com/msp
+        MSPDir: crypto-config/peerOrganizations/BorderControl.el-network.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org3MSP.admin', 'Org3MSP.peer', 'Org3MSP.client')"
+                Rule: "OR('BorderControlMSP.admin', 'BorderControlMSP.peer', 'BorderControlMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org3MSP.admin', 'Org3MSP.client')"
+                Rule: "OR('BorderControlMSP.admin', 'BorderControlMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org3MSP.admin')"
+                Rule: "OR('BorderControlMSP.admin')"
 
         AnchorPeers:
-            - Host: peer0.org3.el-network.com
+            - Host: peer0.BorderControl.el-network.com
               Port: 7051
 
-    - &Org4
+    - &Manufacturer
 
-        Name: Org4MSP
+        Name: ManufacturerMSP
 
         # ID to load the MSP definition as
-        ID: Org4MSP
+        ID: ManufacturerMSP
 
-        MSPDir: crypto-config/peerOrganizations/org4.el-network.com/msp
+        MSPDir: crypto-config/peerOrganizations/Manufacturer.el-network.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org4MSP.admin', 'Org4MSP.peer', 'Org4MSP.client')"
+                Rule: "OR('ManufacturerMSP.admin', 'ManufacturerMSP.peer', 'ManufacturerMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org4MSP.admin', 'Org4MSP.client')"
+                Rule: "OR('ManufacturerMSP.admin', 'ManufacturerMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org4MSP.admin')"
+                Rule: "OR('ManufacturerMSP.admin')"
 
         AnchorPeers:
-            - Host: peer0.org4.el-network.com
+            - Host: peer0.Manufacturer.el-network.com
+              Port: 7051
+
+    - &Hospital
+
+        Name: HospitalMSP
+
+        # ID to load the MSP definition as
+        ID: HospitalMSP
+
+        MSPDir: crypto-config/peerOrganizations/Hospital.el-network.com/msp
+
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('HospitalMSP.admin', 'HospitalMSP.peer', 'HospitalMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('HospitalMSP.admin', 'HospitalMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('HospitalMSP.admin')"
+
+        AnchorPeers:
+            - Host: peer0.Hospital.el-network.com
+              Port: 7051
+
+    - &StorageFacility
+
+        Name: StorageFacilityMSP
+
+        # ID to load the MSP definition as
+        ID: StorageFacilityMSP
+
+        MSPDir: crypto-config/peerOrganizations/StorageFacility.el-network.com/msp
+
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('StorageFacilityMSP.admin', 'StorageFacilityMSP.peer', 'StorageFacilityMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('StorageFacilityMSP.admin', 'StorageFacilityMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('StorageFacilityMSP.admin')"
+
+        AnchorPeers:
+            - Host: peer0.StorageFacility.el-network.com
+              Port: 7051
+    
+    - &Donor
+
+        Name: DonorMSP
+
+        # ID to load the MSP definition as
+        ID: DonorMSP
+
+        MSPDir: crypto-config/peerOrganizations/Donor.el-network.com/msp
+
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('DonorMSP.admin', 'DonorMSP.peer', 'DonorMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('DonorMSP.admin', 'DonorMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('DonorMSP.admin')"
+
+        AnchorPeers:
+            - Host: peer0.Donor.el-network.com
               Port: 7051
 
 ################################################################################
@@ -251,20 +323,20 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                    - *Org1
-                    - *Org2
-                    - *Org3
-                    - *Org4
+                    - *Impact
+                    - *MOPH
+                    - *BorderControl
+                    - *Manufacturer
     FourOrgsChannel:
         Consortium: SampleConsortium
         <<: *ChannelDefaults
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
-                - *Org2
-                - *Org3
-                - *Org4
+                - *Impact
+                - *MOPH
+                - *BorderControl
+                - *Manufacturer
             Capabilities:
                 <<: *ApplicationCapabilities
 
