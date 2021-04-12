@@ -16,7 +16,7 @@ export class PlanningComponent implements OnInit {
     new TableColumnModel('orderId', 'Order ID'),
     new TableColumnModel('date', 'Arrival Date'),
     new TableColumnModel('storageFacility', 'Storage Facility'),
-    new TableColumnModel('hospital', 'Hospitall'),
+    new TableColumnModel('hospital', 'Hospital'),
     new TableColumnModel('batchNumber', 'Batch Number'),
     new TableColumnModel('vialQuantity', 'Number of Vials'),
     new TableColumnModel('status', 'Status')
