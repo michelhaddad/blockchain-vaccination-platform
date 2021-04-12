@@ -23,7 +23,7 @@ const cpState = {
 class OrderDelivery extends State {
 
     constructor(obj) {
-        super(OrderDelivery.getClass(), obj.orderID);
+        super(OrderDelivery.getClass(), obj.deliveryID);
         Object.assign(this, obj);
     }
 
@@ -151,9 +151,9 @@ class OrderDelivery extends State {
     /**
      * Factory method to create a donation paper object
      */
-    static createInstance(orderID, issuer, storage, hospital, batchNumber, numberOfVials, 
+    static createInstance(deliveryID, issuer, storage, hospital, batchNumber, numberOfVials, 
         arrivalDateTime, issueDateTime, updateDateTime) {
-        return new OrderDelivery({ orderID, issuer, storage, hospital, batchNumber, numberOfVials, 
+        return new OrderDelivery({ deliveryID, issuer, storage, hospital, batchNumber, numberOfVials, 
             arrivalDateTime, issueDateTime, updateDateTime});
     }
 

@@ -12,20 +12,20 @@ const OrderDelivery = require('./orderDelivery.js');
 class OrderDeliveryList extends StateList {
 
     constructor(ctx) {
-        super(ctx, 'org.papernet.orderDelivery');
+        super(ctx, OrderDelivery.getClass());
         this.use(OrderDelivery);
     }
 
-    async addPaper(paper) {
-        return this.addState(paper);
+    async addDelivery(delivery) {
+        return this.addState(delivery);
     }
 
-    async getPaper(paperKey) {
-        return this.getState(paperKey);
+    async getDelivery(deliveryKey) {
+        return this.getState(deliveryKey);
     }
 
-    async updatePaper(paper) {
-        return this.updateState(paper);
+    async updateDelivery(delivery) {
+        return this.updateState(delivery);
     }
 }
 

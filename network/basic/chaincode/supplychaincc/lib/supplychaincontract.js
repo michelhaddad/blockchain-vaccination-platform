@@ -19,7 +19,7 @@ class OrderDeliveryContext extends Context {
     constructor() {
         super();
         // All papers are held in a list of papers
-        this.paperList = new OrderDeliveryList(this);
+        this.deliveryList = new OrderDeliveryList(this);
     }
 
 }
@@ -86,18 +86,17 @@ class SupplyChainContract extends Contract {
     async indexOrderDelivery(ctx) {
         let identity = ctx.clientIdentity;
         const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
-        let org = identity.getMSPID();
-        const role = "issuer";
+        // let org = identity.getMSPID();
+        // const role = "issuer";
         // if(org === "MOPH")
         //     role = "issuer";
         // else
         //     role = org;
         const query = `{
             "selector": {
-                "${role.toLowerCase()}": "${enrollmentID}", 
-                "class": "org.papernet.orderDelivery"
-            },
-            "sort": [{"arrivalDateTime": "desc"}]
+                "issuer": "${enrollmentID}",
+                "class": "${OrderDelivery.getClass()}"
+            }
         }`;
         const results = await this.query(ctx, query);
         return results;
@@ -107,14 +106,14 @@ class SupplyChainContract extends Contract {
      * Issue order plan
      *
      * @param {Context} ctx the transaction context
-     * @param {Integer} orderID order number
+     * @param {Integer} deliveryID order number
      * @param {Integer} storageID ID of targeted order's storage facility
      * @param {Integer} hospitalID ID of targeted final destination
      * @param {String} batchNumber batch number sent to hospital
      * @param {Integer} numberOfVials number of vials sent to the hospital
      * @param {Date} arrivalDateTime expected arrival date of vials to final destination
     */
-    async issue(ctx, orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime) {
+    async issue(ctx, deliveryID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime) {
         // get enrollement ID of the issuer
         let identity = ctx.clientIdentity;
         const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
@@ -123,14 +122,14 @@ class SupplyChainContract extends Contract {
         let today = new Date().toISOString().slice(0, 10);
 
         // create an instance of the order
-        let paper = OrderDelivery.createInstance(orderID, enrollmentID, storageID, 
+        let paper = OrderDelivery.createInstance(deliveryID, enrollmentID, storageID, 
             hospitalID, batchNumber, numberOfVials, arrivalDateTime, today, today);
 
         // Smart contract, rather than paper, moves paper into IN_BORDER_CONTROL state
         paper.setInBorderControl();
 
         // Add the paper to the list of all similar order papers in the ledger world state
-        await ctx.paperList.addPaper(paper);
+        await ctx.deliveryList.addDelivery(paper);
 
         // Must return a serialized paper to caller of smart contract
         return paper;
@@ -140,14 +139,14 @@ class SupplyChainContract extends Contract {
      * Initiate order delivery from border control to storage facility
      *
      * @param {Context} ctx the transaction context
-     * @param {Integer} orderID order number for this issuer
+     * @param {Integer} deliveryID order number for this issuer
     */
-    async storageDelivery(ctx, orderID) {
-        let paper = await ctx.paperList.getPaper(orderID);
+    async storageDelivery(ctx, deliveryID) {
+        let paper = await ctx.deliveryList.getDelivery(deliveryID);
 
         // Check order is in border control
         if (!paper.isInBorderControl()) {
-            throw new Error('Delivery ' + orderID + ' is not in border control');
+            throw new Error('Delivery ' + deliveryID + ' is not in border control');
         }
 
         // Get today's date in format yyyy-mm-dd
@@ -157,7 +156,7 @@ class SupplyChainContract extends Contract {
         paper.setToStorage();
         paper.setUpdateDateTime(today);
 
-        await ctx.paperList.updatePaper(paper);
+        await ctx.deliveryList.updateDelivery(paper);
         return paper;
     }
 
@@ -166,14 +165,14 @@ class SupplyChainContract extends Contract {
      * Acknowledge order arrival to storage facility
      *
      * @param {Context} ctx the transaction context
-     * @param {Integer} orderID order number
+     * @param {Integer} deliveryID order number
     */
-     async storageArrival(ctx, orderID) {
-        let paper = await ctx.paperList.getPaper(orderID);
+     async storageArrival(ctx, deliveryID) {
+        let paper = await ctx.deliveryList.getDelivery(deliveryID);
 
         // Check order is on its way to storage
         if (!paper.isToStorage()) {
-            throw new Error('Delivery ' + orderID + ' is not on its way to storage');
+            throw new Error('Delivery ' + deliveryID + ' is not on its way to storage');
         }
 
         // Get today's date in format yyyy-mm-dd
@@ -183,7 +182,7 @@ class SupplyChainContract extends Contract {
         paper.setInStorage();
         paper.setUpdateDateTime(today);
 
-        await ctx.paperList.updatePaper(paper);
+        await ctx.deliveryList.updateDelivery(paper);
         return paper;
     }
 
@@ -191,14 +190,14 @@ class SupplyChainContract extends Contract {
      * Initiate order delivery from storage facility to hospital
      *
      * @param {Context} ctx the transaction context
-     * @param {Integer} orderID order number
+     * @param {Integer} deliveryID order number
     */
-     async hospitalDelivery(ctx, orderID) {
-        let paper = await ctx.paperList.getPaper(orderID);
+     async hospitalDelivery(ctx, deliveryID) {
+        let paper = await ctx.deliveryList.getDelivery(deliveryID);
 
         // Check order is in storage
         if (!paper.isInStorage()) {
-            throw new Error('Delivery ' + orderID + ' is not in storage');
+            throw new Error('Delivery ' + deliveryID + ' is not in storage');
         }
 
         // Get today's date in format yyyy-mm-dd
@@ -208,7 +207,7 @@ class SupplyChainContract extends Contract {
         paper.setToHospital();
         paper.setUpdateDateTime(today);
 
-        await ctx.paperList.updatePaper(paper);
+        await ctx.deliveryList.updateDelivery(paper);
         return paper;
     }
 
@@ -216,14 +215,14 @@ class SupplyChainContract extends Contract {
      * Acknowledge order arrival to hospital
      *
      * @param {Context} ctx the transaction context
-     * @param {Integer} orderID order number
+     * @param {Integer} deliveryID order number
     */
-     async hospitalArrival(ctx, orderID) {
-        let paper = await ctx.paperList.getPaper(orderID);
+     async hospitalArrival(ctx, deliveryID) {
+        let paper = await ctx.deliveryList.getDelivery(deliveryID);
 
         // Check paper is on its way to hospital
         if (!paper.isToHospital()) {
-            throw new Error('Delivery ' + orderID + ' is not on its way to hospital');
+            throw new Error('Delivery ' + deliveryID + ' is not on its way to hospital');
         }
 
         // Get today's date in format yyyy-mm-dd
@@ -233,7 +232,7 @@ class SupplyChainContract extends Contract {
         paper.setInHospital();
         paper.setUpdateDateTime(today);
 
-        await ctx.paperList.updatePaper(paper);
+        await ctx.deliveryList.updateDelivery(paper);
         return paper;
     }
 }
