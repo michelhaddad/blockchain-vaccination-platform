@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { MatTableDataSource } from '@angular/material/table';
 import { TableColumnModel } from '../../models/table-column.model';
 import { MatSort } from '@angular/material/sort';
+import { PlanButtonEnum, PlanningStatusEnum } from '../../models/planning-status.enum';
 
 @Component({
   selector: 'app-table',
@@ -32,8 +33,31 @@ export class TableComponent implements OnInit {
 
   }
 
-  openMenu(): void {
-
+  getStatus(e: PlanningStatusEnum): string {
+    switch (e) {
+      case PlanningStatusEnum.BORDER_CONTROL:
+        return 'In Border Control';
+      case PlanningStatusEnum.IN_HOSPITAL:
+        return 'In Hospital';
+      case PlanningStatusEnum.TO_HOSPITAL:
+        return 'To Hospital';
+      case PlanningStatusEnum.IN_STORAGE:
+        return 'In Storage';
+      case PlanningStatusEnum.TO_STORAGE:
+        return 'To Storage';
+    }
   }
+
+  getButtonText(e: PlanButtonEnum): string {
+    switch (e) {
+      case PlanButtonEnum.RECEIVED:
+        return 'Received';
+      case PlanButtonEnum.SENT:
+        return 'Sent';
+      default:
+        return '';
+    }
+  }
+
   ngOnInit(): void { }
 }

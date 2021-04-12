@@ -14,18 +14,19 @@ import { AddPlanComponent } from '../dialogs/add-plan/add-plan.component';
 export class PlanningComponent implements OnInit {
   displayedColumns: TableColumnModel[] = [
     new TableColumnModel('orderId', 'Order ID'),
-    new TableColumnModel('date', 'Date'),
+    new TableColumnModel('date', 'Arrival Date'),
     new TableColumnModel('storageFacility', 'Storage Facility'),
-    new TableColumnModel('hospital', 'Hospitall'),
+    new TableColumnModel('hospital', 'Hospital'),
     new TableColumnModel('batchNumber', 'Batch Number'),
     new TableColumnModel('vialQuantity', 'Number of Vials'),
-    new TableColumnModel('status', 'Status')
+    new TableColumnModel('status', 'Status', false, true),
+    new TableColumnModel('button', '', false, false, true)
   ];
 
   tableDataSource: MatTableDataSource<any> = new MatTableDataSource([
-    new PlanRowModel('11/11/2021', '1', 'RHA', 'Dummy H', '122345', 10, 'Completed'),
-    new PlanRowModel('11/12/2021', '2', 'RHA', 'Dummy H', '122345', 10, 'In progress'),
-    new PlanRowModel('11/01/2022', '3', 'RHA', 'Dummy H', '122345', 10, 'In progress')
+    new PlanRowModel('11/11/2021', '1', 'RHA', 'Dummy H', '122345', 10, 1, 1),
+    new PlanRowModel('11/12/2021', '2', 'RHA', 'Dummy H', '122345', 10, 2, 2),
+    new PlanRowModel('11/01/2022', '3', 'RHA', 'Dummy H', '122345', 10, 3, 2)
   ]); //dummy data
 
   constructor(public dialog: MatDialog) { }
