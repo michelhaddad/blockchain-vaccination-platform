@@ -50,7 +50,7 @@ export const userAuthModules = {
     },
     {
       "mainSection": {
-        "title": "Distribution Planning",
+        "title": "Distribution Plans",
         "link": "/planning"
       },
       "hasSubSections": false,
