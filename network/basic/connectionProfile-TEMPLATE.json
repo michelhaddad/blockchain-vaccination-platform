@@ -43,24 +43,6 @@
 					"chaincodeQuery": true,
 					"ledgerQuery": true,
 					"eventSource": true
-				},
-				"peer0.Hospital.HLNETWORK.com": {
-					"endorsingPeer": true,
-					"chaincodeQuery": true,
-					"ledgerQuery": true,
-					"eventSource": true
-				},
-				"peer0.StorageFacility.HLNETWORK.com": {
-					"endorsingPeer": true,
-					"chaincodeQuery": true,
-					"ledgerQuery": true,
-					"eventSource": true
-				},
-				"peer0.Donor.HLNETWORK.com": {
-					"endorsingPeer": true,
-					"chaincodeQuery": true,
-					"ledgerQuery": true,
-					"eventSource": true
 				}
 			},
 			"orderers": [
