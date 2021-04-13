@@ -48,11 +48,7 @@ class OrderDelivery extends State {
     }
     
     getHospital(){
-        return this.hospital;
-    }
-
-    setHospital(newHospital){
-        this.hospital = newHospital;
+        return this.hospitalID;
     }
 
     getBatchNumber(){
@@ -151,9 +147,9 @@ class OrderDelivery extends State {
     /**
      * Factory method to create a donation paper object
      */
-    static createInstance(deliveryID, issuer, storage, hospital, batchNumber, numberOfVials, 
+    static createInstance(deliveryID, orderID, issuer, storage, hospitalID, batchNumber, numberOfVials, 
         arrivalDateTime, issueDateTime, updateDateTime) {
-        return new OrderDelivery({ deliveryID, issuer, storage, hospital, batchNumber, numberOfVials, 
+        return new OrderDelivery({ deliveryID, orderID, issuer, storage, hospitalID, batchNumber, numberOfVials, 
             arrivalDateTime, issueDateTime, updateDateTime});
     }
 

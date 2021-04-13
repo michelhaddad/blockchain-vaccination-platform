@@ -102,6 +102,17 @@ class SupplyChainContract extends Contract {
         return results;
     }
 
+    async getAllOrderDeliveries(ctx, orderID) {
+        const query = `{
+            "selector": {
+                "orderID": "${orderID}",
+                "class": "${OrderDelivery.getClass()}"
+            }
+        }`;
+        const results = await this.query(ctx, query);
+        return results;
+    }
+
     /**
      * Issue order plan
      *
@@ -113,7 +124,7 @@ class SupplyChainContract extends Contract {
      * @param {Integer} numberOfVials number of vials sent to the hospital
      * @param {Date} arrivalDateTime expected arrival date of vials to final destination
     */
-    async issue(ctx, deliveryID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime) {
+    async issue(ctx, deliveryID, orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime) {
         // get enrollement ID of the issuer
         let identity = ctx.clientIdentity;
         const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
@@ -122,7 +133,7 @@ class SupplyChainContract extends Contract {
         let today = new Date().toISOString().slice(0, 10);
 
         // create an instance of the order
-        let paper = OrderDelivery.createInstance(deliveryID, enrollmentID, storageID, 
+        let paper = OrderDelivery.createInstance(deliveryID, orderID, enrollmentID, storageID, 
             hospitalID, batchNumber, numberOfVials, arrivalDateTime, today, today);
 
         // Smart contract, rather than paper, moves paper into IN_BORDER_CONTROL state
@@ -134,6 +145,7 @@ class SupplyChainContract extends Contract {
         // Must return a serialized paper to caller of smart contract
         return paper;
     }
+
 
     /**
      * Initiate order delivery from border control to storage facility
@@ -233,6 +245,8 @@ class SupplyChainContract extends Contract {
         paper.setUpdateDateTime(today);
 
         await ctx.deliveryList.updateDelivery(paper);
+        const crossContractResponse = await ctx.stub.invokeChaincode('hospitalcc', ['deliverVials', paper.hospitalID, paper.batchNumber, paper.numberOfVials, 'Manufacturer'], 'mychannel');
+        console.info(crossContractResponse);
         return paper;
     }
 }
