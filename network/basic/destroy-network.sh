@@ -4,7 +4,7 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 export FABRIC_CFG_PATH=$PWD
-export CHANNEL_NAME=mychannel
+export CHANNEL_NAME=supplychainchannel
 
 echo "Stopping all containers"
 

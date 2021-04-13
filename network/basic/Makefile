@@ -22,13 +22,14 @@ destroy:
 	rm -rf connection-profile-Manufacturer.yaml
 	rm -rf connection-profile-StorageFacility.yaml
 	rm -rf connection-profile-BorderControl.yaml
+	make rmchaincode
 
 rmchaincode:
-	docker images | grep "dummycc" | xargs docker rmi
-	docker images | grep "donationcc" | xargs docker rmi
-	docker images | grep "ordercc" | xargs docker rmi
 	docker images | grep "supplychain" | xargs docker rmi
-  
+	docker images | grep "ordercc" | xargs docker rmi
+	docker images | grep "donationcc" | xargs docker rmi
+	docker images | grep "dummycc" | xargs docker rmi
+	  
 generate:
 	cp docker-compose-TEMPLATE.yaml docker-compose.yaml
 	sed -i -e "s/HLNETWORK/${HLNETWORK}/g" docker-compose.yaml

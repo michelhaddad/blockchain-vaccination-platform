@@ -25,7 +25,7 @@ BCCSP:
      level: 256
 
 channels:
-  mychannel:
+  contractchannel:
     peers:
       peer0.Impact.HLNETWORK.com:
         endorsingPeer: true
@@ -47,6 +47,37 @@ channels:
         chaincodeQuery: true
         ledgerQuery: true
         eventSource: true
+      peer0.Donor.HLNETWORK.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+    orderers:
+      - orderer.HLNETWORK.com
+    connection:
+      timeout:
+        peer:
+          endorser: "6000"
+          eventHub: "6000"
+          eventReg: "6000"
+        orderer: "6000"
+  distributionchannel:
+    peers:
+      peer0.Impact.HLNETWORK.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer0.MOPH.HLNETWORK.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer0.BorderControl.HLNETWORK.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
       peer0.Hospital.HLNETWORK.com:
         endorsingPeer: true
         chaincodeQuery: true
@@ -63,14 +94,14 @@ channels:
         ledgerQuery: true
         eventSource: true
     orderers:
-    - orderer.HLNETWORK.com
+      - orderer.HLNETWORK.com
     connection:
       timeout:
         peer:
-          endorser: '6000'
-          eventHub: '6000'
-          eventReg: '6000'
-        orderer: '6000'
+          endorser: "6000"
+          eventHub: "6000"
+          eventReg: "6000"
+        orderer: "6000"
 
 organizations:
   Impact:
