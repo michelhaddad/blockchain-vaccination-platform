@@ -2,7 +2,7 @@
 #set +x
 
 NETWORK ?= basic
-CHANNEL ?= mychannel
+CHANNEL ?= contractchannel
 
 install:
 	npm install

@@ -1,6 +1,6 @@
 {
     "channel": {
-        "channelName": "mychannel",
+        "channelName": "contractchannel",
         "contract": "dummycc"
     },
     "connection_profile": "../../network/basic/connectionProfile.json",
@@ -16,6 +16,9 @@
         },
         "Manufacturer": {
             "MSP": "ManufacturerMSP"
+        },
+        "Donor": {
+            "MSP": "DonorMSP"
         }
     },
     "users": [
@@ -34,6 +37,10 @@
         {
             "name": "user4",
             "organization": "Manufacturer"
+        },
+        {
+            "name": "user5",
+            "organization": "Donor"
         }
     ],
     "transactions": [

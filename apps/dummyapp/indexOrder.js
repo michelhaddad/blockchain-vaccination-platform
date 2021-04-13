@@ -29,7 +29,7 @@ async function main() {
             config.connection_profile = config.connection_profile.replace("basic", process.env.NETWORK);
         }
         if ( process.env.CHANNEL != undefined) {
-            config.channel.channelName = config.channel.channelName.replace("mychannel", process.env.CHANNEL);
+            config.channel.channelName = config.channel.channelName.replace("contractchannel", process.env.CHANNEL);
         }
 
         ccpPath = path.resolve(__dirname, config.connection_profile);
