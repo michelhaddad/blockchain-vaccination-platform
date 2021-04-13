@@ -20,6 +20,11 @@ if [[ ${OSTYPE} == "Darwin" ]]; then
   CONFIGTXGEN=../configtxgen_mac
 fi
 
+
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+echo "GENERATING ARTIFACTS"
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
 #Generate crypto material using crypto-config.yaml as config file
 ${CRYPTOGEN} generate --config=./crypto-config.yaml
 
@@ -58,3 +63,4 @@ ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-a
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/ManufacturerMSPanchors.tx -channelID $CHANNEL_NAME -asOrg HospitalMSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/StorageFacilityMSPanchors.tx -channelID $CHANNEL_NAME -asOrg StorageFacilityMSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/DonorMSPanchors.tx -channelID $CHANNEL_NAME -asOrg DonorMSP
+
