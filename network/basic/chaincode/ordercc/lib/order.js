@@ -43,7 +43,7 @@ class Order extends State {
     }
 
     setActualDeliveryDate(deliveryDate) {
-        this.deliveryDate = deliveryDate;
+        this.actualDeliveryDate = deliveryDate;
     }
 
     setOrderBatchNumber(batchNumber) {

@@ -110,7 +110,26 @@ async function main() {
         // process response
         console.log('Process issue transaction response.' + approveResponse);
         order = Order.fromBuffer(approveResponse);
-        console.log(`Order ${order.orderID} approved ${order.issuer}.`);
+        console.log(`${order.issuer} approved order ${order.orderID}.`);
+
+        /**
+         * Skip shipping and Delivery
+         */
+
+        /**
+         * Get All orders
+         */
+        console.log(`
+        xxxxxxxxxxxxxx
+        Getting Orders
+        xxxxxxxxxxxxxx
+        `)
+        // issue order
+        console.log('Submit get all orders transaction.');
+
+        const getAllResponse = await contract.evaluateTransaction('getAllOrders');
+        // process response
+        console.log('Process issue transaction response.' + getAllResponse);
 
 
         process.exit();
