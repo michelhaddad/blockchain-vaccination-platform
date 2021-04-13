@@ -26,6 +26,7 @@ destroy:
 rmchaincode:
 	docker images | grep "dummycc" | xargs docker rmi
 	docker images | grep "donationcc" | xargs docker rmi
+	docker images | grep "ordercc" | xargs docker rmi
 	docker images | grep "supplychain" | xargs docker rmi
   
 generate:
