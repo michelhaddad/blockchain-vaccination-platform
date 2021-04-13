@@ -77,6 +77,7 @@ fi
     peer chaincode install -n dummycc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/dummycc
     peer chaincode install -n donationcc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/donationcc
     peer chaincode install -n supplychaincc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/supplychaincc
+    peer chaincode install -n hospitalcc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/hospitalcc
 done
 
 # Instantiate chaincode
@@ -89,4 +90,4 @@ CORE_VM_DOCKER_ATTACHSTDOUT=true
 peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n dummycc -l node -v 5.5 -c '{"Args":[]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member')" --tls --cafile $CACERT_ORDERER
 peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n donationcc -l node -v 5.5 -c '{"Args":[]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member')" --tls --cafile $CACERT_ORDERER
 peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n supplychaincc -l node -v 5.5 -c '{"Args":[]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member')" --tls --cafile $CACERT_ORDERER
-
+peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n hospitalcc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member')" --tls --cafile $CACERT_ORDERER
