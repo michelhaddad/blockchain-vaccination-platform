@@ -1,9 +1,13 @@
 'use strict';
 module.exports = function(app) {
-  var apis = require('../controllers/controller');
 
-  // todoList Routes
-  app.route('/firstRoute')
-    .get(apis.test);
+  const donationsController = require('../controllers/donationController');
+  app.route('/donations')
+    .get(donationsController.getDonations);
+  app.route('/donations/donate')
+    .get(donationsController.donate);
+  app.route('/donations/:donorId')
+    .get(donationsController.getDonationsPerDonor);
+  
 
 };
