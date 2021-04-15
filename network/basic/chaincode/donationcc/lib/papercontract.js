@@ -77,10 +77,20 @@ class DonationPaperContract extends Contract {
         }
     }
 
+    async indexDonations(ctx) {
+        let query = {
+            selector: {
+                class: DonationPaper.getClass()
+            }
+        }
+        query = JSON.stringify(query);
+        const results = await this.query(ctx, query);
+        return results;
+    }
 
-    async indexUserDonations(ctx) {
-        let identity = ctx.clientIdentity;
-        const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
+
+    async indexUserDonations(ctx, user = '') {
+        const enrollmentID = user ? user : ctx.clientIdentity.getAttributeValue('hf.EnrollmentID');
         const query = `{"selector": {"issuer": "${enrollmentID}"}}`;
         const results = await this.query(ctx, query);
         return results;
