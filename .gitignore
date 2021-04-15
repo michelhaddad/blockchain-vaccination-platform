@@ -34,7 +34,7 @@ dashboards/
 node_modules
 
 # Wallet
-wallet/*
+apps/dummyapp/wallet/*
 
 # Fabricbeat
 .idea
