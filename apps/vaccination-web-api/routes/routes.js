@@ -1,13 +1,15 @@
 'use strict';
-module.exports = function(app) {
+module.exports = function (app) {
 
   const donationsController = require('../controllers/donationController');
+
   app.route('/donations')
-    .get(donationsController.getDonations);
+    .get(donationsController.getAllDonations);
   app.route('/donations/donate')
-    .get(donationsController.donate);
-  app.route('/donations/:donorId')
-    .get(donationsController.getDonationsPerDonor);
-  
+    .post(donationsController.donate);
+  app.route('/donations/redeem')
+    .put(donationsController.redeem);
+  app.route('/user/donations')
+    .get(donationsController.getUserDonations)
 
 };
