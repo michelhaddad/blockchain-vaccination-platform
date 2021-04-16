@@ -26,7 +26,7 @@ async function main() {
             config.connection_profile = config.connection_profile.replace("basic", process.env.NETWORK);
         }
         if ( process.env.CHANNEL != undefined) {
-            config.channel.channelName = config.channel.channelName.replace("mychannel", process.env.CHANNEL);
+            config.channel.channel2 = config.channel.channel2.replace("mychannel", process.env.CHANNEL);
         }
 
         ccpPath = path.resolve(__dirname, config.connection_profile);
@@ -51,7 +51,7 @@ async function main() {
         await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false }});
 
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork(config.channel.channelName);
+        const network = await gateway.getNetwork(config.channel.channel2);
 
         // Get the contract from the network.
         const contract = network.getContract("donationcc");

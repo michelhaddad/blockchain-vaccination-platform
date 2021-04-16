@@ -312,7 +312,7 @@ Channel: &ChannelDefaults
 ################################################################################
 Profiles:
 
-    FourOrgsOrdererGenesis:
+    OrdererGenesis:
         <<: *ChannelDefaults
         Orderer:
             <<: *OrdererDefaults
@@ -321,14 +321,25 @@ Profiles:
             Capabilities:
                 <<: *OrdererCapabilities
         Consortiums:
-            SampleConsortium:
+            ContractConsortium:
                 Organizations:
                     - *Impact
                     - *MOPH
                     - *BorderControl
                     - *Manufacturer
-    FourOrgsChannel:
-        Consortium: SampleConsortium
+                    - *Donor
+
+            DistributionConsortium:
+                Organizations:
+                    - *Impact
+                    - *MOPH
+                    - *BorderControl
+                    - *Hospital
+                    - *StorageFacility
+                    - *Donor
+
+    Orderchannel:
+        Consortium: ContractConsortium
         <<: *ChannelDefaults
         Application:
             <<: *ApplicationDefaults
@@ -337,6 +348,23 @@ Profiles:
                 - *MOPH
                 - *BorderControl
                 - *Manufacturer
+                - *Donor
+            Capabilities:
+                <<: *ApplicationCapabilities
+    
+    DistributionChannel:
+        Consortium: DistributionConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Impact
+                - *MOPH
+                - *BorderControl
+                - *Hospital
+                - *StorageFacility
+                - *Donor
+                
             Capabilities:
                 <<: *ApplicationCapabilities
 

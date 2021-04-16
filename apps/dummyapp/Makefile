@@ -2,7 +2,8 @@
 #set +x
 
 NETWORK ?= basic
-CHANNEL ?= mychannel
+ORDERCHANNEL ?= contractchannel
+DISTCONTRACTCHANNEL ?= distributionchannel
 
 install:
 	npm install
@@ -29,7 +30,7 @@ redeem:
 	NETWORK=${NETWORK} CHANNEL=${CHANNEL} node redeem.js
 
 supplychain:
-	NETWORK=${NETWORK} CHANNEL=${CHANNEL} node supplychain.js
+	NETWORK=${NETWORK} CHANNEL=${DISTCONTRACTCHANNEL} node supplychain.js
 clean:
 	rm -rf ./wallet
 
