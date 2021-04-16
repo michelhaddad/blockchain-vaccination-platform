@@ -13,7 +13,7 @@ const configJSON = fs.readFileSync(configPath, 'utf8');
 const config = JSON.parse(configJSON);
 
 module.exports.submitTransaction = async function invokeContract(tx) {
-    let ccpPath = path.resolve(__dirname, config.connection_profile);
+    let ccpPath = path.resolve(__dirname, config.users[tx.user].connection_profile);
     let ccpJSON = fs.readFileSync(ccpPath, 'utf8');
     let ccp = JSON.parse(ccpJSON);
 
@@ -40,7 +40,7 @@ module.exports.submitTransaction = async function invokeContract(tx) {
 }
 
 module.exports.evaluateTransaction = async function invokeContract(tx) {
-    let ccpPath = path.resolve(__dirname, config.connection_profile);
+    let ccpPath = path.resolve(__dirname, config.users[tx.user].connection_profile);
     let ccpJSON = fs.readFileSync(ccpPath, 'utf8');
     let ccp = JSON.parse(ccpJSON);
 
