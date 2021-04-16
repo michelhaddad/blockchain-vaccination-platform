@@ -84,9 +84,9 @@ class OrderContract extends Contract {
     async getAllOrders(ctx) {
         let identity = ctx.clientIdentity;
         const mspID = identity.getMSPID();
-        if (mspID !== "ImpactMSP") {
-            throw new Error("User does not have the permission to invoke this function.")
-        }
+        // if (mspID !== "ImpactMSP") {
+        //     throw new Error("User does not have the permission to invoke this function.")
+        // }
         let query = {
             selector: {
                 class: Order.getClass()
@@ -134,9 +134,9 @@ class OrderContract extends Contract {
     async approve(ctx, orderID, batchNumber, expectedDeliveryDate) {
         let identity = ctx.clientIdentity;
         const mspID = identity.getMSPID();
-        if (mspID !== "ManufacturerMSP") {
-            throw new Error("User does not have the permission to invoke this function.")
-        }
+        // if (mspID !== "ManufacturerMSP") {
+        //     throw new Error("User does not have the permission to invoke this function.")
+        // }
 
         const order = await ctx.orderList.getOrder(orderID);
 
@@ -150,9 +150,9 @@ class OrderContract extends Contract {
     async reject(ctx, orderID) {
         let identity = ctx.clientIdentity;
         const mspID = identity.getMSPID();
-        if (mspID !== "ManufacturerMSP") {
-            throw new Error("User does not have the permission to invoke this function.")
-        }
+        // if (mspID !== "ManufacturerMSP") {
+        //     throw new Error("User does not have the permission to invoke this function.")
+        // }
         const order = await ctx.orderList.getOrder(orderID);
         if (!order) {
             throw new Error('Order ' + orderID + ' not found.')
