@@ -60,7 +60,7 @@ ${CONFIGTXGEN} -profile DistributionChannel -outputCreateChannelTx ./channel-art
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/ImpactMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ImpactMSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/MOPHMSPanchors.tx -channelID $CHANNEL_NAME -asOrg MOPHMSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/BorderControlMSPanchors.tx -channelID $CHANNEL_NAME -asOrg BorderControlMSP
-${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/ManufacturerMSPanchors.tx -channelID $CHANNEL_NAME -asOrg HospitalMSP
+${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/HospitalMSPanchors.tx -channelID $CHANNEL_NAME -asOrg HospitalMSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/StorageFacilityMSPanchors.tx -channelID $CHANNEL_NAME -asOrg StorageFacilityMSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/DonorMSPanchors.tx -channelID $CHANNEL_NAME -asOrg DonorMSP
 

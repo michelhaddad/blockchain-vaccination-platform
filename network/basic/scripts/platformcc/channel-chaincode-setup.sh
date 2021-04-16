@@ -112,6 +112,8 @@ echo "Instanciated the ordercc chaincode"
 peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n supplychaincc -l node -v 5.5 -c '{"Args":[]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member','DonorMSP.member')" --tls --cafile $CACERT_ORDERER
 echo "Instanciated the supplychaincc chaincode"
 
+
+
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 echo "CONF of CHANNEL2 : DISTRIBUTION"
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
