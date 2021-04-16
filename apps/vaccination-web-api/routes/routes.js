@@ -4,6 +4,7 @@ module.exports = function (app) {
   const donationsController = require('../controllers/donationController');
   const orderController = require('../controllers/orderController');
   const hospitalController = require('../controllers/hospitalController');
+  const deliveriesController = require('../controllers/supplychainController');
 
   app.route('/donations')
     .get(donationsController.getAllDonations);
@@ -26,6 +27,8 @@ module.exports = function (app) {
   .put(orderController.setOrderShipped);
   app.route('/orders/:id/deliver')
   .put(orderController.setOrderDelivered);
+  app.route('/orders/:id/deliveries')
+  .get(deliveriesController.getAllOrderDeliveries);
 
   app.route('/hospitals')
   .get(hospitalController.getAllHospitals);
@@ -33,5 +36,18 @@ module.exports = function (app) {
   .put(hospitalController.deliverVials);
   app.route('/hospitals/:id/inoculate')
   .put(hospitalController.inoculatePatients);
+
+  app.route('/deliveries')
+  .get(deliveriesController.getAllDeliveries);
+  app.route('/deliveries')
+  .post(deliveriesController.issueOrderDelivery);
+  app.route('/deliveries/:id/settostorage')
+  .put(deliveriesController.setStorageDelivery);
+  app.route('/deliveries/:id/setinstorage')
+  .put(deliveriesController.setStorageArrival);
+  app.route('/deliveries/:id/settohospital')
+  .put(deliveriesController.setHospitalDelivery);
+  app.route('/deliveries/:id/setinhospital')
+  .put(deliveriesController.setHospitalArrival);
 
 };
