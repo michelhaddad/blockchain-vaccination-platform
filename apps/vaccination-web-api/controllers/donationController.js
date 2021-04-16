@@ -35,7 +35,7 @@ exports.donate = async function (req, res) {
     try {
         const { amount } = req.query;
         if (!amount) {
-            return res.status(404).json({ message: 'amount not specified' });
+            return res.status(400).json({ message: 'amount not specified' });
         }
 
         const txManager = new TransactionManager('user1', 'mychannel');
@@ -53,7 +53,7 @@ exports.redeem = async function (req, res) {
     try {
         const { id } = req.query;
         if (!id) {
-            return res.status(404).json({ message: 'id not specified' });
+            return res.status(400).json({ message: 'id not specified' });
         }
 
         const txManager = new TransactionManager('user1', 'mychannel');

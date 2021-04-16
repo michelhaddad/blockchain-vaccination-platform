@@ -10,10 +10,10 @@ const State = require('../ledger-api/state.js');
 // Enumerate order state values
 const cpState = {
     REQUESTED: 1,
-    SHIPPED: 2,
-    APPROVED: 3,
+    APPROVED: 2,
+    SHIPPED: 3,
     DELIVERED: 4,
-    REJECTED: 5
+    REJECTED: -1
 };
 
 /**
