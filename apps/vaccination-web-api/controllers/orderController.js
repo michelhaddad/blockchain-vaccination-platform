@@ -6,7 +6,7 @@ const { generateUID } = require('./../utils/idHelper');
 
 exports.getAllOrders = async function (req, res) {
     try {
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'orderchannel');
         const submitTx = txManager.getEvaluateTransactionInstance('ordercc', 'getAllOrders');
         let response = await submitTx.send();
         response = JSON.parse(JSON.parse(response));
@@ -23,7 +23,7 @@ exports.issueOrder = async function (req, res) {
         if (!(manufacturer && destination && vialsAmount && requestedArrivalDate)) {
             return res.status(400).json({ message: 'Missing parameter(s)' });
         }
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'orderchannel');
         const submitTx =
             txManager.getSubmitTransactionInstance('ordercc', 'issue', generateUID(),manufacturer, destination, vialsAmount, requestedArrivalDate);
         let response = await submitTx.send();
@@ -45,7 +45,7 @@ exports.approveOrder = async function (req, res) {
         if (!(batchNumber && expectedDeliveryDate)) {
             return res.status(400).json({ message: 'Missing parameter(s)' });
         }
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'orderchannel');
         const submitTx =
             txManager.getSubmitTransactionInstance('ordercc', 'approve', id, batchNumber, expectedDeliveryDate);
         let response = await submitTx.send();
@@ -62,7 +62,7 @@ const orderAction = (action) => async function (req, res) {
         if (!id) {
             return res.status(400).json({ message: 'Missing id' });
         }
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'orderchannel');
         const submitTx =
             txManager.getSubmitTransactionInstance('ordercc', action, id);
         let response = await submitTx.send();

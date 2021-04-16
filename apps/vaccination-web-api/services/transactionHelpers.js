@@ -18,7 +18,7 @@ module.exports.submitTransaction = async function invokeContract(tx) {
     let ccp = JSON.parse(ccpJSON);
 
     // Create a new file system based wallet for managing identities.
-    const walletPath = path.join(process.cwd(), '..', 'dummyapp', 'wallet');
+    const walletPath = path.join(process.cwd(), 'wallet');
     const wallet = new FileSystemWallet(walletPath);
 
     // Create a new gateway for connecting to our peer node.
@@ -45,7 +45,7 @@ module.exports.evaluateTransaction = async function invokeContract(tx) {
     let ccp = JSON.parse(ccpJSON);
 
     // Create a new file system based wallet for managing identities.
-    const walletPath = path.join(process.cwd(), '..', 'dummyapp', 'wallet');
+    const walletPath = path.join(process.cwd(), 'wallet');
     const wallet = new FileSystemWallet(walletPath);
 
     // Create a new gateway for connecting to our peer node.

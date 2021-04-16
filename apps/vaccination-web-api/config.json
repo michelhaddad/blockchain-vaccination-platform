@@ -1,0 +1,61 @@
+{
+    "channel": {
+        "channel1": "distributionchannel",
+        "channel2": "orderchannel",
+        "contract": "dummycc"
+    },
+    "connection_profile": "../../network/basic/connectionProfile.json",
+    "organizations": {
+        "Impact": {
+            "MSP": "ImpactMSP"
+        },
+        "MOPH": {
+            "MSP": "MOPHMSP"
+        },
+        "BorderControl": {
+            "MSP": "BorderControlMSP"
+        },
+        "Manufacturer": {
+            "MSP": "ManufacturerMSP"
+        },
+        "Hospital": {
+            "MSP": "HospitalMSP"
+        },
+        "StorageFacility": {
+            "MSP": "StorageFacilityMSP"
+        },
+        "Donor": {
+            "MSP": "DonorMSP"
+        }
+    },
+    "users": [
+        {
+            "name": "user1",
+            "organization": "Impact"
+        },
+        {
+            "name": "user2",
+            "organization": "MOPH"
+        },
+        {
+            "name": "user3",
+            "organization": "BorderControl"
+        },
+        {
+            "name": "user4",
+            "organization": "Manufacturer"
+        },
+        {
+            "name": "user5",
+            "organization": "Hospital"
+        },
+        {
+            "name": "user6",
+            "organization": "StorageFacility"
+        },        
+        {
+            "name": "user7",
+            "organization": "Donor"
+        }
+    ]
+}

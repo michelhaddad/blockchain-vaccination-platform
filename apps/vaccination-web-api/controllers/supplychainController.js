@@ -6,7 +6,7 @@ const { generateUID } = require('./../utils/idHelper');
 
 exports.getAllDeliveries = async function (req, res) {
     try {
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'distributionchannel');
         const submitTx = txManager.getEvaluateTransactionInstance('supplychaincc', 'indexOrderDelivery');
         let response = await submitTx.send();
         response = JSON.parse(JSON.parse(response));
@@ -23,7 +23,7 @@ exports.getAllOrderDeliveries = async function (req, res) {
         if (!id) {
             return res.status(400).json({ message: 'Missing id' });
         }
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'distributionchannel');
         const submitTx = txManager.getEvaluateTransactionInstance('supplychaincc', 'getAllOrderDeliveries', id);
         let response = await submitTx.send();
         response = JSON.parse(JSON.parse(response));
@@ -40,7 +40,7 @@ exports.issueOrderDelivery = async function (req, res) {
         if (!(orderID && storageID && hospitalID && batchNumber && numberOfVials && arrivalDateTime)) {
             return res.status(400).json({ message: 'Missing parameter(s)' });
         }
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'distributionchannel');
         const submitTx =
             txManager.getSubmitTransactionInstance('supplychaincc', 'issue', generateUID(), orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime);
         let response = await submitTx.send();
@@ -58,7 +58,7 @@ exports.setStorageDelivery = async function (req, res) {
         if (!id) {
             return res.status(400).json({ message: 'Missing id' });
         }
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'distributionchannel');
         const submitTx =
             txManager.getSubmitTransactionInstance('supplychaincc', 'storageDelivery', id);
         let response = await submitTx.send();
@@ -76,7 +76,7 @@ exports.setStorageArrival = async function (req, res) {
         if (!id) {
             return res.status(400).json({ message: 'Missing id' });
         }
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'distributionchannel');
         const submitTx =
             txManager.getSubmitTransactionInstance('supplychaincc', 'storageArrival', id);
         let response = await submitTx.send();
@@ -94,7 +94,7 @@ exports.setHospitalDelivery = async function (req, res) {
         if (!id) {
             return res.status(400).json({ message: 'Missing id' });
         }
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'distributionchannel');
         const submitTx =
             txManager.getSubmitTransactionInstance('supplychaincc', 'hospitalDelivery', id);
         let response = await submitTx.send();
@@ -112,7 +112,7 @@ exports.setHospitalArrival = async function (req, res) {
         if (!id) {
             return res.status(400).json({ message: 'Missing id' });
         }
-        const txManager = new TransactionManager('user1', 'mychannel');
+        const txManager = new TransactionManager('user1', 'distributionchannel');
         const submitTx =
             txManager.getSubmitTransactionInstance('supplychaincc', 'hospitalArrival', id);
         let response = await submitTx.send();
