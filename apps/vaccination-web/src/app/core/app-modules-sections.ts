@@ -1,13 +1,4 @@
 export const userAuthModules = {
-  "allModules": [
-    {
-      "moduleName": "Dashboard",
-      "pages": [
-        {
-          "link": "/dashboard"
-        }
-      ]
-    }],
   "allSidenavSection": [
     {
       "mainSection": {
@@ -15,16 +6,14 @@ export const userAuthModules = {
         "link": "/dashboard"
       },
       "hasSubSections": false,
-      "order": 0,
       "icon": "dashboard",
-      "alwaysVisible": true
+      "organizations": [1,2,3,4,5,6]
     },
     {
       "mainSection": {
         "title": "Network Configuration"
       },
       "hasSubSections": true,
-      "order": 1,
       "icon": "settings",
       "subSections": [
         {
@@ -36,7 +25,7 @@ export const userAuthModules = {
           "link": "/networkconfiguration/organizations"
         }
       ],
-      "alwaysVisible": false
+      "organizations": [4]
     },
     {
       "mainSection": {
@@ -44,9 +33,8 @@ export const userAuthModules = {
         "link": "/donations"
       },
       "hasSubSections": false,
-      "order": 2,
       "icon": "money",
-      "alwaysVisible": false
+      "organizations": [3,6]
     },
     {
       "mainSection": {
@@ -54,9 +42,8 @@ export const userAuthModules = {
         "link": "/planning"
       },
       "hasSubSections": false,
-      "order": 3,
       "icon": "timeline",
-      "alwaysVisible": false
-    },
+      "organizations": [1,2,3,5]
+    }
   ]
 };

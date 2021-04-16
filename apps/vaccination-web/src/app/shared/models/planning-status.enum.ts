@@ -6,8 +6,9 @@ export enum PlanningStatusEnum {
     IN_HOSPITAL = 5
 }
 
-export enum PlanButtonEnum {
+export enum TableButtonEnum {
     SENT = 1,
     RECEIVED = 2,
-    NONE = 3
+    NONE = 3,
+    REDEEM = 4
 }

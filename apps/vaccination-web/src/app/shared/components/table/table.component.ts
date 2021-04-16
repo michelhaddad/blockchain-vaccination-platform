@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { MatTableDataSource } from '@angular/material/table';
 import { TableColumnModel } from '../../models/table-column.model';
 import { MatSort } from '@angular/material/sort';
-import { PlanButtonEnum, PlanningStatusEnum } from '../../models/planning-status.enum';
+import { TableButtonEnum, PlanningStatusEnum } from '../../models/planning-status.enum';
 
 @Component({
   selector: 'app-table',
@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
   @Input('displayedColumns') displayedColumns: TableColumnModel[] = [];
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @Output('actionClicked') actionClicked: EventEmitter<any> = new EventEmitter();
+  @Output('buttonClicked') buttonClicked: EventEmitter<any> = new EventEmitter();
   @Output('menuClicked') menuClicked: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
@@ -48,12 +49,14 @@ export class TableComponent implements OnInit {
     }
   }
 
-  getButtonText(e: PlanButtonEnum): string {
+  getButtonText(e: TableButtonEnum): string {
     switch (e) {
-      case PlanButtonEnum.RECEIVED:
+      case TableButtonEnum.RECEIVED:
         return 'Received';
-      case PlanButtonEnum.SENT:
+      case TableButtonEnum.SENT:
         return 'Sent';
+      case TableButtonEnum.REDEEM:
+        return 'Redeem';
       default:
         return '';
     }

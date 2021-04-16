@@ -1,4 +1,3 @@
-import { MenuItemModel } from "./menu-item";
 
 export class TableColumnModel {
     constructor(
@@ -6,8 +5,6 @@ export class TableColumnModel {
         public title: string,
         public clickable: boolean = false,
         public isStatus: boolean = false,
-        public isButton: boolean = false,
-        // public isMenu: boolean = false,
-        // public menuItems: MenuItemModel[] = []
+        public isButton: boolean = false
     ) { }
 }

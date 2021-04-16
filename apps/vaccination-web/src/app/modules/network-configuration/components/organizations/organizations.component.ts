@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { AddOrganizationComponent } from 'src/app/modules/network-configuration/components/dialogs/add-organization/add-organization.component';
-import { MenuItemModel } from 'src/app/shared/models/menu-item';
 import { OrganizationRowModel } from 'src/app/shared/models/organization-row.model';
 import { TableColumnModel } from 'src/app/shared/models/table-column.model';
 import { AddPeerComponent } from '../dialogs/add-peer/add-peer.component';

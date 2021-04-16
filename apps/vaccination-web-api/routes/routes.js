@@ -9,7 +9,7 @@ module.exports = function (app) {
     .post(donationsController.donate);
   app.route('/donations/redeem')
     .put(donationsController.redeem);
-  app.route('/user/donations')
+  app.route('/donations/user')
     .get(donationsController.getUserDonations)
 
 };

@@ -51,13 +51,13 @@ exports.donate = async function (req, res) {
 
 exports.redeem = async function (req, res) {
     try {
-        const { id } = req.query;
-        if (!id) {
-            return res.status(404).json({ message: 'id not specified' });
+        const { donationId } = req.query;
+        if (!donationId) {
+            return res.status(404).json({ message: 'Donation ID not specified' });
         }
 
         const txManager = new TransactionManager('user1', 'mychannel');
-        const submitTx = txManager.getSubmitTransactionInstance('donationcc', 'redeem', id);
+        const submitTx = txManager.getSubmitTransactionInstance('donationcc', 'redeem', donationId);
         const response = await submitTx.send();
         console.log(DonationPaper.fromBuffer(response));
         res.status(204).send({});
