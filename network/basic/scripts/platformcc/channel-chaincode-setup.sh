@@ -91,6 +91,7 @@ fi
     peer chaincode install -n donationcc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/donationcc
     peer chaincode install -n ordercc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/ordercc
     peer chaincode install -n supplychaincc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/supplychaincc
+    peer chaincode install -n hospitalcc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/hospitalcc
 done
 
 # Instantiate chaincode
@@ -111,6 +112,8 @@ peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n or
 echo "Instanciated the ordercc chaincode"
 peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n supplychaincc -l node -v 5.5 -c '{"Args":[]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member','DonorMSP.member')" --tls --cafile $CACERT_ORDERER
 echo "Instanciated the supplychaincc chaincode"
+peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n hospitalcc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member')" --tls --cafile $CACERT_ORDERER
+echo "Instanciated the hospitalcc chaincode"
 
 
 

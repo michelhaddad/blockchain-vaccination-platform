@@ -16,8 +16,7 @@ crypto-config/
 
 # Generated channel artifacts
 channel-artifacts/
-channel-artifacts-fourchannel/
-channel-artifacts-twochannel/
+channel-artifacts-*/
 
 # Generated connection profiles
 connection-profile-*.yaml
