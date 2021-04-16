@@ -245,7 +245,7 @@ class SupplyChainContract extends Contract {
         paper.setUpdateDateTime(today);
 
         await ctx.deliveryList.updateDelivery(paper);
-        const crossContractResponse = await ctx.stub.invokeChaincode('hospitalcc', ['deliverVials', paper.hospitalID, paper.batchNumber, paper.numberOfVials, 'Manufacturer'], 'mychannel');
+        const crossContractResponse = await ctx.stub.invokeChaincode('hospitalcc', ['deliverVials', paper.hospitalID, paper.batchNumber, paper.numberOfVials, 'Manufacturer'], 'distributionchannel');
         console.info(crossContractResponse);
         return paper;
     }

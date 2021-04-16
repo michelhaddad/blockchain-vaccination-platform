@@ -16,8 +16,7 @@ crypto-config/
 
 # Generated channel artifacts
 channel-artifacts/
-channel-artifacts-fourchannel/
-channel-artifacts-twochannel/
+channel-artifacts-*/
 
 # Generated connection profiles
 connection-profile-*.yaml
@@ -35,6 +34,7 @@ node_modules
 
 # Wallet
 apps/dummyapp/wallet/*
+apps/vaccination-web-api/wallet/*
 
 # Fabricbeat
 .idea

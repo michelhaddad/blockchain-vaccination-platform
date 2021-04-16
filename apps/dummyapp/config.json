@@ -1,6 +1,7 @@
 {
     "channel": {
-        "channelName": "mychannel",
+        "channel1": "distributionchannel",
+        "channel2": "orderchannel",
         "contract": "dummycc"
     },
     "connection_profile": "../../network/basic/connectionProfile.json",
@@ -16,6 +17,15 @@
         },
         "Manufacturer": {
             "MSP": "ManufacturerMSP"
+        },
+        "Hospital": {
+            "MSP": "HospitalMSP"
+        },
+        "StorageFacility": {
+            "MSP": "StorageFacilityMSP"
+        },
+        "Donor": {
+            "MSP": "DonorMSP"
         }
     },
     "users": [
@@ -34,60 +44,18 @@
         {
             "name": "user4",
             "organization": "Manufacturer"
-        }
-    ],
-    "transactions": [
-        {
-            "user": "user1",
-            "txFunction": "setValue",
-            "key": "Key1"
         },
         {
-            "user": "user2",
-            "txFunction": "setValue",
-            "key": "Key2",
-            "previousKey": "Key1"
+            "name": "user5",
+            "organization": "Hospital"
         },
         {
-            "user": "user3",
-            "txFunction": "setValue",
-            "key": "Key3",
-            "previousKey": "Key2"
-        },
+            "name": "user6",
+            "organization": "StorageFacility"
+        },        
         {
-            "user": "user4",
-            "txFunction": "setValue",
-            "key": "Key4"
-        },
-        {
-            "user": "user1",
-            "txFunction": "setValue",
-            "key": "Key2"
-        },
-        {
-            "user": "user1",
-            "txFunction": "setValue",
-            "key": "Key3"
-        },
-        {
-            "user": "user2",
-            "txFunction": "setValue",
-            "key": "Key2"
-        },
-        {
-            "user": "user3",
-            "txFunction": "setValue",
-            "key": "Key2"
-        },
-        {
-            "user": "user4",
-            "txFunction": "setValue",
-            "key": "Key4"
-        },
-        {
-            "user": "user2",
-            "txFunction": "setValue",
-            "key": "Key4"
+            "name": "user7",
+            "organization": "Donor"
         }
     ]
 }

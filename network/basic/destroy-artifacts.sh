@@ -1,4 +1,4 @@
 #!/bin/bash
 
 rm -rf crypto-config
-rm -rf channel-artifacts
+rm -rf channel-artifacts-*
