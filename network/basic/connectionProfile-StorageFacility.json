@@ -1,0 +1,161 @@
+{
+	"name": "el-network",
+	"version": "1.0.0",
+	"license": "Apache-2.0",
+	"client": {
+		"tlsEnable": true,
+		"adminUser": "admin",
+		"adminPassword": "adminpw",
+		"enableAuthentication": false,
+		"organization": "Impact",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"orderchannel": {
+			"peers": {
+				"peer0.Impact.el-network.com": {
+					"endorsingPeer": true,
+					"chaincodeQuery": true,
+					"ledgerQuery": true,
+					"eventSource": true
+				}
+			},
+			"orderers": [
+				"orderer.el-network.com"
+			],
+			"connection": {
+				"timeout": {
+					"peer": {
+						"endorser": "6000",
+						"eventHub": "6000",
+						"eventReg": "6000"
+					},
+					"orderer": "6000"
+				}
+			}
+		},
+		"distributionchannel": {
+			"peers": {
+				"peer0.Impact.el-network.com": {
+					"endorsingPeer": true,
+					"chaincodeQuery": true,
+					"ledgerQuery": true,
+					"eventSource": true
+				},
+				"peer0.StorageFacility.el-network.com": {
+					"endorsingPeer": true,
+					"chaincodeQuery": true,
+					"ledgerQuery": true,
+					"eventSource": true
+				}
+			},
+			"orderers": [
+				"orderer.el-network.com"
+			],
+			"connection": {
+				"timeout": {
+					"peer": {
+						"endorser": "6000",
+						"eventHub": "6000",
+						"eventReg": "6000"
+					},
+					"orderer": "6000"
+				}
+			}
+		}
+	},
+	"organizations": {
+		"Impact": {
+			"mspid": "ImpactMSP",
+			"fullpath": true,
+			"peers": [
+				"peer0.Impact.el-network.com"
+			],
+			"certificateAuthorities": [
+                "ca.Impact.el-network.com"
+            ],
+			"adminPrivateKey": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/keystore/adminKeyImpact"
+			},
+			"signedCert": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/signcerts/Admin@Impact.el-network.com-cert.pem"
+			}
+		},
+		"StorageFacility": {
+			"mspid": "StorageFacilityMSP",
+			"fullpath": true,
+			"peers": [
+				"peer0.StorageFacility.el-network.com"
+			],
+			"certificateAuthorities": [
+                "ca.StorageFacility.el-network.com"
+            ],
+			"adminPrivateKey": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/StorageFacility.el-network.com/users/Admin@StorageFacility.el-network.com/msp/keystore/adminKeyStorageFacility"
+			},
+			"signedCert": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/StorageFacility.el-network.com/users/Admin@StorageFacility.el-network.com/msp/signcerts/Admin@StorageFacility.el-network.com-cert.pem"
+			}
+		},
+		"OrdererOrg": {
+			"mspid": "OrdererMSP",
+			"fullpath": true,
+			"adminPrivateKey": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.com/msp/keystore/ordererAdminKey"
+			},
+			"signedCert": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.com/msp/signcerts/Admin@el-network.com-cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.Impact.el-network.com": {
+			"tlsCACerts": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/peers/peer0.Impact.el-network.com/msp/tlscacerts/tlsca.Impact.el-network.com-cert.pem"
+			},
+			"url": "grpcs://localhost:7051",
+			"grpcOptions": {
+				"ssl-target-name-override": "peer0.Impact.el-network.com"
+			}
+		},
+		"peer0.StorageFacility.el-network.com": {
+			"tlsCACerts": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/StorageFacility.el-network.com/peers/peer0.StorageFacility.el-network.com/msp/tlscacerts/tlsca.StorageFacility.el-network.com-cert.pem"
+			},
+			"url": "grpcs://localhost:12051",
+			"grpcOptions": {
+				"ssl-target-name-override": "peer0.StorageFacility.el-network.com"
+				
+      		}
+		}
+	},
+	"orderers": {
+		"orderer.el-network.com": {
+			"tlsCACerts": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/msp/tlscacerts/tlsca.el-network.com-cert.pem"
+			},
+			"url": "grpcs://localhost:7050",
+			"grpcOptions": {
+				"ssl-target-name-override": "orderer.el-network.com"
+			}
+		}
+	},
+	"certificateAuthorities": {
+		"ca.Impact.el-network.com": {
+			"url": "http://localhost:7054",
+			"caName": "ca.Impact.el-network.com"
+		},
+		"ca.StorageFacility.el-network.com": {
+			"url": "http://localhost:12054",
+			"caName": "ca.StorageFacility.el-network.com"
+		}
+	}
+}
+
