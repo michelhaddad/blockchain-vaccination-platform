@@ -38,17 +38,17 @@ mv ./crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.co
 mv ./crypto-config/ordererOrganizations/el-network.com/ca/*_sk ./crypto-config/ordererOrganizations/el-network.com/ca/key.pem
 
 #Generate configuration txs for contract channel
-mkdir channel-artifacts-contractchannel
-${CONFIGTXGEN} -profile OrdererGenesis -outputBlock ./channel-artifacts-contractchannel/genesis.block
+mkdir channel-artifacts-orderchannel
+${CONFIGTXGEN} -profile OrdererGenesis -outputBlock ./channel-artifacts-orderchannel/genesis.block
 
-export CHANNEL_NAME=contractchannel
-${CONFIGTXGEN} -profile ContractChannel -outputCreateChannelTx ./channel-artifacts-contractchannel/channel.tx -channelID $CHANNEL_NAME
+export CHANNEL_NAME=orderchannel
+${CONFIGTXGEN} -profile Orderchannel -outputCreateChannelTx ./channel-artifacts-orderchannel/channel.tx -channelID $CHANNEL_NAME
 
-${CONFIGTXGEN} -profile ContractChannel -outputAnchorPeersUpdate ./channel-artifacts-contractchannel/ImpactMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ImpactMSP
-${CONFIGTXGEN} -profile ContractChannel -outputAnchorPeersUpdate ./channel-artifacts-contractchannel/MOPHMSPanchors.tx -channelID $CHANNEL_NAME -asOrg MOPHMSP
-${CONFIGTXGEN} -profile ContractChannel -outputAnchorPeersUpdate ./channel-artifacts-contractchannel/BorderControlMSPanchors.tx -channelID $CHANNEL_NAME -asOrg BorderControlMSP
-${CONFIGTXGEN} -profile ContractChannel -outputAnchorPeersUpdate ./channel-artifacts-contractchannel/ManufacturerMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ManufacturerMSP
-${CONFIGTXGEN} -profile ContractChannel -outputAnchorPeersUpdate ./channel-artifacts-contractchannel/DonorMSPanchors.tx -channelID $CHANNEL_NAME -asOrg DonorMSP
+${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/ImpactMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ImpactMSP
+${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/MOPHMSPanchors.tx -channelID $CHANNEL_NAME -asOrg MOPHMSP
+${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/BorderControlMSPanchors.tx -channelID $CHANNEL_NAME -asOrg BorderControlMSP
+${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/ManufacturerMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ManufacturerMSP
+${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/DonorMSPanchors.tx -channelID $CHANNEL_NAME -asOrg DonorMSP
 
 #Generate configuration txs for distribution channel
 mkdir channel-artifacts-distributionchannel

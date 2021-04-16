@@ -18,7 +18,7 @@
 		}
 	},
 	"channels": {
-		"contractchannel": {
+		"orderchannel": {
 			"peers": {
 				"peer0.Impact.HLNETWORK.com": {
 					"endorsingPeer": true,

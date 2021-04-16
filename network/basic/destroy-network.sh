@@ -4,7 +4,7 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 export FABRIC_CFG_PATH=$PWD
-export NETWORK_NAME=supplychainnetwork
+export NETWORK_NAME=vaccine_network
 
 echo "Stopping all containers"
 

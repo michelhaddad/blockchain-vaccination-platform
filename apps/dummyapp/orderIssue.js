@@ -30,7 +30,7 @@ async function main() {
             config.connection_profile = config.connection_profile.replace("basic", process.env.NETWORK);
         }
         if (process.env.CHANNEL != undefined) {
-            config.channel.channelName = config.channel.channelName.replace("contractchannel", process.env.CHANNEL);
+            config.channel.channel2 = config.channel.channel2.replace("distributionchannel", process.env.CHANNEL);
         }
 
         ccpPath = path.resolve(__dirname, config.connection_profile);
@@ -63,7 +63,7 @@ async function main() {
         });
 
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork(config.channel.channelName);
+        const network = await gateway.getNetwork(config.channel.channel2);
 
         // Get the contract from the network.
         const contract = network.getContract("ordercc");
@@ -98,7 +98,7 @@ async function main() {
             },
         });
 
-        const network2 = await gateway2.getNetwork(config.channel.channelName);
+        const network2 = await gateway2.getNetwork(config.channel.channel2);
 
         // Get the contract from the network.
         const contract2 = network2.getContract("ordercc");

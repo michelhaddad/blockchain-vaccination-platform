@@ -338,7 +338,7 @@ Profiles:
                     - *StorageFacility
                     - *Donor
 
-    ContractChannel:
+    Orderchannel:
         Consortium: ContractConsortium
         <<: *ChannelDefaults
         Application:
