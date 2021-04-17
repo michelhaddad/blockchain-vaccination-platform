@@ -12,26 +12,25 @@
           </button>
         </ng-container>
         <ng-template #regularText>
-          <ng-container *ngIf='!item.isStatus; else status'>
+          <ng-container>
             {{ element[item.id] }}
           </ng-container>
-          <ng-template #status>
-            {{ getStatus(element[item.id]) }}
-          </ng-template>
         </ng-template>
       </ng-container>
       <ng-template #button>
-        <button *ngIf='element[item.id]!=3' class="main-button" mat-flat-button color='accent'>
-          {{getButtonText(element[item.id]) | uppercase}}
-        </button>
-        <!-- <button class="float-right"
+        <ng-container *ngIf='item.isMenuButton && element[item.id] && element[item.id].length>0'>
+        <button  class="float-right"
           mat-icon-button color='accent' [matMenuTriggerFor]="menuBtn">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menuBtn="matMenu" xPosition="before">
-          <button *ngFor="let e of item.menuItems;" mat-menu-item
+          <button *ngFor="let e of element[item.id];" mat-menu-item
             (click)="menuClicked.emit({action: e.action, item: element})" >{{ e.title }}</button>
-        </mat-menu> -->
+        </mat-menu>
+      </ng-container>
+        <button *ngIf='!item.isMenuButton && element[item.id]!=3' class="main-button" (click)="buttonClicked.emit({ item: element})" mat-flat-button color='accent'>
+          {{getButtonText(element[item.id]) | uppercase}}
+        </button>
       </ng-template>
     </td>
   </ng-container>

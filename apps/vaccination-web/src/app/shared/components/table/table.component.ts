@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { MatTableDataSource } from '@angular/material/table';
 import { TableColumnModel } from '../../models/table-column.model';
 import { MatSort } from '@angular/material/sort';
-import { PlanButtonEnum, PlanningStatusEnum } from '../../models/planning-status.enum';
-
+import { TableButtonEnum } from 'src/app/modules/orders/models/planning-status.enum';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -14,7 +13,9 @@ export class TableComponent implements OnInit {
   @Input('displayedColumns') displayedColumns: TableColumnModel[] = [];
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @Output('actionClicked') actionClicked: EventEmitter<any> = new EventEmitter();
+  @Output('buttonClicked') buttonClicked: EventEmitter<any> = new EventEmitter();
   @Output('menuClicked') menuClicked: EventEmitter<any> = new EventEmitter();
+
   constructor() { }
 
   getTableDisplayedColumnsIds(columns: TableColumnModel[]) {
@@ -24,39 +25,32 @@ export class TableComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
+
   elementClicked(element: any, event: Event) {
     event.stopPropagation();
     if (element)
       this.actionClicked.emit({
-        element: element
+        item: element
       });
 
   }
 
-  getStatus(e: PlanningStatusEnum): string {
+  getButtonText(e: TableButtonEnum): string {
     switch (e) {
-      case PlanningStatusEnum.BORDER_CONTROL:
-        return 'In Border Control';
-      case PlanningStatusEnum.IN_HOSPITAL:
-        return 'In Hospital';
-      case PlanningStatusEnum.TO_HOSPITAL:
-        return 'To Hospital';
-      case PlanningStatusEnum.IN_STORAGE:
-        return 'In Storage';
-      case PlanningStatusEnum.TO_STORAGE:
-        return 'To Storage';
-    }
-  }
-
-  getButtonText(e: PlanButtonEnum): string {
-    switch (e) {
-      case PlanButtonEnum.RECEIVED:
+      case TableButtonEnum.RECEIVED:
         return 'Received';
-      case PlanButtonEnum.SENT:
+      case TableButtonEnum.SENT:
         return 'Sent';
+      case TableButtonEnum.REDEEM:
+        return 'Redeem';
+      case TableButtonEnum.ACCEPT:
+        return 'Accept';
+      case TableButtonEnum.SHIP:
+        return 'Ship';
       default:
         return '';
     }
+  
   }
 
   ngOnInit(): void { }

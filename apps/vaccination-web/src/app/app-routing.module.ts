@@ -35,10 +35,10 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'planning',
+        path: 'orders',
         loadChildren: () =>
-          import('./modules/planning/planning.module').then(
-            (m) => m.PlanningModule
+          import('./modules/orders/orders.module').then(
+            (m) => m. OrdersModule
           ),
       },
     ],

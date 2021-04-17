@@ -65,6 +65,7 @@ exports.donate = async function (req, res) {
 
 exports.redeem = async function (req, res) {
     try {
+
         const { id } = req.query;
         if (!id) {
             return res.status(400).json({ message: 'id not specified' });

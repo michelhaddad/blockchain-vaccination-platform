@@ -8,12 +8,14 @@ import { LoginComponent } from './core/login/login.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     LayoutModule,
     AppRoutingModule,
     SharedModule, //imported in all modules to make use of angular material and other featur emodule

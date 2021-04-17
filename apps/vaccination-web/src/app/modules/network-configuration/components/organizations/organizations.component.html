@@ -3,6 +3,7 @@
   <div class="col-1"></div>
   <app-table
     class="col-10"
+    
     (actionClicked)="showPeers($event)"
     [displayedColumns]="displayedColumns"
     [dataSource]="tableDataSource"

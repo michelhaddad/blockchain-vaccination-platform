@@ -1,5 +1,7 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
+const nocache = require('nocache');
+const cors = require('cors');
 
 const indexRouter = require('./routers/indexRouter');
 const deliveriesRouter = require('./routers/deliveriesRouter');
@@ -8,6 +10,7 @@ const orderRouter = require('./routers/orderRouter');
 const donationRouter = require('./routers/donationRouter');
 const hospitalRouter = require('./routers/hospitalRouter');
 const { verifyUser } = require('./database/authenticate');
+
 
 var express = require('express'),
   app = express(),
@@ -31,7 +34,8 @@ connect.then(
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(cors());
+app.use(nocache());
 app.use(passport.initialize());
 
 app.use('/', indexRouter);
