@@ -45,7 +45,7 @@ export class OrganizationsComponent implements OnInit {
   // }
 
   showPeers(event: any): void {
-    const dialogRef = this.dialog.open(PeersComponent, { panelClass: 'peers-dialog', data: event.element });
+    const dialogRef = this.dialog.open(PeersComponent, { panelClass: 'peers-dialog', data: event.item });
     dialogRef.afterClosed().subscribe(result => { });
   }
 }

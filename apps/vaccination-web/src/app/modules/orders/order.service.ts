@@ -35,6 +35,11 @@ export class OrderService {
     return this.http.put<any>(url,body);
   }
 
+  setOrderDelivered(orderId: string): Observable<any>{
+    let url = this.baseUrl + orderId+ "/deliver";
+    return this.http.put<any>(url,null);
+  }
+
 
   order(vialsAmount: number, deliveryDate: string): Observable<any> {
     const body = {

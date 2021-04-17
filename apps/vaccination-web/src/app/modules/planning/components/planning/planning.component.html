@@ -3,15 +3,8 @@
   <div class="col-1"></div>
   <app-table
     class="col-10"
+    (buttonClicked)="handlePlan($event)"
     [displayedColumns]="displayedColumns"
     [dataSource]="tableDataSource"
   ></app-table>
 </div>
-<button
-  mat-fab
-  color="accent"
-  (click)="addPlan()"
-  class="floating-button"
->
-  <mat-icon>add</mat-icon>
-</button>

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PlanningService } from '../../../planning.service';
 
 @Component({
   selector: 'app-add-plan',
@@ -11,6 +12,7 @@ export class AddPlanComponent implements OnInit {
   formGroup: FormGroup;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private planningService: PlanningService,
     private dialogRef: MatDialogRef<AddPlanComponent>
   ) {
     this.formGroup = new FormGroup({
@@ -19,6 +21,7 @@ export class AddPlanComponent implements OnInit {
       storageFacility: new FormControl(null, [Validators.required]),
       batchNumber: new FormControl(null, [Validators.required]),
       numberVials: new FormControl(null, [Validators.required]),
+      arrivalDate: new FormControl(null, [Validators.required])
     });
   }
 
@@ -29,6 +32,11 @@ export class AddPlanComponent implements OnInit {
   }
 
   submitForm() {
-    this.dialogRef.close();
+    const form = this.formGroup.getRawValue();
+    if (this.formGroup.valid) {
+      this.planningService.addDeliveryPlans(this.data.orderId, form.storageFacility, form.hospital, form.batchNumber, form.numberVials, form.arrivalDate).subscribe(() => {
+        this.dialogRef.close();
+      }, () => this.dialogRef.close())
+    }
   }
 }

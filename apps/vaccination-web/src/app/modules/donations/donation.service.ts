@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiResponseModel } from 'src/app/shared/models/api-response.model';
-import { DonationByUserModel, DonationModel } from 'src/app/shared/models/donation.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

@@ -1,6 +1,11 @@
 <h1 class="p-4">Orders</h1>
 <div class="h-100 w-100 table-container row">
     <div class="col-1"></div>
-    <app-table class="col-10" (menuClicked)="handleOrder($event)" (buttonCLicked)="shipOrder($event)" [displayedColumns]="displayedColumns" [dataSource]="tableDataSource"></app-table>
+    <app-table class="col-10" 
+    (actionClicked)="addDelivery($event)"
+    (menuClicked)="handleOrder($event)" 
+    (buttonCLicked)="shipOrder($event)" 
+    [displayedColumns]="displayedColumns" 
+    [dataSource]="tableDataSource"></app-table>
 </div>
 <button *ngIf='isMOPH' mat-fab color="accent" (click)='order()' class="floating-button"><mat-icon>add</mat-icon></button>

@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { PlanRowModel } from 'src/app/shared/models/plan-row.model';
-import { PlanningStatusEnum } from 'src/app/shared/models/planning-status.enum';
+import { AuthService } from 'src/app/core/auth.service';
+import { ResponseModel } from 'src/app/shared/models/api-response.model';
+import { OrganizationEnum } from 'src/app/shared/models/organization.enum';
 import { TableColumnModel } from 'src/app/shared/models/table-column.model';
-import { AddPlanComponent } from '../dialogs/add-plan/add-plan.component';
+import { PlanningService } from '../../planning.service';
+import { PlanRowModel } from '../models/plan-row.model';
+import { PlanModel } from '../models/plan.model';
+import { PlanningStatusEnum, TableButtonEnum } from '../models/planning-status.enum';
 
 @Component({
   selector: 'app-planning',
@@ -13,6 +17,8 @@ import { AddPlanComponent } from '../dialogs/add-plan/add-plan.component';
 })
 
 export class PlanningComponent implements OnInit {
+  isMOPH: Boolean = false;
+  plans: ResponseModel<PlanModel>[] = [];
   displayedColumns: TableColumnModel[] = [
     new TableColumnModel('orderId', 'Order ID'),
     new TableColumnModel('date', 'Arrival Date'),
@@ -24,21 +30,94 @@ export class PlanningComponent implements OnInit {
     new TableColumnModel('button', '', false, true)
   ];
 
-  tableDataSource: MatTableDataSource<any> = new MatTableDataSource([
-    new PlanRowModel('11/11/2021', '1', 'RHA', 'Dummy H', '122345', 10, 1, 1),
-    new PlanRowModel('11/12/2021', '2', 'RHA', 'Dummy H', '122345', 10, 2, 2),
-    new PlanRowModel('11/01/2022', '3', 'RHA', 'Dummy H', '122345', 10, 3, 2)
-  ]); //dummy data
+  tableDataSource: MatTableDataSource<any> = new MatTableDataSource();
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private authService: AuthService, private planningService: PlanningService) {
+    this.isMOPH = this.authService.getOrganizationType() == OrganizationEnum.MOPH;
+  }
 
-  ngOnInit(): void { }
-
-  addPlan(): void {
-    const dialogRef = this.dialog.open(AddPlanComponent, {
-      panelClass: 'add-plan-dialog',
+  createPlans(): void {
+    const dataSource: any[] = [];
+    this.plans.forEach((e) => {
+      const row = new PlanRowModel(
+        e.Record.orderID,
+        e.Record.deliveryID,
+        e.Record.issueDateTime,
+        e.Record.storage,
+        "Hospital",
+        e.Record.batchNumber,
+        e.Record.vialsAmount,
+        this.getStatus(e.Record.currentState),
+        this.getButton(e.Record.currentState),
+      );
+      dataSource.push(row);
     });
-    dialogRef.afterClosed().subscribe((result) => { });
+    this.tableDataSource = new MatTableDataSource(dataSource);
+  }
+
+  getPlans(): void {
+    this.planningService.getAllDeliveryPlans().subscribe((res) => {
+      this.plans = res.response;
+      this.createPlans();
+    })
+  }
+
+  ngOnInit(): void {
+    this.getPlans();
+  }
+
+  handlePlan(event: any): void {
+    switch (event.item.button) {
+      case PlanningStatusEnum.BORDER_CONTROL:
+        this.planningService.sendToStorage(event.item.deliveryId).subscribe(() => {
+          this.getPlans();
+        })
+        break;
+      case PlanningStatusEnum.TO_HOSPITAL:
+        this.planningService.receivedInHospital(event.item.deliveryId).subscribe(() => {
+          this.getPlans();
+        })
+        break;
+      case PlanningStatusEnum.IN_STORAGE:
+        this.planningService.sendToHospital(event.item.deliveryId).subscribe(() => {
+          this.getPlans();
+        })
+        break;
+      case PlanningStatusEnum.TO_STORAGE:
+        this.planningService.receivedInStorage(event.item.deliveryId).subscribe(() => {
+          this.getPlans();
+        })
+        break;
+      default:
+        break;
+    }
+  }
+
+  getButton(e: PlanningStatusEnum): number {
+    switch (e) {
+      case PlanningStatusEnum.BORDER_CONTROL:
+        if (this.authService.getOrganizationType() == OrganizationEnum.BorderControl) {
+          return TableButtonEnum.SENT;
+        }
+        return TableButtonEnum.NONE;
+      case PlanningStatusEnum.TO_HOSPITAL:
+        if (this.authService.getOrganizationType() == OrganizationEnum.Hospital) {
+          return TableButtonEnum.RECEIVED;
+        }
+        return TableButtonEnum.NONE;
+      case PlanningStatusEnum.IN_STORAGE:
+        if (this.authService.getOrganizationType() == OrganizationEnum.StorageFacility) {
+          return TableButtonEnum.SENT;
+        }
+        return TableButtonEnum.NONE;
+      case PlanningStatusEnum.TO_STORAGE:
+        if (this.authService.getOrganizationType() == OrganizationEnum.StorageFacility) {
+          return TableButtonEnum.RECEIVED;
+        }
+        return TableButtonEnum.NONE;
+      default:
+        return TableButtonEnum.NONE;
+    }
   }
 
   getStatus(e: PlanningStatusEnum): string {
