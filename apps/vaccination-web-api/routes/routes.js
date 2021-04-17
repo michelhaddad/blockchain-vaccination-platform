@@ -12,7 +12,7 @@ module.exports = function (app) {
     .post(donationsController.donate);
   app.route('/donations/redeem')
     .put(donationsController.redeem);
-  app.route('/user/donations')
+  app.route('/donations/user')
     .get(donationsController.getUserDonations);
 
   app.route('/MOPH/balance')
@@ -36,7 +36,7 @@ module.exports = function (app) {
   app.route('/orders/:id/ship')
   .put(orderController.setOrderShipped);
   app.route('/orders/:id/deliver')
-  .put(orderController.setOrderDelivered);
+  .put(orderController.setOrderDelivered); 
   app.route('/orders/:id/deliveries')
   .get(deliveriesController.getAllOrderDeliveries);
 
@@ -52,7 +52,7 @@ module.exports = function (app) {
   .put(hospitalController.inoculatePatients);
 
   app.route('/deliveries')
-  .get(deliveriesController.getAllDeliveries);
+  .get(deliveriesController.getAllDeliveries); 
   app.route('/deliveries')
   .post(deliveriesController.issueOrderDelivery);
   app.route('/deliveries/:id/settostorage')
@@ -63,7 +63,5 @@ module.exports = function (app) {
   .put(deliveriesController.setHospitalDelivery);
   app.route('/deliveries/:id/setinhospital')
   .put(deliveriesController.setHospitalArrival);
-
-  
 
 };

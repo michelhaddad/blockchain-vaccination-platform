@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { AddChannelComponent } from 'src/app/modules/network-configuration/components/dialogs/add-channel/add-channel.component';
-import { ChannelRowModel } from 'src/app/shared/models/channel-row.model';
 import { TableColumnModel } from 'src/app/shared/models/table-column.model';
 
 @Component({

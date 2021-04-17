@@ -1,0 +1,66 @@
+<h1 mat-dialog-title>Add Plan</h1>
+<div mat-dialog-content >
+  <form [formGroup]="formGroup" >
+      <div class="row form-group">
+          <div class="col-6">
+            <mat-form-field class="w-100 pb-2">
+                <input
+                  matInput
+                  formControlName="date"
+                  [matDatepicker]="pickerFrom"
+                  placeholder="Arrival Date"
+                  autocomplete="off"
+                  required
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="pickerFrom"
+                ></mat-datepicker-toggle>
+                <mat-datepicker color="accent" #pickerFrom></mat-datepicker>
+              </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="w-100 pb-2">
+                <input
+                  required
+                  matInput
+                  formControlName="storageFacility"
+                  placeholder="Storage Facility"
+                  autofocus
+                />
+              </mat-form-field>
+          </div>
+          <div class="col-6"> 
+            <mat-form-field class="w-100 pb-2">
+                <input
+                  required
+                  matInput
+                  formControlName="hospital"
+                  placeholder="Hospital"
+                  autofocus
+                />
+              </mat-form-field>
+          </div>
+        <div class="col-6">
+    <mat-form-field class="w-100 pb-2">
+        <input
+          required
+          matInput
+          formControlName="numberVials"
+          type="number"
+          placeholder="Number of Vials"
+          autofocus
+        />
+      </mat-form-field>
+        </div>
+      </div>
+  </form>
+</div>
+<div mat-dialog-actions class="flex-center">
+  <button class="main-button" mat-stroked-button (click)="cancelClick()">
+    {{ "Cancel" | uppercase }}
+  </button>
+  <button class="main-button" type="submit" (click)="submitForm()" color="accent" mat-flat-button>
+    {{ "Add" | uppercase }}
+  </button>
+</div>

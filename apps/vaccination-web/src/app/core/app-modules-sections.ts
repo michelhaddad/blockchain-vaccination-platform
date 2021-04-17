@@ -1,13 +1,4 @@
 export const userAuthModules = {
-  "allModules": [
-    {
-      "moduleName": "Dashboard",
-      "pages": [
-        {
-          "link": "/dashboard"
-        }
-      ]
-    }],
   "allSidenavSection": [
     {
       "mainSection": {
@@ -15,28 +6,27 @@ export const userAuthModules = {
         "link": "/dashboard"
       },
       "hasSubSections": false,
-      "order": 0,
       "icon": "dashboard",
-      "alwaysVisible": true
+      "organizations": [1,2,3,4,5,6]
     },
     {
       "mainSection": {
         "title": "Network Configuration"
       },
       "hasSubSections": true,
-      "order": 1,
       "icon": "settings",
       "subSections": [
         {
           "title": "Channels",
-          "link": "/networkconfiguration/channels"
+          "link": "/networkconfiguration/channels",
+          "organizations": [4]
         },
         {
           "title": "Organizations",
-          "link": "/networkconfiguration/organizations"
+          "link": "/networkconfiguration/organizations",
+          "organizations": [4]
         }
       ],
-      "alwaysVisible": false
     },
     {
       "mainSection": {
@@ -44,19 +34,28 @@ export const userAuthModules = {
         "link": "/donations"
       },
       "hasSubSections": false,
-      "order": 2,
       "icon": "money",
-      "alwaysVisible": false
+      "organizations": [3,6]
     },
     {
       "mainSection": {
-        "title": "Distribution Plans",
-        "link": "/planning"
+        "title": "Orders"
       },
-      "hasSubSections": false,
-      "order": 3,
+      "hasSubSections": true,
       "icon": "timeline",
-      "alwaysVisible": false
+      "subSections": [
+        {
+          "title": "Orders",
+          "link": "/orders",
+          "organizations": [3,7,2]
+        },
+        {
+          "title": "Distribution Schedule",
+          "link": "/orders/planning",
+          "organizations": [1,2,3,5],
+        }
+      ],
+
     },
   ]
 };
