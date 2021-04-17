@@ -9,6 +9,7 @@ export class OrderModel {
         public vialsAmount: number,
         public manufacturer: string,
         public destination: string,
+        public fee?: number,
         public expectedDeliveryDate?: string,
         public batchNumber?: string,
     ) { }

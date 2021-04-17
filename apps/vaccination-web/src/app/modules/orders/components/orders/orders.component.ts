@@ -48,33 +48,36 @@ export class OrdersComponent implements OnInit {
 
   setDisplayedColumns() {
     this.displayedColumns = [
-      new TableColumnModel('orderId', 'Order ID', this.isMOPH),
+      new TableColumnModel('orderId', 'Order ID'),
       new TableColumnModel('issueDate', 'Order Date'),
       new TableColumnModel('issuer', 'Ordered By'),
       new TableColumnModel('requestedArrivalDate', 'Requested Arrival Date'),
       new TableColumnModel('expectedArrivalDate', 'Arrival Date'),
       new TableColumnModel('vialsAmount', 'Number of Vials'),
+      new TableColumnModel('price', 'Price'),
       new TableColumnModel('status', 'Status'),
       new TableColumnModel('batchNumber', 'Batch Number'),
     ]
     if (this.isMOPH) {
       this.displayedColumns.push(new TableColumnModel('manufacturer', 'Manufacturer'));
-      this.displayedColumns.push(new TableColumnModel('button', '', false, true));
+      this.displayedColumns.push(new TableColumnModel('menu', '', false, true, true));
     } else if (this.isBorderControl) {
       this.displayedColumns.push(new TableColumnModel('button', '', false, true));
     }
     else {
-      this.displayedColumns.push(new TableColumnModel('menu', '', false, true, true, [new MenuItemModel("Accept", TableButtonEnum.ACCEPT), new MenuItemModel("Reject", TableButtonEnum.REJECT)]));
+      this.displayedColumns.push(new TableColumnModel('menu', '', false, true, true));
     }
   }
 
   addDelivery(event: any): void {
     const dialogRef = this.dialog.open(AddPlanComponent, {
       panelClass: 'add-plan-dialog',
-      data: { orderId: event.item.orderId }
+      data: { orderId: event.item.orderId, batchNumber: event.item.batchNumber }
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.router.navigate(['planning']);
+      if (result) {
+        this.router.navigate(['planning']);
+      }
     });
   }
 
@@ -89,6 +92,14 @@ export class OrdersComponent implements OnInit {
         this.orderService.rejectOrder(e.item.orderId).subscribe(() => {
           this.getOrders();
         })
+        break;
+      case TableButtonEnum.SHIP:
+        this.orderService.shipOrder(e.item.orderId).subscribe(() => {
+          this.getOrders();
+        });
+        break;
+      case TableButtonEnum.ADD_PLAN:
+        this.addDelivery(e);
         break;
     }
 
@@ -113,7 +124,7 @@ export class OrdersComponent implements OnInit {
     this.orderService.getAllOrders().subscribe((result) => {
       if (this.isBorderControl) {
         this.orders = result.response;
-        this.orders.filter((e) => e.Record.currentState == OrderStateEnum.APPROVED || e.Record.currentState == OrderStateEnum.SHIPPED || e.Record.currentState == OrderStateEnum.DELIVERED)
+        this.orders = this.orders.filter((e) => e.Record.currentState == OrderStateEnum.APPROVED || e.Record.currentState == OrderStateEnum.SHIPPED || e.Record.currentState == OrderStateEnum.DELIVERED)
       } else {
         this.orders = result.response;
       }
@@ -121,13 +132,8 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  shipOrder(event: any): void {
-    switch(event.item.button){
-      case TableButtonEnum.SHIP:
-        this.orderService.shipOrder(event.item.orderId).subscribe(() => {
-          this.getOrders();
-        });
-        break;
+  receiveOrder(event: any): void {
+    switch (event.item.button) {
       case TableButtonEnum.RECEIVED:
         this.orderService.setOrderDelivered(event.item.orderId).subscribe(() => {
           this.getOrders();
@@ -137,6 +143,9 @@ export class OrdersComponent implements OnInit {
   }
 
   createOrders(): void {
+    const menuItemsPlan : MenuItemModel[] =[new MenuItemModel("Add Delivery Plan", TableButtonEnum.ADD_PLAN)]
+    const menuItems: MenuItemModel[] = [new MenuItemModel("Accept", TableButtonEnum.ACCEPT), new MenuItemModel("Reject", TableButtonEnum.REJECT)];
+    const menuItemsShip: MenuItemModel[] = [new MenuItemModel("Ship", TableButtonEnum.SHIP)]
     const dataSource: any[] = [];
     this.orders.forEach((e) => {
       const row = new OrderRowModel(
@@ -147,13 +156,14 @@ export class OrdersComponent implements OnInit {
         e.Record.expectedDeliveryDate ? e.Record.expectedDeliveryDate : "No Delivery Date",
         e.Record.batchNumber ? e.Record.batchNumber : "No Batch Number",
         e.Record.vialsAmount,
+        e.Record.fee ? e.Record.fee.toString() : "No Price Yet",
         this.getStatus(e.Record.currentState),
         e.Record.manufacturer,
-        !this.isMOPH && !this.isBorderControl && e.Record.currentState == OrderStateEnum.REQUESTED ? TableButtonEnum.ACCEPT : 
-        (this.isBorderControl && e.Record.currentState==OrderStateEnum.SHIPPED ? TableButtonEnum.RECEIVED : TableButtonEnum.NONE),
-        e.Record.currentState == OrderStateEnum.APPROVED ? TableButtonEnum.SHIP : TableButtonEnum.NONE
+        !this.isMOPH && !this.isBorderControl ? (e.Record.currentState == OrderStateEnum.REQUESTED ? menuItems : (e.Record.currentState == OrderStateEnum.APPROVED ? menuItemsShip : [])) : (this.isMOPH && e.Record.currentState==OrderStateEnum.DELIVERED ? menuItemsPlan : []),
+        this.isBorderControl && e.Record.currentState == OrderStateEnum.SHIPPED ? TableButtonEnum.RECEIVED : TableButtonEnum.NONE
       );
       dataSource.push(row);
+      console.log(e.Record.currentState)
     });
     this.tableDataSource = new MatTableDataSource(dataSource);
   }

@@ -52,7 +52,7 @@ export const userAuthModules = {
       },
       "hasSubSections": false,
       "icon": "shop",
-      "organizations": [3,7]
+      "organizations": [3,7,2]
     }
   ]
 };

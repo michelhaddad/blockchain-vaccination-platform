@@ -20,12 +20,12 @@ export class PlanningComponent implements OnInit {
   isMOPH: Boolean = false;
   plans: ResponseModel<PlanModel>[] = [];
   displayedColumns: TableColumnModel[] = [
-    new TableColumnModel('orderId', 'Order ID'),
+    new TableColumnModel('deliveryId', 'Delivery ID'),
     new TableColumnModel('date', 'Arrival Date'),
     new TableColumnModel('storageFacility', 'Storage Facility'),
     new TableColumnModel('hospital', 'Hospital'),
     new TableColumnModel('batchNumber', 'Batch Number'),
-    new TableColumnModel('vialQuantity', 'Number of Vials'),
+    new TableColumnModel('vialsQuantity', 'Number of Vials'),
     new TableColumnModel('status', 'Status', false),
     new TableColumnModel('button', '', false, true)
   ];
@@ -42,11 +42,11 @@ export class PlanningComponent implements OnInit {
       const row = new PlanRowModel(
         e.Record.orderID,
         e.Record.deliveryID,
-        e.Record.issueDateTime,
+        e.Record.arrivalDateTime,
         e.Record.storage,
         "Hospital",
         e.Record.batchNumber,
-        e.Record.vialsAmount,
+        e.Record.numberOfVials,
         this.getStatus(e.Record.currentState),
         this.getButton(e.Record.currentState),
       );

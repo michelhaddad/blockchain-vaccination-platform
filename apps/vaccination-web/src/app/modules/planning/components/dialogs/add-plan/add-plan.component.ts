@@ -19,9 +19,7 @@ export class AddPlanComponent implements OnInit {
       date: new FormControl(null, [Validators.required]),
       hospital: new FormControl(null, [Validators.required]),
       storageFacility: new FormControl(null, [Validators.required]),
-      batchNumber: new FormControl(null, [Validators.required]),
-      numberVials: new FormControl(null, [Validators.required]),
-      arrivalDate: new FormControl(null, [Validators.required])
+      numberVials: new FormControl(null, [Validators.required])
     });
   }
 
@@ -33,10 +31,11 @@ export class AddPlanComponent implements OnInit {
 
   submitForm() {
     const form = this.formGroup.getRawValue();
+    console.log(form,"hi",this.data)
     if (this.formGroup.valid) {
-      this.planningService.addDeliveryPlans(this.data.orderId, form.storageFacility, form.hospital, form.batchNumber, form.numberVials, form.arrivalDate).subscribe(() => {
+      this.planningService.addDeliveryPlans(this.data.orderId, form.storageFacility, form.hospital, this.data.batchNumber, form.numberVials, form.date).subscribe(() => {
         this.dialogRef.close();
-      }, () => this.dialogRef.close())
+      }, () => this.dialogRef.close(true))
     }
   }
 }

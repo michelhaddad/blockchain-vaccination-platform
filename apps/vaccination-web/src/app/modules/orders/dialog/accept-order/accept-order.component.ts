@@ -18,6 +18,7 @@ export class AcceptOrderComponent implements OnInit {
     this.formGroup = new FormGroup({
       batchNumber: new FormControl(null, [Validators.required]),
       date: new FormControl(null, [Validators.required]),
+      fee: new FormControl(null, [Validators.required]),
     });
   }
 
@@ -29,7 +30,7 @@ export class AcceptOrderComponent implements OnInit {
 
   submitForm() {
     if (this.formGroup.valid) {
-      this.orderService.acceptOrder(this.data.orderId, this.formGroup.getRawValue().batchNumber, this.formGroup.getRawValue().date).subscribe(() => {
+      this.orderService.acceptOrder(this.data.orderId, this.formGroup.getRawValue().batchNumber, this.formGroup.getRawValue().date, this.formGroup.getRawValue().fee).subscribe(() => {
         this.dialogRef.close();
       }, () => this.dialogRef.close());
     }

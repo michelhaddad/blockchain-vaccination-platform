@@ -18,25 +18,26 @@ export class OrderService {
 
   
   rejectOrder(orderId: string): Observable<any> {
-    let url = this.baseUrl + orderId+ "/reject";
+    let url = this.baseUrl +"/" + orderId+ "/reject";
     return this.http.put<any>(url,null);
   }
   shipOrder(orderId: string): Observable<any> {
-    let url = this.baseUrl + orderId+ "/ship";
+    let url = this.baseUrl +"/"+ orderId+ "/ship";
     return this.http.put<any>(url,null);
   }
 
-  acceptOrder(orderId: string, batchNumber: string, expectedDeliveryDate: string): Observable<any> {
+  acceptOrder(orderId: string, batchNumber: string, expectedDeliveryDate: string, fee: number): Observable<any> {
     const body = {
         batchNumber: batchNumber,
-        expectedDeliveryDate: expectedDeliveryDate
+        expectedDeliveryDate: expectedDeliveryDate,
+        fee: fee.toString()
     }
-    let url = this.baseUrl + orderId+ "/reject";
+    let url = this.baseUrl+"/" + orderId+ "/approve";
     return this.http.put<any>(url,body);
   }
 
   setOrderDelivered(orderId: string): Observable<any>{
-    let url = this.baseUrl + orderId+ "/deliver";
+    let url = this.baseUrl +"/" + orderId+ "/deliver";
     return this.http.put<any>(url,null);
   }
 

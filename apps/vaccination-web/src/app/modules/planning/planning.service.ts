@@ -22,7 +22,7 @@ export class PlanningService {
       storageID: storage,
       hospitalID: hospitalID,
       batchNumber: batchNumber,
-      numberOfVials: numberVials,
+      numberOfVials: numberVials.toString(),
       arrivalDateTime: arrivalDateTime
   }
     let url = this.baseUrl;
@@ -30,22 +30,22 @@ export class PlanningService {
   }
 
   sendToStorage(deliveryId: string): Observable<any> {
-    let url = this.baseUrl + 'deliveries/' + deliveryId +'/settostorage';
+    let url = this.baseUrl + '/' + deliveryId +'/settostorage';
     return this.http.put<any>(url,null);
   }
 
   receivedInStorage(deliveryId: string): Observable<any> {
-    let url = this.baseUrl + 'deliveries/' + deliveryId +'/setinstorage';
+    let url = this.baseUrl + '/' + deliveryId +'/setinstorage';
     return this.http.put<any>(url,null);
   }
 
   sendToHospital(deliveryId: string): Observable<any> {
-    let url = this.baseUrl + 'deliveries/' + deliveryId +'/settohospital';
+    let url = this.baseUrl + '/' + deliveryId +'/settohospital';
     return this.http.put<any>(url,null);
   }
   
   receivedInHospital(deliveryId: string): Observable<any> {
-    let url = this.baseUrl + 'deliveries/' + deliveryId +'/setinhospital';
+    let url = this.baseUrl + '/' + deliveryId +'/setinhospital';
     return this.http.put<any>(url,null);
   }
 }

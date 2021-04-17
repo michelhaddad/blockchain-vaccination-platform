@@ -7,7 +7,7 @@ export class PlanModel {
         public issueDateTime: string,
         public issuer: string,
         public storage: string,
-        public vialsAmount: number,
+        public numberOfVials: number,
         public hospitalID: number,
         public arrivalDateTime: string,
         public updateDateTime: string,

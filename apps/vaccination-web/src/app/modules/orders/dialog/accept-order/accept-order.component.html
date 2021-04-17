@@ -9,13 +9,16 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    <mat-form-field class="w-100 pb-2">
+      <input required  matInput required formControlName="fee" placeholder="Price"/>
+    </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions class="flex-center">
   <button class="main-button" mat-stroked-button (click)="cancelClick()">
     {{ "Cancel" | uppercase }}
   </button>
-  <button class="main-button" type="submit" (clicl)="submitForm()" color="accent" mat-flat-button>
+  <button class="main-button" type="submit" (click)="submitForm()" color="accent" mat-flat-button>
     {{ "Accept" | uppercase }}
   </button>
 </div>
