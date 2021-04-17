@@ -17,6 +17,48 @@ exports.getAllOrders = async function (req, res) {
     }
 };
 
+exports.getManufacturerDosesData = async function (req, res) {
+    try {
+        const result = {};
+
+        const txManager = new TransactionManager('user1', 'orderchannel');
+        const evalTx = txManager.getEvaluateTransactionInstance('ordercc', 'getAllApprovedOrders');
+        let response = await evalTx.send();
+        response = JSON.parse(JSON.parse(response));
+        
+        
+        for (const order of response){
+            const manufacturer = order['Record']['manufacturer'];
+            if (!result[manufacturer]) {
+                result[manufacturer] = {
+                    ordered: 0,
+                    administered: 0
+                }
+            }
+            const vialsAmount = order['Record']['vialsAmount'];
+            result[manufacturer].ordered += vialsAmount * 4;
+        }
+
+        const txManager2 = new TransactionManager('user1', 'distributionchannel');
+        const evalTx2 = txManager2.getEvaluateTransactionInstance('hospitalcc', 'indexHospitals');
+
+        let response2 = await evalTx2.send();
+        response2 = JSON.parse(JSON.parse(response2));
+        for (const hospital of response2){
+            const vaccineDataPerBatch = hospital['Record']['vaccineDataPerBatch'];
+            for (const [batch, value] of Object.entries(vaccineDataPerBatch)) {
+                const administeredDoses = value['dosesDelivered'] - value['remainingDoses'];
+                result[value['manufacturer']].administered += administeredDoses;
+            }
+        }
+
+        res.status(200).send(result);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 exports.issueOrder = async function (req, res) {
     try {
         const { manufacturer, destination, vialsAmount, requestedArrivalDate } = req.body;

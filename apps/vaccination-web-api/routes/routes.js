@@ -18,6 +18,11 @@ module.exports = function (app) {
   app.route('/MOPH/balance')
     .get(donationsController.getMophBalance);
 
+  app.route('/dosesdatapermanufacturer')
+    .get(orderController.getManufacturerDosesData);
+
+  app.route('/vaccineorgdistribution')
+    .get(deliveriesController.VaccinesOrgDistribution)
 
 
   app.route('/orders')
@@ -37,6 +42,10 @@ module.exports = function (app) {
 
   app.route('/hospitals')
   .get(hospitalController.getAllHospitals);
+  app.route('/hospitals/dosesData')
+  .get(hospitalController.getDosesData);
+  app.route('/hospitals/dailyadministrations')
+  .get(hospitalController.getDailyAdministrations);
   app.route('/hospitals/:id/deliver')
   .put(hospitalController.deliverVials);
   app.route('/hospitals/:id/inoculate')
@@ -54,5 +63,7 @@ module.exports = function (app) {
   .put(deliveriesController.setHospitalDelivery);
   app.route('/deliveries/:id/setinhospital')
   .put(deliveriesController.setHospitalArrival);
+
+  
 
 };

@@ -97,6 +97,23 @@ class OrderContract extends Contract {
         return results;
     }
 
+    async getAllApprovedOrders(ctx) {
+        let identity = ctx.clientIdentity;
+        const mspID = identity.getMSPID();
+        // if (mspID !== "ImpactMSP") {
+        //     throw new Error("User does not have the permission to invoke this function.")
+        // }
+        let query = {
+            selector: {
+                currentState: {"$gt": 1},
+                class: Order.getClass()
+            }
+        }
+        query = JSON.stringify(query);
+        const results = await this.query(ctx, query);
+        return results;
+    }
+
     /**
      * 
      * @param {Context} ctx the transaction context
