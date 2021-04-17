@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/core/auth.service';
+import { ResponseModel } from 'src/app/shared/models/api-response.model';
 import { DonationRowModel } from 'src/app/shared/models/donation-row.model';
 import { DonationStateEnum } from 'src/app/shared/models/donation-sate.enum';
-import { DonationModel } from 'src/app/shared/models/donations.model';
+import { DonationModel } from 'src/app/shared/models/donation.model';
 import { OrganizationEnum } from 'src/app/shared/models/organization.enum';
 import { TableButtonEnum } from 'src/app/shared/models/planning-status.enum';
 import { TableColumnModel } from 'src/app/shared/models/table-column.model';
@@ -17,17 +18,17 @@ import { DonateComponent } from '../dialogs/donate/donate.component';
   styleUrls: ['./donations.component.scss'],
 })
 export class DonationsComponent implements OnInit {
-  donations: DonationModel[] = [];
+  donations: ResponseModel<DonationModel>[] = [];
   isDonor: boolean = false;
   displayedColumns: TableColumnModel[] = [
     new TableColumnModel('donationId', 'ID'),
     new TableColumnModel('donor', 'Donor'),
     new TableColumnModel('amount', 'Amount'),
     new TableColumnModel('date', 'Issue Date'),
-    new TableColumnModel('button', '', false, false, true)
+    new TableColumnModel('button', '', false, true)
   ];
 
-  tableDataSource: MatTableDataSource<any> = new MatTableDataSource();
+  tableDataSource: MatTableDataSource<DonationRowModel> = new MatTableDataSource();
 
   constructor(
     public dialog: MatDialog,
@@ -45,30 +46,32 @@ export class DonationsComponent implements OnInit {
   getDonations(): void {
     if (!this.isDonor) {
       this.donationService.getAllDonations().subscribe((result) => {
-        this.donations = result.response.records;
+        this.donations = result.response
         this.createDonations();
       });
     } else {
       this.donationService.getDonationByUser().subscribe((result) => {
-        this.donations = result.response.records;
+        this.donations = result.response;
         this.createDonations();
       });
     }
   }
 
-  redeemDonation(event: DonationRowModel) {
-    this.donationService.redeemDonation(event.donationId);
+  redeemDonation(event: any) {
+    this.donationService.redeemDonation(event.item.donationId).subscribe(()=>{
+      this.getDonations();
+    });
   }
 
   createDonations(): void {
     const dataSource: any[] = [];
     this.donations.forEach((e) => {
       const row = new DonationRowModel(
-        e.id,
-        e.amount,
-        e.issueDateTime,
-        e.issuer,
-        !this.isDonor && e.currentState == DonationStateEnum.ISSUED
+        e.Record.id,
+        e.Record.amount,
+        e.Record.issueDateTime,
+        e.Record.issuer,
+        !this.isDonor && e.Record.currentState == DonationStateEnum.ISSUED
           ? TableButtonEnum.REDEEM
           : TableButtonEnum.NONE
       );

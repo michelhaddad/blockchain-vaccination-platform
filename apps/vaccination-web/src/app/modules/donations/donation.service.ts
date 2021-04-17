@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponseModel } from 'src/app/shared/models/api-response.model';
-import { DonationByUserModel, DonationModel } from 'src/app/shared/models/donations.model';
+import { DonationByUserModel, DonationModel } from 'src/app/shared/models/donation.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -19,17 +19,17 @@ export class DonationService {
   }
 
   redeemDonation(donationId: string): Observable<any> {
-    let url = this.baseUrl + '/redeem?donationId=' + donationId;
+    let url = this.baseUrl + '/redeem?id=' + donationId;
     return this.http.put<any>(url, null);
   }
 
   getDonationByUser(): Observable<any> {
     let url = this.baseUrl + '/user';
-    return this.http.post<any>(url, null);
+    return this.http.get<any>(url);
   }
 
   donate(amount: number): Observable<any> {
     let url = this.baseUrl + '/donate?amount=' + amount;
-    return this.http.get<any>(url);
+    return this.http.post<any>(url,null);
   }
 }

@@ -29,8 +29,12 @@ export class DonateComponent implements OnInit {
 
   submitForm() : void{
     const amount: number = this.formGroup.get('amount')?.value;
-    this.donationService.donate(amount).subscribe(e=>{
-      this.dialogRef.close();
-    })
+    if(amount){
+      this.donationService.donate(amount).subscribe(e=>{
+        this.dialogRef.close();
+      },err=>{
+        this.dialogRef.close();
+      })
+    }
   }
 }

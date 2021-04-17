@@ -10,5 +10,8 @@ export enum TableButtonEnum {
     SENT = 1,
     RECEIVED = 2,
     NONE = 3,
-    REDEEM = 4
+    REDEEM = 4,
+    ACCEPT = 5,
+    REJECT=6,
+    SHIP =7
 }

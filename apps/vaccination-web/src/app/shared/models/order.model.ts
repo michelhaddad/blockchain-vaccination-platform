@@ -8,8 +8,10 @@ export class OrderModel {
         public requestedArrivalDate: string,
         public vialsAmount: number,
         public manufacturer: string,
-        public destination: string
-        ) { }
+        public destination: string,
+        public expectedDeliveryDate?: string,
+        public batchNumber?: string,
+    ) { }
 }
 
 export class OrderIssueModel {
@@ -18,12 +20,20 @@ export class OrderIssueModel {
         public destination: string,
         public vialsAmount: number,
         public requestedArrivalDate: string
-    ){}
+    ) { }
+}
+
+export enum OrderStateEnum {
+    REQUESTED = 1,
+    APPROVED = 2,
+    SHIPPED = 3,
+    DELIVERED = 4,
+    REJECTED = -1
 }
 
 export class OrderApproveModel {
     constructor(
         public batchNumber: string,
         public expectedDeliveryDate: string
-    ){}
+    ) { }
 }

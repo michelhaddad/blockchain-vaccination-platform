@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { PlanRowModel } from 'src/app/shared/models/plan-row.model';
+import { PlanningStatusEnum } from 'src/app/shared/models/planning-status.enum';
 import { TableColumnModel } from 'src/app/shared/models/table-column.model';
 import { AddPlanComponent } from '../dialogs/add-plan/add-plan.component';
 
@@ -19,8 +20,8 @@ export class PlanningComponent implements OnInit {
     new TableColumnModel('hospital', 'Hospital'),
     new TableColumnModel('batchNumber', 'Batch Number'),
     new TableColumnModel('vialQuantity', 'Number of Vials'),
-    new TableColumnModel('status', 'Status', false, true),
-    new TableColumnModel('button', '', false, false, true)
+    new TableColumnModel('status', 'Status', false),
+    new TableColumnModel('button', '', false, true)
   ];
 
   tableDataSource: MatTableDataSource<any> = new MatTableDataSource([
@@ -38,6 +39,21 @@ export class PlanningComponent implements OnInit {
       panelClass: 'add-plan-dialog',
     });
     dialogRef.afterClosed().subscribe((result) => { });
+  }
+
+  getStatus(e: PlanningStatusEnum): string {
+    switch (e) {
+      case PlanningStatusEnum.BORDER_CONTROL:
+        return 'In Border Control';
+      case PlanningStatusEnum.IN_HOSPITAL:
+        return 'In Hospital';
+      case PlanningStatusEnum.TO_HOSPITAL:
+        return 'To Hospital';
+      case PlanningStatusEnum.IN_STORAGE:
+        return 'In Storage';
+      case PlanningStatusEnum.TO_STORAGE:
+        return 'To Storage';
+    }
   }
 
 }

@@ -6,8 +6,8 @@ export class ApiResponseModel<T> {
   
   export class ResponseModel<T> {
     constructor(
-        public key: string,
-        public records: T[]
+        public Key: string,
+        public Record: T
     ) {}
   }
   

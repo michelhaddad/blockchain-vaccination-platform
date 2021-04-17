@@ -3,7 +3,7 @@ export class DonationRowModel {
         public donationId: string,
         public amount: string,
         public date: string,
-        public issuer: string,
+        public donor: string,
         public button: number
         ) { }
 }

@@ -26,7 +26,7 @@ module.exports = function (app) {
   app.route('/orders/:id/ship')
   .put(orderController.setOrderShipped);
   app.route('/orders/:id/deliver')
-  .put(orderController.setOrderDelivered);
+  .put(orderController.setOrderDelivered); // by border control
   app.route('/orders/:id/deliveries')
   .get(deliveriesController.getAllOrderDeliveries);
 
@@ -38,7 +38,7 @@ module.exports = function (app) {
   .put(hospitalController.inoculatePatients);
 
   app.route('/deliveries')
-  .get(deliveriesController.getAllDeliveries);
+  .get(deliveriesController.getAllDeliveries); //
   app.route('/deliveries')
   .post(deliveriesController.issueOrderDelivery);
   app.route('/deliveries/:id/settostorage')

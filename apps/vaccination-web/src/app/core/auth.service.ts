@@ -25,7 +25,6 @@ export class AuthService {
   }
 
   getAllowedSections(): SidenavSection[]{
-      console.log(this.allowedSections);
       return this.allowedSections;
   }
 

@@ -16,6 +16,7 @@ export class TableComponent implements OnInit {
   @Output('actionClicked') actionClicked: EventEmitter<any> = new EventEmitter();
   @Output('buttonClicked') buttonClicked: EventEmitter<any> = new EventEmitter();
   @Output('menuClicked') menuClicked: EventEmitter<any> = new EventEmitter();
+
   constructor() { }
 
   getTableDisplayedColumnsIds(columns: TableColumnModel[]) {
@@ -25,6 +26,7 @@ export class TableComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
+
   elementClicked(element: any, event: Event) {
     event.stopPropagation();
     if (element)
@@ -32,21 +34,6 @@ export class TableComponent implements OnInit {
         element: element
       });
 
-  }
-
-  getStatus(e: PlanningStatusEnum): string {
-    switch (e) {
-      case PlanningStatusEnum.BORDER_CONTROL:
-        return 'In Border Control';
-      case PlanningStatusEnum.IN_HOSPITAL:
-        return 'In Hospital';
-      case PlanningStatusEnum.TO_HOSPITAL:
-        return 'To Hospital';
-      case PlanningStatusEnum.IN_STORAGE:
-        return 'In Storage';
-      case PlanningStatusEnum.TO_STORAGE:
-        return 'To Storage';
-    }
   }
 
   getButtonText(e: TableButtonEnum): string {
@@ -57,6 +44,10 @@ export class TableComponent implements OnInit {
         return 'Sent';
       case TableButtonEnum.REDEEM:
         return 'Redeem';
+      case TableButtonEnum.ACCEPT:
+        return 'Accept';
+      case TableButtonEnum.SHIP:
+        return 'Ship';
       default:
         return '';
     }

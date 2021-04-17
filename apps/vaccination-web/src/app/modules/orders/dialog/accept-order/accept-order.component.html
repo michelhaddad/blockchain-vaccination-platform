@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Accept Order</h1>
+<div mat-dialog-content class="overflow-hidden">
+  <form [formGroup]="formGroup">
+    <mat-form-field class="w-100 pb-2">
+      <input required  matInput required formControlName="batchNumber" placeholder="Batch Number" autofocus />
+    </mat-form-field>
+    <mat-form-field class="w-100 pb-2">
+        <input matInput formControlName="date" required placeholder="Delivery Date" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="flex-center">
+  <button class="main-button" mat-stroked-button (click)="cancelClick()">
+    {{ "Cancel" | uppercase }}
+  </button>
+  <button class="main-button" type="submit" (clicl)="submitForm()" color="accent" mat-flat-button>
+    {{ "Accept" | uppercase }}
+  </button>
+</div>
+

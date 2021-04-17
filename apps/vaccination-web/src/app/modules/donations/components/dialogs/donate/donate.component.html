@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Donate</h1>
 <div mat-dialog-content class="overflow-hidden">
-  <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+  <form [formGroup]="formGroup" >
     <mat-form-field class="w-100 pb-2">
       <input required  matInput formControlName="amount" placeholder='Amount' autofocus type='number' />
     </mat-form-field>
@@ -10,7 +10,7 @@
   <button class="main-button" mat-stroked-button (click)="cancelClick()">
     {{ "Cancel" | uppercase }}
   </button>
-  <button class="main-button" type="submit" color="accent" mat-flat-button>
+  <button class="main-button" type="submit" (click)="submitForm()" color="accent" mat-flat-button>
     {{ "Donate" | uppercase }}
   </button>
 </div>

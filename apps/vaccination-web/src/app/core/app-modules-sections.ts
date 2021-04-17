@@ -44,6 +44,15 @@ export const userAuthModules = {
       "hasSubSections": false,
       "icon": "timeline",
       "organizations": [1,2,3,5]
+    },
+    {
+      "mainSection": {
+        "title": "Orders",
+        "link": "/orders"
+      },
+      "hasSubSections": false,
+      "icon": "shop",
+      "organizations": [3,7]
     }
   ]
 };
