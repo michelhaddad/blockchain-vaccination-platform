@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
 
-const configPath = path.resolve(__dirname, 'config.json');
+const configPath = path.resolve(__dirname, 'services', 'config.json');
 const configJSON = fs.readFileSync(configPath, 'utf8');
 const config = JSON.parse(configJSON);
 

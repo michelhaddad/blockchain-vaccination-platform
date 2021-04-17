@@ -4,7 +4,7 @@
         "channel2": "orderchannel",
         "contract": "dummycc"
     },
-    "connection_profile": "../../../network/basic/connectionProfile.json",
+    "connection_profile": "../../network/basic/connectionProfile.json",
     "organizations": {
         "Impact": {
             "MSP": "ImpactMSP"

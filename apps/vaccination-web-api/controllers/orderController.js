@@ -41,13 +41,13 @@ exports.approveOrder = async function (req, res) {
         if (!id) {
             return res.status(400).json({ message: 'Missing id' });
         }
-        const { batchNumber, expectedDeliveryDate } = req.body;
-        if (!(batchNumber && expectedDeliveryDate)) {
+        const { batchNumber, expectedDeliveryDate, fee } = req.body;
+        if (!(batchNumber && expectedDeliveryDate && fee)) {
             return res.status(400).json({ message: 'Missing parameter(s)' });
         }
         const txManager = new TransactionManager('user1', 'orderchannel');
         const submitTx =
-            txManager.getSubmitTransactionInstance('ordercc', 'approve', id, batchNumber, expectedDeliveryDate);
+            txManager.getSubmitTransactionInstance('ordercc', 'approve', id, batchNumber, expectedDeliveryDate, fee);
         let response = await submitTx.send();
         console.log(Order.fromBuffer(response));
         res.status(204).send({}); 
