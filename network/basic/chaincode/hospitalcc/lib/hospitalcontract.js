@@ -97,6 +97,18 @@ class HospitalContract extends Contract {
         return results;
     }
 
+    async getHospital(ctx, hospitalID) {
+        let query = {
+            selector: {
+                hospitalID: hospitalID,
+                class: Hospital.getClass()
+            }
+        }
+        query = JSON.stringify(query);
+        const results = await this.query(ctx, query);
+        return results;
+    }
+
     async deliverVials(ctx, hospitalID, batchID, vials, manufacturer) {
         let hospital = await ctx.hospitalList.getHospital(hospitalID);
         const totalDoses = dosesPerVial[manufacturer] * vials;

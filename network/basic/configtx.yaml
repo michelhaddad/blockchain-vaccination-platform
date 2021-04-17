@@ -250,7 +250,7 @@ Orderer: &OrdererDefaults
     Addresses:
         - orderer.el-network.com:7050
 
-    BatchTimeout: 10s
+    BatchTimeout: 3s
 
     BatchSize:
 

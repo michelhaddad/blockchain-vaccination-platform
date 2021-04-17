@@ -30,35 +30,54 @@ class Hospital extends State {
         return this.address;
     }
 
-    getVaccineData(){
-        return this.vaccineData;
-    }
+    addDosesToBatch(batchID, doseCount, manufacturer) {
+        doseCount = parseInt(doseCount);
 
-    setVaccineData(vaccineData) {
-        this.vaccineData = vaccineData;
-    }
-
-    addDosesToBatch(batchID, doseCount, manufacturer = '') {
-        if (!this.vaccineData[batchID] && manufacturer) {
-            this.vaccineData[batchID] = {
+        // Add doses in Batch IDs section
+        if (!this.vaccineDataPerBatch[batchID] && manufacturer) {
+            this.vaccineDataPerBatch[batchID] = {
                 dosesDelivered: doseCount,
                 remainingDoses: doseCount,
                 manufacturer: manufacturer
             }
-        } else if (!this.vaccineData[batchID]) {
+        } else if (!this.vaccineDataPerBatch[batchID]) {
             throw new Error("Manufacturer needs to be specified.")
         } else {
-            this.vaccineData[batchID].dosesDelivered += doseCount;
-            this.vaccineData[batchID].remainingDoses += doseCount;
+            this.vaccineDataPerBatch[batchID].dosesDelivered += doseCount;
+            this.vaccineDataPerBatch[batchID].remainingDoses += doseCount;
         }
+        
+        // increment to total remaining and delivrered doses
+        this.totalDosesReceived += doseCount;
+        this.totalRemainingDoses += doseCount;
     }
 
     removeDosesFromBatch(batchID, doseCount) {
-        if (!this.vaccineData[batchID]) {
+        doseCount = parseInt(doseCount);
+        const today = new Date().toISOString().slice(0, 10);
+
+        // Decrement doses in Batch Ids section
+        if (!this.vaccineDataPerBatch[batchID]) {
             throw new Error(this.name + " didn't receive any doses from this batch.")
         } else {
-            this.vaccineData[batchID].remainingDoses -= doseCount;
+            this.vaccineDataPerBatch[batchID].remainingDoses -= doseCount;
         }
+
+        // Add to daily administered doses
+        if (!this.dailyAdministeredDoses[today]) {
+            this.dailyAdministeredDoses[today] = {
+                [batchID]: doseCount
+            }
+        } else {
+            if (!this.dailyAdministeredDoses[today][batchID]) {
+                this.dailyAdministeredDoses[today][batchID] = doseCount;
+            } else {
+                this.dailyAdministeredDoses[today][batchID] -= doseCount;
+            }
+        }
+
+        // Decrement from total remaining doses
+        this.totalRemainingDoses -= doseCount;
     }
 
     static fromBuffer(buffer) {
@@ -80,8 +99,8 @@ class Hospital extends State {
     /**
      * Factory method to create a donation paper object
      */
-    static createInstance(hospitalID, name, address = '', vaccineData = {}) {
-        return new Hospital({ hospitalID, name, address, vaccineData});
+    static createInstance(hospitalID, name, address = '') {
+        return new Hospital({ hospitalID, name, address, vaccineDataPerBatch: {}, totalDosesReceived: 0, totalRemainingDoses: 0, dailyAdministeredDoses: {}});
     }
 
     static getClass() {

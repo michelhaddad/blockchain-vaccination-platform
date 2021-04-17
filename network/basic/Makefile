@@ -15,6 +15,7 @@ destroy:
 	./destroy-network.sh
 	rm -rf *-e
 	rm -rf ../../apps/dummyapp/wallet
+	rm -rf ../../apps/vaccination-web-api/wallet
 	rm -rf connection-profile-Donor.yaml
 	rm -rf connection-profile-Impact.yaml
 	rm -rf connection-profile-Hospital.yaml
@@ -22,7 +23,6 @@ destroy:
 	rm -rf connection-profile-Manufacturer.yaml
 	rm -rf connection-profile-StorageFacility.yaml
 	rm -rf connection-profile-BorderControl.yaml
-	make rmchaincode
 
 rmchaincode:
 	docker images | grep "supplychain" | xargs docker rmi
