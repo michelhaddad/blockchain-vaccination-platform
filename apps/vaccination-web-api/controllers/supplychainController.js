@@ -34,6 +34,67 @@ exports.getAllOrderDeliveries = async function (req, res) {
     }
 };
 
+exports.VaccinesOrgDistribution = async function (req, res) {
+    try {
+        const txManager = new TransactionManager('user1', 'orderchannel');
+        const submitTx = txManager.getEvaluateTransactionInstance('ordercc', 'getAllApprovedOrders');
+        let response = await submitTx.send();
+        response = JSON.parse(JSON.parse(response));
+        let totalOrderedVials = 0;
+        let vialsInBorderControl = 0;
+        let vialsInStorage = 0;
+        let vialsInHospital = 0;
+        
+        for (const order of response){
+            totalOrderedVials += parseInt(order['Record']['vialsAmount']);
+        }
+
+        const txManager2 = new TransactionManager('user1', 'distributionchannel');
+        const submitTx2 = txManager2.getEvaluateTransactionInstance('supplychaincc', 'indexOrderDelivery');
+        response = await submitTx2.send();
+        response = JSON.parse(JSON.parse(response));
+
+        for (const delivery of response){
+            const currentState = delivery['Record']['currentState'];
+            const numberOfVials = parseInt(delivery['Record']['numberOfVials']);
+            console.log(numberOfVials)
+            if (currentState < 3) {
+                vialsInBorderControl += numberOfVials;
+            } else if (currentState < 5) {
+                vialsInStorage += numberOfVials;
+            } else {
+                vialsInHospital += numberOfVials;
+            }
+        }
+
+        const watingForManufacturer = (totalOrderedVials - vialsInHospital - vialsInStorage - vialsInBorderControl) * 4;
+
+        const result = [
+            {
+                name: 'Border Control',
+                value: vialsInBorderControl * 4
+            },
+            {
+                name: 'Storage',
+                value: vialsInStorage * 4
+            },
+            {
+                name: 'Hospital',
+                value: vialsInHospital * 4
+            },
+            {
+                name: 'Waiting Manufacturer Delivery',
+                value: watingForManufacturer
+            }
+        ]
+
+        res.status(200).send(result);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 exports.issueOrderDelivery = async function (req, res) {
     try {
         const { orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime } = req.body;
