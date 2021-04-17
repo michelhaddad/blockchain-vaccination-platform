@@ -48,4 +48,14 @@ export class PlanningService {
     let url = this.baseUrl + '/' + deliveryId +'/setinhospital';
     return this.http.put<any>(url,null);
   }
+
+  vaccinate(batchId: string, date:string, patientCount: number): Observable<any> {
+    const body = {
+      patientCount: patientCount,
+      date: date,
+      batchID: batchId
+  }
+    let url = environment.host + 'hospitals/1/inoculate';
+    return this.http.put<any>(url, body);
+  }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/core/auth.service';
-import { TableButtonEnum } from 'src/app/modules/planning/components/models/planning-status.enum';
+import { TableButtonEnum } from 'src/app/modules/orders/models/planning-status.enum';
 import { ResponseModel } from 'src/app/shared/models/api-response.model';
 import { OrganizationEnum } from 'src/app/shared/models/organization.enum';
 import { TableColumnModel } from 'src/app/shared/models/table-column.model';

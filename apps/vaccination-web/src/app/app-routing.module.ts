@@ -35,13 +35,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'planning',
-        loadChildren: () =>
-          import('./modules/planning/planning.module').then(
-            (m) => m.PlanningModule
-          ),
-      },
-      {
         path: 'orders',
         loadChildren: () =>
           import('./modules/orders/orders.module').then(

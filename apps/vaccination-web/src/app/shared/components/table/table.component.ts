@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { MatTableDataSource } from '@angular/material/table';
 import { TableColumnModel } from '../../models/table-column.model';
 import { MatSort } from '@angular/material/sort';
-import { TableButtonEnum } from 'src/app/modules/planning/components/models/planning-status.enum';
-
+import { TableButtonEnum } from 'src/app/modules/orders/models/planning-status.enum';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',

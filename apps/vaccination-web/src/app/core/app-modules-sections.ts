@@ -18,14 +18,15 @@ export const userAuthModules = {
       "subSections": [
         {
           "title": "Channels",
-          "link": "/networkconfiguration/channels"
+          "link": "/networkconfiguration/channels",
+          "organizations": [4]
         },
         {
           "title": "Organizations",
-          "link": "/networkconfiguration/organizations"
+          "link": "/networkconfiguration/organizations",
+          "organizations": [4]
         }
       ],
-      "organizations": [4]
     },
     {
       "mainSection": {
@@ -38,21 +39,23 @@ export const userAuthModules = {
     },
     {
       "mainSection": {
-        "title": "Distribution Plans",
-        "link": "/planning"
+        "title": "Orders"
       },
-      "hasSubSections": false,
+      "hasSubSections": true,
       "icon": "timeline",
-      "organizations": [1,2,3,5]
+      "subSections": [
+        {
+          "title": "Orders",
+          "link": "/orders",
+          "organizations": [3,7,2]
+        },
+        {
+          "title": "Distribution Schedule",
+          "link": "/orders/planning",
+          "organizations": [1,2,3,5],
+        }
+      ],
+
     },
-    {
-      "mainSection": {
-        "title": "Orders",
-        "link": "/orders"
-      },
-      "hasSubSections": false,
-      "icon": "shop",
-      "organizations": [3,7,2]
-    }
   ]
 };

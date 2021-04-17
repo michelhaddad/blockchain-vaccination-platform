@@ -11,9 +11,9 @@ import { TableColumnModel } from 'src/app/shared/models/table-column.model';
 import { AcceptOrderComponent } from '../../dialog/accept-order/accept-order.component';
 import { OrderComponent } from '../../dialog/order/order.component';
 import { OrderService } from '../../order.service';
-import { TableButtonEnum } from 'src/app/modules/planning/components/models/planning-status.enum';
-import { AddPlanComponent } from 'src/app/modules/planning/components/dialogs/add-plan/add-plan.component';
+import { AddPlanComponent } from 'src/app/modules/orders/dialog/add-plan/add-plan.component';
 import { Router } from '@angular/router';
+import { TableButtonEnum } from '../../models/planning-status.enum';
 
 @Component({
   selector: 'app-orders',

@@ -11,12 +11,23 @@ import { userAuthModules } from './app-modules-sections';
 export class AuthService {
   allowedSections: SidenavSection[] = [];
   constructor() {
-      this.setUpOrganization(2);
+      this.setUpOrganization(1);
   }
 
   setAllowedSections(org: OrganizationEnum) {
     const sections = userAuthModules.allSidenavSection as SidenavSection[];
-    this.allowedSections = sections.filter((e) => e.organizations.includes(org));
+    sections.forEach((e) => {
+      if(!e.hasSubSections){
+        if(e.organizations.includes(org)){
+         this.allowedSections.push(e);
+        }
+      }else {
+        e.subSections=e.subSections?.filter(a=>a.organizations.includes(org));
+        if(e.subSections && e.subSections.length>0){
+          this.allowedSections.push(e);
+        }
+      }
+    });
   }
 
   setUpOrganization(org: number) :void {

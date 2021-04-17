@@ -6,9 +6,10 @@ import { ResponseModel } from 'src/app/shared/models/api-response.model';
 import { OrganizationEnum } from 'src/app/shared/models/organization.enum';
 import { TableColumnModel } from 'src/app/shared/models/table-column.model';
 import { PlanningService } from '../../planning.service';
-import { PlanRowModel } from '../models/plan-row.model';
-import { PlanModel } from '../models/plan.model';
-import { PlanningStatusEnum, TableButtonEnum } from '../models/planning-status.enum';
+import { PlanRowModel } from '../../models/plan-row.model';
+import { PlanModel } from '../../models/plan.model';
+import { PlanningStatusEnum, TableButtonEnum } from '../../models/planning-status.enum';
+import { VaccinateComponent } from 'src/app/orders/dialog/vaccinate/vaccinate.component';
 
 @Component({
   selector: 'app-planning',
@@ -18,6 +19,7 @@ import { PlanningStatusEnum, TableButtonEnum } from '../models/planning-status.e
 
 export class PlanningComponent implements OnInit {
   isMOPH: Boolean = false;
+  isHospital: Boolean = false;
   plans: ResponseModel<PlanModel>[] = [];
   displayedColumns: TableColumnModel[] = [
     new TableColumnModel('deliveryId', 'Delivery ID'),
@@ -34,6 +36,13 @@ export class PlanningComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private authService: AuthService, private planningService: PlanningService) {
     this.isMOPH = this.authService.getOrganizationType() == OrganizationEnum.MOPH;
+    this.isHospital = this.authService.getOrganizationType() == OrganizationEnum.Hospital;
+  }
+
+  vaccinate(): void {
+    const dialogRef = this.dialog.open(VaccinateComponent, {
+      panelClass: 'add-channel-dialog',
+    });
   }
 
   createPlans(): void {

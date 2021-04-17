@@ -14,5 +14,6 @@ export class Section {
     constructor(
         public title: string,
         public link: string,
+        public organizations: number[]
     ) { }
 }
