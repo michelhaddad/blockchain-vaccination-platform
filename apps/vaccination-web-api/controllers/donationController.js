@@ -1,5 +1,6 @@
 'use strict';
 const DonationPaper = require('../../../network/basic/chaincode/donationcc/lib/donationPaper');
+const MophBalance = require('../../../network/basic/chaincode/donationcc/lib/mophBalance');
 const TransactionManager = require('./../models/TransactionManager');
 const { generateUID } = require('./../utils/idHelper')
 
@@ -24,6 +25,19 @@ exports.getUserDonations = async function (req, res) {
         const submitTx = txManager.getEvaluateTransactionInstance('donationcc', 'indexUserDonations', user);
         let response = await submitTx.send();
         response = JSON.parse(JSON.parse(response));
+        res.status(200).send({response});
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.getMophBalance = async function (req, res) {
+    try {
+        const txManager = new TransactionManager('user1', 'orderchannel');
+        const submitTx = txManager.getEvaluateTransactionInstance('donationcc', 'getMophBalance');
+        let response = await submitTx.send();
+        response = MophBalance.fromBuffer(response);
         res.status(200).send({response});
 
     } catch (error) {

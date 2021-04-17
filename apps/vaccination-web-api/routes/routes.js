@@ -15,6 +15,11 @@ module.exports = function (app) {
   app.route('/donations/user')
     .get(donationsController.getUserDonations);
 
+  app.route('/MOPH/balance')
+    .get(donationsController.getMophBalance);
+
+
+
   app.route('/orders')
   .get(orderController.getAllOrders);
   app.route('/orders')

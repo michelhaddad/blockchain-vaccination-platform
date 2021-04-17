@@ -1,0 +1,196 @@
+{
+	"name": "el-network",
+	"version": "1.0.0",
+	"license": "Apache-2.0",
+	"client": {
+		"tlsEnable": true,
+		"adminUser": "admin",
+		"adminPassword": "adminpw",
+		"enableAuthentication": false,
+		"organization": "Impact",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"orderchannel": {
+			"peers": {
+				"peer0.Impact.el-network.com": {
+					"endorsingPeer": true,
+					"chaincodeQuery": true,
+					"ledgerQuery": true,
+					"eventSource": true
+				},
+				"peer0.Manufacturer.el-network.com": {
+					"endorsingPeer": true,
+					"chaincodeQuery": true,
+					"ledgerQuery": true,
+					"eventSource": true
+				}
+			},
+			"orderers": [
+				"orderer.el-network.com"
+			],
+			"connection": {
+				"timeout": {
+					"peer": {
+						"endorser": "6000",
+						"eventHub": "6000",
+						"eventReg": "6000"
+					},
+					"orderer": "6000"
+				}
+			}
+		},
+		"distributionchannel": {
+			"peers": {
+				"peer0.Impact.el-network.com": {
+					"endorsingPeer": true,
+					"chaincodeQuery": true,
+					"ledgerQuery": true,
+					"eventSource": true
+				},
+				"peer0.BorderControl.el-network.com": {
+					"endorsingPeer": true,
+					"chaincodeQuery": true,
+					"ledgerQuery": true,
+					"eventSource": true
+				}
+			},
+			"orderers": [
+				"orderer.el-network.com"
+			],
+			"connection": {
+				"timeout": {
+					"peer": {
+						"endorser": "6000",
+						"eventHub": "6000",
+						"eventReg": "6000"
+					},
+					"orderer": "6000"
+				}
+			}
+		}
+	},
+	"organizations": {
+		"Impact": {
+			"mspid": "ImpactMSP",
+			"fullpath": true,
+			"peers": [
+				"peer0.Impact.el-network.com"
+			],
+			"certificateAuthorities": [
+                "ca.Impact.el-network.com"
+            ],
+			"adminPrivateKey": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/keystore/adminKeyImpact"
+			},
+			"signedCert": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/signcerts/Admin@Impact.el-network.com-cert.pem"
+			}
+		},
+		"BorderControl": {
+			"mspid": "BorderControlMSP",
+			"fullpath": true,
+			"peers": [
+				"peer0.BorderControl.el-network.com"
+			],
+			"certificateAuthorities": [
+                "ca.BorderControl.el-network.com"
+            ],
+			"adminPrivateKey": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.el-network.com/users/Admin@BorderControl.el-network.com/msp/keystore/adminKeyBorderControl"
+			},
+			"signedCert": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.el-network.com/users/Admin@BorderControl.el-network.com/msp/signcerts/Admin@BorderControl.el-network.com-cert.pem"
+			}
+		},
+		"Manufacturer": {
+			"mspid": "ManufacturerMSP",
+			"fullpath": true,
+			"peers": [
+				"peer0.Manufacturer.el-network.com"
+			],
+			"certificateAuthorities": [
+                "ca.Manufacturer.el-network.com"
+            ],
+			"adminPrivateKey": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Manufacturer.el-network.com/users/Admin@Manufacturer.el-network.com/msp/keystore/adminKeyManufacturer"
+			},
+			"signedCert": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Manufacturer.el-network.com/users/Admin@Manufacturer.el-network.com/msp/signcerts/Admin@Manufacturer.el-network.com-cert.pem"
+			}
+		},
+		"OrdererOrg": {
+			"mspid": "OrdererMSP",
+			"fullpath": true,
+			"adminPrivateKey": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.com/msp/keystore/ordererAdminKey"
+			},
+			"signedCert": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.com/msp/signcerts/Admin@el-network.com-cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.Impact.el-network.com": {
+			"tlsCACerts": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/peers/peer0.Impact.el-network.com/msp/tlscacerts/tlsca.Impact.el-network.com-cert.pem"
+			},
+			"url": "grpcs://localhost:7051",
+			"grpcOptions": {
+				"ssl-target-name-override": "peer0.Impact.el-network.com"
+			}
+		},
+		"peer0.BorderControl.el-network.com": {
+			"tlsCACerts": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.el-network.com/peers/peer0.BorderControl.el-network.com/msp/tlscacerts/tlsca.BorderControl.el-network.com-cert.pem"
+			},
+			"url": "grpcs://localhost:9051",
+			"grpcOptions": {
+				"ssl-target-name-override": "peer0.BorderControl.el-network.com"
+			}
+		},
+		"peer0.Manufacturer.el-network.com": {
+			"tlsCACerts": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Manufacturer.el-network.com/peers/peer0.Manufacturer.el-network.com/msp/tlscacerts/tlsca.Manufacturer.el-network.com-cert.pem"
+			},
+			"url": "grpcs://localhost:10051",
+			"grpcOptions": {
+				"ssl-target-name-override": "peer0.Manufacturer.el-network.com"
+				
+      		}
+		}
+	},
+	"orderers": {
+		"orderer.el-network.com": {
+			"tlsCACerts": {
+				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/msp/tlscacerts/tlsca.el-network.com-cert.pem"
+			},
+			"url": "grpcs://localhost:7050",
+			"grpcOptions": {
+				"ssl-target-name-override": "orderer.el-network.com"
+			}
+		}
+	},
+	"certificateAuthorities": {
+		"ca.Impact.el-network.com": {
+			"url": "http://localhost:7054",
+			"caName": "ca.Impact.el-network.com"
+		},
+		"ca.BorderControl.el-network.com": {
+			"url": "http://localhost:9054",
+			"caName": "ca.BorderControl.el-network.com"
+		},
+		"ca.Manufacturer.el-network.com": {
+			"url": "http://localhost:10054",
+			"caName": "ca.Manufacturer.el-network.com"
+		}
+	}
+}
+

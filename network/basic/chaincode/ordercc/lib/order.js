@@ -50,6 +50,10 @@ class Order extends State {
         this.batchNumber = batchNumber;
     }
 
+    setFee(fee) {
+        this.fee = parseInt(fee);
+    }
+
     /**
      * Useful methods to encapsulate order states
      */

@@ -6,9 +6,11 @@ SPDX-License-Identifier: Apache-2.0
 
 // Fabric smart contract classes
 const { Contract, Context } = require('fabric-contract-api');
+const BalanceList = require('./balancelist.js');
 
 // PaperNet specifc classes
 const DonationPaper = require('./donationPaper.js');
+const MophBalance = require('./mophBalance.js');
 const PaperList = require('./paperlist.js');
 
 /**
@@ -20,6 +22,7 @@ class DonationPaperContext extends Context {
         super();
         // All papers are held in a list of papers
         this.paperList = new PaperList(this);
+        this.balanceList = new BalanceList(this);
     }
 
 }
@@ -43,9 +46,8 @@ class DonationPaperContract extends Contract {
      * @param {Context} ctx the transaction context
      */
     async instantiate(ctx) {
-        // No implementation required with this example
-        // It could be where data migration is performed, if necessary
-        console.log('Instantiate the contract');
+        const mophBalance = MophBalance.createInstance();
+        await ctx.balanceList.addBalanceObject(mophBalance);
     }
 
     async query(ctx, query) {
@@ -94,6 +96,18 @@ class DonationPaperContract extends Contract {
         const query = `{"selector": {"issuer": "${enrollmentID}"}}`;
         const results = await this.query(ctx, query);
         return results;
+    }
+
+    async getMophBalance(ctx) {
+        const mophBalance = await ctx.balanceList.getBalanceObject();
+        return mophBalance;
+    }
+
+    async triggerMophPayment(ctx, amount) {
+        const mophBalance = await ctx.balanceList.getBalanceObject();
+        mophBalance.pay(amount);
+        await ctx.balanceList.updateBalanceObject(mophBalance);
+        return mophBalance;
     }
 
     /**
@@ -151,6 +165,9 @@ class DonationPaperContract extends Contract {
         paper.setRedeemedDate(today);
         paper.setRedeemer(enrollmentID);
 
+        const mophBalance = await ctx.balanceList.getBalanceObject();
+        mophBalance.redeem(paper.amount);
+        await ctx.balanceList.updateBalanceObject(mophBalance);
         await ctx.paperList.updatePaper(paper);
         return paper;
     }

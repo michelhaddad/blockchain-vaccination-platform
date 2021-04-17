@@ -131,7 +131,7 @@ class OrderContract extends Contract {
         return order;
     }
 
-    async approve(ctx, orderID, batchNumber, expectedDeliveryDate) {
+    async approve(ctx, orderID, batchNumber, expectedDeliveryDate, fee) {
         let identity = ctx.clientIdentity;
         const mspID = identity.getMSPID();
         // if (mspID !== "ManufacturerMSP") {
@@ -143,6 +143,9 @@ class OrderContract extends Contract {
         order.setApproved();
         order.setExpectedDeliveryDate(expectedDeliveryDate);
         order.setOrderBatchNumber(batchNumber);
+        order.setFee(fee);
+        const crossContractResponse = await ctx.stub.invokeChaincode('donationcc', ['triggerMophPayment', order.fee.toString()], 'orderchannel');
+        console.info(crossContractResponse);
         await ctx.orderList.updateOrder(order);
         return order;
     }

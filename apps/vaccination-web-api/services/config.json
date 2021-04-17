@@ -1,9 +1,10 @@
 {
     "channel": {
-        "channelName": "mychannel",
+        "channel1": "distributionchannel",
+        "channel2": "orderchannel",
         "contract": "dummycc"
     },
-    "connection_profile": "../../../network/basic/connectionProfile.json",
+    "connection_profile": "../../network/basic/connectionProfile.json",
     "organizations": {
         "Impact": {
             "MSP": "ImpactMSP"
@@ -16,78 +17,52 @@
         },
         "Manufacturer": {
             "MSP": "ManufacturerMSP"
+        },
+        "Hospital": {
+            "MSP": "HospitalMSP"
+        },
+        "StorageFacility": {
+            "MSP": "StorageFacilityMSP"
+        },
+        "Donor": {
+            "MSP": "DonorMSP"
         }
     },
-    "users": [
-        {
+    "users": {
+        "user1": {
             "name": "user1",
-            "organization": "Impact"
+            "organization": "Impact",
+            "connection_profile": "../../../network/basic/connectionProfile-Impact.json"
         },
-        {
+        "user2": {
             "name": "user2",
-            "organization": "MOPH"
+            "organization": "MOPH",
+            "connection_profile": "../../../network/basic/connectionProfile-MOPH.json"
         },
-        {
+        "user3": {
             "name": "user3",
-            "organization": "BorderControl"
+            "organization": "BorderControl",
+            "connection_profile": "../../../network/basic/connectionProfile-BorderControl.json"
         },
-        {
+        "user4": {
             "name": "user4",
-            "organization": "Manufacturer"
+            "organization": "Manufacturer",
+            "connection_profile": "../../../network/basic/connectionProfile-Manufacturer.json"
+        },
+        "user5": {
+            "name": "user5",
+            "organization": "Hospital",
+            "connection_profile": "../../../network/basic/connectionProfile-Hospital.json"
+        },
+        "user6": {
+            "name": "user6",
+            "organization": "StorageFacility",
+            "connection_profile": "../../../network/basic/connectionProfile-StorageFacility.json"
+        },        
+        "user7": {
+            "name": "user7",
+            "organization": "Donor",
+            "connection_profile": "../../../network/basic/connectionProfile-Donor.json"
         }
-    ],
-    "transactions": [
-        {
-            "user": "user1",
-            "txFunction": "setValue",
-            "key": "Key1"
-        },
-        {
-            "user": "user2",
-            "txFunction": "setValue",
-            "key": "Key2",
-            "previousKey": "Key1"
-        },
-        {
-            "user": "user3",
-            "txFunction": "setValue",
-            "key": "Key3",
-            "previousKey": "Key2"
-        },
-        {
-            "user": "user4",
-            "txFunction": "setValue",
-            "key": "Key4"
-        },
-        {
-            "user": "user1",
-            "txFunction": "setValue",
-            "key": "Key2"
-        },
-        {
-            "user": "user1",
-            "txFunction": "setValue",
-            "key": "Key3"
-        },
-        {
-            "user": "user2",
-            "txFunction": "setValue",
-            "key": "Key2"
-        },
-        {
-            "user": "user3",
-            "txFunction": "setValue",
-            "key": "Key2"
-        },
-        {
-            "user": "user4",
-            "txFunction": "setValue",
-            "key": "Key4"
-        },
-        {
-            "user": "user2",
-            "txFunction": "setValue",
-            "key": "Key4"
-        }
-    ]
+    }
 }
