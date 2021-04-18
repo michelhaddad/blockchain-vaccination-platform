@@ -6,6 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 // Fabric smart contract classes
 const { Contract, Context } = require('fabric-contract-api');
+const OrderAccessControl = require('../ledger-api/OrderAccessControl.js');
 
 const Order = require('./order.js');
 const OrderList = require('./orderlist.js');
@@ -35,6 +36,14 @@ class OrderContract extends Contract {
     */
     createContext() {
         return new OrderContext();
+    }
+
+    beforeTransaction(ctx) {
+        const ac = new OrderAccessControl();
+        const fcn = ctx.stub.getFunctionAndParameters().fcn;
+        if (!ac.checkAccess(ctx, fcn)) {
+            throw new Error("User is not allowed to perform this operation.");
+        }
     }
 
     /**
