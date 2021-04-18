@@ -26,11 +26,13 @@ class OrderAccessControl {
         if (!constants.ALL_MSPS.some(x => x == mspId)) {
             throw new Error("User is not recognized");
         }
-        
+
         if (!this.aclRules[aclSubject]) {
             return false;
         }
+
         if (fcn == constants.INSTANCIATION_FUNCTION) return true;
+        
         
         return this.aclRules[aclSubject].some(x => x === fcn);
     }

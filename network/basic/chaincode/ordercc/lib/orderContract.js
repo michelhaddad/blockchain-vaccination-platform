@@ -93,9 +93,7 @@ class OrderContract extends Contract {
     async getAllOrders(ctx) {
         let identity = ctx.clientIdentity;
         const mspID = identity.getMSPID();
-        // if (mspID !== "ImpactMSP") {
-        //     throw new Error("User does not have the permission to invoke this function.")
-        // }
+        
         let query = {
             selector: {
                 class: Order.getClass()
@@ -109,9 +107,7 @@ class OrderContract extends Contract {
     async getAllApprovedOrders(ctx) {
         let identity = ctx.clientIdentity;
         const mspID = identity.getMSPID();
-        // if (mspID !== "ImpactMSP") {
-        //     throw new Error("User does not have the permission to invoke this function.")
-        // }
+        
         let query = {
             selector: {
                 currentState: {"$gt": 1},
@@ -136,9 +132,7 @@ class OrderContract extends Contract {
     async issue(ctx, orderID, manufacturer, destination, vialsAmount, requestedArrivalDate) {
         let identity = ctx.clientIdentity;
         const mspID = identity.getMSPID();
-        if (mspID !== "ImpactMSP") {
-            throw new Error("User does not have the permission to invoke this function.")
-        }
+       
         const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
 
         // Get today's date in format yyyy-mm-dd
@@ -160,9 +154,6 @@ class OrderContract extends Contract {
     async approve(ctx, orderID, batchNumber, expectedDeliveryDate, fee) {
         let identity = ctx.clientIdentity;
         const mspID = identity.getMSPID();
-        // if (mspID !== "ManufacturerMSP") {
-        //     throw new Error("User does not have the permission to invoke this function.")
-        // }
 
         const order = await ctx.orderList.getOrder(orderID);
 
@@ -179,9 +170,7 @@ class OrderContract extends Contract {
     async reject(ctx, orderID) {
         let identity = ctx.clientIdentity;
         const mspID = identity.getMSPID();
-        // if (mspID !== "ManufacturerMSP") {
-        //     throw new Error("User does not have the permission to invoke this function.")
-        // }
+        
         const order = await ctx.orderList.getOrder(orderID);
         if (!order) {
             throw new Error('Order ' + orderID + ' not found.')

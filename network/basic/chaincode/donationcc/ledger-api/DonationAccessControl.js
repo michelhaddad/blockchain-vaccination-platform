@@ -30,6 +30,7 @@ class DonationAccessControl {
         if (!this.aclRules[aclSubject]) {
             return false;
         }
+        
         if (fcn == constants.INSTANCIATION_FUNCTION) return true;
         
         return this.aclRules[aclSubject].some(x => x === fcn);
