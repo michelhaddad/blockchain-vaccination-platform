@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/core/auth.service';
+import { MOPHBalanceModel } from 'src/app/modules/orders/models/moph-balance.model';
 import { TableButtonEnum } from 'src/app/modules/orders/models/planning-status.enum';
 import { ResponseModel } from 'src/app/shared/models/api-response.model';
 import { OrganizationEnum } from 'src/app/shared/models/organization.enum';
@@ -19,12 +20,13 @@ import { DonateComponent } from '../dialogs/donate/donate.component';
 })
 export class DonationsComponent implements OnInit {
   donations: ResponseModel<DonationModel>[] = [];
+  redeemedBalance: number = 0;
   isDonor: boolean = false;
   displayedColumns: TableColumnModel[] = [
     new TableColumnModel('donationId', 'Donation ID'),
     new TableColumnModel('donor', 'Donor'),
     new TableColumnModel('amount', 'Amount'),
-    new TableColumnModel('date', 'Issue Date'),
+    new TableColumnModel('date', 'Donation Date'),
     new TableColumnModel('button', '', false, true)
   ];
 
@@ -40,7 +42,20 @@ export class DonationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getData();
+  }
+
+  getData() : void{
     this.getDonations();
+    this.getAmountRedeemed();
+  }
+
+  getAmountRedeemed(){
+    if(!this.isDonor){
+      this.donationService.getFunds().subscribe((e)=>{
+        this.redeemedBalance=e.response.redeemedAmount;
+      })
+    }
   }
 
   getDonations(): void {
@@ -59,7 +74,7 @@ export class DonationsComponent implements OnInit {
 
   redeemDonation(event: any) {
     this.donationService.redeemDonation(event.item.donationId).subscribe(()=>{
-      this.getDonations();
+      this.getData();
     });
   }
 
@@ -85,7 +100,7 @@ export class DonationsComponent implements OnInit {
       panelClass: 'donate-dialog',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.getDonations();
+      this.getData();
     });
   }
 }
