@@ -6,11 +6,13 @@ class DonationAccessControl {
         const donorAcl = new ACLSubject(constants.DonorMSP);
         const mophAcl = new ACLSubject(constants.MophMSP);
         const impactAcl = new ACLSubject(constants.ImpactMSP);
+        const manufacturerAcl = new ACLSubject(constants.ManufacturerMSP);
 
         this.aclRules = {
             [donorAcl]: constants.DONOR_FUNCTIONS,
             [mophAcl]: constants.MOPH_FUNCTIONS,
-            [impactAcl]: constants.QUERY_FUNCTIONS
+            [impactAcl]: constants.QUERY_FUNCTIONS,
+            [manufacturerAcl]: constants.MANUFACTURER_FUNCTIONS
         }
     }
 
@@ -24,11 +26,12 @@ class DonationAccessControl {
         if (!constants.ALL_MSPS.some(x => x == mspId)) {
             throw new Error("User is not recognized");
         }
-        if (fcn == constants.INSTANCIATION_FUNCTION) return true;
+        
         if (!this.aclRules[aclSubject]) {
             return false;
         }
-
+        if (fcn == constants.INSTANCIATION_FUNCTION) return true;
+        
         return this.aclRules[aclSubject].some(x => x === fcn);
     }
 }

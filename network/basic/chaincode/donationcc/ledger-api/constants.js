@@ -14,12 +14,14 @@ const QUERY_FUNCTIONS = ['query', 'indexDonations', 'indexUserDonations', 'getMo
 const ALL_FUNCTIONS = [...QUERY_FUNCTIONS, 'triggerMophPayment', 'issue', 'redeem'];
 const DONOR_FUNCTIONS = [...QUERY_FUNCTIONS, 'issue'];
 const MOPH_FUNCTIONS = [...QUERY_FUNCTIONS, 'triggerMophPayment', 'redeem'];
+const MANUFACTURER_FUNCTIONS = ['triggerMophPayment'];
 
 const INSTANCIATION_FUNCTION = 'instantiate';
 
 
 module.exports = {
     ALL_FUNCTIONS,
+    MANUFACTURER_FUNCTIONS,
     DONOR_FUNCTIONS,
     MOPH_FUNCTIONS,
     QUERY_FUNCTIONS,
