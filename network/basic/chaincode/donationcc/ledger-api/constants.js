@@ -15,6 +15,8 @@ const ALL_FUNCTIONS = [...QUERY_FUNCTIONS, 'triggerMophPayment', 'issue', 'redee
 const DONOR_FUNCTIONS = [...QUERY_FUNCTIONS, 'issue'];
 const MOPH_FUNCTIONS = [...QUERY_FUNCTIONS, 'triggerMophPayment', 'redeem'];
 
+const INSTANCIATION_FUNCTION = 'instantiate';
+
 
 module.exports = {
     ALL_FUNCTIONS,
@@ -28,5 +30,6 @@ module.exports = {
     BorderControlMSP,
     HopistalMSP,
     ManufacturerMSP,
-    ALL_MSPS
+    ALL_MSPS,
+    INSTANCIATION_FUNCTION
 }

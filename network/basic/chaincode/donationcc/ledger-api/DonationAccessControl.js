@@ -19,13 +19,12 @@ class DonationAccessControl {
     }
 
     checkAccess(ctx, fcn) {
-        const initfcns = ['init', 'Init', 'instanciate', 'ChaincodeFromContract.Init'];
-        if (initfcns.some(x => x == fcn)) return true;
         const mspId = this.getClientMspId(ctx);
         const aclSubject = new ACLSubject(mspId);
         if (!constants.ALL_MSPS.some(x => x == mspId)) {
             throw new Error("User is not recognized");
         }
+        if (fcn == constants.INSTANCIATION_FUNCTION) return true;
         if (!this.aclRules[aclSubject]) {
             return false;
         }
