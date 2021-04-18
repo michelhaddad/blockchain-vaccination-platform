@@ -38,6 +38,14 @@ class SupplyChainContract extends Contract {
         return new OrderDeliveryContext();
     }
 
+    beforeTransaction(ctx) {
+        const ac = new SupplyChainAccessControl();
+        const fcn = ctx.stub.getFunctionAndParameters().fcn;
+        if (!ac.checkAccess(ctx, fcn)) {
+            throw new Error("User is not allowed to perform this operation.");
+        }
+    }
+
     /**
      * Instantiate to perform any setup of the ledger that might be required.
      * @param {Context} ctx the transaction context
@@ -86,12 +94,7 @@ class SupplyChainContract extends Contract {
     async indexOrderDelivery(ctx) {
         let identity = ctx.clientIdentity;
         const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
-        // let org = identity.getMSPID();
-        // const role = "issuer";
-        // if(org === "MOPH")
-        //     role = "issuer";
-        // else
-        //     role = org;
+       
         const query = `{
             "selector": {
                 "issuer": "${enrollmentID}",
