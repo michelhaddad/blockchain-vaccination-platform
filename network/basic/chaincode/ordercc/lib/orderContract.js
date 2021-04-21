@@ -9,6 +9,7 @@ const { Contract, Context } = require('fabric-contract-api');
 
 const Order = require('./order.js');
 const OrderList = require('./orderlist.js');
+const initialOrders = require('../init-ledger/orders');
 
 /**
  * A custom context provides easy access to list of all orders
@@ -42,9 +43,20 @@ class OrderContract extends Contract {
      * @param {Context} ctx the transaction context
      */
     async instantiate(ctx) {
-        // No implementation required with this example
-        // It could be where data migration is performed, if necessary
-        console.log('Instantiate the contract');
+        for (const initialOrder of initialOrders) {
+            let order = Order.createInstance('user2', initialOrder.orderID, initialOrder.date, 'Manufacturer', 'Border Control',
+                initialOrder.vialsAmount, initialOrder.requestedArrivalDate);
+            order.currentState = initialOrder.state;
+            if (order.currentState >= 2) {
+                order.setOrderBatchNumber(initialOrder.batchNumber);
+                order.setExpectedDeliveryDate(initialOrder.expectedDeliveryDate);
+                order.setFee(initialOrder.fee);
+            }
+            if (initialOrder.state == 4) {
+                order.setActualDeliveryDate(initialOrder.deliveryDate);
+            }
+            await ctx.orderList.addOrder(order);
+        }
     }
 
     async query(ctx, query) {
@@ -82,11 +94,6 @@ class OrderContract extends Contract {
      * @returns {String} All issued orders
      */
     async getAllOrders(ctx) {
-        let identity = ctx.clientIdentity;
-        const mspID = identity.getMSPID();
-        // if (mspID !== "ImpactMSP") {
-        //     throw new Error("User does not have the permission to invoke this function.")
-        // }
         let query = {
             selector: {
                 class: Order.getClass()
@@ -127,9 +134,6 @@ class OrderContract extends Contract {
     async issue(ctx, orderID, manufacturer, destination, vialsAmount, requestedArrivalDate) {
         let identity = ctx.clientIdentity;
         const mspID = identity.getMSPID();
-        if (mspID !== "ImpactMSP") {
-            throw new Error("User does not have the permission to invoke this function.")
-        }
         const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
 
         // Get today's date in format yyyy-mm-dd
@@ -149,14 +153,7 @@ class OrderContract extends Contract {
     }
 
     async approve(ctx, orderID, batchNumber, expectedDeliveryDate, fee) {
-        let identity = ctx.clientIdentity;
-        const mspID = identity.getMSPID();
-        // if (mspID !== "ManufacturerMSP") {
-        //     throw new Error("User does not have the permission to invoke this function.")
-        // }
-
         const order = await ctx.orderList.getOrder(orderID);
-
         order.setApproved();
         order.setExpectedDeliveryDate(expectedDeliveryDate);
         order.setOrderBatchNumber(batchNumber);
@@ -168,11 +165,6 @@ class OrderContract extends Contract {
     }
 
     async reject(ctx, orderID) {
-        let identity = ctx.clientIdentity;
-        const mspID = identity.getMSPID();
-        // if (mspID !== "ManufacturerMSP") {
-        //     throw new Error("User does not have the permission to invoke this function.")
-        // }
         const order = await ctx.orderList.getOrder(orderID);
         if (!order) {
             throw new Error('Order ' + orderID + ' not found.')

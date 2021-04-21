@@ -103,7 +103,7 @@ CORE_VM_DOCKER_ATTACHSTDOUT=true
 
 peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n donationcc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member','DonorMSP.member')" --tls --cafile $CACERT_ORDERER
 echo "Instanciated the donationcc chaincode"
-peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n ordercc -l node -v 5.5 -c '{"Args":[]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member','DonorMSP.member')" --tls --cafile $CACERT_ORDERER
+peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n ordercc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member','DonorMSP.member')" --tls --cafile $CACERT_ORDERER
 echo "Instanciated the ordercc chaincode"
 
 

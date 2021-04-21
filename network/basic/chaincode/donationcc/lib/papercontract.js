@@ -12,6 +12,8 @@ const BalanceList = require('./balancelist.js');
 const DonationPaper = require('./donationPaper.js');
 const MophBalance = require('./mophBalance.js');
 const PaperList = require('./paperlist.js');
+const initialDonations = require('../init-ledger/donations');
+const initialOrders = require('../init-ledger/orders');
 
 /**
  * A custom context provides easy access to list of all donation papers
@@ -46,7 +48,22 @@ class DonationPaperContract extends Contract {
      * @param {Context} ctx the transaction context
      */
     async instantiate(ctx) {
-        const mophBalance = MophBalance.createInstance();
+        let mophRedeemedAmount = 0;
+        let mophPayedAmount = 0;
+        for (const donation of initialDonations) {
+            if (donation.state == 2) {
+                mophRedeemedAmount += parseInt(donation.amount);
+            }
+            let paper = DonationPaper.createInstance('user7', donation.paperID, donation.date, donation.amount);
+            paper.currentState = donation.state;
+            await ctx.paperList.addPaper(paper);
+        }
+        for (const initialOrder of initialOrders) {
+            if (initialOrders.state >= 2) {
+                mophPayedAmount += parseInt(initialOrder.fee);
+            }
+        }
+        const mophBalance = MophBalance.createInstance(mophRedeemedAmount, mophPayedAmount);
         await ctx.balanceList.addBalanceObject(mophBalance);
     }
 
