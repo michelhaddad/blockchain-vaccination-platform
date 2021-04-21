@@ -14,7 +14,6 @@ start:
 destroy:
 	./destroy-network.sh
 	rm -rf *-e
-	rm -rf ../../apps/dummyapp/wallet
 	rm -rf ../../apps/vaccination-web-api/wallet
 	rm -rf connection-profile-Donor.yaml
 	rm -rf connection-profile-Impact.yaml
@@ -29,7 +28,6 @@ rmchaincode:
 	docker images | grep "ordercc" | xargs docker rmi
 	docker images | grep "hospitalcc" | xargs docker rmi
 	docker images | grep "donationcc" | xargs docker rmi
-	docker images | grep "dummycc" | xargs docker rmi
 	  
 generate:
 	cp docker-compose-TEMPLATE.yaml docker-compose.yaml
