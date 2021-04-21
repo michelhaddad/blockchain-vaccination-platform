@@ -2,7 +2,8 @@
 
 * Docker  (v19.03.0+)
 * docker-compose (v1.24.1+)  
-* Node.js (v10.16.3)  
+* Node.js (v10.16.3)
+* npm (6.9.0)
 
 The following are necessary only if you want to build Fabricbeat yourself. If you intend to use the Docker image ([balazsprehoda/fabricbeat](https://hub.docker.com/repository/docker/balazsprehoda/fabricbeat/general)) or the pre-compiled executable, you can skip them.
 
