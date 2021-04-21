@@ -1,9 +1,7 @@
 # Blockchain Vaccination Platform
-
+This project is a POC, aimed at showing that building a **project management framework with Hyperledger Fabric** is feasible.
 
 ## Description
-
-To fill
 
 Currently, the project includes:
 
@@ -17,15 +15,11 @@ Currently, the project includes:
 
 5. An Express REST server that communicates with the Blockchain.
 
-6. A web interface interact with the Blockchain network.
-
-
-### Eventual goal
-To fill
+6. A web interface to interact with the Blockchain network and visualize data and transactions.
 
 ### Project background
 
-This project was developed for our Multidisciplinary project at Saint Joseph University  .
+This project was part of the Multidisciplinary project at Saint Joseph University.
 
 
 ## Getting Started
