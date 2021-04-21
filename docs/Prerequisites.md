@@ -128,6 +128,57 @@ $ node -v
 $ npm -v
 ```
 
+### Install MongoDB:
+
+Import the public key used by the package management system
+```
+$ wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+```
+
+
+Create a list file for MongoDB (Please choose the command that matches your Ubuntu version)
+```
+# For Ubuntu 20.04
+$ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+# For Ubuntu 18.04
+$ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+# For Ubuntu 16.04
+$ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+```
+
+Install the MongoDB packages
+```
+$ sudo apt-get update
+$ sudo apt-get install -y mongodb-org
+```
+
+Run MongoDB Community Edition
+
+To run and manage your mongod process, you will be using your operating system's built-in init system. Recent versions of Linux tend to use systemd (which uses the systemctl command), while older versions of Linux tend to use System V init (which uses the service command).
+
+If you are unsure which init system your platform uses, run the following command:
+```
+ps --no-headers -o comm 1
+```
+
+systemd
+```
+sudo systemctl start mongod
+# Verify that MongoDB has started successfully
+sudo systemctl status mongod
+#  ensure that MongoDB will start following a system reboot (optional)
+sudo systemctl enable mongod
+```
+
+System V init
+```
+sudo service mongod start
+# Verify that MongoDB has started successfully
+sudo service mongod status
+```
+
+If you're having trouble installing MongoDB, you may want to check this installation guide: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
 ### Optional
 
 ### Python
