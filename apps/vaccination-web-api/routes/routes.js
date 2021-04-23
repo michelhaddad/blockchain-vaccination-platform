@@ -39,13 +39,15 @@ module.exports = function (app) {
   .put(orderController.setOrderDelivered); 
   app.route('/orders/:id/deliveries')
   .get(deliveriesController.getAllOrderDeliveries);
+  app.route('/dailyadministrations')
+  .get(hospitalController.getDailyAdministrations);
 
   app.route('/hospitals')
   .get(hospitalController.getAllHospitals);
   app.route('/hospitals/dosesData')
   .get(hospitalController.getDosesData);
   app.route('/hospitals/dailyadministrations')
-  .get(hospitalController.getDailyAdministrations);
+  .get(hospitalController.getDailyHospitalAdministrations);
   app.route('/hospitals/:id/deliver')
   .put(hospitalController.deliverVials);
   app.route('/hospitals/:id/inoculate')

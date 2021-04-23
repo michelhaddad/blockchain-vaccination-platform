@@ -19,7 +19,9 @@ import { VaccinateComponent } from 'src/app/orders/dialog/vaccinate/vaccinate.co
 
 export class PlanningComponent implements OnInit {
   isMOPH: Boolean = false;
+  radioValue: number = 6;
   isHospital: Boolean = false;
+  isBorderControl: Boolean = false;
   plans: ResponseModel<PlanModel>[] = [];
   displayedColumns: TableColumnModel[] = [
     new TableColumnModel('deliveryId', 'Delivery ID'),
@@ -37,6 +39,7 @@ export class PlanningComponent implements OnInit {
   constructor(public dialog: MatDialog, private authService: AuthService, private planningService: PlanningService) {
     this.isMOPH = this.authService.getOrganizationType() == OrganizationEnum.MOPH;
     this.isHospital = this.authService.getOrganizationType() == OrganizationEnum.Hospital;
+    this.isBorderControl = this.authService.getOrganizationType()== OrganizationEnum.BorderControl;
   }
 
   vaccinate(): void {
@@ -62,13 +65,27 @@ export class PlanningComponent implements OnInit {
       dataSource.push(row);
     });
     this.tableDataSource = new MatTableDataSource(dataSource);
+    this.tableDataSource.filterPredicate = (o: PlanRowModel, filter: string) => {
+      return o.status == filter;
+    }
+    this.clearFilter();
   }
 
   getPlans(): void {
     this.planningService.getAllDeliveryPlans().subscribe((res) => {
-      this.plans = res.response;
+      if (this.isBorderControl) {
+        this.plans = res.response;
+        this.plans = this.plans.filter((e) => e.Record.currentState == PlanningStatusEnum.BORDER_CONTROL || e.Record.currentState == PlanningStatusEnum.IN_STORAGE || e.Record.currentState == PlanningStatusEnum.TO_STORAGE )
+      } else {
+        this.plans = res.response;
+      }
       this.createPlans();
     })
+  }
+
+  clearFilter(){
+    this.tableDataSource.filter = '';
+    this.radioValue = 6;
   }
 
   ngOnInit(): void {
@@ -77,25 +94,27 @@ export class PlanningComponent implements OnInit {
 
   handlePlan(event: any): void {
     switch (event.item.button) {
-      case PlanningStatusEnum.BORDER_CONTROL:
-        this.planningService.sendToStorage(event.item.deliveryId).subscribe(() => {
-          this.getPlans();
-        })
+      case TableButtonEnum.SENT:
+        if(event.item.status == this.getStatus(PlanningStatusEnum.BORDER_CONTROL)){
+          this.planningService.sendToStorage(event.item.deliveryId).subscribe(() => {
+            this.getPlans();
+          });
+        }else{
+          this.planningService.sendToHospital(event.item.deliveryId).subscribe(() => {
+            this.getPlans();
+          });
+        }
         break;
-      case PlanningStatusEnum.TO_HOSPITAL:
+      case TableButtonEnum.RECEIVED:
+        if(event.item.status == this.getStatus(PlanningStatusEnum.TO_HOSPITAL)){
         this.planningService.receivedInHospital(event.item.deliveryId).subscribe(() => {
           this.getPlans();
-        })
-        break;
-      case PlanningStatusEnum.IN_STORAGE:
-        this.planningService.sendToHospital(event.item.deliveryId).subscribe(() => {
-          this.getPlans();
-        })
-        break;
-      case PlanningStatusEnum.TO_STORAGE:
+        });
+      }else{
         this.planningService.receivedInStorage(event.item.deliveryId).subscribe(() => {
           this.getPlans();
-        })
+        });
+      }
         break;
       default:
         break;
@@ -142,6 +161,13 @@ export class PlanningComponent implements OnInit {
       case PlanningStatusEnum.TO_STORAGE:
         return 'To Storage';
     }
+  }
+
+  onFilter(event: any){
+    if(event.value==6){
+      this.tableDataSource.filter="";
+    }
+    this.tableDataSource.filter=this.getStatus(event.value);
   }
 
 }

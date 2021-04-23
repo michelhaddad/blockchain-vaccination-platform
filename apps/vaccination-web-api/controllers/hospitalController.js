@@ -49,6 +49,42 @@ exports.getDailyAdministrations = async function (req, res) {
         response = JSON.parse(JSON.parse(response));
         
         const resultArray = [];
+        const series = [];
+        const name = "Daily Administration";
+        for (const hospital of response){
+            const dailyAdministeredDoses = hospital['Record']['dailyAdministeredDoses'];
+            
+
+            for (const [date, value] of Object.entries(dailyAdministeredDoses)) {
+                let doses = 0;
+                for (const [batch, doseCount] of Object.entries(value)) {
+                    doses += doseCount;
+                }
+                series.push({
+                    value: doses,
+                    name: date
+                });
+            }
+        }
+        resultArray.push({
+            name,
+            series
+        });
+        res.status(200).send(resultArray);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.getDailyHospitalAdministrations = async function (req, res) {
+    try {
+        const txManager = new TransactionManager('user1', 'distributionchannel');
+        const submitTx = txManager.getEvaluateTransactionInstance('hospitalcc', 'indexHospitals');
+        let response = await submitTx.send();
+        response = JSON.parse(JSON.parse(response));
+        
+        const resultArray = [];
         for (const hospital of response){
             const series = [];
             const name = hospital['Record']['name'];
@@ -69,9 +105,8 @@ exports.getDailyAdministrations = async function (req, res) {
                 name,
                 series
             });
-
-            res.status(200).send(resultArray);
         }
+        res.status(200).send(resultArray);
 
     } catch (error) {
         res.status(500).json({ message: error.message });

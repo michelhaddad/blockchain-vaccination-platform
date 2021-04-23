@@ -1,17 +1,68 @@
-<nav color="accent" class="centered-nav" mat-tab-nav-bar>
-  <a mat-tab-link>
-    <div>
-        Donations
-    </div>
-  </a>
-  <a mat-tab-link>
-    <div>
-        Distribution
-    </div>
-  </a>
-  <a mat-tab-link>
-    <div>
-        Vaccination
-    </div>
-  </a>
-</nav>
+<div class=" pt-2 row ml-4 mr-4">
+  <div class="col-6 pl-10 pr-10 pb-2">
+    <mat-card class="card-container mat-elevation-z2">
+      <mat-card-header>
+        <mat-card-title>Daily Doses Administered Per Hospital</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ngx-charts-line-chart [view]="[750,350]" autoScale="true"
+          showYAxisLabel="true" showXAxisLabel="false" xAxis="true" yAxis="true"
+          yAxisLabel="Number of Administered Doses" [results]="hospitalDailyDoses" showLegend="true">
+        </ngx-charts-line-chart>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-6 pl-10 pr-10 pb-2">
+  <mat-card class="card-container mat-elevation-z2">
+    <mat-card-header>
+      <mat-card-title>Remaining Doses Per Hospital</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ngx-charts-bar-vertical [view]="[750,350]" [results]="hospitalRemainingDoses" showYAxisLabel="true" showXAxisLabel="false"
+        xAxis="false" yAxis="true" yAxisLabel="Number of Remaining Doses">
+      </ngx-charts-bar-vertical>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="col-4 pl-10 pr-10 pb-2">
+  <mat-card class="card-container mat-elevation-z2">
+    <mat-card-header>
+      <mat-card-title>Remaining Vaccines Repartition</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ngx-charts-pie-chart
+  [view]="[600,350]"
+  [results]="distributedDoses"
+  [labels]="true"
+  [doughnut]="false"
+  >
+</ngx-charts-pie-chart>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="col-3 pl-10 pr-10 pb-2">
+  <mat-card class="card-container mat-elevation-z2">
+    <mat-card-header>
+      <mat-card-title>Vaccines Count</mat-card-title>
+    </mat-card-header>
+  <ngx-charts-number-card
+  [view]="[400,350]"
+  [cardColor]="cardColor"
+  [results]="manufacturerData">
+</ngx-charts-number-card>
+</mat-card>
+</div>
+<div class="col-5 pl-10 pr-10 pb-2">
+  <mat-card class="card-container mat-elevation-z2">
+    <mat-card-header>
+      <mat-card-title>Daily Doses Administered</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ngx-charts-line-chart [view]="[0,350]" autoScale="true"
+        showYAxisLabel="true" showXAxisLabel="false" xAxis="true" yAxis="true"
+        yAxisLabel="Number of Administered Doses" [results]="dailyDoses" showLegend="true">
+      </ngx-charts-line-chart>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
