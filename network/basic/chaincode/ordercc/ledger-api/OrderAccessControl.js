@@ -1,15 +1,17 @@
 const ACLSubject = require('./ACLSubject');
 const constants = require('./constants');
 
-class DonationAccessControl {
+class OrderAccessControl {
     constructor() {
-        const donorAcl = new ACLSubject(constants.DonorMSP);
+        const manufacturerAcl = new ACLSubject(constants.ManufacturerMSP);
         const mophAcl = new ACLSubject(constants.MophMSP);
+        const bordercontrolAcl = new ACLSubject(constants.BorderControlMSP);
         const impactAcl = new ACLSubject(constants.ImpactMSP);
 
         this.aclRules = {
-            [donorAcl]: constants.DONOR_FUNCTIONS,
+            [manufacturerAcl]: constants.MANUFACTURER_FUNCTIONS,
             [mophAcl]: constants.MOPH_FUNCTIONS,
+            [bordercontrolAcl] : constants.BORDERCONTROL_FUNCTIONS,
             [impactAcl]: constants.QUERY_FUNCTIONS
         }
     }
@@ -19,19 +21,21 @@ class DonationAccessControl {
     }
 
     checkAccess(ctx, fcn) {
-        const initfcns = ['init', 'Init', 'instanciate', 'ChaincodeFromContract.Init'];
-        if (initfcns.some(x => x == fcn)) return true;
         const mspId = this.getClientMspId(ctx);
         const aclSubject = new ACLSubject(mspId);
         if (!constants.ALL_MSPS.some(x => x == mspId)) {
             throw new Error("User is not recognized");
         }
+
         if (!this.aclRules[aclSubject]) {
             return false;
         }
 
+        if (fcn == constants.INSTANCIATION_FUNCTION) return true;
+        
+        
         return this.aclRules[aclSubject].some(x => x === fcn);
     }
 }
 
-module.exports = DonationAccessControl;
+module.exports = OrderAccessControl;

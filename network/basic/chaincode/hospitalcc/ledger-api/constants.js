@@ -10,20 +10,16 @@ const MophMSP = 'MOPHMSP'
 
 const ALL_MSPS = [DonorMSP, ImpactMSP, HopistalMSP, ManufacturerMSP, BorderControlMSP, StorageFacilityMSP, MophMSP];
 
-const QUERY_FUNCTIONS = ['query', 'indexDonations', 'indexUserDonations', 'getMophBalance'];
-const ALL_FUNCTIONS = [...QUERY_FUNCTIONS, 'triggerMophPayment', 'issue', 'redeem'];
-const DONOR_FUNCTIONS = [...QUERY_FUNCTIONS, 'issue'];
-const MOPH_FUNCTIONS = [...QUERY_FUNCTIONS, 'triggerMophPayment', 'redeem'];
-const MANUFACTURER_FUNCTIONS = ['triggerMophPayment'];
+const QUERY_FUNCTIONS = ['query', 'indexHospitals', 'getHospital'];
+const ALL_FUNCTIONS = [...QUERY_FUNCTIONS, 'deliverVials', 'inoculatePatients'];
+
+
 
 const INSTANCIATION_FUNCTION = 'instantiate';
 
 
 module.exports = {
     ALL_FUNCTIONS,
-    MANUFACTURER_FUNCTIONS,
-    DONOR_FUNCTIONS,
-    MOPH_FUNCTIONS,
     QUERY_FUNCTIONS,
     DonorMSP,
     ImpactMSP,
