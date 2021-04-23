@@ -36,7 +36,9 @@ module.exports = function (app) {
   app.route('/orders/:id/ship')
   .put(orderController.setOrderShipped);
   app.route('/orders/:id/deliver')
-  .put(orderController.setOrderDelivered); 
+  .put(orderController.setOrderDelivered);
+  app.route('/orders/deliveries')
+  .get(deliveriesController.getAllDeliveries);
   app.route('/orders/:id/deliveries')
   .get(deliveriesController.getAllOrderDeliveries);
 

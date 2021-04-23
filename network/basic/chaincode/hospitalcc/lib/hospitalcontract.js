@@ -9,6 +9,8 @@ const { Contract, Context } = require('fabric-contract-api');
 const Hospital = require('./hospital.js');
 const HospitalList = require('./hospitalList.js');
 const { hospitals, dosesPerVial } = require('./constants');
+const deliveries = require('../init-ledger/deliveries.js');
+const inoculations = require('../init-ledger/inoculations.js');
 
 
 /**
@@ -40,13 +42,20 @@ class HospitalContract extends Contract {
      * Instantiate to perform any setup of the ledger that might be required.
      * @param {Context} ctx the transaction context
      */
-    async instantiate(ctx) {    
-        // No implementation required with this example
-        // It could be where data migration is performed, if necessary
-        console.log('Instantiate the contract');
-
+    async instantiate(ctx) {
         for (const h of hospitals) {
             let hospital = Hospital.createInstance(h.hospitalID, h.name, h.address);
+            let hospitalDeliveries = deliveries.filter(x => x.hospitalID == h.hospitalID && x.state == 5);
+            hospitalDeliveries.forEach(x => {
+                let totalDoses = dosesPerVial[x.manufacturer] * parseInt(x.numberOfVials);
+                hospital.addDosesToBatch(x.batchNumber, totalDoses, x.manufacturer);
+            })
+
+            let hospitalInoculations = inoculations.filter(x => x.hospitalID == h.hospitalID);
+            hospitalInoculations.forEach(x => {
+                hospital.removeDosesFromBatch(x.batchID, x.doseCount, x.date);
+            })
+            
             await ctx.hospitalList.addHospital(hospital);
         }
     }

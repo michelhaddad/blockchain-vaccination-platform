@@ -59,7 +59,7 @@ class DonationPaperContract extends Contract {
             await ctx.paperList.addPaper(paper);
         }
         for (const initialOrder of initialOrders) {
-            if (initialOrders.state >= 2) {
+            if (initialOrder.state >= 2) {
                 mophPayedAmount += parseInt(initialOrder.fee);
             }
         }

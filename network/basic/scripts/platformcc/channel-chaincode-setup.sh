@@ -220,9 +220,8 @@ CORE_PEER_TLS_ROOTCERT_FILE=$CACERT_1
 CORE_VM_DOCKER_ATTACHSTDOUT=true
 
 
-peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n supplychaincc -l node -v 5.5 -c '{"Args":[]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','StorageFacilityMSP.member','DonorMSP.member', 'HospitalMSP.member')" --tls --cafile $CACERT_ORDERER
-echo "Instanciated the supplychaincc chaincode"
 peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n hospitalcc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','StorageFacilityMSP.member','DonorMSP.member', 'HospitalMSP.member')" --tls --cafile $CACERT_ORDERER
 echo "Instanciated the hospitalcc chaincode"
-
+peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n supplychaincc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','StorageFacilityMSP.member','DonorMSP.member', 'HospitalMSP.member')" --tls --cafile $CACERT_ORDERER
+echo "Instanciated the supplychaincc chaincode"
 
