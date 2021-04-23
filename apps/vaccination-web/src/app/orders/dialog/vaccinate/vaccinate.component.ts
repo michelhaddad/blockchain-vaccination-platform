@@ -18,7 +18,7 @@ export class VaccinateComponent implements OnInit {
   ) {
     this.formGroup = new FormGroup({
       batchNumber: new FormControl(null, [Validators.required]),
-      date: new FormControl(null, [Validators.required]),
+      // date: new FormControl(null, [Validators.required]),
       count: new FormControl(null, [Validators.required]),
     });
   }
@@ -31,7 +31,7 @@ export class VaccinateComponent implements OnInit {
 
   submitForm() {
     if (this.formGroup.valid) {
-      this.planningService.vaccinate(this.formGroup.getRawValue().batchNumber, this.formGroup.getRawValue().date, this.formGroup.getRawValue().count).subscribe(() => {
+      this.planningService.vaccinate(this.formGroup.getRawValue().batchNumber, this.formGroup.getRawValue().count).subscribe(() => {
         this.dialogRef.close();
       }, () => this.dialogRef.close());
     }

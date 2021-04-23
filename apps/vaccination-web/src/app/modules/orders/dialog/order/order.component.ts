@@ -29,7 +29,8 @@ export class OrderComponent implements OnInit {
   
     submitForm() {
       if(this.formGroup.valid){
-        this.orderState.order(this.formGroup.getRawValue().numberVials, this.formGroup.getRawValue().date).subscribe(()=>{
+        let date= new Date(this.formGroup.getRawValue().date).toISOString().slice(0,10);
+        this.orderState.order(this.formGroup.getRawValue().numberVials, date).subscribe(()=>{
           this.dialogRef.close();
         })
       }

@@ -30,4 +30,9 @@ export class DonationService {
     let url = this.baseUrl + '/donate?amount=' + amount;
     return this.http.post<any>(url,null);
   }
+
+  getFunds(): Observable<any> {
+    let url = environment.host + "MOPH/balance";
+    return this.http.get(url);
+  }
 }

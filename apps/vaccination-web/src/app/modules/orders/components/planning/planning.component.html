@@ -1,6 +1,15 @@
 <div class="top-row p-4">
-  <h1 >Distribution Schedule</h1><button *ngIf="isHospital" class="main-button mr-4" (click)="vaccinate()" mat-flat-button color="accent">VACCINATE</button>
+  <h1 >Schedule</h1><button *ngIf="isHospital" class="main-button mr-4" (click)="vaccinate()" mat-flat-button color="accent">VACCINATE</button>
 </div>
+<mat-radio-group (change)="onFilter($event)" [(ngModel)]="radioValue" class="filters ml-4" >
+  <label id="example-radio-group-label">Filter by Status: </label>
+  <mat-radio-button [value]="1">{{getStatus(1)}}</mat-radio-button>
+  <mat-radio-button [value]="2">{{getStatus(2)}}</mat-radio-button>
+  <mat-radio-button [value]="3">{{getStatus(3)}}</mat-radio-button>
+  <mat-radio-button *ngIf="isBorderControl" [value]="4">{{getStatus(4)}}</mat-radio-button>
+  <mat-radio-button *ngIf="isBorderControl" [value]="5">{{getStatus(5)}}</mat-radio-button>
+  <mat-radio-button [value]="6">All</mat-radio-button>
+</mat-radio-group>
 <div class="h-100 w-100 table-container row">
   <div class="col-1"></div>
   <app-table

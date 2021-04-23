@@ -1,6 +1,9 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="bar" color="primary">
   <button class="hamburger-button" mat-icon-button (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
+  </button>
+  <button class="hamburger-button" mat-icon-button>
+    <mat-icon>person</mat-icon>
   </button>
 </mat-toolbar>
 <mat-sidenav-container class="h-100 overflow-hidden" autosize>
@@ -33,7 +36,10 @@
                 >
                   <mat-panel-title>
 					  <div  class="section-title">
-						<mat-icon class="mr-2">{{ section.icon }}</mat-icon><div>{{ section.mainSection.title | titlecase }}</div>
+              <button   mat-icon-button>
+                <mat-icon class="mr-2">{{ section.icon }}</mat-icon>
+              </button>
+              <div>{{ section.mainSection.title | titlecase }}</div>
 					  </div>	
                   </mat-panel-title>
                 </mat-expansion-panel-header>
