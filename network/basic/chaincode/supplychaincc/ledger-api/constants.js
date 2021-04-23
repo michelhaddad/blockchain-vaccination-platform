@@ -12,9 +12,9 @@ const ALL_MSPS = [DonorMSP, ImpactMSP, HopistalMSP, ManufacturerMSP, BorderContr
 
 const QUERY_FUNCTIONS = ['query', 'indexOrderDelivery', 'getAllOrderDeliveries'];
 const ALL_FUNCTIONS = [...QUERY_FUNCTIONS, 'issue', 'storageDelivery', 'storageArrival', 'hospitalDelivery', 'hospitalArrival'];
-const BORDERCONTROL_FUNCTIONS = ['storageDelivery'];
-const STORAGEFACILITY_FUNCTIONS = ['storageArrival','hospitalDelivery'];
-const HOSPITAL_FUNCTIONS = [...QUERY_FUNCTIONS, 'hospitalArrrival'];
+const BORDERCONTROL_FUNCTIONS = ['indexOrderDelivery','issue','storageDelivery'];
+const STORAGEFACILITY_FUNCTIONS = ['indexOrderDelivery','storageDelivery','storageArrival','hospitalDelivery'];
+const HOSPITAL_FUNCTIONS = [...QUERY_FUNCTIONS,'indexOrderDelivery','hospitalDelivery', 'hospitalArrrival'];
 
 
 const INSTANCIATION_FUNCTION = 'instantiate';
