@@ -11,7 +11,7 @@ import { userAuthModules } from './app-modules-sections';
 export class AuthService {
   allowedSections: SidenavSection[] = [];
   constructor() {
-      this.setUpOrganization(6);
+      this.setUpOrganization(3);
   }
 
 //   export enum OrganizationEnum {

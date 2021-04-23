@@ -6,6 +6,9 @@ export class TableColumnModel {
         public title: string,
         public clickable: boolean = false,
         public isButton: boolean = false,
-        public isMenuButton: boolean = false
+        public isMenuButton: boolean = false,
+        public isNumber: boolean = false,
+        public isAmount: boolean = false,
+        public isStatus: boolean = false
     ) { }
 }

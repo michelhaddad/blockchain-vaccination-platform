@@ -55,7 +55,6 @@ export class DashboardComponent implements OnInit{
       new PointModel("Total Administered",res.Manufacturer.administered),
       new PointModel("Doses Left",res.Manufacturer.remainingInCountry)
     ];
-      console.log(this.manufacturerData,res)
     });
   }
 

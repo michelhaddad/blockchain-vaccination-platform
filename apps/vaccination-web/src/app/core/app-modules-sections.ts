@@ -6,7 +6,7 @@ export const userAuthModules = {
         "link": "/dashboard"
       },
       "hasSubSections": false,
-      "icon": "dashboard",
+      "icon": "home",
       "organizations": [4,3,6]
     },
     {

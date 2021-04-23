@@ -73,7 +73,7 @@ export class OrdersComponent implements OnInit {
       new TableColumnModel('price', 'Price'),
       new TableColumnModel('requestedArrivalDate', 'Requested Arrival Date'),
       new TableColumnModel('expectedArrivalDate', 'Arrival Date'),
-      new TableColumnModel('status', 'Status'),
+      new TableColumnModel('status', 'Status',false,false,false,false,false,true),
     ]
     if (this.isMOPH) {
       // this.displayedColumns.push(new TableColumnModel('manufacturer', 'Manufacturer'));
@@ -183,10 +183,10 @@ export class OrdersComponent implements OnInit {
         e.Record.issueDateTime,
         e.Record.issuer,
         e.Record.requestedArrivalDate,
-        e.Record.expectedDeliveryDate ? e.Record.expectedDeliveryDate : "No Delivery Date",
-        e.Record.batchNumber ? e.Record.batchNumber : "No Batch Number",
+        e.Record.expectedDeliveryDate ? e.Record.expectedDeliveryDate : " Not Available",
+        e.Record.batchNumber ? e.Record.batchNumber : "Not Available",
         e.Record.vialsAmount,
-        e.Record.fee ? e.Record.fee.toString() : "No Price Yet",
+        e.Record.fee ? e.Record.fee.toString() : "Not Available",
         this.getStatus(e.Record.currentState),
         e.Record.manufacturer,
         !this.isMOPH && !this.isBorderControl ? (e.Record.currentState == OrderStateEnum.REQUESTED ? menuItems : (e.Record.currentState == OrderStateEnum.APPROVED ? menuItemsShip : [])) : (this.isMOPH && e.Record.currentState == OrderStateEnum.DELIVERED ? menuItemsPlan : []),

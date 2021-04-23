@@ -12,9 +12,15 @@
           </button>
         </ng-container>
         <ng-template #regularText>
-          <ng-container>
+          <ng-container *ngIf="item.isStatus">
+            <div [style.color]="getStatusColor(element[item.id])">{{ element[item.id] }}</div>
+          </ng-container>
+          <ng-container *ngIf="!item.isNumber && !item.isStatus; else number">
             {{ element[item.id] }}
           </ng-container>
+          <ng-template #number>
+            {{ element[item.id] | number}}{{item.isAmount ? "$" : ""}}
+          </ng-template>
         </ng-template>
       </ng-container>
       <ng-template #button>
