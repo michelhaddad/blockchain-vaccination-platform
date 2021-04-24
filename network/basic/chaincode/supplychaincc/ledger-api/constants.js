@@ -14,7 +14,7 @@ const QUERY_FUNCTIONS = ['query', 'indexOrderDelivery', 'getAllOrderDeliveries']
 const ALL_FUNCTIONS = [...QUERY_FUNCTIONS, 'issue', 'storageDelivery', 'storageArrival', 'hospitalDelivery', 'hospitalArrival'];
 const BORDERCONTROL_FUNCTIONS = ['indexOrderDelivery','issue','storageDelivery'];
 const STORAGEFACILITY_FUNCTIONS = ['indexOrderDelivery','storageDelivery','storageArrival','hospitalDelivery'];
-const HOSPITAL_FUNCTIONS = [...QUERY_FUNCTIONS,'indexOrderDelivery','hospitalDelivery', 'hospitalArrrival'];
+const HOSPITAL_FUNCTIONS = [...QUERY_FUNCTIONS,'indexOrderDelivery','hospitalDelivery', 'hospitalArrival'];
 
 
 const INSTANCIATION_FUNCTION = 'instantiate';
