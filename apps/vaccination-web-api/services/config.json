@@ -7,61 +7,31 @@
     "connection_profile": "../../network/basic/connectionProfile.json",
     "organizations": {
         "Impact": {
-            "MSP": "ImpactMSP"
-        },
-        "MOPH": {
-            "MSP": "MOPHMSP"
-        },
-        "BorderControl": {
-            "MSP": "BorderControlMSP"
-        },
-        "Manufacturer": {
-            "MSP": "ManufacturerMSP"
-        },
-        "Hospital": {
-            "MSP": "HospitalMSP"
-        },
-        "StorageFacility": {
-            "MSP": "StorageFacilityMSP"
-        },
-        "Donor": {
-            "MSP": "DonorMSP"
-        }
-    },
-    "users": {
-        "user1": {
-            "name": "user1",
-            "organization": "Impact",
+            "MSP": "ImpactMSP",
             "connection_profile": "../../../network/basic/connectionProfile-Impact.json"
         },
-        "user2": {
-            "name": "user2",
-            "organization": "MOPH",
+        "MOPH": {
+            "MSP": "MOPHMSP",
             "connection_profile": "../../../network/basic/connectionProfile-MOPH.json"
         },
-        "user3": {
-            "name": "user3",
-            "organization": "BorderControl",
+        "BorderControl": {
+            "MSP": "BorderControlMSP",
             "connection_profile": "../../../network/basic/connectionProfile-BorderControl.json"
         },
-        "user4": {
-            "name": "user4",
-            "organization": "Manufacturer",
+        "Manufacturer": {
+            "MSP": "ManufacturerMSP",
             "connection_profile": "../../../network/basic/connectionProfile-Manufacturer.json"
         },
-        "user5": {
-            "name": "user5",
-            "organization": "Hospital",
+        "Hospital": {
+            "MSP": "HospitalMSP",
             "connection_profile": "../../../network/basic/connectionProfile-Hospital.json"
         },
-        "user6": {
-            "name": "user6",
-            "organization": "StorageFacility",
+        "StorageFacility": {
+            "MSP": "StorageFacilityMSP",
             "connection_profile": "../../../network/basic/connectionProfile-StorageFacility.json"
-        },        
-        "user7": {
-            "name": "user7",
-            "organization": "Donor",
+        },
+        "Donor": {
+            "MSP": "DonorMSP",
             "connection_profile": "../../../network/basic/connectionProfile-Donor.json"
         }
     }
