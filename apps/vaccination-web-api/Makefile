@@ -13,10 +13,6 @@ network:
 
 start:
 	npm start
-
-users:
-	NETWORK=${NETWORK} node enrollAdmins.js
-	NETWORK=${NETWORK} node registerUsers.js
 	
 clean:
 	rm -rf ./wallet
