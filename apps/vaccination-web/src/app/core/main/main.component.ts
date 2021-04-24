@@ -21,6 +21,7 @@ export class MainComponent {
     this.sections=this.authService.getAllowedSections();
     this.userName=this.authService.getUserName();
   }
+
   logout(): void{
     this.authService.logout();
   }

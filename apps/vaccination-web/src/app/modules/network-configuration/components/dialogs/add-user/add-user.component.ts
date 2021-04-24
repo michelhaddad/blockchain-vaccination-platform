@@ -30,7 +30,7 @@ export class AddUserComponent implements OnInit {
 
   submitForm() {
     if (this.formGroup.valid) {
-      this.authService.login(this.formGroup.get('userName')?.value,
+      this.authService.signup(this.formGroup.get('userName')?.value,
       this.formGroup.get('password')?.value).subscribe(() => {
         this.dialogRef.close();
       });

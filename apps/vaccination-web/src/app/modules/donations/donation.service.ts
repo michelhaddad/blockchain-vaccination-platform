@@ -22,7 +22,7 @@ export class DonationService {
   }
 
   getDonationByUser(): Observable<any> {
-    let url = this.baseUrl + '/user';
+    let url = environment.host + 'user/donations';
     return this.http.get<any>(url);
   }
 

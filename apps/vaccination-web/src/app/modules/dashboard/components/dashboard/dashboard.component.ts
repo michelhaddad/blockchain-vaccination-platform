@@ -50,11 +50,13 @@ export class DashboardComponent implements OnInit{
 
   getManufacturerDosesData(){
     this.dashboardService.getManufacturerDosesData().subscribe(res=>{
-      this.manufacturerData=[ 
+      if(res.Manufacturer){
+        this.manufacturerData=[ 
         new PointModel("Total Ordered",res.Manufacturer.ordered),
-      new PointModel("Total Administered",res.Manufacturer.administered),
-      new PointModel("Doses Left",res.Manufacturer.remainingInCountry)
-    ];
+        new PointModel("Total Administered",res.Manufacturer.administered),
+        new PointModel("Doses Left",res.Manufacturer.remainingInCountry)
+      ];
+      }
     });
   }
 

@@ -24,7 +24,7 @@ export class DonationsComponent implements OnInit {
   isDonor: boolean = false;
   displayedColumns: TableColumnModel[] = [
     new TableColumnModel('donationId', 'Donation ID'),
-    new TableColumnModel('donor', 'Donor'),
+    new TableColumnModel('donor', 'Donor ID'),
     new TableColumnModel('amount', 'Amount',false,false,false,true,true),
     new TableColumnModel('date', 'Donation Date'),
     new TableColumnModel('button', '', false, true)

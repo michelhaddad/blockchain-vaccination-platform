@@ -7,7 +7,7 @@ export const userAuthModules = {
       },
       "hasSubSections": false,
       "icon": "home",
-      "organizations": [4,3,6]
+      "organizations": [4,3,6,9]
     },
     {
       "mainSection": {
@@ -17,15 +17,10 @@ export const userAuthModules = {
       "icon": "settings",
       "subSections": [
         {
-          "title": "Accounts",
-          "link": "/adminsettings/user",
+          "title": "User",
+          "link": "/adminsettings/users",
           "organizations": [9]
-        },
-        // {
-        //   "title": "Organizations",
-        //   "link": "/adminsettings/organizations",
-        //   "organizations": [4]
-        // }
+        }
       ],
     },
     {

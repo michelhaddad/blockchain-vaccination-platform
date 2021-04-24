@@ -18,7 +18,7 @@ export class APIInterceptor implements HttpInterceptor {
 
       if(authToken){
         request = request.clone({
-          headers: request.headers.set("Authorization","Bearer" + authToken)
+          headers: request.headers.set("Authorization","Bearer " + authToken)
         });
       }
 

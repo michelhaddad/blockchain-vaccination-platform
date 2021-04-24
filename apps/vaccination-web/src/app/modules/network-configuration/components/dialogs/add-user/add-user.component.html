@@ -18,7 +18,7 @@
   <button class="main-button" mat-stroked-button (click)="cancelClick()">
     {{ "Cancel" | uppercase }}
   </button>
-  <button class="main-button" type="submit" color="accent" mat-flat-button>
-    {{ "Add" | uppercase }} (click)="submitForm()"
+  <button class="main-button" type="submit" color="accent" (click)="submitForm()" mat-flat-button>
+    {{ "Add" | uppercase }}
   </button>
 </div>

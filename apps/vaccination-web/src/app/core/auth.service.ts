@@ -16,34 +16,33 @@ export class AuthService {
   isAdmin: boolean = false;
   constructor(private http: HttpClient, private router: Router) {}
 
-//   export enum OrganizationEnum {
-//     Hospital = 1,
-//     BorderControl = 2,
-//     MOPH = 3,
-//     Impact = 4,
-//     StorageFacility = 5,
-//     Donor = 6,
-//     Manufacturer = 7,
-//     Default = 8
-// }
-  setAllowedSections(org: OrganizationEnum) {
+  getAllowedSections() {
+    this.allowedSections = [];
     const sections = userAuthModules.allSidenavSection as SidenavSection[];
+    const isAdmin = this.getAdminRight();
+    const org = isAdmin ? OrganizationEnum.Admin : this.getOrganizationType();
     sections.forEach((e) => {
       if(!e.hasSubSections){
-        if(e.organizations.includes(org) || (e.organizations.includes(OrganizationEnum.Admin) && this.isAdmin)){
+        if(e.organizations.includes(org)){
          this.allowedSections.push(e);
         }
       }else {
-        e.subSections=e.subSections?.filter(a=>a.organizations.includes(org) || (a.organizations.includes(OrganizationEnum.Admin) && this.isAdmin));
+        e.subSections=e.subSections?.filter(a=>a.organizations.includes(org));
         if(e.subSections && e.subSections.length>0){
           this.allowedSections.push(e);
         }
       }
     });
+    return this.allowedSections
   }
 
   saveAdminRight(isAdmin: boolean): void {
-    this.isAdmin = isAdmin;
+    localStorage.setItem("admin", isAdmin.toString());
+  }
+
+  getAdminRight(): boolean {
+    const isAdmin = localStorage.getItem("admin") == "true" ? true : false;
+    return isAdmin;
   }
 
   saveLoginResponse(token: string): void {
@@ -66,18 +65,12 @@ export class AuthService {
       return localStorage.getItem("userName");
   }
 
-  clearToken(): void {
+  clearStorage(): void {
      localStorage.removeItem("token");
+     localStorage.removeItem("orgType");
+     localStorage.removeItem("userName");
+     localStorage.removeItem("admin");
 }
-
-  setUpOrganization(org: number) :void {
-    this.setAllowedSections(org);
-    this.storeOrganizationType(org);
-  }
-
-  getAllowedSections(): SidenavSection[]{
-      return this.allowedSections;
-  }
 
   storeOrganizationType(org: OrganizationEnum) {
     localStorage.setItem('orgType', org.toString());
@@ -94,23 +87,28 @@ export class AuthService {
   login(userName: string, pass: string):  Observable<any> {
     const url = environment.host + "user/login";
     const body = {
-      userName: userName,
+      username: userName,
       password: pass
     }
     return this.http.post<any>(url,body)
   }
 
   logout(){
-    this.clearToken();
+    this.clearStorage();
     this.router.navigate(['login']);
   }
 
   signup(userName: string, pass: string):  Observable<LoginComponent> {
     const url = environment.host + "user/signup";
     const body = {
-      userName: userName,
+      username: userName,
       password: pass
     }
     return this.http.post<any>(url,body)
+  }
+
+  getUsers(){
+    const url = environment.host + "users";
+    return this.http.get<any>(url)
   }
 }
