@@ -88,10 +88,10 @@
                 "ca.Impact.el-network.com"
             ],
 			"adminPrivateKey": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/keystore/adminKeyImpact"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/keystore/adminKeyImpact"
 			},
 			"signedCert": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/signcerts/Admin@Impact.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/signcerts/Admin@Impact.el-network.com-cert.pem"
 			}
 		},
 		"BorderControl": {
@@ -104,27 +104,27 @@
                 "ca.BorderControl.el-network.com"
             ],
 			"adminPrivateKey": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.el-network.com/users/Admin@BorderControl.el-network.com/msp/keystore/adminKeyBorderControl"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.el-network.com/users/Admin@BorderControl.el-network.com/msp/keystore/adminKeyBorderControl"
 			},
 			"signedCert": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.el-network.com/users/Admin@BorderControl.el-network.com/msp/signcerts/Admin@BorderControl.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.el-network.com/users/Admin@BorderControl.el-network.com/msp/signcerts/Admin@BorderControl.el-network.com-cert.pem"
 			}
 		},
 		"OrdererOrg": {
 			"mspid": "OrdererMSP",
 			"fullpath": true,
 			"adminPrivateKey": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.com/msp/keystore/ordererAdminKey"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.com/msp/keystore/ordererAdminKey"
 			},
 			"signedCert": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.com/msp/signcerts/Admin@el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/users/Admin@el-network.com/msp/signcerts/Admin@el-network.com-cert.pem"
 			}
 		}
 	},
 	"peers": {
 		"peer0.Impact.el-network.com": {
 			"tlsCACerts": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/peers/peer0.Impact.el-network.com/msp/tlscacerts/tlsca.Impact.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/peers/peer0.Impact.el-network.com/msp/tlscacerts/tlsca.Impact.el-network.com-cert.pem"
 			},
 			"url": "grpcs://localhost:7051",
 			"grpcOptions": {
@@ -133,7 +133,7 @@
 		},
 		"peer0.BorderControl.el-network.com": {
 			"tlsCACerts": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.el-network.com/peers/peer0.BorderControl.el-network.com/msp/tlscacerts/tlsca.BorderControl.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.el-network.com/peers/peer0.BorderControl.el-network.com/msp/tlscacerts/tlsca.BorderControl.el-network.com-cert.pem"
 			},
 			"url": "grpcs://localhost:9051",
 			"grpcOptions": {
@@ -144,7 +144,7 @@
 	"orderers": {
 		"orderer.el-network.com": {
 			"tlsCACerts": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/msp/tlscacerts/tlsca.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/msp/tlscacerts/tlsca.el-network.com-cert.pem"
 			},
 			"url": "grpcs://localhost:7050",
 			"grpcOptions": {

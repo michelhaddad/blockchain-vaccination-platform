@@ -88,10 +88,10 @@
                 "ca.Impact.el-network.com"
             ],
 			"adminPrivateKey": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/keystore/adminKeyImpact"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/keystore/adminKeyImpact"
 			},
 			"signedCert": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/signcerts/Admin@Impact.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/signcerts/Admin@Impact.el-network.com-cert.pem"
 			}
 		},
 		"MOPH": {
@@ -104,17 +104,17 @@
                 "ca.MOPH.el-network.com"
             ],
 			"adminPrivateKey": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.el-network.com/users/Admin@MOPH.el-network.com/msp/keystore/adminKeyMOPH"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.el-network.com/users/Admin@MOPH.el-network.com/msp/keystore/adminKeyMOPH"
 			},
 			"signedCert": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.el-network.com/users/Admin@MOPH.el-network.com/msp/signcerts/Admin@MOPH.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.el-network.com/users/Admin@MOPH.el-network.com/msp/signcerts/Admin@MOPH.el-network.com-cert.pem"
 			}
 		}
 	},
 	"peers": {
 		"peer0.Impact.el-network.com": {
 			"tlsCACerts": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/peers/peer0.Impact.el-network.com/msp/tlscacerts/tlsca.Impact.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/peers/peer0.Impact.el-network.com/msp/tlscacerts/tlsca.Impact.el-network.com-cert.pem"
 			},
 			"url": "grpcs://localhost:7051",
 			"grpcOptions": {
@@ -123,7 +123,7 @@
 		},
 		"peer0.MOPH.el-network.com": {
 			"tlsCACerts": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.el-network.com/peers/peer0.MOPH.el-network.com/msp/tlscacerts/tlsca.MOPH.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.el-network.com/peers/peer0.MOPH.el-network.com/msp/tlscacerts/tlsca.MOPH.el-network.com-cert.pem"
 			},
 			"url": "grpcs://localhost:8051",
 			"grpcOptions": {
@@ -134,7 +134,7 @@
 	"orderers": {
 		"orderer.el-network.com": {
 			"tlsCACerts": {
-				"path": "/home/michel/go/1.12.7/src/github.com/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/msp/tlscacerts/tlsca.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/el-network.com/msp/tlscacerts/tlsca.el-network.com-cert.pem"
 			},
 			"url": "grpcs://localhost:7050",
 			"grpcOptions": {
