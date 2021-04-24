@@ -16,16 +16,6 @@ export class AuthService {
   isAdmin: boolean = false;
   constructor(private http: HttpClient, private router: Router) {}
 
-//   export enum OrganizationEnum {
-//     Hospital = 1,
-//     BorderControl = 2,
-//     MOPH = 3,
-//     Impact = 4,
-//     StorageFacility = 5,
-//     Donor = 6,
-//     Manufacturer = 7,
-//     Default = 8
-// }
   setAllowedSections(org: OrganizationEnum) {
     const sections = userAuthModules.allSidenavSection as SidenavSection[];
     sections.forEach((e) => {
@@ -94,7 +84,7 @@ export class AuthService {
   login(userName: string, pass: string):  Observable<any> {
     const url = environment.host + "user/login";
     const body = {
-      userName: userName,
+      username: userName,
       password: pass
     }
     return this.http.post<any>(url,body)
@@ -108,7 +98,7 @@ export class AuthService {
   signup(userName: string, pass: string):  Observable<LoginComponent> {
     const url = environment.host + "user/signup";
     const body = {
-      userName: userName,
+      username: userName,
       password: pass
     }
     return this.http.post<any>(url,body)

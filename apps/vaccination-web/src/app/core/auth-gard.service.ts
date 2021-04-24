@@ -18,6 +18,7 @@ import { AuthService } from "./auth.service";
         return true;
       } else {
         this.router.navigate(['login']);
+        return false;
       }
     }
   }
