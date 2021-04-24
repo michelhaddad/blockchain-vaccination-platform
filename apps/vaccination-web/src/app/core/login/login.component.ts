@@ -43,13 +43,12 @@ export class LoginComponent {
       default:
         return OrganizationEnum.Default;
     }
-
   }
 
   submitForm() {
     if(this.formGroup.valid){
       this.authService.login(this.formGroup.get('userName')?.value, this.formGroup.get('password')?.value).subscribe((res)=>{
-        this.authService.setUpOrganization(res.user.organization);
+        this.authService.storeOrganizationType(this.mapOrganizationToEnum(res.user.organization));
         this.authService.saveLoginResponse(res.token);
         this.authService.saveUsername(this.formGroup.get('userName')?.value);
         this.authService.saveAdminRight(res.user.admin);
