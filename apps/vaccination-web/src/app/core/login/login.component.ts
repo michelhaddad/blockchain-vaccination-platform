@@ -29,6 +29,7 @@ export class LoginComponent {
       this.authService.login(this.formGroup.get('userName')?.value, this.formGroup.get('password')?.value).subscribe((res: LoginResponseModel)=>{
         this.authService.setUpOrganization(res.organizationId);
         this.authService.saveLoginResponse(res.token);
+        this.authService.saveUsername(this.formGroup.get('userName')?.value);
         this.authService.saveAdminRight(res.isAdmin);
         this.router.navigate(['dashboard']);   
       });

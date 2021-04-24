@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChannelsComponent } from './components/channels/channels.component';
+import { AccountsComponent } from './components/accounts/accounts.component';
 import { OrganizationsComponent } from './components/organizations/organizations.component';
 const routes: Routes = [
   {
@@ -8,8 +8,8 @@ const routes: Routes = [
     component: OrganizationsComponent
   },
   {
-    path: 'channels',
-    component: ChannelsComponent
+    path: 'accounts',
+    component: AccountsComponent
   }
 ];
 

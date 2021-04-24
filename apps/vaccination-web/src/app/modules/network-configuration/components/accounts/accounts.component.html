@@ -1,0 +1,18 @@
+<h1 class="p-4">Accounts</h1>
+<div class="h-100 w-100 table-container row">
+  <div class="col-1"></div>
+  <app-table
+    class="col-10"
+    [displayedColumns]="displayedColumns"
+    [dataSource]="tableDataSource"
+  ></app-table>
+</div>
+<button
+  mat-fab
+  color="accent"
+  (click)="addUser()"
+  class="floating-button"
+>
+  <mat-icon>add</mat-icon>
+</button>
+

@@ -22,7 +22,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'networkconfiguration',
+        path: 'adminsettings',
         loadChildren: () =>
           import(
             './modules/network-configuration/network-configuration.module'

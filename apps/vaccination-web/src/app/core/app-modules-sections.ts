@@ -11,21 +11,21 @@ export const userAuthModules = {
     },
     {
       "mainSection": {
-        "title": "Network Configuration"
+        "title": "Admin Settings"
       },
       "hasSubSections": true,
       "icon": "settings",
       "subSections": [
         {
-          "title": "Channels",
-          "link": "/networkconfiguration/channels",
-          "organizations": [4]
+          "title": "Accounts",
+          "link": "/adminsettings/user",
+          "organizations": [9]
         },
-        {
-          "title": "Organizations",
-          "link": "/networkconfiguration/organizations",
-          "organizations": [4]
-        }
+        // {
+        //   "title": "Organizations",
+        //   "link": "/adminsettings/organizations",
+        //   "organizations": [4]
+        // }
       ],
     },
     {
@@ -55,7 +55,6 @@ export const userAuthModules = {
           "organizations": [1,2,3,5],
         }
       ],
-
     },
   ]
 };
