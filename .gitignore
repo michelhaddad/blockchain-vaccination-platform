@@ -33,8 +33,7 @@ dashboards/
 node_modules
 
 # Wallet
-apps/dummyapp/wallet/*
-apps/vaccination-web-api/wallet/*
+apps/vaccination-web-api/wallet/
 
 # Fabricbeat
 .idea

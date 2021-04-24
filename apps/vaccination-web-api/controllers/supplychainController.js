@@ -47,6 +47,9 @@ exports.VaccinesOrgDistribution = async function (req, res) {
         
         for (const order of response){
             totalOrderedVials += parseInt(order['Record']['vialsAmount']);
+            if (order['Record']['currentState'] == 4) {
+                vialsInBorderControl += parseInt(order['Record']['vialsAmount']);
+            }
         }
 
         const txManager2 = new TransactionManager(req.user.enrollmentID, 'distributionchannel');
@@ -57,13 +60,12 @@ exports.VaccinesOrgDistribution = async function (req, res) {
         for (const delivery of response){
             const currentState = delivery['Record']['currentState'];
             const numberOfVials = parseInt(delivery['Record']['numberOfVials']);
-            console.log(numberOfVials)
-            if (currentState < 3) {
-                vialsInBorderControl += numberOfVials;
-            } else if (currentState < 5) {
+            if (currentState >= 3 && currentState < 5) {
                 vialsInStorage += numberOfVials;
-            } else {
+                vialsInBorderControl -= numberOfVials;
+            } else if (currentState == 5) {
                 vialsInHospital += numberOfVials;
+                vialsInBorderControl -= numberOfVials;
             }
         }
 

@@ -25,17 +25,20 @@ exports.getManufacturerDosesData = async function (req, res) {
         const evalTx = txManager.getEvaluateTransactionInstance('ordercc', 'getAllApprovedOrders');
         let response = await evalTx.send();
         response = JSON.parse(JSON.parse(response));
-        
-        
         for (const order of response){
             const manufacturer = order['Record']['manufacturer'];
             if (!result[manufacturer]) {
                 result[manufacturer] = {
                     ordered: 0,
-                    administered: 0
+                    administered: 0,
+                    remainingInCountry: 0
                 }
             }
-            const vialsAmount = order['Record']['vialsAmount'];
+            
+            const vialsAmount = parseInt(order['Record']['vialsAmount']);
+            if(order['Record']['currentState']==4){
+                result[manufacturer].remainingInCountry += vialsAmount*4;
+            }
             result[manufacturer].ordered += vialsAmount * 4;
         }
 
@@ -49,6 +52,7 @@ exports.getManufacturerDosesData = async function (req, res) {
             for (const [batch, value] of Object.entries(vaccineDataPerBatch)) {
                 const administeredDoses = value['dosesDelivered'] - value['remainingDoses'];
                 result[value['manufacturer']].administered += administeredDoses;
+                result[value['manufacturer']].remainingInCountry -=administeredDoses;
             }
         }
 
