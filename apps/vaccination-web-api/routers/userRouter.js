@@ -5,13 +5,13 @@ const userController = require('../controllers/userController');
 const donationController = require('../controllers/donationController')
 
 const bodyParser = require('body-parser');
-const { verifyUser } = require('../database/authenticate');
+const { verifyUser, verifyAdmin } = require('../database/authenticate');
 
 router.use(bodyParser.json());
 
-router.get('/donations', verifyUser, donationController.getUserDonations)
+router.get('/donations', verifyUser, donationController.getUserDonations);
 
-router.post('/signup', userController.signup);
+router.post('/signup', verifyUser, verifyAdmin, userController.signupUser);
 
 router.post('/login', passport.authenticate('local'), userController.login);
 

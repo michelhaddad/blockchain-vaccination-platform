@@ -11,6 +11,10 @@ const User = new Schema({
         type: Boolean,
         default: false
     },
+    organization: {
+        type: String,
+        required: true
+    },
     enrollmentID: {
         type: String,
         required: true,

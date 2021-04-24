@@ -1,23 +1,29 @@
 const passport = require('passport');
 const authenticate = require('../database/authenticate');
 const User = require('../database/models/user');
+const { addUserToWallet } = require('../utils/walletHelper');
 
-const getUserById = (req, res, next) => {
-  User.findById(req.params.id)
+const getUsers = (req, res, next) => {
+  User.find({organization: req.user.organization})
     .then(
-      (user) => {
+      (users) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(user);
+        res.json(users);
       },
       (err) => next(err),
     )
     .catch((err) => next(err));
 };
 
-const signup = (req, res) => {
+const signupUser = async (req, res) => {
+  const userInfo = {
+    username: req.body.username
+  }
+  const enrollmentInfo = await addUserToWallet(userInfo, req.user);
+
   User.register(
-    new User({ username: req.body.username, enrollmentID: req.body.enrollmentID }),
+    new User({ username: userInfo.username, organization: enrollmentInfo.organization, enrollmentID: enrollmentInfo.enrollmentID }),
     req.body.password,
     (err, user) => {
       if (err) {
@@ -47,15 +53,21 @@ const login = (req, res) => {
   const token = authenticate.getToken({ _id: req.user._id });
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
+  const { username, enrollmentID, organization, admin, _id } = req.user;
   res.json({
-    success: true,
     token: token,
-    status: 'You are successfully logged in!'
+    user: {
+      username,
+      enrollmentID,
+      organization,
+      admin,
+      _id
+    }
   });
 };
 
 module.exports = {
-  getUserById,
-  signup,
+  getUsers,
+  signupUser,
   login,
 };
