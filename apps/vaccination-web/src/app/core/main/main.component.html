@@ -37,7 +37,10 @@
                 >
                   <mat-panel-title>
 					  <div  class="section-title">
-						<mat-icon class="mr-2">{{ section.icon }}</mat-icon><div>{{ section.mainSection.title | titlecase }}</div>
+              <button   mat-icon-button>
+                <mat-icon class="mr-2">{{ section.icon }}</mat-icon>
+              </button>
+              <div>{{ section.mainSection.title | titlecase }}</div>
 					  </div>	
                   </mat-panel-title>
                 </mat-expansion-panel-header>

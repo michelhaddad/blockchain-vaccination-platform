@@ -6,7 +6,7 @@ const { generateUID } = require('./../utils/idHelper')
 
 exports.getAllDonations = async function (req, res) {
     try {
-        const txManager = new TransactionManager('user1', 'orderchannel');
+        const txManager = new TransactionManager(req.user.enrollmentID, 'orderchannel');
         const submitTx = txManager.getEvaluateTransactionInstance('donationcc', 'indexDonations');
         let response = await submitTx.send();
         response = JSON.parse(JSON.parse(response));
@@ -21,7 +21,7 @@ exports.getUserDonations = async function (req, res) {
     try {
         let { user } = req.query;
         user = user ? user : '';
-        const txManager = new TransactionManager('user1', 'orderchannel');
+        const txManager = new TransactionManager(req.user.enrollmentID, 'orderchannel');
         const submitTx = txManager.getEvaluateTransactionInstance('donationcc', 'indexUserDonations', user);
         let response = await submitTx.send();
         response = JSON.parse(JSON.parse(response));
@@ -34,7 +34,7 @@ exports.getUserDonations = async function (req, res) {
 
 exports.getMophBalance = async function (req, res) {
     try {
-        const txManager = new TransactionManager('user1', 'orderchannel');
+        const txManager = new TransactionManager(req.user.enrollmentID, 'orderchannel');
         const submitTx = txManager.getEvaluateTransactionInstance('donationcc', 'getMophBalance');
         let response = await submitTx.send();
         response = MophBalance.fromBuffer(response);
@@ -52,7 +52,7 @@ exports.donate = async function (req, res) {
             return res.status(400).json({ message: 'amount not specified' });
         }
 
-        const txManager = new TransactionManager('user1', 'orderchannel');
+        const txManager = new TransactionManager(req.user.enrollmentID, 'orderchannel');
         const submitTx = txManager.getSubmitTransactionInstance('donationcc', 'issue', generateUID(), amount);
         const response = await submitTx.send();
         console.log(DonationPaper.fromBuffer(response));
@@ -71,7 +71,7 @@ exports.redeem = async function (req, res) {
             return res.status(400).json({ message: 'id not specified' });
         }
 
-        const txManager = new TransactionManager('user1', 'orderchannel');
+        const txManager = new TransactionManager(req.user.enrollmentID, 'orderchannel');
         const submitTx = txManager.getSubmitTransactionInstance('donationcc', 'redeem', id);
         const response = await submitTx.send();
         console.log(DonationPaper.fromBuffer(response));

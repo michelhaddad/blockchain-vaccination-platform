@@ -19,8 +19,8 @@ export class PlanningService {
   addDeliveryPlans(orderId: string, storage: string, hospitalID: number, batchNumber: string, numberVials: number, arrivalDateTime: string): Observable<any> {
     const body = {
       orderID: orderId,
-      storageID: storage,
-      hospitalID: hospitalID,
+      storageID: "storage",
+      hospitalID: "1",
       batchNumber: batchNumber,
       numberOfVials: numberVials.toString(),
       arrivalDateTime: arrivalDateTime
@@ -49,10 +49,9 @@ export class PlanningService {
     return this.http.put<any>(url,null);
   }
 
-  vaccinate(batchId: string, date:string, patientCount: number): Observable<any> {
+  vaccinate(batchId: string, patientCount: number): Observable<any> {
     const body = {
       patientCount: patientCount,
-      date: date,
       batchID: batchId
   }
     let url = environment.host + 'hospitals/1/inoculate';

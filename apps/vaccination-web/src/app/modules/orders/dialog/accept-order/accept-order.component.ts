@@ -30,7 +30,8 @@ export class AcceptOrderComponent implements OnInit {
 
   submitForm() {
     if (this.formGroup.valid) {
-      this.orderService.acceptOrder(this.data.orderId, this.formGroup.getRawValue().batchNumber, this.formGroup.getRawValue().date, this.formGroup.getRawValue().fee).subscribe(() => {
+      let date= new Date(this.formGroup.getRawValue().date).toISOString().slice(0,10);
+      this.orderService.acceptOrder(this.data.orderId, this.formGroup.getRawValue().batchNumber, date, this.formGroup.getRawValue().fee).subscribe(() => {
         this.dialogRef.close();
       }, () => this.dialogRef.close());
     }

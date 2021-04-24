@@ -6,7 +6,7 @@ const { generateUID } = require('./../utils/idHelper');
 
 exports.getAllHospitals = async function (req, res) {
     try {
-        const txManager = new TransactionManager('user1', 'distributionchannel');
+        const txManager = new TransactionManager(req.user.enrollmentID, 'distributionchannel');
         const submitTx = txManager.getEvaluateTransactionInstance('hospitalcc', 'indexHospitals');
         let response = await submitTx.send();
         response = JSON.parse(JSON.parse(response));
@@ -19,7 +19,7 @@ exports.getAllHospitals = async function (req, res) {
 
 exports.getDosesData = async function (req, res) {
     try {
-        const txManager = new TransactionManager('user1', 'distributionchannel');
+        const txManager = new TransactionManager(req.user.enrollmentID, 'distributionchannel');
         const submitTx = txManager.getEvaluateTransactionInstance('hospitalcc', 'indexHospitals');
         let response = await submitTx.send();
         response = JSON.parse(JSON.parse(response));
@@ -42,6 +42,42 @@ exports.getDosesData = async function (req, res) {
 };
 
 exports.getDailyAdministrations = async function (req, res) {
+    try {
+        const txManager = new TransactionManager(req.user.enrollmentID, 'distributionchannel');
+        const submitTx = txManager.getEvaluateTransactionInstance('hospitalcc', 'indexHospitals');
+        let response = await submitTx.send();
+        response = JSON.parse(JSON.parse(response));
+        
+        const resultArray = [];
+        const series = [];
+        const name = "Daily Administration";
+        for (const hospital of response){
+            const dailyAdministeredDoses = hospital['Record']['dailyAdministeredDoses'];
+            
+
+            for (const [date, value] of Object.entries(dailyAdministeredDoses)) {
+                let doses = 0;
+                for (const [batch, doseCount] of Object.entries(value)) {
+                    doses += doseCount;
+                }
+                series.push({
+                    value: doses,
+                    name: date
+                });
+            }
+        }
+        resultArray.push({
+            name,
+            series
+        });
+        res.status(200).send(resultArray);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.getDailyHospitalAdministrations = async function (req, res) {
     try {
         const txManager = new TransactionManager('user1', 'distributionchannel');
         const submitTx = txManager.getEvaluateTransactionInstance('hospitalcc', 'indexHospitals');
@@ -69,9 +105,8 @@ exports.getDailyAdministrations = async function (req, res) {
                 name,
                 series
             });
-
-            res.status(200).send(resultArray);
         }
+        res.status(200).send(resultArray);
 
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -88,7 +123,7 @@ exports.deliverVials = async function (req, res) {
         if (!(batchID && vials && manufacturer)) {
             return res.status(400).json({ message: 'Missing parameter(s)' });
         }
-        const txManager = new TransactionManager('user1', 'distributionchannel');
+        const txManager = new TransactionManager(req.user.enrollmentID, 'distributionchannel');
         const submitTx = txManager.getSubmitTransactionInstance('hospitalcc', 'deliverVials', id, batchID, vials, manufacturer);
         let response = await submitTx.send();
         console.log(Hospital.fromBuffer(response));
@@ -109,7 +144,7 @@ exports.inoculatePatients = async function (req, res) {
         if (!(batchID && patientCount)) {
             return res.status(400).json({ message: 'Missing parameter(s)' });
         }
-        const txManager = new TransactionManager('user1', 'distributionchannel');
+        const txManager = new TransactionManager(req.user.enrollmentID, 'distributionchannel');
         const submitTx = txManager.getSubmitTransactionInstance('hospitalcc', 'inoculatePatients', id, batchID, patientCount);
         let response = await submitTx.send();
         console.log(Hospital.fromBuffer(response));

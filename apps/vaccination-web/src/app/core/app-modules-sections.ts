@@ -6,8 +6,8 @@ export const userAuthModules = {
         "link": "/dashboard"
       },
       "hasSubSections": false,
-      "icon": "dashboard",
-      "organizations": [1,2,3,4,5,6]
+      "icon": "home",
+      "organizations": [4,3,6]
     },
     {
       "mainSection": {
@@ -39,7 +39,7 @@ export const userAuthModules = {
     },
     {
       "mainSection": {
-        "title": "Orders"
+        "title": "Vaccination Distribution"
       },
       "hasSubSections": true,
       "icon": "timeline",
@@ -50,7 +50,7 @@ export const userAuthModules = {
           "organizations": [3,7,2]
         },
         {
-          "title": "Distribution Schedule",
+          "title": "Schedule",
           "link": "/orders/planning",
           "organizations": [1,2,3,5],
         }

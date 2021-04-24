@@ -11,6 +11,9 @@ install:
 network:
 	echo ${NETWORK}
 
+start:
+	npm start
+
 users:
 	NETWORK=${NETWORK} node enrollAdmins.js
 	NETWORK=${NETWORK} node registerUsers.js
