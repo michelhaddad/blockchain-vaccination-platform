@@ -13,7 +13,7 @@ const configJSON = fs.readFileSync(configPath, 'utf8');
 const config = JSON.parse(configJSON);
 
 module.exports.submitTransaction = async function invokeContract(tx) {
-    let ccpPath = path.resolve(__dirname, config.users[tx.user].connection_profile);
+    let ccpPath = path.resolve(__dirname, config.organizations[tx.user.organization].connection_profile);
     let ccpJSON = fs.readFileSync(ccpPath, 'utf8');
     let ccp = JSON.parse(ccpJSON);
 
@@ -23,14 +23,14 @@ module.exports.submitTransaction = async function invokeContract(tx) {
 
     // Create a new gateway for connecting to our peer node.
     const gateway = new Gateway();
-    await gateway.connect(ccp, { wallet, identity: tx.user, discovery: { enabled: false } });
+    await gateway.connect(ccp, { wallet, identity: tx.user.enrollmentID, discovery: { enabled: false } });
 
     // Get the network (channel) our contract is deployed to.
 
     const network = await gateway.getNetwork(tx.channel);
     // Get the contract from the network.
     const contract = network.getContract(tx.contract);
-    console.log("Invoking the following transaction:\n",tx, '\n\n')
+    console.log("Invoking the following transaction:\n", tx, '\n\n')
 
     let result;
     result = await contract.submitTransaction(tx.txFunction, ...tx.args);
@@ -40,7 +40,7 @@ module.exports.submitTransaction = async function invokeContract(tx) {
 }
 
 module.exports.evaluateTransaction = async function invokeContract(tx) {
-    let ccpPath = path.resolve(__dirname, config.users[tx.user].connection_profile);
+    let ccpPath = path.resolve(__dirname, config.organizations[tx.user.organization].connection_profile);
     let ccpJSON = fs.readFileSync(ccpPath, 'utf8');
     let ccp = JSON.parse(ccpJSON);
 
@@ -50,14 +50,14 @@ module.exports.evaluateTransaction = async function invokeContract(tx) {
 
     // Create a new gateway for connecting to our peer node.
     const gateway = new Gateway();
-    await gateway.connect(ccp, { wallet, identity: tx.user, discovery: { enabled: false } });
+    await gateway.connect(ccp, { wallet, identity: tx.user.enrollmentID, discovery: { enabled: false } });
 
     // Get the network (channel) our contract is deployed to.
 
     const network = await gateway.getNetwork(tx.channel);
     // Get the contract from the network.
     const contract = network.getContract(tx.contract);
-    console.log("Invoking the following transaction:\n",tx, '\n\n')
+    console.log("Invoking the following transaction:\n", tx, '\n\n')
 
     let result;
     result = await contract.evaluateTransaction(tx.txFunction, ...tx.args);

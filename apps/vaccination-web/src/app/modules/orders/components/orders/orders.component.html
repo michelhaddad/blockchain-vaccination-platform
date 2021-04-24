@@ -1,4 +1,13 @@
-<h1 class="p-4">Orders</h1>
+<h1 class="p-4">Orders{{isMOPH? "  -  Funds: "+ funds+"$" : ""}}</h1>
+<mat-radio-group (change)="onFilter($event)" [(ngModel)]="radioValue"  class="filters ml-4" >
+    <label id="example-radio-group-label">Filter by Status: </label>
+    <mat-radio-button *ngIf='!isBorderControl' [value]="1">{{getStatus(1)}}</mat-radio-button>
+    <mat-radio-button [value]="2">{{getStatus(2)}}</mat-radio-button>
+    <mat-radio-button [value]="3">{{getStatus(3)}}</mat-radio-button>
+    <mat-radio-button [value]="4">{{getStatus(4)}}</mat-radio-button>
+    <mat-radio-button *ngIf='!isBorderControl' [value]="-1">{{getStatus(-1)}}</mat-radio-button>
+    <mat-radio-button [value]="5">All</mat-radio-button>
+</mat-radio-group>
 <div class="h-100 w-100 table-container row">
     <div class="col-1"></div>
     <app-table class="col-10" 

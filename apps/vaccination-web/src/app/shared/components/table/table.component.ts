@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TableColumnModel } from '../../models/table-column.model';
 import { MatSort } from '@angular/material/sort';
 import { TableButtonEnum } from 'src/app/modules/orders/models/planning-status.enum';
+import { OrderStateEnum } from 'src/app/modules/orders/models/order.model';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -32,7 +33,24 @@ export class TableComponent implements OnInit {
       this.actionClicked.emit({
         item: element
       });
+  }
 
+
+  getStatusColor(e: string): string {
+    switch (e) {
+      case "Rejected":
+        return 'red'
+      case "Pending":
+        return 'orange';
+      case "Delivered":
+        return 'rgb(25, 181, 38)'
+      case "Shipped":
+        return '';
+      case "Accepted":
+        return 'blue';
+      default:
+        return "";
+    }
   }
 
   getButtonText(e: TableButtonEnum): string {
@@ -40,7 +58,7 @@ export class TableComponent implements OnInit {
       case TableButtonEnum.RECEIVED:
         return 'Received';
       case TableButtonEnum.SENT:
-        return 'Sent';
+        return 'Send';
       case TableButtonEnum.REDEEM:
         return 'Redeem';
       case TableButtonEnum.ACCEPT:

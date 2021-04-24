@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginResponseModel } from 'src/app/shared/models/login-response.model';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   formGroup: FormGroup;
-  constructor(private router: Router) {
+  constructor(
+    private router: Router, 
+    private authService: AuthService
+    ) {
     this.formGroup = new FormGroup({
       userName: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [
@@ -20,6 +25,14 @@ export class LoginComponent {
   }
 
   submitForm() {
-    this.router.navigate(['dashboard']);
+    if(this.formGroup.valid){
+      this.authService.login(this.formGroup.get('userName')?.value, this.formGroup.get('password')?.value).subscribe((res: LoginResponseModel)=>{
+        this.authService.setUpOrganization(res.organizationId);
+        this.authService.saveLoginResponse(res.token);
+        this.authService.saveUsername(this.formGroup.get('userName')?.value);
+        this.authService.saveAdminRight(res.isAdmin);
+        this.router.navigate(['dashboard']);   
+      });
+    }
   }
 }

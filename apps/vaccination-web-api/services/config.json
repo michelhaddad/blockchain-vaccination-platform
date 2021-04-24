@@ -7,60 +7,67 @@
     "connection_profile": "../../network/basic/connectionProfile.json",
     "organizations": {
         "Impact": {
-            "MSP": "ImpactMSP"
+            "MSP": "ImpactMSP",
+            "connection_profile": "../../../network/basic/connectionProfile-Impact.json"
         },
         "MOPH": {
-            "MSP": "MOPHMSP"
+            "MSP": "MOPHMSP",
+            "connection_profile": "../../../network/basic/connectionProfile-MOPH.json"
         },
         "BorderControl": {
-            "MSP": "BorderControlMSP"
+            "MSP": "BorderControlMSP",
+            "connection_profile": "../../../network/basic/connectionProfile-BorderControl.json"
         },
         "Manufacturer": {
-            "MSP": "ManufacturerMSP"
+            "MSP": "ManufacturerMSP",
+            "connection_profile": "../../../network/basic/connectionProfile-Manufacturer.json"
         },
         "Hospital": {
-            "MSP": "HospitalMSP"
+            "MSP": "HospitalMSP",
+            "connection_profile": "../../../network/basic/connectionProfile-Hospital.json"
         },
         "StorageFacility": {
-            "MSP": "StorageFacilityMSP"
+            "MSP": "StorageFacilityMSP",
+            "connection_profile": "../../../network/basic/connectionProfile-StorageFacility.json"
         },
         "Donor": {
-            "MSP": "DonorMSP"
+            "MSP": "DonorMSP",
+            "connection_profile": "../../../network/basic/connectionProfile-Donor.json"
         }
     },
     "users": {
         "user1": {
-            "name": "user1",
+            "name": "userImpact",
             "organization": "Impact",
             "connection_profile": "../../../network/basic/connectionProfile-Impact.json"
         },
         "user2": {
-            "name": "user2",
+            "name": "userMOPH",
             "organization": "MOPH",
             "connection_profile": "../../../network/basic/connectionProfile-MOPH.json"
         },
         "user3": {
-            "name": "user3",
+            "name": "userBorderControl",
             "organization": "BorderControl",
             "connection_profile": "../../../network/basic/connectionProfile-BorderControl.json"
         },
         "user4": {
-            "name": "user4",
+            "name": "userManufacturer",
             "organization": "Manufacturer",
             "connection_profile": "../../../network/basic/connectionProfile-Manufacturer.json"
         },
         "user5": {
-            "name": "user5",
+            "name": "userHospital",
             "organization": "Hospital",
             "connection_profile": "../../../network/basic/connectionProfile-Hospital.json"
         },
         "user6": {
-            "name": "user6",
+            "name": "userStorageFacility",
             "organization": "StorageFacility",
             "connection_profile": "../../../network/basic/connectionProfile-StorageFacility.json"
         },        
         "user7": {
-            "name": "user7",
+            "name": "userDonor",
             "organization": "Donor",
             "connection_profile": "../../../network/basic/connectionProfile-Donor.json"
         }

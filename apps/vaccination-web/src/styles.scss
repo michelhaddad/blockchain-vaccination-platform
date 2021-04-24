@@ -3,6 +3,9 @@
 html,
 body {
   height: 100%;
+  .mat-sidenav-container{
+    background-color: #f3f3f3;
+  }
 }
 
 .table-container {
@@ -35,6 +38,14 @@ body {
 
 .h-100 {
   height: 100%;
+}
+
+.pl-10{
+  padding-left: 10px;
+}
+
+.pr-10{
+  padding-right: 10px;
 }
 
 .flex-center {
@@ -73,17 +84,24 @@ body {
   min-width: 500px;
 }
 
+.filters{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%
+}
+
 .italic {
   font-style: italic;
 }
 
-.donate-dialog,
-.add-peer-dialog {
+.donate-dialog {
   min-height: 120px;
   @extend .general-dialog;
 }
 
-.peers-dialog {
+.peers-dialog, .add-user-dialog {
   .mat-dialog-container {
     padding: 0px;
   }
