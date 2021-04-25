@@ -2,9 +2,10 @@
 #set +x
 
 HLNETWORK?=el-network
-ORG_NUMBER?=1
+ORG_NUMBER?=Impact
 NETWORK?=basic
 PEER_NUMBER?=0
+ABSPATH=/go/src/github.com
 
 WHICHOS := $(shell uname)
 
@@ -19,14 +20,15 @@ destroy:
 
 generate:
 	cp templates/docker-compose-TEMPLATE.yaml docker-compose.yaml
+	sed -i -e "s/CONFIG_NETWORK_NAME/${HLNETWORK}/g" docker-compose.yaml
 	sed -i -e "s/CONFIG_ORG_NUM/${ORG_NUMBER}/g" docker-compose.yaml
-	sed -i -e "s/CONFIG_NETWORK_NAME/${NETWORK}/g" docker-compose.yaml
 	sed -i -e "s/CONFIG_PEER_NUM/${PEER_NUMBER}/g" docker-compose.yaml
-	for NUMBER in 1 2 3 4 ; \
+	for ORG in Impact MOPH BorderControl Manufacturer Hospital StorageFacility Donor ; \
 	do \
-		cp templates/network/${NETWORK}/connection-profile-TEMPLATE.yaml connection-profile-$${NUMBER}.yaml; \
-		sed -i -e  "s/HLNETWORK/${HLNETWORK}/g" connection-profile-$${NUMBER}.yaml; \
-		sed -i -e  "s/ORG/Org$${NUMBER}/g" connection-profile-$${NUMBER}.yaml; \
+		cp templates/network/${NETWORK}/connection-profile-TEMPLATE.yaml connection-profile-$${ORG}.yaml; \
+		sed -i -e  "s/HLNETWORK/${HLNETWORK}/g" connection-profile-$${ORG}.yaml; \
+		sed -i -e  "s/ORG/$${ORG}/g" connection-profile-$${ORG}.yaml; \
+		sed -i -e  "s~ABSPATH~${ABSPATH}~g" connection-profile-$${ORG}.yaml; \
 	done
 ifeq ($(WHICHOS),Darwin)
 	rm *-e
