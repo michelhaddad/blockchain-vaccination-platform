@@ -103,12 +103,6 @@ class OrderContract extends Contract {
      * @returns {String} All issued orders
      */
     async getAllOrders(ctx) {
-<<<<<<< HEAD
-=======
-        let identity = ctx.clientIdentity;
-        const mspID = identity.getMSPID();
-        
->>>>>>> access_control
         let query = {
             selector: {
                 class: Order.getClass()
@@ -120,12 +114,6 @@ class OrderContract extends Contract {
     }
 
     async getAllApprovedOrders(ctx) {
-<<<<<<< HEAD
-=======
-        let identity = ctx.clientIdentity;
-        const mspID = identity.getMSPID();
-        
->>>>>>> access_control
         let query = {
             selector: {
                 currentState: {"$gt": 1},
