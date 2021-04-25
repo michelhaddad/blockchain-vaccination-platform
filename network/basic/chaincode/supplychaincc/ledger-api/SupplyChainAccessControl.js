@@ -11,7 +11,7 @@ class SupplyChainAccessControl {
         const storagefacilityAcl = new ACLSubject(constants.StorageFacilityMSP);
 
         this.aclRules = {
-            [mophAcl]: constants.QUERY_FUNCTIONS,
+            [mophAcl]: constants.MOPH_FUNCTIONS,
             [bordercontrolAcl] : constants.BORDERCONTROL_FUNCTIONS,
             [impactAcl]: constants.QUERY_FUNCTIONS,
             [hospitalAcl] : constants.HOSPITAL_FUNCTIONS,

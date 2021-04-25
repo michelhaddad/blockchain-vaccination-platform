@@ -12,9 +12,10 @@ const ALL_MSPS = [DonorMSP, ImpactMSP, HopistalMSP, ManufacturerMSP, BorderContr
 
 const QUERY_FUNCTIONS = ['query', 'indexOrderDelivery', 'getAllOrderDeliveries'];
 const ALL_FUNCTIONS = [...QUERY_FUNCTIONS, 'issue', 'storageDelivery', 'storageArrival', 'hospitalDelivery', 'hospitalArrival'];
-const BORDERCONTROL_FUNCTIONS = ['indexOrderDelivery','issue','storageDelivery'];
+const BORDERCONTROL_FUNCTIONS = ['indexOrderDelivery','storageDelivery'];
 const STORAGEFACILITY_FUNCTIONS = ['indexOrderDelivery','storageDelivery','storageArrival','hospitalDelivery'];
-const HOSPITAL_FUNCTIONS = [...QUERY_FUNCTIONS,'indexOrderDelivery','hospitalDelivery', 'hospitalArrival'];
+const HOSPITAL_FUNCTIONS = [...QUERY_FUNCTIONS, 'indexOrderDelivery','hospitalDelivery', 'hospitalArrival'];
+const MOPH_FUNCTIONS = [...QUERY_FUNCTIONS, 'issue'];
 
 
 const INSTANCIATION_FUNCTION = 'instantiate';
@@ -25,9 +26,9 @@ module.exports = {
     BORDERCONTROL_FUNCTIONS,
     STORAGEFACILITY_FUNCTIONS,
     HOSPITAL_FUNCTIONS,
-    MOPH_FUNCTIONS,
     QUERY_FUNCTIONS,
     DonorMSP,
+    MOPH_FUNCTIONS,
     ImpactMSP,
     MophMSP,
     StorageFacilityMSP,

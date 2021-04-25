@@ -11,6 +11,7 @@ const deliveries = require('../init-ledger/deliveries.js');
 // PaperNet specifc classes
 const OrderDelivery = require('./orderDelivery.js');
 const OrderDeliveryList = require('./orderDeliveryList.js');
+const SupplyChainAccessControl = require('../ledger-api/SupplyChainAccessControl')
 
 /**
  * A custom context provides easy access to list of all donation papers

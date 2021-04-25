@@ -11,6 +11,7 @@ const HospitalList = require('./hospitalList.js');
 const { hospitals, dosesPerVial } = require('./constants');
 const deliveries = require('../init-ledger/deliveries.js');
 const inoculations = require('../init-ledger/inoculations.js');
+const HospitalAccessControl = require('../ledger-api/HospitalAccessControl.js');
 
 
 /**
