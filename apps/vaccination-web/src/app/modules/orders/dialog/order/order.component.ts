@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';import { OrderService } from '../../order.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { OrderService } from '../../order.service';
 ;
 
 @Component({
@@ -13,7 +14,8 @@ export class OrderComponent implements OnInit {
     constructor(
       @Inject(MAT_DIALOG_DATA) public data: any,
       private dialogRef: MatDialogRef<OrderComponent>,
-      private orderState: OrderService
+      private orderState: OrderService,
+      private ngxLoader: NgxUiLoaderService
     ) {
       this.formGroup = new FormGroup({
         date: new FormControl(null, [Validators.required]),
@@ -31,6 +33,7 @@ export class OrderComponent implements OnInit {
       if(this.formGroup.valid){
         let date= new Date(this.formGroup.getRawValue().date).toISOString().slice(0,10);
         this.orderState.order(this.formGroup.getRawValue().numberVials, date).subscribe(()=>{
+          this.ngxLoader.stop();
           this.dialogRef.close();
         })
       }

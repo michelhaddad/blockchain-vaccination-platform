@@ -19,7 +19,7 @@ export class PlanningService {
   addDeliveryPlans(orderId: string, storage: string, hospitalID: number, batchNumber: string, numberVials: number, arrivalDateTime: string): Observable<any> {
     const body = {
       orderID: orderId,
-      storageID: "storage",
+      storageID: "StorageFacility",
       hospitalID: "1",
       batchNumber: batchNumber,
       numberOfVials: numberVials.toString(),

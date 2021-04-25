@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxUiLoaderModule,
     LayoutModule,
     AppRoutingModule,
     SharedModule, //imported in all modules to make use of angular material and other featur emodule

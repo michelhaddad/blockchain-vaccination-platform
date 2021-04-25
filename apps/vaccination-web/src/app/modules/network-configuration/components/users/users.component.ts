@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AuthService } from 'src/app/core/auth.service';
 import { TableColumnModel } from 'src/app/shared/models/table-column.model';
 import { UserRowModel } from '../../models/user-row.model';
@@ -19,7 +20,8 @@ export class UsersComponent implements OnInit {
   users: any[] = [];
   tableDataSource: MatTableDataSource<UserRowModel> = new MatTableDataSource(); 
 
-  constructor(public dialog: MatDialog, private authService: AuthService) { }
+  constructor(public dialog: MatDialog, private authService: AuthService,
+    private ngxLoader: NgxUiLoaderService) { }
 
   ngOnInit(): void { 
     this.getUsers();
@@ -27,6 +29,7 @@ export class UsersComponent implements OnInit {
 
   getUsers(): void {
     this.authService.getUsers().subscribe((res)=>{
+      this.ngxLoader.stop();
       this.users=res;
       this.createUsers();
     });
