@@ -28,8 +28,11 @@ echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 #Generate crypto material using crypto-config.yaml as config file
 ${CRYPTOGEN} generate --config=./crypto-config.yaml
 
+mv ./crypto-config/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp/keystore/*_sk ./crypto-config/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp/keystore/adminKey1
+mv ./crypto-config/peerOrganizations/org1.el-network.com/ca/*_sk ./crypto-config/peerOrganizations/org1.el-network.com/ca/key.pem
+
 #Rename admin and ca private key files so their names are always the same (no need to change Hyperledger Explorer configuration after restarting the network)
-for ORG in Impact MOPH BorderControl Manufacturer Hospital StorageFacility Donor
+for ORG in MOPH BorderControl Manufacturer Hospital StorageFacility Donor
 do
 	mv ./crypto-config/peerOrganizations/$ORG.el-network.com/users/Admin@$ORG.el-network.com/msp/keystore/*_sk ./crypto-config/peerOrganizations/$ORG.el-network.com/users/Admin@$ORG.el-network.com/msp/keystore/adminKey$ORG
   mv ./crypto-config/peerOrganizations/$ORG.el-network.com/ca/*_sk ./crypto-config/peerOrganizations/$ORG.el-network.com/ca/key.pem
@@ -44,7 +47,7 @@ ${CONFIGTXGEN} -profile OrdererGenesis -outputBlock ./channel-artifacts-ordercha
 export CHANNEL_NAME=orderchannel
 ${CONFIGTXGEN} -profile Orderchannel -outputCreateChannelTx ./channel-artifacts-orderchannel/channel.tx -channelID $CHANNEL_NAME
 
-${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/ImpactMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ImpactMSP
+${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
 ${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/MOPHMSPanchors.tx -channelID $CHANNEL_NAME -asOrg MOPHMSP
 ${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/BorderControlMSPanchors.tx -channelID $CHANNEL_NAME -asOrg BorderControlMSP
 ${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/ManufacturerMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ManufacturerMSP
@@ -57,7 +60,7 @@ ${CONFIGTXGEN} -profile OrdererGenesis -outputBlock ./channel-artifacts-distribu
 export CHANNEL_NAME=distributionchannel
 ${CONFIGTXGEN} -profile DistributionChannel -outputCreateChannelTx ./channel-artifacts-distributionchannel/channel.tx -channelID $CHANNEL_NAME
 
-${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/ImpactMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ImpactMSP
+${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/MOPHMSPanchors.tx -channelID $CHANNEL_NAME -asOrg MOPHMSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/BorderControlMSPanchors.tx -channelID $CHANNEL_NAME -asOrg BorderControlMSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/HospitalMSPanchors.tx -channelID $CHANNEL_NAME -asOrg HospitalMSP

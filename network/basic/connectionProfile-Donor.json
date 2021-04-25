@@ -7,7 +7,7 @@
 		"adminUser": "admin",
 		"adminPassword": "adminpw",
 		"enableAuthentication": false,
-		"organization": "Impact",
+		"organization": "Org1",
 		"connection": {
 			"timeout": {
 				"peer": {
@@ -20,7 +20,7 @@
 	"channels": {
 		"orderchannel": {
 			"peers": {
-				"peer0.Impact.el-network.com": {
+				"peer0.org1.el-network.com": {
 					"endorsingPeer": true,
 					"chaincodeQuery": true,
 					"ledgerQuery": true,
@@ -49,7 +49,7 @@
 		},
 		"distributionchannel": {
 			"peers": {
-				"peer0.Impact.el-network.com": {
+				"peer0.org1.el-network.com": {
 					"endorsingPeer": true,
 					"chaincodeQuery": true,
 					"ledgerQuery": true,
@@ -78,20 +78,20 @@
 		}
 	},
 	"organizations": {
-		"Impact": {
-			"mspid": "ImpactMSP",
+		"org1": {
+			"mspid": "Org1MSP",
 			"fullpath": true,
 			"peers": [
-				"peer0.Impact.el-network.com"
+				"peer0.org1.el-network.com"
 			],
 			"certificateAuthorities": [
-                "ca.Impact.el-network.com"
+                "ca.org1.el-network.com"
             ],
 			"adminPrivateKey": {
-				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/keystore/adminKeyImpact"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp/keystore/adminKey1"
 			},
 			"signedCert": {
-				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp/signcerts/Admin@Impact.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp/signcerts/Admin@org1.el-network.com-cert.pem"
 			}
 		},
 		"Donor": {
@@ -122,13 +122,13 @@
 		}
 	},
 	"peers": {
-		"peer0.Impact.el-network.com": {
+		"peer0.org1.el-network.com": {
 			"tlsCACerts": {
-				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.el-network.com/peers/peer0.Impact.el-network.com/msp/tlscacerts/tlsca.Impact.el-network.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.el-network.com/peers/peer0.org1.el-network.com/msp/tlscacerts/tlsca.org1.el-network.com-cert.pem"
 			},
 			"url": "grpcs://localhost:7051",
 			"grpcOptions": {
-				"ssl-target-name-override": "peer0.Impact.el-network.com"
+				"ssl-target-name-override": "peer0.org1.el-network.com"
 			}
 		},
 		"peer0.Donor.el-network.com": {
@@ -154,9 +154,9 @@
 		}
 	},
 	"certificateAuthorities": {
-		"ca.Impact.el-network.com": {
+		"ca.org1.el-network.com": {
 			"url": "http://localhost:7054",
-			"caName": "ca.Impact.el-network.com"
+			"caName": "ca.org1.el-network.com"
 		},
 		"ca.Donor.el-network.com": {
 			"url": "http://localhost:13054",

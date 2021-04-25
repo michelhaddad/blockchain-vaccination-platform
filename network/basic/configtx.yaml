@@ -25,28 +25,28 @@ Organizations:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
 
-    - &Impact
+    - &Org1
 
-        Name: ImpactMSP
+        Name: Org1MSP
 
         # ID to load the MSP definition as
-        ID: ImpactMSP
+        ID: Org1MSP
 
-        MSPDir: crypto-config/peerOrganizations/Impact.el-network.com/msp
+        MSPDir: crypto-config/peerOrganizations/org1.el-network.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('ImpactMSP.admin', 'ImpactMSP.peer', 'ImpactMSP.client')"
+                Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('ImpactMSP.admin', 'ImpactMSP.client')"
+                Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('ImpactMSP.admin')"
+                Rule: "OR('Org1MSP.admin')"
 
         AnchorPeers:
-            - Host: peer0.Impact.el-network.com
+            - Host: peer0.org1.el-network.com
               Port: 7051
 
     - &MOPH
@@ -323,7 +323,7 @@ Profiles:
         Consortiums:
             ContractConsortium:
                 Organizations:
-                    - *Impact
+                    - *Org1
                     - *MOPH
                     - *BorderControl
                     - *Manufacturer
@@ -331,7 +331,7 @@ Profiles:
 
             DistributionConsortium:
                 Organizations:
-                    - *Impact
+                    - *Org1
                     - *MOPH
                     - *BorderControl
                     - *Hospital
@@ -344,7 +344,7 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Impact
+                - *Org1
                 - *MOPH
                 - *BorderControl
                 - *Manufacturer
@@ -358,7 +358,7 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Impact
+                - *Org1
                 - *MOPH
                 - *BorderControl
                 - *Hospital

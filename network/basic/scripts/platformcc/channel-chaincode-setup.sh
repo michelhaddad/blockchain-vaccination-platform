@@ -7,7 +7,7 @@ export CHANNEL_NAME=orderchannel
 
 #Create channel
 export CACERT_ORDERER=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/el-network.com/orderers/orderer.el-network.com/tls/ca.crt
-export CACERT_1=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Impact.el-network.com/peers/peer0.Impact.el-network.com/tls/ca.crt
+export CACERT_1=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.el-network.com/peers/peer0.org1.el-network.com/tls/ca.crt
 export CACERT_2=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/MOPH.el-network.com/peers/peer0.MOPH.el-network.com/tls/ca.crt
 export CACERT_3=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/BorderControl.el-network.com/peers/peer0.BorderControl.el-network.com/tls/ca.crt
 export CACERT_4=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Manufacturer.el-network.com/peers/peer0.Manufacturer.el-network.com/tls/ca.crt
@@ -18,9 +18,16 @@ peer channel create -o orderer.el-network.com:7050 -c $CHANNEL_NAME -f ./channel
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 echo "CONNECTING PEERS TO CHANNEL"
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-for ORG_NUM in Impact MOPH BorderControl Manufacturer Donor
+
+CACERT=$CACERT_1
+eval "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp CORE_PEER_ADDRESS=peer0.org1.el-network.com:7051 CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_TLS_ROOTCERT_FILE=$CACERT"
+
+echo "Connecting peer0 of org1 to $CHANNEL_NAME..."
+peer channel join -b orderchannel.block
+
+for ORG_NUM in MOPH BorderControl Manufacturer Donor
 do
-if [ $ORG_NUM == Impact ]; then
+if [ $ORG_NUM == org1 ]; then
         CACERT=$CACERT_1
     else if [ $ORG_NUM == MOPH ]; then
             CACERT=$CACERT_2
@@ -44,9 +51,16 @@ done
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 echo "UPDATING CHANNEL"
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-for ORG_NUM in Impact MOPH BorderControl Manufacturer Donor
+
+CACERT=$CACERT_1
+eval "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp CORE_PEER_ADDRESS=peer0.org1.el-network.com:7051 CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_TLS_ROOTCERT_FILE=$CACERT"
+
+echo "Connecting peer0 of org1 to $CHANNEL_NAME..."
+peer channel update -o orderer.el-network.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts-orderchannel/Org1MSPanchors.tx --tls --cafile $CACERT_ORDERER
+
+for ORG_NUM in MOPH BorderControl Manufacturer Donor
 do
-if [ $ORG_NUM == Impact ]; then
+if [ $ORG_NUM == org1 ]; then
         CACERT=$CACERT_1
     else if [ $ORG_NUM == MOPH ]; then
             CACERT=$CACERT_2
@@ -69,9 +83,17 @@ done
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 echo "INSTALLING CHAINCODE"
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-for ORG_NUM in Impact MOPH BorderControl Manufacturer Donor
+
+CACERT=$CACERT_1
+eval "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp CORE_PEER_ADDRESS=peer0.org1.el-network.com:7051 CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_TLS_ROOTCERT_FILE=$CACERT"
+
+echo "Installing chaincode on peer0 of org1 of $CHANNEL_NAME..."
+peer chaincode install -n donationcc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/donationcc
+peer chaincode install -n ordercc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/ordercc
+
+for ORG_NUM in MOPH BorderControl Manufacturer Donor
 do
-if [ $ORG_NUM == Impact ]; then
+if [ $ORG_NUM == org1 ]; then
         CACERT=$CACERT_1
     else if [ $ORG_NUM == MOPH ]; then
             CACERT=$CACERT_2
@@ -95,15 +117,15 @@ done
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 echo "INSTANTIATING CHAINCODE"
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp
-CORE_PEER_ADDRESS=peer0.Impact.el-network.com:7051
-CORE_PEER_LOCALMSPID=ImpactMSP
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp
+CORE_PEER_ADDRESS=peer0.org1.el-network.com:7051
+CORE_PEER_LOCALMSPID=Org1MSP
 CORE_PEER_TLS_ROOTCERT_FILE=$CACERT_1
 CORE_VM_DOCKER_ATTACHSTDOUT=true
 
-peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n donationcc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member','DonorMSP.member')" --tls --cafile $CACERT_ORDERER
+peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n donationcc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('Org1MSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member','DonorMSP.member')" --tls --cafile $CACERT_ORDERER
 echo "Instanciated the donationcc chaincode"
-peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n ordercc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member','DonorMSP.member')" --tls --cafile $CACERT_ORDERER
+peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n ordercc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('Org1MSP.member','MOPHMSP.member','BorderControlMSP.member','ManufacturerMSP.member','DonorMSP.member')" --tls --cafile $CACERT_ORDERER
 echo "Instanciated the ordercc chaincode"
 
 
@@ -115,7 +137,7 @@ export CHANNEL_NAME=distributionchannel
 
 #Create channel
 export CACERT_ORDERER=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/el-network.com/orderers/orderer.el-network.com/tls/ca.crt
-export CACERT_1=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Impact.el-network.com/peers/peer0.Impact.el-network.com/tls/ca.crt
+export CACERT_1=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.el-network.com/peers/peer0.org1.el-network.com/tls/ca.crt
 export CACERT_2=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/MOPH.el-network.com/peers/peer0.MOPH.el-network.com/tls/ca.crt
 export CACERT_3=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/BorderControl.el-network.com/peers/peer0.BorderControl.el-network.com/tls/ca.crt
 export CACERT_4=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital.el-network.com/peers/peer0.Hospital.el-network.com/tls/ca.crt
@@ -127,9 +149,16 @@ peer channel create -o orderer.el-network.com:7050 -c $CHANNEL_NAME -f ./channel
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 echo "CONNECTING PEERS TO CHANNEL"
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-for ORG_NUM in Impact MOPH BorderControl Hospital StorageFacility Donor
+
+CACERT=$CACERT_1
+eval "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp CORE_PEER_ADDRESS=peer0.org1.el-network.com:7051 CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_TLS_ROOTCERT_FILE=$CACERT"
+
+echo "Connecting peer0 of org1 to $CHANNEL_NAME..."
+peer channel join -b distributionchannel.block
+
+for ORG_NUM in MOPH BorderControl Hospital StorageFacility Donor
 do
-if [ $ORG_NUM == Impact ]; then
+if [ $ORG_NUM == org1 ]; then
         CACERT=$CACERT_1
     else if [ $ORG_NUM == MOPH ]; then
             CACERT=$CACERT_2
@@ -156,9 +185,16 @@ done
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 echo "UPDATING CHANNEL"
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-for ORG_NUM in Impact MOPH BorderControl Hospital StorageFacility Donor
+
+CACERT=$CACERT_1
+eval "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp CORE_PEER_ADDRESS=peer0.org1.el-network.com:7051 CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_TLS_ROOTCERT_FILE=$CACERT"
+
+echo "Connecting peer0 of org1 to $CHANNEL_NAME..."
+peer channel update -o orderer.el-network.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts-distributionchannel/Org1MSPanchors.tx --tls --cafile $CACERT_ORDERER
+
+for ORG_NUM in MOPH BorderControl Hospital StorageFacility Donor
 do
-if [ $ORG_NUM == Impact ]; then
+if [ $ORG_NUM == org1 ]; then
         CACERT=$CACERT_1
     else if [ $ORG_NUM == MOPH ]; then
             CACERT=$CACERT_2
@@ -184,9 +220,17 @@ done
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 echo "INSTALLING CHAINCODE"
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-for ORG_NUM in Impact MOPH BorderControl Hospital StorageFacility Donor
+
+CACERT=$CACERT_1
+eval "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp CORE_PEER_ADDRESS=peer0.org1.el-network.com:7051 CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_TLS_ROOTCERT_FILE=$CACERT"
+
+echo "Connecting peer0 of org1 to $CHANNEL_NAME..."
+peer chaincode install -n supplychaincc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/supplychaincc
+peer chaincode install -n hospitalcc -v 5.5 -l node -p /opt/gopath/src/github.com/chaincode/hospitalcc
+
+for ORG_NUM in MOPH BorderControl Hospital StorageFacility Donor
 do
-if [ $ORG_NUM == Impact ]; then
+if [ $ORG_NUM == org1 ]; then
         CACERT=$CACERT_1
     else if [ $ORG_NUM == MOPH ]; then
             CACERT=$CACERT_2
@@ -213,15 +257,15 @@ done
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 echo "INSTANTIATING CHAINCODE"
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Impact.el-network.com/users/Admin@Impact.el-network.com/msp
-CORE_PEER_ADDRESS=peer0.Impact.el-network.com:7051
-CORE_PEER_LOCALMSPID=ImpactMSP
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp
+CORE_PEER_ADDRESS=peer0.org1.el-network.com:7051
+CORE_PEER_LOCALMSPID=Org1MSP
 CORE_PEER_TLS_ROOTCERT_FILE=$CACERT_1
 CORE_VM_DOCKER_ATTACHSTDOUT=true
 
 
-peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n hospitalcc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','StorageFacilityMSP.member','DonorMSP.member', 'HospitalMSP.member')" --tls --cafile $CACERT_ORDERER
+peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n hospitalcc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('Org1MSP.member','MOPHMSP.member','BorderControlMSP.member','StorageFacilityMSP.member','DonorMSP.member', 'HospitalMSP.member')" --tls --cafile $CACERT_ORDERER
 echo "Instanciated the hospitalcc chaincode"
-peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n supplychaincc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('ImpactMSP.member','MOPHMSP.member','BorderControlMSP.member','StorageFacilityMSP.member','DonorMSP.member', 'HospitalMSP.member')" --tls --cafile $CACERT_ORDERER
+peer chaincode instantiate -o orderer.el-network.com:7050 -C $CHANNEL_NAME -n supplychaincc -l node -v 5.5 -c '{"Args":["instantiate"]}' -P "OR ('Org1MSP.member','MOPHMSP.member','BorderControlMSP.member','StorageFacilityMSP.member','DonorMSP.member', 'HospitalMSP.member')" --tls --cafile $CACERT_ORDERER
 echo "Instanciated the supplychaincc chaincode"
 
