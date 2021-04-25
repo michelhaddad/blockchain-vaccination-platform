@@ -9,16 +9,16 @@ services:
     # as the Hyperledger Fabric containers.
     network_mode: host
     environment:
-      - ORG_NUMBER=CONFIG_ORG_NUM
-      - PEER_NUMBER=CONFIG_PEER_NUM
-      - NETWORK=CONFIG_NETWORK_NAME
+      - ORG_NUMBER=Impact
+      - PEER_NUMBER=0
+      - NETWORK=basic
     volumes:
       # Fabricbeat configuration file
       - ./fabricbeat.yml:/go/src/github.com/blockchain-analyzer/agent/fabricbeat/fabricbeat.yml
       # Connection profile ("connectionProfile" in configuration file)
-      - ./connection-profile-CONFIG_ORG_NUM.yaml:/go/src/github.com/blockchain-analyzer/network/CONFIG_NETWORK_NAME/connection-profile-CONFIG_ORG_NUM.yaml
+      - ./connection-profile-Impact.yaml:/go/src/github.com/blockchain-analyzer/network/basic/connection-profile-Impact.yaml
       # Crypto-config
-      - ../network/CONFIG_NETWORK_NAME/crypto-config:/go/src/github.com/blockchain-analyzer/network/CONFIG_NETWORK_NAME/crypto-config
+      - ../network/basic/crypto-config:/go/src/github.com/blockchain-analyzer/network/basic/crypto-config
       # Kibana dashboard directory ("dashboardDirectory" in configuration file)
       - ../dashboards/7/dashboard:/go/src/github.com/blockchain-analyzer/dashboards/7/dashboard
       # Kibana template directory ("templateDirectory" in configuration file)

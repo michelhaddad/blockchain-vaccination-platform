@@ -113,7 +113,7 @@ organizations:
     - ca.Impact.HLNETWORK.com
     cryptopath: peerOrganizations/Impact.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.HLNETWORK.com/users/Admin@Impact.HLNETWORK.com/msp/keystore/adminKey1"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.HLNETWORK.com/users/Admin@Impact.HLNETWORK.com/msp/keystore/adminKeyImpact"
     signedCert:
       path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.HLNETWORK.com/users/Admin@Impact.HLNETWORK.com/msp/signcerts/Admin@Impact.HLNETWORK.com-cert.pem"
   MOPH:
@@ -125,7 +125,7 @@ organizations:
     - ca.MOPH.HLNETWORK.com
     cryptopath: peerOrganizations/MOPH.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.HLNETWORK.com/users/Admin@MOPH.HLNETWORK.com/msp/keystore/adminKey2"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.HLNETWORK.com/users/Admin@MOPH.HLNETWORK.com/msp/keystore/adminKeyMOPH"
     signedCert:
       path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.HLNETWORK.com/users/Admin@MOPH.HLNETWORK.com/msp/signcerts/Admin@MOPH.HLNETWORK.com-cert.pem"
   BorderControl:
@@ -137,7 +137,7 @@ organizations:
     - ca.BorderControl.HLNETWORK.com
     cryptopath: peerOrganizations/BorderControl.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.HLNETWORK.com/users/Admin@BorderControl.HLNETWORK.com/msp/keystore/adminKey3"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.HLNETWORK.com/users/Admin@BorderControl.HLNETWORK.com/msp/keystore/adminKeyBorderControl"
     signedCert:
       path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/BorderControl.HLNETWORK.com/users/Admin@BorderControl.HLNETWORK.com/msp/signcerts/Admin@BorderControl.HLNETWORK.com-cert.pem"
   Manufacturer:
@@ -149,7 +149,7 @@ organizations:
     - ca.Manufacturer.HLNETWORK.com
     cryptopath: peerOrganizations/Manufacturer.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Manufacturer.HLNETWORK.com/users/Admin@Manufacturer.HLNETWORK.com/msp/keystore/adminKey4"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Manufacturer.HLNETWORK.com/users/Admin@Manufacturer.HLNETWORK.com/msp/keystore/adminKeyManufacturer"
     signedCert:
       path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Manufacturer.HLNETWORK.com/users/Admin@Manufacturer.HLNETWORK.com/msp/signcerts/Admin@Manufacturer.HLNETWORK.com-cert.pem"
   Hospital:
@@ -161,7 +161,7 @@ organizations:
     - ca.Hospital.HLNETWORK.com
     cryptopath: peerOrganizations/Hospital.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Hospital.HLNETWORK.com/users/Admin@Hospital.HLNETWORK.com/msp/keystore/adminKey4"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Hospital.HLNETWORK.com/users/Admin@Hospital.HLNETWORK.com/msp/keystore/adminKeyHospital"
     signedCert:
       path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Hospital.HLNETWORK.com/users/Admin@Hospital.HLNETWORK.com/msp/signcerts/Admin@Hospital.HLNETWORK.com-cert.pem"
   StorageFacility:
@@ -173,7 +173,7 @@ organizations:
     - ca.StorageFacility.HLNETWORK.com
     cryptopath: peerOrganizations/StorageFacility.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/StorageFacility.HLNETWORK.com/users/Admin@StorageFacility.HLNETWORK.com/msp/keystore/adminKey4"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/StorageFacility.HLNETWORK.com/users/Admin@StorageFacility.HLNETWORK.com/msp/keystore/adminKeyStorageFacility"
     signedCert:
       path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/StorageFacility.HLNETWORK.com/users/Admin@StorageFacility.HLNETWORK.com/msp/signcerts/Admin@StorageFacility.HLNETWORK.com-cert.pem"
   Donor:
@@ -185,7 +185,7 @@ organizations:
     - ca.Donor.HLNETWORK.com
     cryptopath: peerOrganizations/Donor.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Donor.HLNETWORK.com/users/Admin@Donor.HLNETWORK.com/msp/keystore/adminKey4"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Donor.HLNETWORK.com/users/Admin@Donor.HLNETWORK.com/msp/keystore/adminKeyDonor"
     signedCert:
       path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Donor.HLNETWORK.com/users/Admin@Donor.HLNETWORK.com/msp/signcerts/Admin@Donor.HLNETWORK.com-cert.pem"
   ordererOrg:

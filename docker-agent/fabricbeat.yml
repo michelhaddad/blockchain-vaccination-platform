@@ -14,7 +14,7 @@ fabricbeat:
   connectionProfile: ${GOPATH}/src/github.com/blockchain-analyzer/network/${NETWORK}/connection-profile-${ORG_NUMBER}.yaml
   # Path to the admin certfile and keyfile
   adminCertPath: "${GOPATH}/src/github.com/blockchain-analyzer/network/${NETWORK}/crypto-config/peerOrganizations/${ORG_NUMBER}.el-network.com/users/Admin@${ORG_NUMBER}.el-network.com/msp/signcerts/Admin@${ORG_NUMBER}.el-network.com-cert.pem"
-  adminKeyPath: "${GOPATH}/src/github.com/blockchain-analyzer/network/${NETWORK}/crypto-config/peerOrganizations/${ORG_NUMBER}.el-network.com/users/Admin@${ORG_NUMBER}.el-network.com/msp/keystore/adminKey1"
+  adminKeyPath: "${GOPATH}/src/github.com/blockchain-analyzer/network/${NETWORK}/crypto-config/peerOrganizations/${ORG_NUMBER}.el-network.com/users/Admin@${ORG_NUMBER}.el-network.com/msp/keystore/adminKeyImpact"
   # URL of Elasticsearch
   elasticURL: "http://localhost:9200"
   # URL of Kibana
