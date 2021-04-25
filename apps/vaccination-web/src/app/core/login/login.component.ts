@@ -51,7 +51,6 @@ export class LoginComponent {
     if(this.formGroup.valid){
       this.authService.login(this.formGroup.get('userName')?.value, this.formGroup.get('password')?.value).subscribe((res)=>{
         this.ngxLoader.stop();
-        console.log("stoping")
         this.authService.storeOrganizationType(this.mapOrganizationToEnum(res.user.organization));
         this.authService.saveLoginResponse(res.token);
         this.authService.saveUsername(this.formGroup.get('userName')?.value);

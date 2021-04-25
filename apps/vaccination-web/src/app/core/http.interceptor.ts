@@ -16,7 +16,6 @@ export class APIInterceptor implements HttpInterceptor {
     constructor(private authService: AuthService, private ngxLoader: NgxUiLoaderService) {}  
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> { 
       if(request.url.indexOf(environment.host)!=-1){
-        console.log("starting")
         this.ngxLoader.start();
       }
 

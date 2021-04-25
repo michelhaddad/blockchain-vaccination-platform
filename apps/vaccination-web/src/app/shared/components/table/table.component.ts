@@ -41,13 +41,13 @@ export class TableComponent implements OnInit {
       case "Rejected":
         return 'red'
       case "Pending":
-        return 'orange';
+        return 'yellow';
       case "Delivered":
         return 'rgb(25, 181, 38)'
       case "Shipped":
         return '';
       case "Accepted":
-        return 'blue';
+        return '';
       default:
         return "";
     }
