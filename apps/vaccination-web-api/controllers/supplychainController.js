@@ -97,6 +97,23 @@ exports.VaccinesOrgDistribution = async function (req, res) {
     }
 };
 
+exports.instantiate = async function (req, res) {
+    try {
+        const { orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime } = req.body;
+        if (!(orderID && storageID && hospitalID && batchNumber && numberOfVials && arrivalDateTime)) {
+            return res.status(400).json({ message: 'Missing parameter(s)' });
+        }
+        const txManager = new TransactionManager('user1', 'distributionchannel');
+        const submitTx =
+            txManager.getSubmitTransactionInstance('supplychaincc', 'instantiate');
+        let response = await submitTx.send();
+        res.status(204).send({}); 
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 exports.issueOrderDelivery = async function (req, res) {
     try {
         const { orderID, storageID, hospitalID, batchNumber, numberOfVials, arrivalDateTime } = req.body;
