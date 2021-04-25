@@ -47,7 +47,7 @@ ${CONFIGTXGEN} -profile OrdererGenesis -outputBlock ./channel-artifacts-ordercha
 export CHANNEL_NAME=orderchannel
 ${CONFIGTXGEN} -profile Orderchannel -outputCreateChannelTx ./channel-artifacts-orderchannel/channel.tx -channelID $CHANNEL_NAME
 
-${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg org1MSP
 ${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/MOPHMSPanchors.tx -channelID $CHANNEL_NAME -asOrg MOPHMSP
 ${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/BorderControlMSPanchors.tx -channelID $CHANNEL_NAME -asOrg BorderControlMSP
 ${CONFIGTXGEN} -profile Orderchannel -outputAnchorPeersUpdate ./channel-artifacts-orderchannel/ManufacturerMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ManufacturerMSP
@@ -60,7 +60,7 @@ ${CONFIGTXGEN} -profile OrdererGenesis -outputBlock ./channel-artifacts-distribu
 export CHANNEL_NAME=distributionchannel
 ${CONFIGTXGEN} -profile DistributionChannel -outputCreateChannelTx ./channel-artifacts-distributionchannel/channel.tx -channelID $CHANNEL_NAME
 
-${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg org1MSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/MOPHMSPanchors.tx -channelID $CHANNEL_NAME -asOrg MOPHMSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/BorderControlMSPanchors.tx -channelID $CHANNEL_NAME -asOrg BorderControlMSP
 ${CONFIGTXGEN} -profile DistributionChannel -outputAnchorPeersUpdate ./channel-artifacts-distributionchannel/HospitalMSPanchors.tx -channelID $CHANNEL_NAME -asOrg HospitalMSP

@@ -38,7 +38,7 @@ generate:
 	cp connectionProfile-TEMPLATE.json connectionProfile.json
 	sed -i -e "s/HLNETWORK/${HLNETWORK}/g" connectionProfile.json
 	sed -i -e "s~ABSPATH~${ABSPATH}~g" connectionProfile.json
-	for ORG in Org1 MOPH BorderControl Manufacturer Hospital StorageFacility Donor ; \
+	for ORG in org1 MOPH BorderControl Manufacturer Hospital StorageFacility Donor ; \
 	do \
 		cp connection-profile-TEMPLATE.yaml connection-profile-$${ORG}.yaml; \
 		sed -i -e  "s/HLNETWORK/${HLNETWORK}/g" connection-profile-$${ORG}.yaml; \

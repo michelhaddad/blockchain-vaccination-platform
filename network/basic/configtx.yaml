@@ -25,25 +25,25 @@ Organizations:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
 
-    - &Org1
+    - &org1
 
-        Name: Org1MSP
+        Name: org1MSP
 
         # ID to load the MSP definition as
-        ID: Org1MSP
+        ID: org1MSP
 
         MSPDir: crypto-config/peerOrganizations/org1.el-network.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
+                Rule: "OR('org1MSP.admin', 'org1MSP.peer', 'org1MSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
+                Rule: "OR('org1MSP.admin', 'org1MSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin')"
+                Rule: "OR('org1MSP.admin')"
 
         AnchorPeers:
             - Host: peer0.org1.el-network.com
@@ -323,7 +323,7 @@ Profiles:
         Consortiums:
             ContractConsortium:
                 Organizations:
-                    - *Org1
+                    - *org1
                     - *MOPH
                     - *BorderControl
                     - *Manufacturer
@@ -331,7 +331,7 @@ Profiles:
 
             DistributionConsortium:
                 Organizations:
-                    - *Org1
+                    - *org1
                     - *MOPH
                     - *BorderControl
                     - *Hospital
@@ -344,7 +344,7 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
+                - *org1
                 - *MOPH
                 - *BorderControl
                 - *Manufacturer
@@ -358,7 +358,7 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
+                - *org1
                 - *MOPH
                 - *BorderControl
                 - *Hospital

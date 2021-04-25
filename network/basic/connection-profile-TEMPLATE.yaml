@@ -104,8 +104,8 @@ channels:
         orderer: "6000"
 
 organizations:
-  Org1:
-    mspid: Org1MSP
+  org1:
+    mspid: org1MSP
     fullpath: true
     peers:
     - peer0.org1.HLNETWORK.com
