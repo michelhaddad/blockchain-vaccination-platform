@@ -15,6 +15,7 @@ import { AddPlanComponent } from 'src/app/modules/orders/dialog/add-plan/add-pla
 import { Router } from '@angular/router';
 import { TableButtonEnum } from '../../models/planning-status.enum';
 import { DonationService } from 'src/app/modules/donations/donation.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-orders',
@@ -37,7 +38,8 @@ export class OrdersComponent implements OnInit {
     private orderService: OrderService,
     private authService: AuthService,
     private router: Router,
-    private donationService: DonationService
+    private donationService: DonationService,
+    private ngxLoader: NgxUiLoaderService
   ) {
     this.isMOPH =
       this.authService.getOrganizationType() == OrganizationEnum.MOPH;
@@ -58,6 +60,7 @@ export class OrdersComponent implements OnInit {
   getFunds(){
     if(this.isMOPH){
       this.donationService.getFunds().subscribe((e)=>{
+        this.ngxLoader.stop();
         this.funds=e.response.redeemedAmount - e.response.payedAmount;
       })
     }
@@ -107,11 +110,13 @@ export class OrdersComponent implements OnInit {
         break;
       case TableButtonEnum.REJECT:
         this.orderService.rejectOrder(e.item.orderId).subscribe(() => {
+          this.ngxLoader.stop();
           this.getData();
         })
         break;
       case TableButtonEnum.SHIP:
         this.orderService.shipOrder(e.item.orderId).subscribe(() => {
+          this.ngxLoader.stop();
           this.getData();
         });
         break;
@@ -152,6 +157,7 @@ export class OrdersComponent implements OnInit {
 
   getOrders(): void {
     this.orderService.getAllOrders().subscribe((result) => {
+      this.ngxLoader.stop();
       if (this.isBorderControl) {
         this.orders = result.response;
         this.orders = this.orders.filter((e) => e.Record.currentState == OrderStateEnum.APPROVED || e.Record.currentState == OrderStateEnum.SHIPPED || e.Record.currentState == OrderStateEnum.DELIVERED)
@@ -166,6 +172,7 @@ export class OrdersComponent implements OnInit {
     switch (event.item.button) {
       case TableButtonEnum.RECEIVED:
         this.orderService.setOrderDelivered(event.item.orderId).subscribe(() => {
+          this.ngxLoader.stop();
           this.getData();
         });
         break;

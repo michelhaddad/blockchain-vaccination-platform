@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class AddUserComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<AddUserComponent>,
-    private authService: AuthService
+    private authService: AuthService,
+    private ngxLoader: NgxUiLoaderService
   ) {
     this.formGroup = new FormGroup({
       userName: new FormControl(null, [Validators.required]),
@@ -32,6 +34,7 @@ export class AddUserComponent implements OnInit {
     if (this.formGroup.valid) {
       this.authService.signup(this.formGroup.get('userName')?.value,
       this.formGroup.get('password')?.value).subscribe(() => {
+        this.ngxLoader.stop();
         this.dialogRef.close();
       });
     }

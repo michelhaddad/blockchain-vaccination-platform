@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { OrderService } from '../../../modules/orders/order.service';
 import { PlanningService } from '../../../modules/orders/planning.service';
 
@@ -14,7 +15,8 @@ export class VaccinateComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<VaccinateComponent>,
-    private planningService: PlanningService
+    private planningService: PlanningService,
+    private ngxLoader: NgxUiLoaderService
   ) {
     this.formGroup = new FormGroup({
       batchNumber: new FormControl(null, [Validators.required]),
@@ -32,6 +34,7 @@ export class VaccinateComponent implements OnInit {
   submitForm() {
     if (this.formGroup.valid) {
       this.planningService.vaccinate(this.formGroup.getRawValue().batchNumber, this.formGroup.getRawValue().count).subscribe(() => {
+        this.ngxLoader.stop();
         this.dialogRef.close();
       }, () => this.dialogRef.close());
     }
