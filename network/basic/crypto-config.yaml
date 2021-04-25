@@ -7,8 +7,8 @@ OrdererOrgs:
 
 PeerOrgs:
 
-  - Name: org1
-    Domain: org1.el-network.com
+  - Name: impact
+    Domain: impact.el-network.com
     EnableNodeOUs: true
     Template:
       Count: 1

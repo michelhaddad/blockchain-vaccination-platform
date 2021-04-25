@@ -16,7 +16,7 @@ destroy:
 	rm -rf *-e
 	rm -rf ../../apps/vaccination-web-api/wallet
 	rm -rf connection-profile-Donor.yaml
-	rm -rf connection-profile-Impact.yaml
+	rm -rf connection-profile-impact.yaml
 	rm -rf connection-profile-Hospital.yaml
 	rm -rf connection-profile-MOPH.yaml
 	rm -rf connection-profile-Manufacturer.yaml
@@ -38,7 +38,7 @@ generate:
 	cp connectionProfile-TEMPLATE.json connectionProfile.json
 	sed -i -e "s/HLNETWORK/${HLNETWORK}/g" connectionProfile.json
 	sed -i -e "s~ABSPATH~${ABSPATH}~g" connectionProfile.json
-	for ORG in org1 MOPH BorderControl Manufacturer Hospital StorageFacility Donor ; \
+	for ORG in impact MOPH BorderControl Manufacturer Hospital StorageFacility Donor ; \
 	do \
 		cp connection-profile-TEMPLATE.yaml connection-profile-$${ORG}.yaml; \
 		sed -i -e  "s/HLNETWORK/${HLNETWORK}/g" connection-profile-$${ORG}.yaml; \
