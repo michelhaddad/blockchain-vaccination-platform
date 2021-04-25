@@ -20,7 +20,7 @@ export class AddPlanComponent implements OnInit {
     this.formGroup = new FormGroup({
       date: new FormControl(null, [Validators.required]),
       hospital: new FormControl({value:"Hospital", disabled: true},  [Validators.required]),
-      storageFacility: new FormControl({value:"Storage",disabled:true}, [Validators.required]),
+      storageFacility: new FormControl({value:"StorageFacility",disabled:true}, [Validators.required]),
       numberVials: new FormControl(null, [Validators.required])
     });
   }
