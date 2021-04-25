@@ -10,6 +10,7 @@ import { PlanRowModel } from '../../models/plan-row.model';
 import { PlanModel } from '../../models/plan.model';
 import { PlanningStatusEnum, TableButtonEnum } from '../../models/planning-status.enum';
 import { VaccinateComponent } from 'src/app/orders/dialog/vaccinate/vaccinate.component';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-planning',
@@ -36,7 +37,7 @@ export class PlanningComponent implements OnInit {
 
   tableDataSource: MatTableDataSource<any> = new MatTableDataSource();
 
-  constructor(public dialog: MatDialog, private authService: AuthService, private planningService: PlanningService) {
+  constructor(public dialog: MatDialog, private authService: AuthService, private planningService: PlanningService, private ngxLoader: NgxUiLoaderService) {
     this.isMOPH = this.authService.getOrganizationType() == OrganizationEnum.MOPH;
     this.isHospital = this.authService.getOrganizationType() == OrganizationEnum.Hospital;
     this.isBorderControl = this.authService.getOrganizationType()== OrganizationEnum.BorderControl;
@@ -73,6 +74,7 @@ export class PlanningComponent implements OnInit {
 
   getPlans(): void {
     this.planningService.getAllDeliveryPlans().subscribe((res) => {
+      this.ngxLoader.stop();
       if (this.isBorderControl) {
         this.plans = res.response;
         this.plans = this.plans.filter((e) => e.Record.currentState == PlanningStatusEnum.BORDER_CONTROL || e.Record.currentState == PlanningStatusEnum.IN_STORAGE || e.Record.currentState == PlanningStatusEnum.TO_STORAGE )
@@ -97,10 +99,12 @@ export class PlanningComponent implements OnInit {
       case TableButtonEnum.SENT:
         if(event.item.status == this.getStatus(PlanningStatusEnum.BORDER_CONTROL)){
           this.planningService.sendToStorage(event.item.deliveryId).subscribe(() => {
+            this.ngxLoader.stop();
             this.getPlans();
           });
         }else{
           this.planningService.sendToHospital(event.item.deliveryId).subscribe(() => {
+            this.ngxLoader.stop();
             this.getPlans();
           });
         }
@@ -108,10 +112,12 @@ export class PlanningComponent implements OnInit {
       case TableButtonEnum.RECEIVED:
         if(event.item.status == this.getStatus(PlanningStatusEnum.TO_HOSPITAL)){
         this.planningService.receivedInHospital(event.item.deliveryId).subscribe(() => {
+          this.ngxLoader.stop();
           this.getPlans();
         });
       }else{
         this.planningService.receivedInStorage(event.item.deliveryId).subscribe(() => {
+          this.ngxLoader.stop();
           this.getPlans();
         });
       }

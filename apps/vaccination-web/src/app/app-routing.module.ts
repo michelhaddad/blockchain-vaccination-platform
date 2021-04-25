@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './core/auth-gard.service';
 import { LoginComponent } from './core/login/login.component';
 import { MainComponent } from './core/main/main.component';
 
@@ -21,7 +22,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'networkconfiguration',
+        path: 'adminsettings',
         loadChildren: () =>
           import(
             './modules/network-configuration/network-configuration.module'
@@ -42,6 +43,9 @@ const routes: Routes = [
           ),
       },
     ],
+    canActivate: [AuthGuardService],
+    canActivateChild:[AuthGuardService],
+    runGuardsAndResolvers: 'always'
   },
 ];
 

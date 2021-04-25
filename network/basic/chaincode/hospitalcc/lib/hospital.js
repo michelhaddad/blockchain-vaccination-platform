@@ -52,9 +52,11 @@ class Hospital extends State {
         this.totalRemainingDoses += doseCount;
     }
 
-    removeDosesFromBatch(batchID, doseCount) {
+    removeDosesFromBatch(batchID, doseCount, date = null) {
         doseCount = parseInt(doseCount);
-        const today = new Date().toISOString().slice(0, 10);
+        if (date == null) {
+            date = new Date().toISOString().slice(0, 10);
+        }
 
         // Decrement doses in Batch Ids section
         if (!this.vaccineDataPerBatch[batchID]) {
@@ -64,15 +66,15 @@ class Hospital extends State {
         }
 
         // Add to daily administered doses
-        if (!this.dailyAdministeredDoses[today]) {
-            this.dailyAdministeredDoses[today] = {
+        if (!this.dailyAdministeredDoses[date]) {
+            this.dailyAdministeredDoses[date] = {
                 [batchID]: doseCount
             }
         } else {
-            if (!this.dailyAdministeredDoses[today][batchID]) {
-                this.dailyAdministeredDoses[today][batchID] = doseCount;
+            if (!this.dailyAdministeredDoses[date][batchID]) {
+                this.dailyAdministeredDoses[date][batchID] = doseCount;
             } else {
-                this.dailyAdministeredDoses[today][batchID] -= doseCount;
+                this.dailyAdministeredDoses[date][batchID] -= doseCount;
             }
         }
 

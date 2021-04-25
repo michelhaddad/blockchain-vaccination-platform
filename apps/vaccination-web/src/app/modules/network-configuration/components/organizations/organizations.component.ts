@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { OrganizationRowModel } from 'src/app/shared/models/organization-row.model';
 import { TableColumnModel } from 'src/app/shared/models/table-column.model';
-import { AddPeerComponent } from '../dialogs/add-peer/add-peer.component';
+// import { AddUserComponent } from '../dialogs/add-user/add-user.component';
 import { PeersComponent } from '../dialogs/peers/peers.component';
 
 @Component({

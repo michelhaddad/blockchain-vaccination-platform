@@ -63,8 +63,8 @@ class MophBalance extends State {
     /**
      * Factory method to create a donation paper object
      */
-    static createInstance() {
-        return new MophBalance({payedAmount: 0, redeemedAmount: 0});
+    static createInstance(redeemedAmount = 0, payedAmount = 0) {
+        return new MophBalance({payedAmount: payedAmount, redeemedAmount: redeemedAmount});
     }
 
     static getClass() {

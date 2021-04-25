@@ -1,16 +1,12 @@
-/*
- * SPDX-License-Identifier: Apache-2.0
- */
-
-'use strict';
+'use strict'
 
 const FabricCAServices = require('fabric-ca-client');
 const { FileSystemWallet, X509WalletMixin } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
-const dotenv = require('dotenv');
+const User = require('../database/models/user');
 
-const configPath = path.resolve(__dirname, 'services', 'config.json');
+const configPath = path.resolve(__dirname, '..', 'services', 'config.json');
 const configJSON = fs.readFileSync(configPath, 'utf8');
 const config = JSON.parse(configJSON);
 
@@ -18,21 +14,35 @@ let ccpPath;
 let ccpJSON;
 let ccp;
 
-async function main() {
-    try {
-        dotenv.config();
-        if ( process.env.NETWORK != undefined) {
-            config.connection_profile = config.connection_profile.replace("basic", process.env.NETWORK);
-        }
+const addAdminToDB = async ({username, organization, password, enrollmentID}) => {
+    User.register(
+        new User({ username, organization, enrollmentID, admin: true}),
+        password,
+        (err, user) => {
+          if (err) {
+            throw err;
+          } else {
+              user.save((err, user) => {
+              if (err) {
+                throw err;
+              }
+              console.log("Successfully registered the admin: " + username)
+            });
+          }
+        },
+    );
+}
 
-        ccpPath = path.resolve(__dirname, config.connection_profile);
+const createAdminAccounts = async () =>  {
+    try {
+        ccpPath = path.resolve(__dirname, '..', config.connection_profile);
         ccpJSON = fs.readFileSync(ccpPath, 'utf8');
         ccp = JSON.parse(ccpJSON);
 
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = new FileSystemWallet(walletPath);
-        console.log(`Wallet path: ${walletPath}`);
+        console.log(`Wallet path: ${walletPath}\n`);
 
         // For each organization in the config file, get the CA from the connection profile.
         const orgs = Object.keys(config.organizations);
@@ -54,6 +64,12 @@ async function main() {
                 const identity = X509WalletMixin.createIdentity(config.organizations[orgs[i]].MSP, enrollment.certificate, enrollment.key.toBytes());
                 wallet.import('admin' + orgs[i], identity);
                 console.log('Successfully enrolled admin user and imported it into the wallet: admin' + orgs[i]);
+                await addAdminToDB({
+                    username: 'admin' + orgs[i],
+                    enrollmentID: 'admin' + orgs[i],
+                    organization: orgs[i],
+                    password: 'password'
+                });
             }
         }
     } catch (error) {
@@ -62,4 +78,4 @@ async function main() {
     }
 }
 
-main();
+module.exports = createAdminAccounts

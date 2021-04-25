@@ -6,10 +6,12 @@ SPDX-License-Identifier: Apache-2.0
 
 // Fabric smart contract classes
 const { Contract, Context } = require('fabric-contract-api');
+const deliveries = require('../init-ledger/deliveries.js');
 
 // PaperNet specifc classes
 const OrderDelivery = require('./orderDelivery.js');
 const OrderDeliveryList = require('./orderDeliveryList.js');
+const SupplyChainAccessControl = require('../ledger-api/SupplyChainAccessControl')
 
 /**
  * A custom context provides easy access to list of all donation papers
@@ -38,14 +40,25 @@ class SupplyChainContract extends Contract {
         return new OrderDeliveryContext();
     }
 
+    beforeTransaction(ctx) {
+        const ac = new SupplyChainAccessControl();
+        const fcn = ctx.stub.getFunctionAndParameters().fcn;
+        if (!ac.checkAccess(ctx, fcn)) {
+            throw new Error("User is not allowed to perform this operation.");
+        }
+    }
+
     /**
      * Instantiate to perform any setup of the ledger that might be required.
      * @param {Context} ctx the transaction context
      */
     async instantiate(ctx) {
-        // No implementation required with this example
-        // It could be where data migration is performed, if necessary
-        console.log('Instantiate the contract');
+        for (const delivery of deliveries) {
+            let orderDelivery = OrderDelivery.createInstance(delivery.deliveryID, delivery.orderID, 'mophUser', 'StorageFacility', delivery.hospitalID,
+                delivery.batchNumber, delivery.numberOfVials, delivery.arrivalDateTime, delivery.issueDateTime, delivery.updateDateTime);
+            orderDelivery.currentState = delivery.state;
+            await ctx.deliveryList.addDelivery(orderDelivery);
+        }
     }
 
     async query(ctx, query) {
@@ -84,17 +97,8 @@ class SupplyChainContract extends Contract {
      * @returns 
      */
     async indexOrderDelivery(ctx) {
-        let identity = ctx.clientIdentity;
-        const enrollmentID = identity.getAttributeValue('hf.EnrollmentID');
-        // let org = identity.getMSPID();
-        // const role = "issuer";
-        // if(org === "MOPH")
-        //     role = "issuer";
-        // else
-        //     role = org;
         const query = `{
             "selector": {
-                "issuer": "${enrollmentID}",
                 "class": "${OrderDelivery.getClass()}"
             }
         }`;

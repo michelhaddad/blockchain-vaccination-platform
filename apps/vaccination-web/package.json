@@ -27,6 +27,7 @@
     "dotenv": "^8.1.0",
     "hammerjs": "^2.0.8",
     "jquery": "^3.6.0",
+    "ngx-ui-loader": "^10.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

@@ -15,12 +15,12 @@
           <ng-container *ngIf="item.isStatus">
             <div [style.color]="getStatusColor(element[item.id])">{{ element[item.id] }}</div>
           </ng-container>
-          <ng-container *ngIf="!item.isNumber && !item.isStatus; else number">
+          <ng-container *ngIf="!item.isNumber && !item.isStatus">
             {{ element[item.id] }}
           </ng-container>
-          <ng-template #number>
+          <ng-container *ngIf="item.isNumber" >
             {{ element[item.id] | number}}{{item.isAmount ? "$" : ""}}
-          </ng-template>
+          </ng-container>
         </ng-template>
       </ng-container>
       <ng-template #button>

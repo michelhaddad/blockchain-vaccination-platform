@@ -14,9 +14,15 @@ export class MainComponent {
   showSubmenu: boolean = false;
   isShowing = false;
   showSubSubMenu: boolean = false;
+  userName: string | null = '';
 
   sections: any[] = [];
   constructor(private authService: AuthService) {
-    this.sections=authService.getAllowedSections();
+    this.sections=this.authService.getAllowedSections();
+    this.userName=this.authService.getUserName();
+  }
+
+  logout(): void{
+    this.authService.logout();
   }
 }

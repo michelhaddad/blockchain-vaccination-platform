@@ -11,9 +11,8 @@ install:
 network:
 	echo ${NETWORK}
 
-users:
-	NETWORK=${NETWORK} node enrollAdmins.js
-	NETWORK=${NETWORK} node registerUsers.js
+start:
+	npm start
 	
 clean:
 	rm -rf ./wallet

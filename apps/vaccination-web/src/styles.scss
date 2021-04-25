@@ -96,16 +96,8 @@ body {
   font-style: italic;
 }
 
-.donate-dialog,
-.add-peer-dialog {
+.donate-dialog, .add-user-dialog{
   min-height: 120px;
-  @extend .general-dialog;
-}
-
-.peers-dialog {
-  .mat-dialog-container {
-    padding: 0px;
-  }
   @extend .general-dialog;
 }
 

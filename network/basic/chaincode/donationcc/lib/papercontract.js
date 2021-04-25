@@ -6,12 +6,15 @@ SPDX-License-Identifier: Apache-2.0
 
 // Fabric smart contract classes
 const { Contract, Context } = require('fabric-contract-api');
+const DonationAccessControl = require('../ledger-api/DonationAccessControl.js');
 const BalanceList = require('./balancelist.js');
 
 // PaperNet specifc classes
 const DonationPaper = require('./donationPaper.js');
 const MophBalance = require('./mophBalance.js');
 const PaperList = require('./paperlist.js');
+const initialDonations = require('../init-ledger/donations');
+const initialOrders = require('../init-ledger/orders');
 
 /**
  * A custom context provides easy access to list of all donation papers
@@ -41,12 +44,35 @@ class DonationPaperContract extends Contract {
         return new DonationPaperContext();
     }
 
+    beforeTransaction(ctx) {
+        const ac = new DonationAccessControl();
+        const fcn = ctx.stub.getFunctionAndParameters().fcn;
+        if (!ac.checkAccess(ctx, fcn)) {
+            throw new Error("User is not allowed to perform this operation.");
+        }
+    }
+
     /**
      * Instantiate to perform any setup of the ledger that might be required.
      * @param {Context} ctx the transaction context
      */
     async instantiate(ctx) {
-        const mophBalance = MophBalance.createInstance();
+        let mophRedeemedAmount = 0;
+        let mophPayedAmount = 0;
+        for (const donation of initialDonations) {
+            if (donation.state == 2) {
+                mophRedeemedAmount += parseInt(donation.amount);
+            }
+            let paper = DonationPaper.createInstance('user7', donation.paperID, donation.date, donation.amount);
+            paper.currentState = donation.state;
+            await ctx.paperList.addPaper(paper);
+        }
+        for (const initialOrder of initialOrders) {
+            if (initialOrder.state >= 2) {
+                mophPayedAmount += parseInt(initialOrder.fee);
+            }
+        }
+        const mophBalance = MophBalance.createInstance(mophRedeemedAmount, mophPayedAmount);
         await ctx.balanceList.addBalanceObject(mophBalance);
     }
 

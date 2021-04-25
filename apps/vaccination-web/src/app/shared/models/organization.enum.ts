@@ -6,5 +6,6 @@ export enum OrganizationEnum {
     StorageFacility = 5,
     Donor = 6,
     Manufacturer = 7,
-    Default = 8
+    Default = 8,
+    Admin = 9.
 }

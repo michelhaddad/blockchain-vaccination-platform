@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AuthService } from 'src/app/core/auth.service';
 import { MOPHBalanceModel } from 'src/app/modules/orders/models/moph-balance.model';
 import { TableButtonEnum } from 'src/app/modules/orders/models/planning-status.enum';
@@ -24,7 +25,7 @@ export class DonationsComponent implements OnInit {
   isDonor: boolean = false;
   displayedColumns: TableColumnModel[] = [
     new TableColumnModel('donationId', 'Donation ID'),
-    new TableColumnModel('donor', 'Donor'),
+    new TableColumnModel('donor', 'Donor ID'),
     new TableColumnModel('amount', 'Amount',false,false,false,true,true),
     new TableColumnModel('date', 'Donation Date'),
     new TableColumnModel('button', '', false, true)
@@ -35,7 +36,8 @@ export class DonationsComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private donationService: DonationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private ngxLoader: NgxUiLoaderService
   ) {
     this.isDonor =
       this.authService.getOrganizationType() == OrganizationEnum.Donor;
@@ -53,6 +55,7 @@ export class DonationsComponent implements OnInit {
   getAmountRedeemed(){
     if(!this.isDonor){
       this.donationService.getFunds().subscribe((e)=>{
+        this.ngxLoader.stop();
         this.redeemedBalance=e.response.redeemedAmount;
       })
     }
@@ -61,11 +64,13 @@ export class DonationsComponent implements OnInit {
   getDonations(): void {
     if (!this.isDonor) {
       this.donationService.getAllDonations().subscribe((result) => {
+        this.ngxLoader.stop();
         this.donations = result.response
         this.createDonations();
       });
     } else {
       this.donationService.getDonationByUser().subscribe((result) => {
+        this.ngxLoader.stop();
         this.donations = result.response;
         this.createDonations();
       });
@@ -74,6 +79,7 @@ export class DonationsComponent implements OnInit {
 
   redeemDonation(event: any) {
     this.donationService.redeemDonation(event.item.donationId).subscribe(()=>{
+      this.ngxLoader.stop();
       this.getData();
     });
   }

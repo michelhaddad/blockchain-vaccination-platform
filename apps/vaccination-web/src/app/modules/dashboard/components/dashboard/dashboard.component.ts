@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { DashboardService } from '../../dashboard.service';
 import { multi } from '../../dummy';
 import {  LineModel, PointModel } from '../../models/line-chart';
@@ -17,7 +18,8 @@ export class DashboardComponent implements OnInit{
   manufacturerData: PointModel[] = [];
 
   cardColor: string = '#ffffff';
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService,
+    private ngxLoader: NgxUiLoaderService) {
   }
   ngOnInit(): void {
     this.getData();
@@ -26,11 +28,13 @@ export class DashboardComponent implements OnInit{
   getDailyAdministeredHospitalDoses(){
     this.dashboardService.getHospitalDailyAdministrations().subscribe(result=>{
       this.hospitalDailyDoses=result;
+      this.ngxLoader.stop();
     });
   }
 
   getDailyAdministeredDoses(){
     this.dashboardService.getDailyAdministrations().subscribe(result=>{
+      this.ngxLoader.stop();
       this.dailyDoses=result;
     });
   }
@@ -38,6 +42,7 @@ export class DashboardComponent implements OnInit{
   getRemainingHospitalDoses(){
     this.dashboardService.getHospitalRemainingVials().subscribe((result : any[])=>{
       this.hospitalRemainingDoses=result.map(e=> new PointModel(e.name,e.remainingDoses));
+      this.ngxLoader.stop();
     });
   }
 
@@ -45,16 +50,21 @@ export class DashboardComponent implements OnInit{
   getRemainingDosesDistribution(){
     this.dashboardService.getRemainingVialsDistribution().subscribe(res=>{
       this.distributedDoses=res;
+      this.ngxLoader.stop();
     });
   }
 
   getManufacturerDosesData(){
     this.dashboardService.getManufacturerDosesData().subscribe(res=>{
-      this.manufacturerData=[ 
+      
+      this.ngxLoader.stop();
+      if(res.Manufacturer){
+        this.manufacturerData=[ 
         new PointModel("Total Ordered",res.Manufacturer.ordered),
-      new PointModel("Total Administered",res.Manufacturer.administered),
-      new PointModel("Doses Left",res.Manufacturer.remainingInCountry)
-    ];
+        new PointModel("Total Administered",res.Manufacturer.administered),
+        new PointModel("Doses Left",res.Manufacturer.remainingInCountry)
+      ];
+      }
     });
   }
 

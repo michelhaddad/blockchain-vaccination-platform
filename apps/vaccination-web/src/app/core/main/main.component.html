@@ -1,10 +1,15 @@
-<mat-toolbar class="bar" color="primary">
-  <button class="hamburger-button" mat-icon-button (click)="sidenav.toggle()">
+<mat-toolbar color="primary">
+  <button class="icon-button" mat-icon-button (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <button class="hamburger-button" mat-icon-button>
+  <span>{{userName}}</span>
+  <button class="icon-button" mat-icon-button [matMenuTriggerFor]="menuBtn" >
     <mat-icon>person</mat-icon>
   </button>
+  <mat-menu #menuBtn="matMenu" xPosition="before">
+    <button mat-menu-item
+    (click)="logout()" >Log Out</button>
+  </mat-menu>
 </mat-toolbar>
 <mat-sidenav-container class="h-100 overflow-hidden" autosize>
   <mat-sidenav
