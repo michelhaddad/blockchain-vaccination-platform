@@ -45,6 +45,12 @@ generate:
 		sed -i -e  "s/ORG/$${ORG}/g" connection-profile-$${ORG}.yaml; \
 		sed -i -e  "s~ABSPATH~${ABSPATH}~g" connection-profile-$${ORG}.yaml; \
 	done
+
+	for ORG in 1 MOPH BorderControl Manufacturer Hospital StorageFacility Donor ; \
+	do \
+		sed -i -e "s~ABSPATH~${ABSPATH}~g" connectionProfile-$${ORG}.json; \
+	done
+
 ifeq ($(WHICHOS),Darwin)
 	rm *-e
 endif

@@ -7,7 +7,7 @@
 		"adminUser": "admin",
 		"adminPassword": "adminpw",
 		"enableAuthentication": false,
-		"organization": "Impact",
+		"organization": "Org1",
 		"connection": {
 			"timeout": {
 				"peer": {
@@ -20,7 +20,7 @@
 	"channels": {
 		"orderchannel": {
 			"peers": {
-				"peer0.Impact.HLNETWORK.com": {
+				"peer0.org1.HLNETWORK.com": {
 					"endorsingPeer": true,
 					"chaincodeQuery": true,
 					"ledgerQuery": true,
@@ -67,7 +67,7 @@
 		},
 		"distributionchannel": {
 			"peers": {
-				"peer0.Impact.HLNETWORK.com": {
+				"peer0.org1.HLNETWORK.com": {
 					"endorsingPeer": true,
 					"chaincodeQuery": true,
 					"ledgerQuery": true,
@@ -120,20 +120,20 @@
 		}
 	},
 	"organizations": {
-		"Impact": {
-			"mspid": "ImpactMSP",
+		"Org1": {
+			"mspid": "org1MSP",
 			"fullpath": true,
 			"peers": [
-				"peer0.Impact.HLNETWORK.com"
+				"peer0.org1.HLNETWORK.com"
 			],
 			"certificateAuthorities": [
-                "ca.Impact.HLNETWORK.com"
+                "ca.org1.HLNETWORK.com"
             ],
 			"adminPrivateKey": {
-				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.HLNETWORK.com/users/Admin@Impact.HLNETWORK.com/msp/keystore/adminKeyImpact"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/users/Admin@org1.HLNETWORK.com/msp/keystore/adminKey1"
 			},
 			"signedCert": {
-				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.HLNETWORK.com/users/Admin@Impact.HLNETWORK.com/msp/signcerts/Admin@Impact.HLNETWORK.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/users/Admin@org1.HLNETWORK.com/msp/signcerts/Admin@org1.HLNETWORK.com-cert.pem"
 			}
 		},
 		"MOPH": {
@@ -244,13 +244,13 @@
 		}
 	},
 	"peers": {
-		"peer0.Impact.HLNETWORK.com": {
+		"peer0.org1.HLNETWORK.com": {
 			"tlsCACerts": {
-				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/Impact.HLNETWORK.com/peers/peer0.Impact.HLNETWORK.com/msp/tlscacerts/tlsca.Impact.HLNETWORK.com-cert.pem"
+				"path": "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/peers/peer0.org1.HLNETWORK.com/msp/tlscacerts/tlsca.org1.HLNETWORK.com-cert.pem"
 			},
 			"url": "grpcs://localhost:7051",
 			"grpcOptions": {
-				"ssl-target-name-override": "peer0.Impact.HLNETWORK.com"
+				"ssl-target-name-override": "peer0.org1.HLNETWORK.com"
 			}
 		},
 		"peer0.MOPH.HLNETWORK.com": {
@@ -324,9 +324,9 @@
 		}
 	},
 	"certificateAuthorities": {
-		"ca.Impact.HLNETWORK.com": {
+		"ca.org1.HLNETWORK.com": {
 			"url": "http://localhost:7054",
-			"caName": "ca.Impact.HLNETWORK.com"
+			"caName": "ca.org1.HLNETWORK.com"
 		},
 		"ca.MOPH.HLNETWORK.com": {
 			"url": "http://localhost:8054",
