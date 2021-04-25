@@ -104,7 +104,7 @@ channels:
         orderer: "6000"
 
 organizations:
-  org1:
+  Org1:
     mspid: Org1MSP
     fullpath: true
     peers:

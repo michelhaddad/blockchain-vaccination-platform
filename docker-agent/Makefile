@@ -2,7 +2,7 @@
 #set +x
 
 HLNETWORK?=el-network
-ORG_NUMBER?=Impact
+ORG_NUMBER?=1
 NETWORK?=basic
 PEER_NUMBER?=0
 ABSPATH=/go/src/github.com
@@ -23,7 +23,13 @@ generate:
 	sed -i -e "s/CONFIG_NETWORK_NAME/${HLNETWORK}/g" docker-compose.yaml
 	sed -i -e "s/CONFIG_ORG_NUM/${ORG_NUMBER}/g" docker-compose.yaml
 	sed -i -e "s/CONFIG_PEER_NUM/${PEER_NUMBER}/g" docker-compose.yaml
-	for ORG in Impact MOPH BorderControl Manufacturer Hospital StorageFacility Donor ; \
+
+	cp templates/network/${NETWORK}/connection-profile-TEMPLATE.yaml connection-profile-Org1.yaml
+	sed -i -e  "s/HLNETWORK/${HLNETWORK}/g" connection-profile-Org1.yaml
+	sed -i -e  "s/ORG/Org1/g" connection-profile-Org1.yaml
+	sed -i -e  "s~ABSPATH~${ABSPATH}~g" connection-profile-Org1.yaml
+
+	for ORG in MOPH BorderControl Manufacturer Hospital StorageFacility Donor ; \
 	do \
 		cp templates/network/${NETWORK}/connection-profile-TEMPLATE.yaml connection-profile-$${ORG}.yaml; \
 		sed -i -e  "s/HLNETWORK/${HLNETWORK}/g" connection-profile-$${ORG}.yaml; \

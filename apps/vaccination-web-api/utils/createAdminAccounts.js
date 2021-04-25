@@ -46,6 +46,7 @@ const createAdminAccounts = async () =>  {
 
         // For each organization in the config file, get the CA from the connection profile.
         const orgs = Object.keys(config.organizations);
+        console.log(ccp);
         for (let i = 0; i < orgs.length; i++) {
             // Check if organization is present in connection profile and if it contains at least one CA.
             if (ccp.organizations[orgs[i]].certificateAuthorities && ccp.organizations[orgs[i]].certificateAuthorities.length != 0) {
