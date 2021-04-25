@@ -6,6 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 // Fabric smart contract classes
 const { Contract, Context } = require('fabric-contract-api');
+const DonationAccessControl = require('../ledger-api/DonationAccessControl.js');
 const BalanceList = require('./balancelist.js');
 
 // PaperNet specifc classes
@@ -41,6 +42,14 @@ class DonationPaperContract extends Contract {
     */
     createContext() {
         return new DonationPaperContext();
+    }
+
+    beforeTransaction(ctx) {
+        const ac = new DonationAccessControl();
+        const fcn = ctx.stub.getFunctionAndParameters().fcn;
+        if (!ac.checkAccess(ctx, fcn)) {
+            throw new Error("User is not allowed to perform this operation.");
+        }
     }
 
     /**

@@ -39,6 +39,18 @@ class SupplyChainContract extends Contract {
         return new OrderDeliveryContext();
     }
 
+    beforeTransaction(ctx) {
+        const ac = new SupplyChainAccessControl();
+        const fcn = ctx.stub.getFunctionAndParameters().fcn;
+        if (!ac.checkAccess(ctx, fcn)) {
+            throw new Error("User is not allowed to perform this operation.");
+        }
+    }
+
+    /**
+     * Instantiate to perform any setup of the ledger that might be required.
+     * @param {Context} ctx the transaction context
+     */
     async instantiate(ctx) {
         for (const delivery of deliveries) {
             let orderDelivery = OrderDelivery.createInstance(delivery.deliveryID, delivery.orderID, 'mophUser', 'StorageFacility', delivery.hospitalID,
