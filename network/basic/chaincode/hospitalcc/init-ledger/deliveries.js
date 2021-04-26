@@ -7,9 +7,9 @@ const deliveries = [
         batchNumber: 'BATCH002',
         numberOfVials: '400',
         manufacturer: 'Manufacturer',
-        arrivalDateTime: '2021-09-10',
-        issueDateTime: '2021-08-16',
-        updateDateTime: '2021-09-10'
+        arrivalDateTime: '2021-04-10',
+        issueDateTime: '2021-04-16',
+        updateDateTime: '2021-04-10'
     },
     {
         deliveryID: '272430de-4eca-4ee8-88fb-6c666d8b9115',
@@ -19,9 +19,9 @@ const deliveries = [
         batchNumber: 'BATCH002',
         numberOfVials: '400',
         manufacturer: 'Manufacturer',
-        arrivalDateTime: '2021-09-10',
-        issueDateTime: '2021-08-16',
-        updateDateTime: '2021-09-10'
+        arrivalDateTime: '2021-04-10',
+        issueDateTime: '2021-04-16',
+        updateDateTime: '2021-04-10'
     },
     {
         deliveryID: '7c50e0b5-f4ad-4620-a5ac-b8e19c96d397',
@@ -31,9 +31,9 @@ const deliveries = [
         numberOfVials: '800',
         manufacturer: 'Manufacturer',
         state: 3,
-        arrivalDateTime: '2021-09-13',
-        issueDateTime: '2021-08-16',
-        updateDateTime: '2021-09-13'
+        arrivalDateTime: '2021-04-13',
+        issueDateTime: '2021-04-16',
+        updateDateTime: '2021-04-13'
     },
     {
         deliveryID: 'b766c079-e235-4f01-ab3b-5a8949f11ce7',
@@ -43,9 +43,9 @@ const deliveries = [
         numberOfVials: '400',
         state: 1,
         manufacturer: 'Manufacturer',
-        arrivalDateTime: '2021-09-15',
-        issueDateTime: '2021-08-16',
-        updateDateTime: '2021-09-15'
+        arrivalDateTime: '2021-04-15',
+        issueDateTime: '2021-04-16',
+        updateDateTime: '2021-04-15'
     },
     {
         deliveryID: 'cd45e360-189a-4f8d-82ea-b34ee824c6fc',
@@ -55,9 +55,9 @@ const deliveries = [
         numberOfVials: '600',
         manufacturer: 'Manufacturer',
         state: 5,
-        arrivalDateTime: '2021-09-08',
-        issueDateTime: '2021-08-16',
-        updateDateTime: '2021-09-08'
+        arrivalDateTime: '2021-04-08',
+        issueDateTime: '2021-04-16',
+        updateDateTime: '2021-04-08'
     },
     {
         deliveryID: 'dd45d360-189a-4f8d-82ea-b34ee824c6fc',
@@ -67,9 +67,9 @@ const deliveries = [
         numberOfVials: '400',
         manufacturer: 'Manufacturer',
         state: 5,
-        arrivalDateTime: '2021-09-08',
-        issueDateTime: '2021-08-16',
-        updateDateTime: '2021-09-08'
+        arrivalDateTime: '2021-04-08',
+        issueDateTime: '2021-04-16',
+        updateDateTime: '2021-04-08'
     },
     {
         deliveryID: 'b7a808b5-1942-4e1e-a9d2-c5fb703fbb12',
@@ -79,9 +79,9 @@ const deliveries = [
         numberOfVials: '1000',
         manufacturer: 'Manufacturer',
         state: 3,
-        arrivalDateTime: '2021-09-10',
-        issueDateTime: '2021-08-16',
-        updateDateTime: '2021-09-10'
+        arrivalDateTime: '2021-04-10',
+        issueDateTime: '2021-04-16',
+        updateDateTime: '2021-04-10'
     },
     {
         deliveryID: '50fcdbcd-fdaa-4c98-aaae-15a634f31d05',
@@ -91,9 +91,9 @@ const deliveries = [
         state: 1,
         numberOfVials: '500',
         manufacturer: 'Manufacturer',
-        arrivalDateTime: '2021-09-18',
-        issueDateTime: '2021-08-16',
-        updateDateTime: '2021-09-18'
+        arrivalDateTime: '2021-04-18',
+        issueDateTime: '2021-04-16',
+        updateDateTime: '2021-04-18'
     },
 ];
 
