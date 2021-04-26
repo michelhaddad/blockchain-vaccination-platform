@@ -1,8 +1,13 @@
 const hospitals = [
     {
         hospitalID: '1',
-        name: 'Hospital',
-        address: 'Achrafieh, Rue 11'
+        name: 'Hotel Dieu',
+        address: 'Achrafieh'
+    },
+    {
+        hospitalID: '2',
+        name: 'Rafic Hariri',
+        address: 'Jnah'
     }
 ];
 
