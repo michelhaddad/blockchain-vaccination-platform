@@ -30,7 +30,7 @@ export class PlanningComponent implements OnInit {
     new TableColumnModel('storageFacility', 'Storage Facility'),
     new TableColumnModel('hospital', 'Hospital'),
     new TableColumnModel('batchNumber', 'Batch Number'),
-    new TableColumnModel('vialsQuantity', 'Number of Vials'),
+    new TableColumnModel('vialsQuantity', 'Number of Vials', false, false, false, true),
     new TableColumnModel('status', 'Status', false),
     new TableColumnModel('button', '', false, true)
   ];
@@ -57,7 +57,7 @@ export class PlanningComponent implements OnInit {
         e.Record.deliveryID,
         e.Record.arrivalDateTime,
         e.Record.storage,
-        "Hospital",
+        e.Record.hospitalID ==1 ? "Hotel Dieu" : "Rafic Hariri",
         e.Record.batchNumber,
         e.Record.numberOfVials,
         this.getStatus(e.Record.currentState),

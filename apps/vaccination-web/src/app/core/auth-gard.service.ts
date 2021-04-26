@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from "@angular/router";
+import { OrganizationEnum } from "../shared/models/organization.enum";
 import { AuthService } from "./auth.service";
 
 @Injectable({

@@ -32,13 +32,11 @@
           </div>
           <div class="col-6"> 
             <mat-form-field class="w-100 pb-2">
-                <input
-                  required
-                  matInput
-                  formControlName="hospital"
-                  placeholder="Hospital"
-                  autofocus
-                />
+              <mat-select required
+              formControlName="hospital"
+              placeholder="Hospital">
+              <mat-option *ngFor="let h of hospitals" [value]="h.id">{{h.name}}</mat-option>
+              </mat-select>
               </mat-form-field>
           </div>
         <div class="col-6">

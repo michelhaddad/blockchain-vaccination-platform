@@ -54,16 +54,21 @@ exports.getDailyAdministrations = async function (req, res) {
         for (const hospital of response){
             const dailyAdministeredDoses = hospital['Record']['dailyAdministeredDoses'];
             
-
             for (const [date, value] of Object.entries(dailyAdministeredDoses)) {
                 let doses = 0;
                 for (const [batch, doseCount] of Object.entries(value)) {
                     doses += doseCount;
                 }
-                series.push({
-                    value: doses,
-                    name: date
-                });
+                var i = series.findIndex(e=>e.name==date);
+                if(i!=-1){
+                    series[i].value+= doses;
+
+                }else{
+                    series.push({
+                        value: doses,
+                        name: date
+                    });
+                }
             }
         }
         resultArray.push({
@@ -79,7 +84,7 @@ exports.getDailyAdministrations = async function (req, res) {
 
 exports.getDailyHospitalAdministrations = async function (req, res) {
     try {
-        const txManager = new TransactionManager('user1', 'distributionchannel');
+        const txManager = new TransactionManager(req.user, 'distributionchannel');
         const submitTx = txManager.getEvaluateTransactionInstance('hospitalcc', 'indexHospitals');
         let response = await submitTx.send();
         response = JSON.parse(JSON.parse(response));

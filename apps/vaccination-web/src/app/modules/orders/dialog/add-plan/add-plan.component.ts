@@ -11,6 +11,7 @@ import { PlanningService } from '../../planning.service';
 })
 export class AddPlanComponent implements OnInit {
   formGroup: FormGroup;
+  hospitals: any= [{id:1,name:"Hotel Dieu"}, {id:2,name:"Rafic Hariri"}]
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private planningService: PlanningService,
@@ -19,7 +20,7 @@ export class AddPlanComponent implements OnInit {
   ) {
     this.formGroup = new FormGroup({
       date: new FormControl(null, [Validators.required]),
-      hospital: new FormControl({value:"Hospital", disabled: true},  [Validators.required]),
+      hospital: new FormControl(null,  [Validators.required]),
       storageFacility: new FormControl({value:"StorageFacility",disabled:true}, [Validators.required]),
       numberVials: new FormControl(null, [Validators.required])
     });

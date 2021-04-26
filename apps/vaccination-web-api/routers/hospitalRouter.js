@@ -10,7 +10,7 @@ router.get('/', hospitalController.getAllHospitals);
 
 router.get('/dosesData', hospitalController.getDosesData);
 
-router.get('/dailyadministrations', hospitalController.getDailyAdministrations);
+router.get('/dailyadministrations', hospitalController.getDailyHospitalAdministrations);
 
 router.put('/:id/deliver', hospitalController.deliverVials);
 

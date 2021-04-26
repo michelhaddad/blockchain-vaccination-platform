@@ -55,7 +55,11 @@ export class LoginComponent {
         this.authService.saveLoginResponse(res.token);
         this.authService.saveUsername(this.formGroup.get('userName')?.value);
         this.authService.saveAdminRight(res.user.admin);
-        this.router.navigate(['dashboard']);   
+        if(this.mapOrganizationToEnum(res.user.organization)==OrganizationEnum.Manufacturer){
+          this.router.navigate(['orders']);
+        }else{
+          this.router.navigate(['dashboard']);   
+        }
       });
     }
   }

@@ -20,7 +20,7 @@ export class PlanningService {
     const body = {
       orderID: orderId,
       storageID: "StorageFacility",
-      hospitalID: "1",
+      hospitalID: hospitalID.toString(),
       batchNumber: batchNumber,
       numberOfVials: numberVials.toString(),
       arrivalDateTime: arrivalDateTime

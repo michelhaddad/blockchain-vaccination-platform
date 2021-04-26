@@ -15,10 +15,10 @@
           <ng-container *ngIf="item.isStatus">
             <div [style.color]="getStatusColor(element[item.id])">{{ element[item.id] }}</div>
           </ng-container>
-          <ng-container *ngIf="!item.isNumber && !item.isStatus">
+          <ng-container *ngIf="!item.isNumber && !item.isStatus || element[item.id]=='Not Available'">
             {{ element[item.id] }}
           </ng-container>
-          <ng-container *ngIf="item.isNumber" >
+          <ng-container *ngIf="item.isNumber && element[item.id]!='Not Available'" >
             {{ element[item.id] | number}}{{item.isAmount ? "$" : ""}}
           </ng-container>
         </ng-template>
