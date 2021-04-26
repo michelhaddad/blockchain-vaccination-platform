@@ -55,7 +55,7 @@ export class PlanningComponent implements OnInit {
       const row = new PlanRowModel(
         e.Record.orderID,
         e.Record.deliveryID,
-        e.Record.arrivalDateTime,
+        new Date(e.Record.arrivalDateTime).toISOString().slice(0,10),
         e.Record.storage,
         e.Record.hospitalID ==1 ? "Hotel Dieu" : "Rafic Hariri",
         e.Record.batchNumber,

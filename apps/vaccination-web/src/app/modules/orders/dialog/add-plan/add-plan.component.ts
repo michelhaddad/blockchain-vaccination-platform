@@ -34,8 +34,9 @@ export class AddPlanComponent implements OnInit {
 
   submitForm() {
     const form = this.formGroup.getRawValue();
-    if (this.formGroup.valid) {
-      this.planningService.addDeliveryPlans(this.data.orderId, form.storageFacility, form.hospital, this.data.batchNumber, form.numberVials, form.date).subscribe(() => {
+    if (this.formGroup.valid) {;
+      let date= new Date(form.date).toISOString().slice(0,10);
+      this.planningService.addDeliveryPlans(this.data.orderId, form.storageFacility, form.hospital, this.data.batchNumber, form.numberVials, date).subscribe(() => {
         this.ngxLoader.stop();
         this.dialogRef.close();
       }, () => this.dialogRef.close(true))

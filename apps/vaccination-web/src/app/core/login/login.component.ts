@@ -51,13 +51,17 @@ export class LoginComponent {
     if(this.formGroup.valid){
       this.authService.login(this.formGroup.get('userName')?.value, this.formGroup.get('password')?.value).subscribe((res)=>{
         this.ngxLoader.stop();
-        this.authService.storeOrganizationType(this.mapOrganizationToEnum(res.user.organization));
+        const org=  this.mapOrganizationToEnum(res.user.organization);
+        this.authService.storeOrganizationType(org);
         this.authService.saveLoginResponse(res.token);
         this.authService.saveUsername(this.formGroup.get('userName')?.value);
         this.authService.saveAdminRight(res.user.admin);
-        if(this.mapOrganizationToEnum(res.user.organization)==OrganizationEnum.Manufacturer){
+        if(org==OrganizationEnum.Manufacturer || org==OrganizationEnum.BorderControl){
           this.router.navigate(['orders']);
-        }else{
+        }else if(org==OrganizationEnum.Hospital || org ==OrganizationEnum.StorageFacility){
+            this.router.navigate(['orders/planning'])
+        }
+        else{
           this.router.navigate(['dashboard']);   
         }
       });
