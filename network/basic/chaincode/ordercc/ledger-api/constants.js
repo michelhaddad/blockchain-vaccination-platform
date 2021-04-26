@@ -22,7 +22,7 @@ const QUERY_FUNCTIONS = ["query", "getAllOrders", "getAllApprovedOrders"];
 const ALL_FUNCTIONS = [...QUERY_FUNCTIONS, "issue", "approve", "reject", "setOrderShipped", "setOrderDelivered"];
 const MANUFACTURER_FUNCTIONS = [...QUERY_FUNCTIONS, "approve", "reject", "setOrderShipped"];
 const MOPH_FUNCTIONS = [...QUERY_FUNCTIONS, "issue"];
-const BORDERCONTROL_FUNCTIONS = ["getAllApprovedOrders", "setOrderDelivered"];
+const BORDERCONTROL_FUNCTIONS = [...QUERY_FUNCTIONS, "setOrderDelivered"];
 
 const INSTANCIATION_FUNCTION = "instantiate";
 
