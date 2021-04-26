@@ -7,12 +7,14 @@ class OrderAccessControl {
         const mophAcl = new ACLSubject(constants.MophMSP);
         const bordercontrolAcl = new ACLSubject(constants.BorderControlMSP);
         const impactAcl = new ACLSubject(constants.ImpactMSP);
+        const donorAcl = new ACLSubject(constants.DonorMSP);
 
         this.aclRules = {
             [manufacturerAcl]: constants.MANUFACTURER_FUNCTIONS,
             [mophAcl]: constants.MOPH_FUNCTIONS,
             [bordercontrolAcl] : constants.BORDERCONTROL_FUNCTIONS,
-            [impactAcl]: constants.QUERY_FUNCTIONS
+            [impactAcl]: constants.QUERY_FUNCTIONS,
+            [donorAcl]: constants.QUERY_FUNCTIONS
         }
     }
 
