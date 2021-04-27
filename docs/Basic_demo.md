@@ -9,9 +9,9 @@ Kibana is taking us to select a default index pattern. Click `fabricbeat-*`, the
 ![alt text](https://github.com/balazsprehoda/hyperledger-elastic/blob/master/docs/images/Index_pattern_selection_basic.png "Setting default index pattern")
 After that, we can click the dashboards again to see the dashboards:
 ![alt text](https://github.com/balazsprehoda/hyperledger-elastic/blob/master/docs/images/Dashboards_basic.png "Dashboards")
-See the overview of our data on the Overview Dashboard (org1). We can select peer and channel in the two dropdown lists:
-![alt text](https://github.com/balazsprehoda/hyperledger-elastic/blob/master/docs/images/Org1_overview_basic.png "Org1 overview")
-We can see that Org1 is member of `mychannel`, and there is one fabricbeat instance shipping data from one peer (`peer0.org1.el-network.com`) in Org1.
+See the overview of our data on the Overview Dashboard (impact). We can select peer and channel in the two dropdown lists:
+![alt text](https://github.com/balazsprehoda/hyperledger-elastic/blob/master/docs/images/impact_overview_basic.png "impact overview")
+We can see that impact is member of `mychannel`, and there is one fabricbeat instance shipping data from one peer (`peer0.impact.el-network.com`) in impact.
 **If the dashboards are empty, set the time range wider!**
 
 You can stop the fabricbeat agent with `Ctrl+C`, and bring down the whole network and remove generated data by issuing `make destroy-basic`.

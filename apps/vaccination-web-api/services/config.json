@@ -6,9 +6,9 @@
     },
     "connection_profile": "../../network/basic/connectionProfile.json",
     "organizations": {
-        "Org1": {
-            "MSP": "Org1MSP",
-            "connection_profile": "../../../network/basic/connectionProfile-1.json"
+        "impact": {
+            "MSP": "impactMSP",
+            "connection_profile": "../../../network/basic/connectionProfile-impact.json"
         },
         "MOPH": {
             "MSP": "MOPHMSP",
@@ -37,9 +37,9 @@
     },
     "users": {
         "user1": {
-            "name": "userOrg1",
-            "organization": "Org1",
-            "connection_profile": "../../../network/basic/connectionProfile-1.json"
+            "name": "userimpact",
+            "organization": "impact",
+            "connection_profile": "../../../network/basic/connectionProfile-impact.json"
         },
         "user2": {
             "name": "userMOPH",

@@ -27,11 +27,11 @@ type Config struct {
 
 var DefaultConfig = Config{
 	Period:               1 * time.Second,
-	Organization:         "org1",
-	Peer:                 "peer0.org1.el-network.com",
+	Organization:         "impact",
+	Peer:                 "peer0.impact.el-network.com",
 	ConnectionProfile:    "connection.yaml",
-	AdminCertPath:        "/home/prehi/internship/testNetwork/blockchain-analyzer/network/crypto-config/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp/signcerts/Admin@org1.el-network.com-cert.pem",
-	AdminKeyPath:         "/home/prehi/internship/testNetwork/blockchain-analyzer/network/crypto-config/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp/keystore/adminKey1",
+	AdminCertPath:        "/home/prehi/internship/testNetwork/blockchain-analyzer/network/crypto-config/peerOrganizations/impact.el-network.com/users/Admin@impact.el-network.com/msp/signcerts/Admin@impact.el-network.com-cert.pem",
+	AdminKeyPath:         "/home/prehi/internship/testNetwork/blockchain-analyzer/network/crypto-config/peerOrganizations/impact.el-network.com/users/Admin@impact.el-network.com/msp/keystore/adminKey1",
 	ElasticURL:           "http://localhost:9200",
 	KibanaURL:            "http://localhost:5601",
 	BlockIndexName:       "block",

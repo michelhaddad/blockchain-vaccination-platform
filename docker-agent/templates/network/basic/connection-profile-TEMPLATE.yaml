@@ -27,7 +27,7 @@ BCCSP:
 channels:
   orderchannel:
     peers:
-      peer0.org1.HLNETWORK.com:
+      peer0.impact.HLNETWORK.com:
         endorsingPeer: true
         chaincodeQuery: true
         ledgerQuery: true
@@ -63,7 +63,7 @@ channels:
         orderer: "6000"
   distributionchannel:
     peers:
-      peer0.org1.HLNETWORK.com:
+      peer0.impact.HLNETWORK.com:
         endorsingPeer: true
         chaincodeQuery: true
         ledgerQuery: true
@@ -104,18 +104,18 @@ channels:
         orderer: "6000"
 
 organizations:
-  Org1:
-    mspid: Org1MSP
+  impact:
+    mspid: impactMSP
     fullpath: true
     peers:
-    - peer0.org1.HLNETWORK.com
+    - peer0.impact.HLNETWORK.com
     certificateAuthorities:
-    - ca.org1.HLNETWORK.com
-    cryptopath: peerOrganizations/org1.HLNETWORK.com/msp
+    - ca.impact.HLNETWORK.com
+    cryptopath: peerOrganizations/impact.HLNETWORK.com/msp
     adminPrivateKey:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/users/Admin@org1.HLNETWORK.com/msp/keystore/adminKey1"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/impact.HLNETWORK.com/users/Admin@impact.HLNETWORK.com/msp/keystore/adminKey1"
     signedCert:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/users/Admin@org1.HLNETWORK.com/msp/signcerts/Admin@org1.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/impact.HLNETWORK.com/users/Admin@impact.HLNETWORK.com/msp/signcerts/Admin@impact.HLNETWORK.com-cert.pem"
   MOPH:
     mspid: MOPHMSP
     fullpath: true
@@ -197,12 +197,12 @@ organizations:
     signedCert:
       path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/ordererOrganizations/HLNETWORK.com/users/Admin@HLNETWORK.com/msp/signcerts/Admin@HLNETWORK.com-cert.pem"
 peers:
-  peer0.org1.HLNETWORK.com:
+  peer0.impact.HLNETWORK.com:
     tlsCACerts:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/peers/peer0.org1.HLNETWORK.com/msp/tlscacerts/tlsca.org1.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/impact.HLNETWORK.com/peers/peer0.impact.HLNETWORK.com/msp/tlscacerts/tlsca.impact.HLNETWORK.com-cert.pem"
     url: grpcs://localhost:7051
     grpcOptions:
-      ssl-target-name-override: peer0.org1.HLNETWORK.com
+      ssl-target-name-override: peer0.impact.HLNETWORK.com
   peer0.MOPH.HLNETWORK.com:
     tlsCACerts:
       path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/MOPH.HLNETWORK.com/peers/peer0.MOPH.HLNETWORK.com/msp/tlscacerts/tlsca.MOPH.HLNETWORK.com-cert.pem"
@@ -249,16 +249,16 @@ orderers:
 
 certificateAuthorities:
 
-  ca.org1.HLNETWORK.com:
+  ca.impact.HLNETWORK.com:
     url: http://localhost:7054
-    caName: ca.org1.HLNETWORK.com
+    caName: ca.impact.HLNETWORK.com
     httpOptions:
       verify: false
     registrar:
       enrollId: admin
       enrollSecret: adminpw
     tlsCACerts:
-      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/org1.HLNETWORK.com/peers/peer0.org1.HLNETWORK.com/msp/tlscacerts/tlsca.org1.HLNETWORK.com-cert.pem"
+      path: "ABSPATH/blockchain-analyzer/network/basic/crypto-config/peerOrganizations/impact.HLNETWORK.com/peers/peer0.impact.HLNETWORK.com/msp/tlscacerts/tlsca.impact.HLNETWORK.com-cert.pem"
   
   ca.MOPH.HLNETWORK.com:
     url: http://localhost:8054
@@ -328,11 +328,11 @@ certificateAuthorities:
 
 entityMatchers:
   peer:
-    - pattern: (\w*)peer0.org1.HLNETWORK.com(\w*)
+    - pattern: (\w*)peer0.impact.HLNETWORK.com(\w*)
       urlSubstitutionExp: localhost:7051
       eventUrlSubstitutionExp: localhost:7053
-      sslTargetOverrideUrlSubstitutionExp: peer0.org1.HLNETWORK.com
-      mappedHost: peer0.org1.HLNETWORK.com
+      sslTargetOverrideUrlSubstitutionExp: peer0.impact.HLNETWORK.com
+      mappedHost: peer0.impact.HLNETWORK.com
     
     - pattern: (\w*)peer0.MOPH.HLNETWORK.com(\w*)
       urlSubstitutionExp: localhost:8051
@@ -377,9 +377,9 @@ entityMatchers:
       mappedHost: orderer.HLNETWORK.com
 
   certificateAuthorities:
-    - pattern: (\w*)ca.org1.HLNETWORK.com(\w*)
+    - pattern: (\w*)ca.impact.HLNETWORK.com(\w*)
       urlSubstitutionExp: http://localhost:7054
-      mappedHost: ca.org1.HLNETWORK.com
+      mappedHost: ca.impact.HLNETWORK.com
 
     - pattern: (\w*)ca.MOPH.HLNETWORK.com(\w*)
       urlSubstitutionExp: http://localhost:8054

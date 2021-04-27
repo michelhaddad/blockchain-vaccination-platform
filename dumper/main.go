@@ -27,12 +27,12 @@ func main() {
 	fullpath := dirpath + "/" + network + "/"
 
 	ConfigFile := fullpath + "connection-profile-1.yaml"
-	Peer := "peer0.org1.el-network.com"
-	AdminCertPath := fullpath + "crypto-config/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp/signcerts/Admin@org1.el-network.com-cert.pem"
-	AdminKeyPath := fullpath + "crypto-config/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp/keystore/adminKey1"
+	Peer := "peer0.impact.el-network.com"
+	AdminCertPath := fullpath + "crypto-config/peerOrganizations/impact.el-network.com/users/Admin@impact.el-network.com/msp/signcerts/Admin@impact.el-network.com-cert.pem"
+	AdminKeyPath := fullpath + "crypto-config/peerOrganizations/impact.el-network.com/users/Admin@impact.el-network.com/msp/keystore/adminKey1"
 
 	fbSetup := &fabricsetup.FabricSetup{
-		OrgName:       "org1",
+		OrgName:       "impact",
 		ConfigFile:    ConfigFile,
 		Peer:          Peer,
 		AdminCertPath: AdminCertPath,

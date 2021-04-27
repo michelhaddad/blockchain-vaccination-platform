@@ -24,10 +24,10 @@ generate:
 	sed -i -e "s/CONFIG_ORG_NUM/${ORG_NUMBER}/g" docker-compose.yaml
 	sed -i -e "s/CONFIG_PEER_NUM/${PEER_NUMBER}/g" docker-compose.yaml
 
-	cp templates/network/${NETWORK}/connection-profile-TEMPLATE.yaml connection-profile-Org1.yaml
-	sed -i -e  "s/HLNETWORK/${HLNETWORK}/g" connection-profile-Org1.yaml
-	sed -i -e  "s/ORG/Org1/g" connection-profile-Org1.yaml
-	sed -i -e  "s~ABSPATH~${ABSPATH}~g" connection-profile-Org1.yaml
+	cp templates/network/${NETWORK}/connection-profile-TEMPLATE.yaml connection-profile-impact.yaml
+	sed -i -e  "s/HLNETWORK/${HLNETWORK}/g" connection-profile-impact.yaml
+	sed -i -e  "s/ORG/impact/g" connection-profile-impact.yaml
+	sed -i -e  "s~ABSPATH~${ABSPATH}~g" connection-profile-impact.yaml
 
 	for ORG in MOPH BorderControl Manufacturer Hospital StorageFacility Donor ; \
 	do \

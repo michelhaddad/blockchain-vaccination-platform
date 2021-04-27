@@ -7,14 +7,14 @@ fabricbeat:
   # Defines how often an event is sent to the output
   period: 1s
   # Defines which organization the connected peer is part of
-  organization: Org1
+  organization: impact
   # Defines the peer which fabricbeat should query
-  peer: peer0.org1.el-network.com
+  peer: peer0.impact.el-network.com
   # Defines the location of the connection profile of the Fabric network
-  connectionProfile: ${GOPATH}/src/github.com/blockchain-analyzer/network/${NETWORK}/connection-profile-Org1.yaml
+  connectionProfile: ${GOPATH}/src/github.com/blockchain-analyzer/network/${NETWORK}/connection-profile-impact.yaml
   # Path to the admin certfile and keyfile
-  adminCertPath: "${GOPATH}/src/github.com/blockchain-analyzer/network/${NETWORK}/crypto-config/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp/signcerts/Admin@org1.el-network.com-cert.pem"
-  adminKeyPath: "${GOPATH}/src/github.com/blockchain-analyzer/network/${NETWORK}/crypto-config/peerOrganizations/org1.el-network.com/users/Admin@org1.el-network.com/msp/keystore/adminKey1"
+  adminCertPath: "${GOPATH}/src/github.com/blockchain-analyzer/network/${NETWORK}/crypto-config/peerOrganizations/impact.el-network.com/users/Admin@impact.el-network.com/msp/signcerts/Admin@impact.el-network.com-cert.pem"
+  adminKeyPath: "${GOPATH}/src/github.com/blockchain-analyzer/network/${NETWORK}/crypto-config/peerOrganizations/impact.el-network.com/users/Admin@impact.el-network.com/msp/keystore/adminKey1"
   # URL of Elasticsearch
   elasticURL: "http://localhost:9200"
   # URL of Kibana
@@ -52,7 +52,7 @@ fabricbeat:
 #-------------------------- Elasticsearch output ------------------------------
 setup.ilm.enabled: false
 
-output.elasticsearch.index: fabricbeat-%{[agent.version]}-%{[index_name]}-0rg1
+output.elasticsearch.index: fabricbeat-%{[agent.version]}-%{[index_name]}-impact
 output.elasticsearch.hosts: ["localhost:9200"]
 
 setup.template.name: fabricbeat-%{[agent.version]}
